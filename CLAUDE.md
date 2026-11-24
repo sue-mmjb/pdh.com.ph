@@ -28,7 +28,7 @@ Source of truth: `context/PDH_Claude_Code_Brief.md`. Supporting material: `conte
 ## Stack
 
 - Astro 5, static output (`astro build` → `dist/`), no client-side framework. Sitemap via `@astrojs/sitemap`.
-- Three design directions share the same content: `/` (Option A, Minimal Editorial — scroll-driven layout after the MinimalGoods reference; the old Trust Blue homepage is kept unused in `src/components/home/HomeTrustBlue.astro`), `/option-b/` (Warm Care), `/option-c/` (Calm Platform — design direction from terminal-industries.com: look only, no frame-sequence hero, no scroll hijack, no trackers). Tokens live under `[data-theme]` in `src/styles/global.css`; homepage layouts are `src/components/home/Home{A,B,C}.astro`. Inner pages follow the option picked on the prototype bar (stored in `localStorage`).
+- One design, "Calm Platform" (direction taken from terminal-industries.com: look only — floating pill nav, light grey bands, large calm type, rounded cards, black primary and PDH orange accent; no frame-sequence hero, scroll hijack or trackers). Tokens live in `:root` in `src/styles/global.css`; the homepage is `src/components/home/Home.astro`. The earlier three-option prototype (A Minimal Editorial / PDH brand, B Warm Care, C Bold Modern) was retired on 25 Nov 2026 at Sue's request.
 - Commands: `npm run dev` (http://localhost:4321), `npm run build`, `npm run preview`, `npm run extract`.
 - Site URL in `astro.config.mjs` is a placeholder until PDH chooses a domain.
 
