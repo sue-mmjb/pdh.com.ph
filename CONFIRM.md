@@ -48,7 +48,7 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | --- | --- |
 | Logo | Not supplied; text wordmark used |
 | Photos | None supplied; labeled placeholders on every image slot |
-| Domain | `astro.config.mjs` uses `https://pdh-prototype.example.com` until PDH chooses a host |
+| Domain | `astro.config.mjs` uses the Vercel address `https://pdhcomph.vercel.app` until PDH chooses a domain |
 
 ## Not confirmed but shown as published (verify at sign-off)
 

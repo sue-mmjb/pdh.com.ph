@@ -3,4 +3,4 @@ Allow: /
 Disallow: /option-b/
 Disallow: /option-c/
 
-Sitemap: https://pdh-prototype.example.com/sitemap-index.xml
+Sitemap: https://pdhcomph.vercel.app/sitemap-index.xml
