@@ -38,21 +38,27 @@ const faqs = [
 ];
 ---
 <div class="cp" data-cp>
-  <!-- 1 · Hero -->
+  <!-- 1 · Hero: headline and actions on the left, the building on the right with fact chips -->
   <section class="cp-hero">
-    <div class="container">
-      <p class="eyebrow cp-reveal">Parañaque City · Member of {site.network.name}</p>
-      <h1 class="cp-h1 cp-reveal">{site.hero.headline}.</h1>
-      <p class="cp-lead cp-reveal">{site.hero.text}</p>
-      <div class="actions cp-reveal" style="justify-content:center">
-        <a class="btn btn-primary btn-lg" href="/doctors/"><Icon name="search" /> Find a doctor</a>
-        <a class="btn btn-accent btn-lg" href="/book/"><Icon name="calendar" /> Book</a>
-        <a class="btn btn-emergency btn-lg" href={`tel:${er.tel}`}><Icon name="emergency" /> Emergency</a>
+    <div class="cp-hero_glow" aria-hidden="true"></div>
+    <div class="container cp-hero_grid">
+      <div class="cp-hero_copy">
+        <p class="eyebrow cp-reveal">Parañaque City · Member of {site.network.name}</p>
+        <h1 class="cp-h1 cp-reveal">{site.hero.headline}.</h1>
+        <span class="cp-rule cp-hero_rule cp-reveal" aria-hidden="true"></span>
+        <p class="cp-lead cp-reveal">{site.hero.text}</p>
+        <div class="actions cp-reveal">
+          <a class="btn btn-primary btn-lg" href="/doctors/"><Icon name="search" /> Find a doctor</a>
+          <a class="btn btn-accent btn-lg" href="/book/"><Icon name="calendar" /> Book</a>
+          <a class="btn btn-emergency btn-lg" href={`tel:${er.tel}`}><Icon name="emergency" /> Emergency</a>
+        </div>
+        <p class="small muted cp-reveal cp-hero_er">ER open 24/7 · Ground Floor · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></p>
       </div>
-      <p class="small muted cp-reveal" style="text-align:center;margin-top:14px">ER open 24/7 · Ground Floor · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></p>
-    </div>
-    <div class="container cp-hero_media" data-cp-parallax>
-      <img class="cp-hero_img" src={site.photos.facade.src} alt={site.photos.facade.alt} width={site.photos.facade.w} height={site.photos.facade.h} fetchpriority="high" decoding="async" />
+      <div class="cp-hero_media cp-reveal" data-cp-parallax>
+        <img class="cp-hero_img" src={site.photos.facade.src} alt={site.photos.facade.alt} width={site.photos.facade.w} height={site.photos.facade.h} fetchpriority="high" decoding="async" />
+        <div class="cp-chip cp-chip_a"><span class="cp-chip_dot"></span><strong>Open 24/7</strong><span>ER · Laboratory · Radiology · Pharmacy</span></div>
+        <div class="cp-chip cp-chip_b"><strong>94</strong><span>beds</span><strong>320</strong><span>doctors</span><strong>32</strong><span>HMO partners</span></div>
+      </div>
     </div>
   </section>
 
@@ -263,12 +269,26 @@ const faqs = [
   :global(html.no-js) .cp-reveal, :global([data-theme]) .cp-reveal.is-visible { opacity: 1; }
   @media (prefers-reduced-motion: reduce) { .cp-reveal { opacity: 1; } }
 
-  .cp-hero { padding: 72px 0 0; text-align: center; background: linear-gradient(180deg, var(--pdh-teal-tint) 0%, #ffffff 70%); }
-  .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 6vw, 6rem); line-height: 1.0; letter-spacing: -0.04em; font-weight: 600; max-width: 14ch; margin: 12px auto 0.3em; }
-  .cp-lead { max-width: 60ch; margin: 0 auto 24px; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); color: var(--ink-soft); }
-  .cp-hero_media { margin-top: 40px; will-change: transform; }
-  .cp-hero_pic { display: block; }
-  .cp-hero_img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: center 40%; border-radius: 24px; box-shadow: 0 24px 60px rgba(0, 92, 94, 0.18); }
+  .cp-hero { position: relative; overflow: hidden; padding: 56px 0 24px; background: #ffffff; }
+  .cp-hero_glow { position: absolute; inset: -20% -10% auto -10%; height: 120%; pointer-events: none;
+    background: radial-gradient(42% 50% at 18% 20%, rgba(0,163,165,0.16), transparent 70%), radial-gradient(38% 45% at 88% 72%, rgba(255,116,2,0.14), transparent 70%), radial-gradient(60% 60% at 60% 110%, rgba(0,92,94,0.10), transparent 70%); }
+  .cp-hero_grid { position: relative; display: grid; gap: 28px; align-items: center; }
+  @media (min-width: 900px) { .cp-hero { padding: 72px 0 48px; } .cp-hero_grid { grid-template-columns: 1.05fr 1fr; gap: 56px; } }
+  .cp-hero_copy { text-align: left; }
+  .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 4.6vw, 5.2rem); line-height: 1.0; letter-spacing: -0.04em; font-weight: 600; max-width: 12ch; margin: 12px 0 0.3em; }
+  .cp-hero_rule { margin: 2px 0 18px; }
+  .cp-lead { max-width: 54ch; margin: 0 0 22px; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem); color: var(--ink-soft); }
+  .cp-hero_er { margin: 14px 0 0; }
+  .cp-hero_media { position: relative; will-change: transform; }
+  .cp-hero_img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 40%; border-radius: 24px; box-shadow: 0 30px 70px rgba(0, 92, 94, 0.22); }
+  .cp-chip { position: absolute; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(255,255,255,0.94); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 10px 30px rgba(0,92,94,0.16); font-size: 0.82rem; color: var(--ink-soft); white-space: nowrap; }
+  .cp-chip strong { color: var(--pdh-teal-deep); font-weight: 700; font-size: 0.95rem; }
+  .cp-chip_dot { width: 10px; height: 10px; border-radius: 50%; background: var(--pdh-orange); box-shadow: 0 0 0 4px rgba(255,116,2,0.2); flex: none; }
+  .cp-chip_a { top: 18px; left: -10px; }
+  .cp-chip_b { bottom: 18px; right: -10px; gap: 6px; }
+  .cp-chip_b strong { margin-left: 6px; }
+  .cp-chip_b strong:first-child { margin-left: 0; }
+  @media (max-width: 599px) { .cp-chip { font-size: 0.74rem; padding: 8px 12px; } .cp-chip_a { left: 8px; } .cp-chip_b { right: 8px; } .cp-chip_a span { display: none; } }
   .cp-statement { padding: 96px 0 56px; }
   .cp-big { font-size: clamp(1.6rem, 1rem + 2.6vw, 3.2rem); line-height: 1.15; letter-spacing: -0.03em; font-weight: 600; font-family: var(--font-head); max-width: 24ch; margin: 0; color: var(--heading); }
   :global(.cp-word) { opacity: 0.22; transition: opacity 0.2s; }

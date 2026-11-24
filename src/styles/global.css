@@ -191,7 +191,6 @@ ul, ol { padding-left: 1.25em; }
 @media (min-width: 1100px) { .site-nav a { padding: 8px 12px; } }
 /* Header action labels: icon-only until the bar has room, so nothing overflows */
 .header-actions .lbl-wide { display: none; }
-@media (min-width: 1500px) { .header-actions .lbl-wide { display: inline; } }
 .site-header .container { max-width: none; }
 .header-actions .btn { flex: none; }
 body { overflow-x: clip; }
@@ -314,7 +313,7 @@ details.acc .body { padding: 0 16px 16px; color: var(--ink-soft); }
 /* ---------- Calm Platform overrides (after base rules so they win) ---------- */
 /* Floating pill header: PDH teal with the orange rule, white nav, logo lockup */
 .site-header { background: transparent; border-bottom: 0; padding: 10px var(--gutter) 0; pointer-events: none; }
-.site-header .bar { pointer-events: auto; max-width: 1240px; margin: 0 auto; min-height: 60px; padding: 6px 8px 6px 12px; background: var(--pdh-teal); color: #ffffff; border-bottom: 3px solid var(--pdh-orange); border-radius: 999px; box-shadow: 0 8px 30px rgba(0,92,94,0.22); }
+.site-header .bar { pointer-events: auto; max-width: 1320px; margin: 0 auto; min-height: 60px; padding: 6px 8px 6px 12px; background: var(--pdh-teal); color: #ffffff; border-bottom: 3px solid var(--pdh-orange); border-radius: 999px; box-shadow: 0 8px 30px rgba(0,92,94,0.22); }
 .brand { color: #ffffff; }
 .brand-logo-wide { display: block; height: 42px; width: auto; }
 .brand-logo-square, .brand-text { display: none; }
