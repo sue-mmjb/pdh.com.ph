@@ -31,10 +31,12 @@ const ld = {
     <div class="container doc-grid">
       <div>
         <div class="card" style="display:flex;gap:16px;align-items:center;margin-bottom:24px">
-          <span class="avatar" aria-hidden="true" style="width:72px;height:72px;border-radius:50%;background:var(--accent-soft);color:var(--accent-text);display:grid;place-items:center;font-weight:800;font-size:1.4rem;font-family:var(--font-head);flex:none">{initials(d.name)}</span>
+          {d.photo
+            ? <img src={d.photo} alt={`${name}`} width="400" height="400" decoding="async" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;flex:none;background:var(--pdh-teal-tint)" />
+            : <span class="avatar" aria-hidden="true" style="width:96px;height:96px;border-radius:50%;background:var(--pdh-teal-tint);color:var(--pdh-teal-text);display:grid;place-items:center;font-weight:800;font-size:1.6rem;font-family:var(--font-head);flex:none">{initials(d.name)}</span>}
           <div>
-            <p style="margin:0" class="muted small">Photo: supplied by PDH only (no AI-generated images)</p>
-            <p style="margin:4px 0 0" class="small">Listed as <strong>{d.name}</strong> on pdh.com.ph</p>
+            <p style="margin:0" class="small">Listed as <strong>{d.name}</strong> on pdh.com.ph</p>
+            {!d.photo && <p style="margin:4px 0 0" class="muted small">No photo published by PDH for this doctor.</p>}
           </div>
         </div>
 

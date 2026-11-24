@@ -1,5 +1,5 @@
 {
-  "_note": "Clinical services and departments from pdh.com.ph/our-services (crawled 25 Nov 2026). 'offered' lists come from each service's own page. 'preparation' is NOT on the current site: every entry is a labeled sample. 'doctorMatch' maps a service to doctor departments/specializations in doctors.json. A null location or hours means the current site shows TBD. 'programs', 'priceLine', 'hoursAlt' and 'contactLocal' come from the homepage carousel slides (Nov 2026).",
+  "_note": "Clinical services and departments from pdh.com.ph/our-services (crawled 25 Nov 2026). 'offered' lists come from each service's own page. 'preparation' is NOT on the current site: every entry is a labeled sample. 'doctorMatch' maps a service to doctor departments/specializations in doctors.json. A null location or hours means the current site shows TBD. 'programs', 'priceLine', 'hoursAlt' and 'contactLocal' come from the homepage carousel slides (Nov 2026). 'illustration' is a teal line illustration supplied by Sue (assets/icons/service-illustrations-sheet.webp).",
   "services": [
     {
       "slug": "emergency-room",
@@ -16,7 +16,8 @@
       "preparation": null,
       "featured": true,
       "icon": "emergency",
-      "image": "/photos/pdh-facade.webp"
+      "image": "/photos/pdh-facade.webp",
+      "illustration": "/icons/services/emergency-room.png"
     },
     {
       "slug": "radiology",
@@ -41,7 +42,8 @@
       },
       "preparation": "Bring your doctor’s request form and a valid ID. Some scans require fasting; the Radiology desk will tell you when you book.",
       "featured": true,
-      "icon": "scan"
+      "icon": "scan",
+      "illustration": "/icons/services/radiology.png"
     },
     {
       "slug": "laboratory",
@@ -68,7 +70,8 @@
         "label": "View online lab results",
         "href": "https://lis.pdh.com.ph/"
       },
-      "image": "/photos/pillar-innovation.webp"
+      "image": "/photos/pillar-innovation.webp",
+      "illustration": "/icons/services/laboratory.png"
     },
     {
       "slug": "nuclear-medicine",
@@ -90,7 +93,8 @@
       },
       "preparation": "Book ahead; this department is by appointment only. Your doctor may ask you to pause thyroid medication before an uptake study.",
       "featured": true,
-      "icon": "atom"
+      "icon": "atom",
+      "illustration": "/icons/services/nuclear-medicine.png"
     },
     {
       "slug": "multi-diagnostic-center",
@@ -116,7 +120,8 @@
       "icon": "heart",
       "hoursAlt": "A homepage slide lists Echocardiogram (pedia & adult) Monday–Sunday 6 AM–7 PM and Vascular procedures Monday–Saturday 8 AM–5 PM, which differs from the Our Services page.",
       "hoursConfirmed": false,
-      "image": "/packages/cardio-services.webp"
+      "image": "/packages/cardio-services.webp",
+      "illustration": "/icons/services/multi-diagnostic-center.png"
     },
     {
       "slug": "pulmonary",
@@ -166,7 +171,8 @@
       "featured": true,
       "icon": "kidney",
       "priceLine": "For as low as Php 6,700.00, inclusive of PhilHealth (homepage slide, Nov 2026)",
-      "image": "/packages/hemodialysis.webp"
+      "image": "/packages/hemodialysis.webp",
+      "illustration": "/icons/services/hemodialysis-center.png"
     },
     {
       "slug": "physical-medicine-rehabilitation",
@@ -249,7 +255,8 @@
         "/packages/rehab-shockwave.webp",
         "/packages/rehab-cryotherapy.webp",
         "/packages/cardio-rehab-services.webp"
-      ]
+      ],
+      "illustration": "/icons/services/physical-medicine-rehabilitation.png"
     },
     {
       "slug": "operating-room",
@@ -353,7 +360,8 @@
       "preparation": "Check your doctor’s clinic schedule on their profile, then call to book. Bring previous results and a list of your medications.",
       "featured": true,
       "icon": "stethoscope",
-      "image": "/photos/pillar-compassion.webp"
+      "image": "/photos/pillar-compassion.webp",
+      "illustration": "/icons/services/outpatient-clinics.png"
     },
     {
       "slug": "ob-ultrasound",
@@ -381,7 +389,8 @@
       },
       "preparation": "Bring your OB’s request. For a transabdominal scan early in pregnancy you may be asked to come with a full bladder.",
       "featured": true,
-      "icon": "pregnancy"
+      "icon": "pregnancy",
+      "illustration": "/icons/services/ob-ultrasound.png"
     },
     {
       "slug": "breastfeeding-station",
@@ -441,7 +450,8 @@
       },
       "preparation": "Bring your current glasses or contact lens prescription. If your pupils will be dilated, bring someone to drive you home.",
       "featured": true,
-      "icon": "eye"
+      "icon": "eye",
+      "illustration": "/icons/services/eye-center.png"
     },
     {
       "slug": "dental-services",
@@ -474,7 +484,8 @@
       },
       "preparation": "Brush before your visit and bring a list of any medications you take.",
       "featured": true,
-      "icon": "tooth"
+      "icon": "tooth",
+      "illustration": "/icons/services/dental-services.png"
     },
     {
       "slug": "pharmacy",
@@ -490,7 +501,8 @@
       },
       "preparation": "Bring your prescription. Senior citizen and PWD IDs are needed for statutory discounts.",
       "featured": false,
-      "icon": "pill"
+      "icon": "pill",
+      "illustration": "/icons/services/pharmacy.png"
     },
     {
       "slug": "admitting",

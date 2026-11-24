@@ -6,6 +6,8 @@ import { join } from 'node:path';
 
 const PAGES = join(process.cwd(), 'context', 'full-site-crawl', 'pages');
 const OUT = join(process.cwd(), 'src', 'data', 'doctors.json');
+// Photos PDH publishes on its own doctor pages, keyed by slug (see scripts/fetch-doctor-photos note in CLAUDE.md).
+const PHOTOS = JSON.parse(readFileSync(join(process.cwd(), 'src', 'data', 'doctor-photos.json'), 'utf8'));
 
 const SPECIALTY_FIX = {
   'Infectious': 'Infectious Diseases',
@@ -60,6 +62,7 @@ for (const file of files) {
     contact: clean(get('- Contact Number:')),
     hmos,
     hmoNote,
+    photo: PHOTOS[slug] ?? null,
     source: url,
   });
 }
