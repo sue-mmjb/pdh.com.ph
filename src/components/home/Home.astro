@@ -35,7 +35,7 @@ const faqs = [
   <!-- 1 · Hero -->
   <section class="cp-hero">
     <div class="container">
-      <p class="eyebrow cp-reveal cp-hero_kicker">Parañaque City <span class="cp-hero_sep">·</span> Member of <img class="cp-hero_mph" src="/brand/mph-wordmark.png" alt={site.network.name} width="184" height="43" decoding="async" fetchpriority="high" /></p>
+      <p class="eyebrow cp-reveal">Parañaque City · Member of {site.network.name}</p>
       <h1 class="cp-h1 cp-reveal">{site.hero.headline}.</h1>
       <p class="cp-lead cp-reveal">{site.hero.text}</p>
       <div class="actions cp-reveal" style="justify-content:center">
@@ -85,7 +85,7 @@ const faqs = [
         <input id="home-q" name="q" type="search" placeholder="Search doctors by name or specialty" />
         <button class="btn btn-primary" type="submit">Search</button>
       </form>
-      <ul class="pill-list" style="margin-top:12px;justify-content:center">
+      <ul class="pill-list cp-pills" style="margin-top:14px;justify-content:center">
         {specialtyGroups.map((g) => <li><a href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}>{g.name}</a></li>)}
       </ul>
     </div>
@@ -139,15 +139,14 @@ const faqs = [
   <!-- 7 · Packages -->
   <section class="cp-sec section-soft cp-band">
     <div class="container">
-      <div class="cp-two" style="align-items:end">
-        <div><p class="eyebrow">Packages &amp; promos</p><h2 class="cp-h2">Bundled tests at one price.</h2></div>
-        <p class="small muted" style="margin:0">Prices as published on pdh.com.ph, November 2026. <a href="/packages/">All packages</a></p>
-      </div>
-      <div class="grid grid-4" style="margin-top:20px">
+      <p class="eyebrow">Packages &amp; promos</p>
+      <h2 class="cp-h2">Bundled tests at one price.</h2>
+      <p class="cp-sub">Prices as published on pdh.com.ph, November 2026. <a href="/packages/">See all packages</a>.</p>
+      <div class="grid grid-4" style="margin-top:8px">
         {featuredPackages.slice(0, 4).map((p) => (
           <a class="card card-link cp-pkg cp-reveal" href={`/packages/#${p.slug}`}>
             <span class="small muted">{p.category}</span>
-            <h3 style="font-size:1.1rem;margin:6px 0 4px">{p.name}</h3>
+            <h3 style="font-size:1.1rem;margin:4px 0 8px">{p.name}</h3>
             <span class="cp-pkg_price">{p.priceLabel}</span>
           </a>
         ))}
@@ -250,10 +249,6 @@ const faqs = [
   @media (prefers-reduced-motion: reduce) { .cp-reveal { opacity: 1; } }
 
   .cp-hero { padding: 72px 0 0; text-align: center; background: linear-gradient(180deg, var(--pdh-teal-tint) 0%, #ffffff 70%); }
-  .cp-hero_kicker { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
-  .cp-hero_sep { opacity: 0.5; }
-  .cp-hero_mph { height: 30px; width: auto; border-radius: 6px; vertical-align: middle; }
-  @media (min-width: 900px) { .cp-hero_mph { height: 34px; } }
   .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 6vw, 6rem); line-height: 1.0; letter-spacing: -0.04em; font-weight: 600; max-width: 14ch; margin: 12px auto 0.3em; }
   .cp-lead { max-width: 60ch; margin: 0 auto 24px; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); color: var(--ink-soft); }
   .cp-hero_media { margin-top: 40px; will-change: transform; }
@@ -275,11 +270,14 @@ const faqs = [
   .cp-entry_art { width: 120px; height: 100px; object-fit: contain; object-position: left bottom; margin: 0 0 18px; }
   .cp-entry_card h3 { font-size: 1.35rem; letter-spacing: -0.02em; font-weight: 600; color: var(--heading); margin: 0 0 8px; }
   .cp-entry_card p { margin: 0 0 10px; }
+  .cp-entry_card p.small { margin-bottom: 18px; }
   .cp-entry_card .btn { margin-top: auto; }
   .cp-search { display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 18px; border-radius: 999px; max-width: 760px; margin: 0 auto; }
   .cp-search svg { width: 20px; height: 20px; color: var(--ink-soft); flex: none; }
   .cp-search input { flex: 1; border: 0; background: transparent; font: inherit; min-height: 44px; outline: none; color: inherit; min-width: 0; }
   .cp-search .btn { flex: none; }
+  .cp-pills { gap: 8px; max-width: 980px; margin-left: auto; margin-right: auto; }
+  .cp-pills a { font-size: 0.86rem; }
   .cp-floor { margin-top: 28px; }
   .cp-floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
   .cp-floor_label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pdh-teal-text); white-space: nowrap; }
@@ -298,6 +296,7 @@ const faqs = [
   .cp-two { display: grid; gap: 20px; }
   @media (min-width: 900px) { .cp-two { grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; } }
   .cp-marquee { margin-top: 24px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+  .cp-pkg { display: grid; align-content: start; padding: 22px; }
   .cp-pkg_price { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.03em; color: var(--accent-text); }
   .cp-figs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
   .cp-figs_num { display: block; font-size: clamp(2.2rem, 1.6rem + 2.6vw, 4rem); line-height: 1; letter-spacing: -0.04em; font-weight: 500; color: var(--pdh-teal-text); }
