@@ -7,7 +7,6 @@ const p = site.phones;
   <div class="container">
     <div class="grid grid-4">
       <div>
-        <img src="/brand/pdh-logo-stacked.png" alt={`${site.name}, a member of ${site.network.name}`} width="354" height="264" loading="lazy" decoding="async" style="width:120px;height:auto;border-radius:8px;margin-bottom:14px" />
         <h3>{site.name}</h3>
         <p>{site.address.full}</p>
         <p class="small">Member of {site.network.name} since {site.network.memberSince}</p>
@@ -57,4 +56,22 @@ const p = site.phones;
       <span>Website prototype by Iozera. Not the live PDH site. No analytics or tracking.</span>
     </div>
   </div>
+  <!-- Big closing mark, vector so it stays crisp at any size: PD+H with the orange cross, then the name -->
+  <div class="footer-mark" aria-hidden="true">
+    <div class="footer-mark_in">
+      <div class="footer-mark_pdh">PD<svg viewBox="0 0 100 100" class="footer-mark_cross"><path d="M36 8h28v28h28v28H64v28H36V64H8V36h28z" fill="#ff7402"/></svg>H</div>
+      <div class="footer-mark_name">Parañaque<br />Doctors Hospital</div>
+    </div>
+  </div>
+  <img src="/brand/mph-wordmark.png" alt="" width="184" height="43" loading="lazy" decoding="async" class="footer-mph" />
 </footer>
+<style>
+  .footer-mark { overflow: hidden; margin-top: 40px; pointer-events: none; user-select: none; }
+  .footer-mark_in { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); transform: translateY(14%); }
+  .footer-mark_pdh { display: flex; align-items: center; font-family: var(--font-head); font-weight: 800; letter-spacing: -0.06em; line-height: 0.85; font-size: clamp(6rem, 26vw, 24rem); color: #ffffff; }
+  .footer-mark_cross { width: 0.72em; height: 0.72em; margin: 0 -0.02em 0 -0.04em; flex: none; }
+  .footer-mark_name { font-family: var(--font-head); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.02; font-size: clamp(1.6rem, 6.4vw, 5.9rem); color: #ffffff; opacity: 0.92; margin-top: 0.1em; }
+  .footer-mph { display: block; width: 184px; height: auto; margin: 16px auto 0; border-radius: 6px; }
+  @media (min-width: 900px) { .footer-mph { position: absolute; right: calc(var(--gutter) + 24px); bottom: 24px; margin: 0; } }
+  .site-footer { position: relative; }
+</style>

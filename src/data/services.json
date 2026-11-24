@@ -151,7 +151,8 @@
       },
       "preparation": "Bring your doctor’s request form. For a pulmonary function test, avoid heavy meals and smoking beforehand.",
       "featured": false,
-      "icon": "lungs"
+      "icon": "lungs",
+      "illustration": "/icons/services/pulmonary.png"
     },
     {
       "slug": "hemodialysis-center",
@@ -275,7 +276,8 @@
       },
       "preparation": "Your surgeon and anesthesiologist will give you fasting and medication instructions before any scheduled procedure.",
       "featured": true,
-      "icon": "surgery"
+      "icon": "surgery",
+      "illustration": "/icons/services/operating-room.png"
     },
     {
       "slug": "icu",
@@ -294,7 +296,8 @@
       "preparation": null,
       "featured": false,
       "icon": "monitor",
-      "image": "/photos/pillar-patient-safety.webp"
+      "image": "/photos/pillar-patient-safety.webp",
+      "illustration": "/icons/services/icu.png"
     },
     {
       "slug": "nicu",
@@ -318,7 +321,8 @@
       },
       "preparation": null,
       "featured": false,
-      "icon": "baby"
+      "icon": "baby",
+      "illustration": "/icons/services/nicu.png"
     },
     {
       "slug": "picu",
@@ -341,7 +345,8 @@
       },
       "preparation": null,
       "featured": false,
-      "icon": "child"
+      "icon": "child",
+      "illustration": "/icons/services/picu.png"
     },
     {
       "slug": "outpatient-clinics",
@@ -406,7 +411,8 @@
       },
       "preparation": null,
       "featured": false,
-      "icon": "baby"
+      "icon": "baby",
+      "illustration": "/icons/services/breastfeeding-station.png"
     },
     {
       "slug": "animal-bite-center",
@@ -422,7 +428,8 @@
       },
       "preparation": "Wash the wound with soap and running water for 15 minutes, then come in as soon as possible.",
       "featured": false,
-      "icon": "shield"
+      "icon": "shield",
+      "illustration": "/icons/services/animal-bite-center.png"
     },
     {
       "slug": "eye-center",
@@ -538,7 +545,8 @@
       },
       "preparation": null,
       "featured": false,
-      "icon": "drop"
+      "icon": "drop",
+      "illustration": "/icons/services/chemo-infusion-center.png"
     },
     {
       "slug": "medical-records",
@@ -554,7 +562,8 @@
       },
       "preparation": "Bring a valid ID; an authorization letter is needed if you are requesting records for someone else.",
       "featured": false,
-      "icon": "folder"
+      "icon": "folder",
+      "illustration": "/icons/services/medical-records.png"
     },
     {
       "slug": "patient-experience",
@@ -571,7 +580,8 @@
       "preparation": null,
       "featured": false,
       "icon": "smile",
-      "image": "/photos/pillar-accessible.webp"
+      "image": "/photos/pillar-accessible.webp",
+      "illustration": "/icons/services/patient-experience.png"
     }
   ],
   "namedOnlyOnSite": [

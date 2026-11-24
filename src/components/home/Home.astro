@@ -35,8 +35,7 @@ const faqs = [
   <!-- 1 · Hero -->
   <section class="cp-hero">
     <div class="container">
-      <img class="cp-hero_logo cp-reveal" src="/brand/pdh-logo-stacked.png" alt={`${site.name}, a member of ${site.network.name}`} width="354" height="264" decoding="async" fetchpriority="high" />
-      <p class="eyebrow cp-reveal">Parañaque City · Member of {site.network.name}</p>
+      <p class="eyebrow cp-reveal cp-hero_kicker">Parañaque City <span class="cp-hero_sep">·</span> Member of <img class="cp-hero_mph" src="/brand/mph-wordmark.png" alt={site.network.name} width="184" height="43" decoding="async" fetchpriority="high" /></p>
       <h1 class="cp-h1 cp-reveal">{site.hero.headline}.</h1>
       <p class="cp-lead cp-reveal">{site.hero.text}</p>
       <div class="actions cp-reveal" style="justify-content:center">
@@ -251,8 +250,10 @@ const faqs = [
   @media (prefers-reduced-motion: reduce) { .cp-reveal { opacity: 1; } }
 
   .cp-hero { padding: 72px 0 0; text-align: center; background: linear-gradient(180deg, var(--pdh-teal-tint) 0%, #ffffff 70%); }
-  .cp-hero_logo { display: block; width: 132px; height: auto; margin: 0 auto 20px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 92, 94, 0.18); }
-  @media (min-width: 900px) { .cp-hero_logo { width: 160px; } }
+  .cp-hero_kicker { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .cp-hero_sep { opacity: 0.5; }
+  .cp-hero_mph { height: 30px; width: auto; border-radius: 6px; vertical-align: middle; }
+  @media (min-width: 900px) { .cp-hero_mph { height: 34px; } }
   .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 6vw, 6rem); line-height: 1.0; letter-spacing: -0.04em; font-weight: 600; max-width: 14ch; margin: 12px auto 0.3em; }
   .cp-lead { max-width: 60ch; margin: 0 auto 24px; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); color: var(--ink-soft); }
   .cp-hero_media { margin-top: 40px; will-change: transform; }
