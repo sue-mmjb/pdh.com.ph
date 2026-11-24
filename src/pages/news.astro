@@ -10,6 +10,7 @@ import { news, site, formatDate } from '../lib/data';
     <div class="container grid grid-3">
       {news.items.map((n) => (
         <article class="card">
+          {n.image && <img src={n.image} alt="" loading="lazy" decoding="async" width="1400" height="788" style="width:calc(100% + 40px);margin:-20px -20px 14px;max-width:none;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;display:block" />}
           <p class="meta"><time datetime={n.date}>{formatDate(n.date)}</time> · {n.category}</p>
           <h2 style="font-size:1.1rem">{n.title}</h2>
           <p class="small muted">{n.excerpt}</p>

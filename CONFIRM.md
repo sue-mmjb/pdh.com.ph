@@ -49,8 +49,8 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 
 | Item | Detail |
 | --- | --- |
-| Logo | Not supplied; text wordmark used |
-| Photos | None supplied; labeled placeholders on every image slot |
+| Logo | PDH's horizontal lockup (2048 px, from the current site) in the header; official square logo for favicon and social image |
+| Photos | 42 of PDH's own images from pdh.com.ph now used (façade, lobby, pillars, rooms, news, MPH map, NPC seal, 19 promo slides); placeholders remain on 14 service pages with no PDH photo |
 | Domain | `astro.config.mjs` uses the Vercel address `https://pdhcomph.vercel.app` until PDH chooses a domain |
 
 ## Not confirmed but shown as published (verify at sign-off)
@@ -74,3 +74,9 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 - Diagnostic prices: 2D Echo 3,959; CT scan 7,220; whole abdomen ultrasound 4,261; ECG 623; chest X-ray (PA) 515.
 - Payment methods: cash, GCash, credit card, debit card; HMO accepted. TikTok handle paranaquedoctorshospital.
 - Legal name on signage and the official logo: UHBI-Parañaque Doctors Hospital, Inc. (the site uses "Parañaque Doctors Hospital").
+
+## Photo mapping to confirm with PDH
+
+- Room photos: PDH's room-gallery images are assigned to Ward, Semi-private, Private, Suite, Isolation (anteroom) and Premium Labor Room by what each picture shows. PDH should confirm which photo belongs to which room type.
+- News photos: the cardiovascular-talk photo is certain; the photos on the IM Family Health Talk and Barangay Partnership items are PDH event photos matched by content and should be confirmed.
+- Essential Lab Package (Promo 9), PHP 1,500, was added from a slide that is in PDH's site files but not in the live carousel we screenshotted; confirm it is current.

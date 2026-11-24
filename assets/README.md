@@ -7,5 +7,7 @@ PDH-supplied brand files and photos only. No stock photos, no AI-generated image
 
 - `photos/pdh-facade-source.webp` — building façade from PDH's homepage slider (909×489, supplied by Sue 25 Nov 2026). Used as the homepage hero photo; a higher-resolution original from PDH would sharpen it on desktop.
 
+- `photos/` and `hmo/` — PDH's own images copied from the current site's media library (pdh.com.ph/wp-content/uploads), used across the pages. Nothing is hotlinked.
+
 Still needed from PDH: a transparent-background logo (SVG or PNG) and real hospital photos. Until then, pages show labeled "Photo placeholder" boxes.
 Suggested photo names: `hero-facade.jpg`, `er-entrance.jpg`, `room-private.jpg`, `room-suite.jpg`, `lab.jpg`, `radiology.jpg`.

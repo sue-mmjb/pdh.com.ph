@@ -49,9 +49,7 @@ const lines = [p.emergency, p.information, p.marketing, p.admitting, p.hmoHub, p
       <div id="directions">
         <h2>Directions</h2>
         <address style="font-style:normal;margin-bottom:12px"><strong>{site.name}</strong><br />{site.address.full}</address>
-        <div class="ph ph-4x3" role="img" aria-label="Map placeholder: PDH at 175 Doña Soledad Ave., Better Living Subdivision, Parañaque">
-          <span>Map placeholder, no third-party map scripts in the prototype</span>
-        </div>
+        <img src={site.photos.lobby.src} alt={site.photos.lobby.alt} width={site.photos.lobby.w} height={site.photos.lobby.h} loading="lazy" decoding="async" style="width:100%;height:auto;border-radius:var(--radius)" />
         <p style="margin-top:12px"><a class="btn btn-primary" href={`https://www.google.com/maps/search/?api=1&query=${mapsQuery}`} target="_blank" rel="noopener"><Icon name="pin" /> Open in Google Maps</a></p>
 
         <h3 style="margin-top:24px">Parking</h3>

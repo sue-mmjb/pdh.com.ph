@@ -1,15 +1,89 @@
 {
   "_note": "From pdh.com.ph/pdh-news (crawled 25 Nov 2026). Dates are the dates shown on the current site. 'url' links to the original article on pdh.com.ph; no images are hotlinked.",
   "items": [
-    { "slug": "second-home-built-on-trust", "title": "Alagang PDH Ako Stories: More Than a Hospital: A Second Home Built on Trust and Care", "date": "2025-07-26", "category": "Patient Stories", "excerpt": "At Parañaque Doctors Hospital, care goes beyond medicine. It’s about building trust, offering comfort, and creating a second home for families facing life’s toughest challenges.", "url": "https://pdh.com.ph/alagang-pdh-ako-stories-more-than-a-hospital-a-second-home-built-on-trust-and-care/" },
-    { "slug": "neuro-talk-napindan", "title": "Neuro Talk Kick-Off: Empowering Barangay Napindan with Life-Saving Knowledge", "date": "2025-03-27", "category": "Community", "excerpt": "PDH took an important step toward community health empowerment with the Kick-Off: Neuro Talk at Barangay Napindan, led by neurologist Dr. Aubrey Punzalan, on stroke awareness and prevention.", "url": "https://pdh.com.ph/neuro-talk-kick-off-empowering-barangay-napindan-with-life-saving-knowledge/" },
-    { "slug": "im-family-health-talk", "title": "IM Family Health Talk Kick-Off: Building Stronger Families, One Health Talk at a Time", "date": "2025-03-24", "category": "Community", "excerpt": "PDH launched its IM Family Health Talk in Barangay Upper Bicutan, led by Dr. Keith Darryl Deo Grafil, with a focus on dengue awareness and healthy lifestyle habits.", "url": "https://pdh.com.ph/im-family-health-talk-kick-off-building-stronger-families-one-health-talk-at-a-time/" },
-    { "slug": "cardiovascular-health-talk", "title": "Keeping Hearts Healthy: PDH’s Cardiovascular Health Talk Brings Awareness to the Community", "date": "2025-03-21", "category": "Community", "excerpt": "On March 20, 2025, PDH hosted a Cardiovascular Health Talk led by Dr. Paul Quetua, Internal Medicine Specialist, with Barangay Marcelo Green and Barangay Don Bosco.", "url": "https://pdh.com.ph/keeping-hearts-healthy-pdhs-cardiovascular-health-talk-brings-awareness-to-the-community/" },
-    { "slug": "parenting-101", "title": "Parenting 101: Because Every Child Deserves the Best Start!", "date": "2025-03-17", "category": "Community", "excerpt": "On March 17, 2025, Parañaque Doctors Hospital hosted a parenting talk for the community.", "url": "https://pdh.com.ph/parenting-101-because-every-child-deserves-the-best-start/" },
-    { "slug": "buntis-day-2025", "title": "PDH Buntis Day 2025: Nurturing Mothers, Strengthening Communities", "date": "2025-03-10", "category": "Community", "excerpt": "On March 10, 2025, Parañaque Doctors Hospital held PDH Buntis Day for expectant mothers.", "url": "https://pdh.com.ph/pdh-buntis-day-2025-nurturing-mothers-strengthening-communities/" },
-    { "slug": "a-mothers-journey", "title": "Alagang PDH Ako Stories: A Mother’s Journey of Hope and Healing", "date": "2025-03-08", "category": "Patient Stories", "excerpt": "For Jennifer Danao, January 2025 was a time of worry, uncertainty, and ultimately, gratitude, marked by the dedication of the medical professionals who saved her six-year-old son.", "url": "https://pdh.com.ph/alagang-pdh-ako-stories-a-mothers-journey-of-hope-and-healing/" },
-    { "slug": "barangay-partnership", "title": "Alagang PDH Barangay Partnership", "date": "2025-03-05", "category": "Community", "excerpt": "At Parañaque Doctors Hospital, we believe that quality healthcare starts at the grassroots, through partnerships with barangay leaders and local communities.", "url": "https://pdh.com.ph/alagang-pdh-barangay-partnership/" },
-    { "slug": "bloodletting-drive", "title": "Every Drop Counts: PDH Bloodletting Drive Saves Lives", "date": "2025-02-26", "category": "Community", "excerpt": "Parañaque Doctors Hospital hosted a bloodletting drive to help save lives.", "url": "https://pdh.com.ph/every-drop-counts-pdh-bloodletting-drive-saves-lives/" },
-    { "slug": "importance-of-regular-checkups", "title": "Importance of Regular Check-ups", "date": "2025-02-19", "category": "Health Tips", "excerpt": "Have you been hearing about regular check-ups? Here’s why they matter.", "url": "https://pdh.com.ph/importance-of-regular-check-ups/" }
+    {
+      "slug": "second-home-built-on-trust",
+      "title": "Alagang PDH Ako Stories: More Than a Hospital: A Second Home Built on Trust and Care",
+      "date": "2025-07-26",
+      "category": "Patient Stories",
+      "excerpt": "At Parañaque Doctors Hospital, care goes beyond medicine. It’s about building trust, offering comfort, and creating a second home for families facing life’s toughest challenges.",
+      "url": "https://pdh.com.ph/alagang-pdh-ako-stories-more-than-a-hospital-a-second-home-built-on-trust-and-care/",
+      "image": "/photos/story-thelma.webp"
+    },
+    {
+      "slug": "neuro-talk-napindan",
+      "title": "Neuro Talk Kick-Off: Empowering Barangay Napindan with Life-Saving Knowledge",
+      "date": "2025-03-27",
+      "category": "Community",
+      "excerpt": "PDH took an important step toward community health empowerment with the Kick-Off: Neuro Talk at Barangay Napindan, led by neurologist Dr. Aubrey Punzalan, on stroke awareness and prevention.",
+      "url": "https://pdh.com.ph/neuro-talk-kick-off-empowering-barangay-napindan-with-life-saving-knowledge/"
+    },
+    {
+      "slug": "im-family-health-talk",
+      "title": "IM Family Health Talk Kick-Off: Building Stronger Families, One Health Talk at a Time",
+      "date": "2025-03-24",
+      "category": "Community",
+      "excerpt": "PDH launched its IM Family Health Talk in Barangay Upper Bicutan, led by Dr. Keith Darryl Deo Grafil, with a focus on dengue awareness and healthy lifestyle habits.",
+      "url": "https://pdh.com.ph/im-family-health-talk-kick-off-building-stronger-families-one-health-talk-at-a-time/",
+      "image": "/photos/news-health-talk.webp"
+    },
+    {
+      "slug": "cardiovascular-health-talk",
+      "title": "Keeping Hearts Healthy: PDH’s Cardiovascular Health Talk Brings Awareness to the Community",
+      "date": "2025-03-21",
+      "category": "Community",
+      "excerpt": "On March 20, 2025, PDH hosted a Cardiovascular Health Talk led by Dr. Paul Quetua, Internal Medicine Specialist, with Barangay Marcelo Green and Barangay Don Bosco.",
+      "url": "https://pdh.com.ph/keeping-hearts-healthy-pdhs-cardiovascular-health-talk-brings-awareness-to-the-community/",
+      "image": "/photos/news-cardio-talk.webp"
+    },
+    {
+      "slug": "parenting-101",
+      "title": "Parenting 101: Because Every Child Deserves the Best Start!",
+      "date": "2025-03-17",
+      "category": "Community",
+      "excerpt": "On March 17, 2025, Parañaque Doctors Hospital hosted a parenting talk for the community.",
+      "url": "https://pdh.com.ph/parenting-101-because-every-child-deserves-the-best-start/"
+    },
+    {
+      "slug": "buntis-day-2025",
+      "title": "PDH Buntis Day 2025: Nurturing Mothers, Strengthening Communities",
+      "date": "2025-03-10",
+      "category": "Community",
+      "excerpt": "On March 10, 2025, Parañaque Doctors Hospital held PDH Buntis Day for expectant mothers.",
+      "url": "https://pdh.com.ph/pdh-buntis-day-2025-nurturing-mothers-strengthening-communities/"
+    },
+    {
+      "slug": "a-mothers-journey",
+      "title": "Alagang PDH Ako Stories: A Mother’s Journey of Hope and Healing",
+      "date": "2025-03-08",
+      "category": "Patient Stories",
+      "excerpt": "For Jennifer Danao, January 2025 was a time of worry, uncertainty, and ultimately, gratitude, marked by the dedication of the medical professionals who saved her six-year-old son.",
+      "url": "https://pdh.com.ph/alagang-pdh-ako-stories-a-mothers-journey-of-hope-and-healing/"
+    },
+    {
+      "slug": "barangay-partnership",
+      "title": "Alagang PDH Barangay Partnership",
+      "date": "2025-03-05",
+      "category": "Community",
+      "excerpt": "At Parañaque Doctors Hospital, we believe that quality healthcare starts at the grassroots, through partnerships with barangay leaders and local communities.",
+      "url": "https://pdh.com.ph/alagang-pdh-barangay-partnership/",
+      "image": "/photos/news-community-group.webp"
+    },
+    {
+      "slug": "bloodletting-drive",
+      "title": "Every Drop Counts: PDH Bloodletting Drive Saves Lives",
+      "date": "2025-02-26",
+      "category": "Community",
+      "excerpt": "Parañaque Doctors Hospital hosted a bloodletting drive to help save lives.",
+      "url": "https://pdh.com.ph/every-drop-counts-pdh-bloodletting-drive-saves-lives/"
+    },
+    {
+      "slug": "importance-of-regular-checkups",
+      "title": "Importance of Regular Check-ups",
+      "date": "2025-02-19",
+      "category": "Health Tips",
+      "excerpt": "Have you been hearing about regular check-ups? Here’s why they matter.",
+      "url": "https://pdh.com.ph/importance-of-regular-check-ups/"
+    }
   ]
 }

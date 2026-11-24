@@ -45,10 +45,7 @@ const faqs = [
       <p class="small muted cp-reveal" style="text-align:center;margin-top:14px">ER open 24/7 · Ground Floor · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></p>
     </div>
     <div class="container cp-hero_media" data-cp-parallax>
-      <picture class="cp-hero_pic">
-        <source srcset="/photos/pdh-facade.webp" type="image/webp" />
-        <img class="cp-hero_img" src="/photos/pdh-facade.jpg" alt="Parañaque Doctors Hospital building on Doña Soledad Avenue, with the Emergency entrance at street level" width="909" height="489" fetchpriority="high" decoding="async" />
-      </picture>
+      <img class="cp-hero_img" src={site.photos.facade.src} alt={site.photos.facade.alt} width={site.photos.facade.w} height={site.photos.facade.h} fetchpriority="high" decoding="async" />
     </div>
   </section>
 
@@ -162,9 +159,10 @@ const faqs = [
           <div><span class="cp-figs_num">27</span><span class="small muted">MPH hospitals</span></div>
         </div>
         <p class="small muted">{site.network.blurb}</p>
+        <img src={site.network.mapImage} alt="Map of Metro Pacific Health hospitals across the Philippines" loading="lazy" decoding="async" width="1800" height="600" style="width:100%;height:auto;border-radius:12px;margin-top:8px" />
       </div>
       <dl class="cp-pillars">
-        {site.pillars.map((p, i) => <div class="cp-reveal"><dt><span>0{i + 1}</span>{p.title}</dt><dd>{p.text}</dd></div>)}
+        {site.pillars.map((p, i) => <div class="cp-reveal"><img src={p.image} alt="" loading="lazy" decoding="async" width="240" height="160" /><div><dt><span>0{i + 1}</span>{p.title}</dt><dd>{p.text}</dd></div></div>)}
       </dl>
     </div>
   </section>
@@ -249,7 +247,7 @@ const faqs = [
   .cp-lead { max-width: 60ch; margin: 0 auto 24px; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); color: var(--ink-soft); }
   .cp-hero_media { margin-top: 40px; will-change: transform; }
   .cp-hero_pic { display: block; }
-  .cp-hero_img { display: block; width: 100%; height: auto; aspect-ratio: 909 / 489; object-fit: cover; border-radius: 24px; box-shadow: 0 24px 60px rgba(0, 92, 94, 0.18); }
+  .cp-hero_img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: center 40%; border-radius: 24px; box-shadow: 0 24px 60px rgba(0, 92, 94, 0.18); }
   .cp-statement { padding: 96px 0 56px; }
   .cp-big { font-size: clamp(1.6rem, 1rem + 2.6vw, 3.2rem); line-height: 1.15; letter-spacing: -0.03em; font-weight: 600; font-family: var(--font-head); max-width: 24ch; margin: 0; color: var(--heading); }
   :global(.cp-word) { opacity: 0.22; transition: opacity 0.2s; }
@@ -281,8 +279,9 @@ const faqs = [
   .cp-figs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
   .cp-figs_num { display: block; font-size: clamp(2.2rem, 1.6rem + 2.6vw, 4rem); line-height: 1; letter-spacing: -0.04em; font-weight: 500; color: var(--pdh-teal-text); }
   .cp-pillars { margin: 0; display: grid; }
-  .cp-pillars > div { padding: 18px 0; border-top: 1px solid var(--line); display: grid; gap: 6px; }
-  @media (min-width: 720px) { .cp-pillars > div { grid-template-columns: 1fr 1.6fr; gap: 24px; } }
+  .cp-pillars > div { padding: 16px 0; border-top: 1px solid var(--line); display: grid; gap: 12px; grid-template-columns: 96px 1fr; align-items: center; }
+  .cp-pillars img { width: 96px; height: 72px; object-fit: cover; border-radius: 10px; }
+  @media (min-width: 720px) { .cp-pillars > div { grid-template-columns: 120px 1fr; gap: 20px; } .cp-pillars img { width: 120px; height: 84px; } }
   .cp-pillars dt { font-weight: 500; font-size: 1.15rem; letter-spacing: -0.02em; display: flex; gap: 12px; align-items: baseline; }
   .cp-pillars dt span { font-size: 0.8rem; color: var(--ink-soft); }
   .cp-pillars dd { margin: 0; color: var(--ink-soft); }

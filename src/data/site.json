@@ -37,7 +37,8 @@
       "Asian Hospital and Medical Center",
       "Riverside Medical Center",
       "Davao Doctors Hospital"
-    ]
+    ],
+    "mapImage": "/photos/mph-map.webp"
   },
   "address": {
     "street": "175 Doña Soledad Ave.",
@@ -150,23 +151,28 @@
   "pillars": [
     {
       "title": "Patient Safety",
-      "text": "Our commitment is to place patient safety and top-tier medical standards at the forefront of everything we do."
+      "text": "Our commitment is to place patient safety and top-tier medical standards at the forefront of everything we do.",
+      "image": "/photos/pillar-patient-safety.webp"
     },
     {
       "title": "Compassion & Medical Expertise",
-      "text": "We deliver expert medical care with the warmth and compassion every patient deserves."
+      "text": "We deliver expert medical care with the warmth and compassion every patient deserves.",
+      "image": "/photos/pillar-compassion.webp"
     },
     {
       "title": "Cutting-Edge Science & Innovation",
-      "text": "Your well-being inspires our focus on innovation."
+      "text": "Your well-being inspires our focus on innovation.",
+      "image": "/photos/pillar-innovation.webp"
     },
     {
       "title": "Accessible & Inclusive Care",
-      "text": "From Outpatient and Emergency to Inpatient and Urgent Care Services, we offer a comprehensive range of healthcare solutions tailored to your needs."
+      "text": "From Outpatient and Emergency to Inpatient and Urgent Care Services, we offer a comprehensive range of healthcare solutions tailored to your needs.",
+      "image": "/photos/pillar-accessible.webp"
     },
     {
       "title": "Community-Centered Service",
-      "text": "We care beyond the clinic, strengthening lives through outreach and health advocacy."
+      "text": "We care beyond the clinic, strengthening lives through outreach and health advocacy.",
+      "image": "/photos/pillar-community.webp"
     }
   ],
   "careTypes": [
@@ -307,7 +313,8 @@
       "excerpt": "At Parañaque Doctors Hospital, care goes beyond medicine. It’s about building trust, offering comfort, and creating a second home for families facing life’s toughest challenges. This is the story of Thelma and her family.",
       "quote": "What stands out most to us is the consistent warmth, attentiveness, and genuine care we receive from the PDH team, proof that compassion is at the heart of every visit.",
       "by": "Rene, Thelma’s husband, PDH patient companion",
-      "url": "https://pdh.com.ph/alagang-pdh-ako-stories-more-than-a-hospital-a-second-home-built-on-trust-and-care/"
+      "url": "https://pdh.com.ph/alagang-pdh-ako-stories-more-than-a-hospital-a-second-home-built-on-trust-and-care/",
+      "image": "/photos/story-thelma.webp"
     },
     {
       "title": "A Mother’s Journey of Hope and Healing",
@@ -328,12 +335,14 @@
   "privacy": {
     "law": "Data Privacy Act of 2012 (Republic Act No. 10173)",
     "dpoEmail": "dpo@pdh.com.ph",
-    "updated": "10/8/2026"
+    "updated": "10/8/2026",
+    "npcSeal": "/photos/npc-dpo-registered.webp"
   },
   "hero": {
     "headline": "PDH is a pillar of Trust",
     "text": "For generations, families have relied on Parañaque Doctors Hospital for expert care. Built on trust, compassion, and innovation, we remain steadfast in our commitment to serving, healing, and uplifting our community, where health and family legacies thrive.",
-    "source": "Current homepage hero slide"
+    "source": "Current homepage hero slide",
+    "image": "/photos/pdh-facade.webp"
   },
   "payment": [
     "Cash",
@@ -343,5 +352,19 @@
     "HMO accepted"
   ],
   "legalName": "UHBI-Parañaque Doctors Hospital, Inc.",
-  "dohLevelNote": "PDH's About page says 'Level 2'; withheld from the site at Sue's request (25 Nov 2026) until PDH confirms the DOH classification."
+  "dohLevelNote": "PDH's About page says 'Level 2'; withheld from the site at Sue's request (25 Nov 2026) until PDH confirms the DOH classification.",
+  "photos": {
+    "facade": {
+      "src": "/photos/pdh-facade.webp",
+      "w": 1333,
+      "h": 1080,
+      "alt": "Parañaque Doctors Hospital building on Doña Soledad Avenue, with the Emergency entrance at street level"
+    },
+    "lobby": {
+      "src": "/photos/pdh-lobby.webp",
+      "w": 1600,
+      "h": 1172,
+      "alt": "Information desk in the PDH lobby"
+    }
+  }
 }

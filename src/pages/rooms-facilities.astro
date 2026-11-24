@@ -16,7 +16,7 @@ import { rooms, site } from '../lib/data';
       <div class="grid grid-2">
         {rooms.rooms.map((r) => (
           <article class="card">
-            <Placeholder label={r.name} ratio="16x9" />
+            <img src={r.image} alt={`${r.name} at PDH`} width="1200" height="675" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-sm)" />
             <h3 style="margin-top:16px">{r.name}</h3>
             <p class="meta" style="margin-bottom:8px">{r.capacity}</p>
             <p class="small">{r.text}</p>

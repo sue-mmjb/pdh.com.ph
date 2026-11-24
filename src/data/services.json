@@ -15,7 +15,8 @@
       },
       "preparation": null,
       "featured": true,
-      "icon": "emergency"
+      "icon": "emergency",
+      "image": "/photos/pdh-facade.webp"
     },
     {
       "slug": "radiology",
@@ -66,7 +67,8 @@
       "extraLink": {
         "label": "View online lab results",
         "href": "https://lis.pdh.com.ph/"
-      }
+      },
+      "image": "/photos/pillar-innovation.webp"
     },
     {
       "slug": "nuclear-medicine",
@@ -113,7 +115,8 @@
       "featured": true,
       "icon": "heart",
       "hoursAlt": "A homepage slide lists Echocardiogram (pedia & adult) Monday–Sunday 6 AM–7 PM and Vascular procedures Monday–Saturday 8 AM–5 PM, which differs from the Our Services page.",
-      "hoursConfirmed": false
+      "hoursConfirmed": false,
+      "image": "/packages/cardio-services.webp"
     },
     {
       "slug": "pulmonary",
@@ -162,7 +165,8 @@
       "preparation": "Bring your nephrologist’s dialysis order, recent lab results, and your PhilHealth or HMO documents for coverage.",
       "featured": true,
       "icon": "kidney",
-      "priceLine": "For as low as Php 6,700.00, inclusive of PhilHealth (homepage slide, Nov 2026)"
+      "priceLine": "For as low as Php 6,700.00, inclusive of PhilHealth (homepage slide, Nov 2026)",
+      "image": "/packages/hemodialysis.webp"
     },
     {
       "slug": "physical-medicine-rehabilitation",
@@ -187,6 +191,11 @@
       "featured": false,
       "icon": "rehab",
       "programs": [
+        {
+          "name": "Cryotherapy",
+          "summary": "Cold therapy for pain and inflammation, as offered on PDH's rehabilitation slides.",
+          "conditions": []
+        },
         {
           "name": "Laser Therapy",
           "summary": "Reduce acute and chronic pain, inflammation and accelerate tissue repair and healing.",
@@ -215,9 +224,32 @@
             "Patellar tendinitis",
             "Achilles tendinitis"
           ]
+        },
+        {
+          "name": "Cardiovascular Rehabilitation",
+          "summary": "A medically supervised program that helps patients recover and strengthen their heart through safe exercise, monitoring, and lifestyle guidance.",
+          "conditions": [
+            "Heart attack (myocardial infarction)",
+            "Coronary artery disease",
+            "Post-angioplasty or stent",
+            "Post-heart surgery (CABG, valve surgery)",
+            "Heart failure",
+            "Hypertension",
+            "Peripheral artery disease",
+            "Congenital heart disease",
+            "Weight management"
+          ]
         }
       ],
-      "contactLocal": "local 8211"
+      "contactLocal": "local 8211",
+      "image": "/packages/rehab-today.webp",
+      "gallery": [
+        "/packages/rehab-today.webp",
+        "/packages/rehab-laser-therapy.webp",
+        "/packages/rehab-shockwave.webp",
+        "/packages/rehab-cryotherapy.webp",
+        "/packages/cardio-rehab-services.webp"
+      ]
     },
     {
       "slug": "operating-room",
@@ -254,7 +286,8 @@
       },
       "preparation": null,
       "featured": false,
-      "icon": "monitor"
+      "icon": "monitor",
+      "image": "/photos/pillar-patient-safety.webp"
     },
     {
       "slug": "nicu",
@@ -319,7 +352,8 @@
       },
       "preparation": "Check your doctor’s clinic schedule on their profile, then call to book. Bring previous results and a list of your medications.",
       "featured": true,
-      "icon": "stethoscope"
+      "icon": "stethoscope",
+      "image": "/photos/pillar-compassion.webp"
     },
     {
       "slug": "ob-ultrasound",
@@ -472,7 +506,8 @@
       },
       "preparation": "Bring a valid ID, your admitting order, and PhilHealth or HMO documents.",
       "featured": false,
-      "icon": "clipboard"
+      "icon": "clipboard",
+      "image": "/photos/pdh-lobby.webp"
     },
     {
       "slug": "chemo-infusion-center",
@@ -523,7 +558,8 @@
       },
       "preparation": null,
       "featured": false,
-      "icon": "smile"
+      "icon": "smile",
+      "image": "/photos/pillar-accessible.webp"
     }
   ],
   "namedOnlyOnSite": [

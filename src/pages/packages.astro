@@ -14,6 +14,7 @@ const c = packagesData.contacts;
     <div class="container grid grid-3">
       {packages.map((p) => (
         <article class="card pkg" id={p.slug}>
+          <img src={p.image} alt={`${p.name} promo slide from PDH`} loading="lazy" decoding="async" width="1600" height="557" style="width:calc(100% + 40px);margin:-20px -20px 14px;max-width:none;border-radius:var(--radius) var(--radius) 0 0;height:auto;display:block" />
           <p class="eyebrow" style="margin-bottom:4px">{p.category}</p>
           <h2 style="font-size:1.2rem">{p.name}</h2>
           <p class="pkg-price">{p.priceLabel}</p>
