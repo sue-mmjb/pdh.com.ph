@@ -1,219 +1,300 @@
 ---
-// Option C — "Bold Modern": full-bleed charcoal hero with giant type and pill CTAs,
-// a floating search card that overlaps the hero, horizontally scrolling service tiles,
-// aqua stats block, pillar accordion, chip-style HMO list, compact news tiles.
-import { site, hmo, news, featuredServices, specialtyGroups, formatDate } from '../../lib/data';
-import Icon from '../Icon.astro';
+// Option C — "Calm Platform". Design direction from terminal-industries.com (look only, not the
+// template): floating pill nav, light grey bands, one calm sans at a large scale, rounded cards,
+// black primary buttons and a single orange accent. Order follows the brief, task-first.
+// No frame-sequence hero, no scroll hijacking, no trackers: a photo slot with light parallax and
+// gentle reveals, skipped under reduced motion.
+import { site, hmo, news, services, specialtyGroups, doctors, featuredPackages, formatDate } from '../../lib/data';
 import ToConfirm from '../ToConfirm.astro';
 import Sample from '../Sample.astro';
+import Icon from '../Icon.astro';
 import Placeholder from '../Placeholder.astro';
-const er = site.phones.emergency;
-const latest = news.items.slice(0, 3);
----
-<section class="hero">
-  <div class="container">
-    <p class="tag"><span class="dotc"></span> {site.dohLevel} · Parañaque City · Member of {site.network.name}</p>
-    <h1>PDH is a<br />pillar of<br /><span class="hl">trust.</span></h1>
-    <p class="lead" style="color:inherit;opacity:.9;max-width:60ch">{site.hero.text}</p>
-    <div class="actions">
-      <a class="btn btn-accent btn-lg" href="/doctors/"><Icon name="search" /> Find a doctor</a>
-      <a class="btn btn-lg btn-light" href="/book/"><Icon name="calendar" /> Book</a>
-      <a class="btn btn-emergency btn-lg" href={`tel:${er.tel}`}><Icon name="emergency" /> Emergency</a>
-    </div>
-    <p class="er-line">ER open 24/7 · Ground Floor · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></p>
-  </div>
-</section>
 
-<section class="floating">
-  <div class="container">
-    <form class="search-card" action="/doctors/" method="get" role="search">
-      <div class="search-in">
+const er = site.phones.emergency;
+const info = site.phones.information;
+const always = services.filter((s) => s.hours === 'Open 24/7' && ['emergency-room', 'laboratory', 'radiology', 'pharmacy'].includes(s.slug));
+const clinics = services.filter((s) => ['multi-diagnostic-center', 'hemodialysis-center', 'eye-center', 'dental-services', 'ob-ultrasound', 'nuclear-medicine', 'physical-medicine-rehabilitation', 'outpatient-clinics'].includes(s.slug));
+const entry = [
+  { title: 'I need help now', text: 'The Emergency Room is on the Ground Floor and open 24/7. Call first if you can.', cta: 'Call the ER', href: `tel:${er.tel}`, cls: 'btn-emergency', icon: 'emergency', note: `${er.display} · mobile ${er.mobile}`, confirm: true },
+  { title: 'I want to see a doctor', text: `${doctors.length} doctors listed with clinic schedules and room numbers. Outpatient clinics on the 3rd to 6th floors, by appointment.`, cta: 'Find a doctor', href: '/doctors/', cls: 'btn-primary', icon: 'search', note: 'Search by name or specialty' },
+  { title: 'I’m being admitted', text: 'Admitting is on the Ground Floor, open 24/7. Bring a valid ID, your admitting order and PhilHealth or HMO documents.', cta: 'Rooms and admission', href: '/rooms-facilities/', cls: 'btn-outline', icon: 'bed', note: '94 beds · ward to suite' },
+];
+// FAQ answers use only facts already published by PDH (see CONFIRM.md for sources).
+const faqs = [
+  { q: 'Is the Emergency Room open 24/7?', a: 'Yes. The ER is on the Ground Floor and open 24/7, with laboratory, radiology and pharmacy also open around the clock.' },
+  { q: 'How do I get HMO approval?', a: `Go to the HMO Hub on the Ground Floor (${hmo.hub.hours}) with your HMO card, a valid ID and your doctor’s request, or request approval online before you come.` },
+  { q: 'Which HMOs does PDH accept?', a: 'PDH is accredited by PhilHealth and the HMOs listed on the HMO & PhilHealth page. Each doctor’s profile also lists the HMOs they accept.' },
+  { q: 'How do I get my laboratory results?', a: 'Online lab results are available at lis.pdh.com.ph. The laboratory itself is on the Ground Floor, open 24/7.' },
+  { q: 'How do I pay for a package?', a: 'Packages can be paid in cash, GCash, credit card or debit card, and HMO is accepted. Some promos are cash basis only; each package says so.' },
+  { q: 'Is there parking?', a: 'Yes. Basement parking and allocated parking for patients and visitors, with slots for PWD and senior citizens.' },
+];
+---
+<div class="cp" data-cp>
+  <!-- 1 · Hero -->
+  <section class="cp-hero">
+    <div class="container">
+      <p class="eyebrow cp-reveal">{site.dohLevel} hospital · Parañaque City · Member of {site.network.name}</p>
+      <h1 class="cp-h1 cp-reveal">{site.hero.headline}.</h1>
+      <p class="cp-lead cp-reveal">{site.hero.text}</p>
+      <div class="actions cp-reveal" style="justify-content:center">
+        <a class="btn btn-primary btn-lg" href="/doctors/"><Icon name="search" /> Find a doctor</a>
+        <a class="btn btn-accent btn-lg" href="/book/"><Icon name="calendar" /> Book</a>
+        <a class="btn btn-emergency btn-lg" href={`tel:${er.tel}`}><Icon name="emergency" /> Emergency</a>
+      </div>
+      <p class="small muted cp-reveal" style="text-align:center;margin-top:14px">ER open 24/7 · Ground Floor · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></p>
+    </div>
+    <div class="container cp-hero_media" data-cp-parallax>
+      <Placeholder label="PDH building or information desk (supplied by PDH)" ratio="16x9" class="cp-hero_ph" />
+    </div>
+  </section>
+
+  <!-- 2 · Statement -->
+  <section class="cp-statement">
+    <div class="container">
+      <h2 class="cp-big" data-cp-words>{site.why.intro}</h2>
+    </div>
+  </section>
+
+  <!-- 3 · Entry points -->
+  <section class="cp-sec">
+    <div class="container">
+      <p class="eyebrow">Start here</p>
+      <h2 class="cp-h2">What do you need today?</h2>
+      <div class="grid grid-3 cp-entry">
+        {entry.map((e) => (
+          <article class="card cp-entry_card cp-reveal">
+            <span class="icon-circle"><Icon name={e.icon} /></span>
+            <h3>{e.title}</h3>
+            <p class="muted">{e.text}</p>
+            <p class="small muted" style="margin:0 0 14px">{e.note}{e.confirm && <> <ToConfirm note={er.note} /></>}</p>
+            <a class={`btn ${e.cls}`} href={e.href} style="margin-top:auto;align-self:start">{e.cta}</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Search -->
+  <section class="cp-sec cp-sec_tight">
+    <div class="container">
+      <form class="cp-search card" action="/doctors/" method="get" role="search">
         <label class="visually-hidden" for="home-q">Doctor name or specialty</label>
         <Icon name="search" />
-        <input id="home-q" name="q" type="search" placeholder="Search 320 doctors by name or specialty" />
-      </div>
-      <button class="btn btn-primary" type="submit">Search</button>
-      <div class="search-chips">
-        {specialtyGroups.slice(0, 6).map((g) => <a href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}>{g.name}</a>)}
-      </div>
-    </form>
-  </div>
-</section>
-
-<section class="section svc">
-  <div class="container">
-    <div class="row-head">
-      <h2>Services</h2>
-      <a class="btn btn-outline btn-sm" href="/services/">See all <Icon name="arrow" /></a>
-    </div>
-  </div>
-  <div class="scroller" tabindex="0" aria-label="Featured services, scroll horizontally">
-    {featuredServices.map((s) => (
-      <a class="tile" href={`/services/${s.slug}/`}>
-        <span class="icon-circle"><Icon name={s.icon} /></span>
-        <strong>{s.name}</strong>
-        <span class="small">{s.location ?? 'Location to confirm'} · {s.hours && s.hours.length > 28 ? 'see hours' : s.hours}</span>
-      </a>
-    ))}
-  </div>
-</section>
-
-<section class="stats-c">
-  <div class="container stats-grid">
-    {site.stats.map((s) => <div><span class="num">{s.value}</span><span class="lbl">{s.label}</span></div>)}
-    <div class="stats-copy">
-      <h2>Built for Parañaque since 2007.</h2>
-      <p>{site.about.intro}</p>
-      <a class="btn btn-sm btn-primary" href="/about/">About PDH</a>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container hmo-c">
-    <div>
-      <h2>HMO &amp; PhilHealth, sorted at the Hub.</h2>
-      <p class="lead">Ground Floor · {hmo.hub.hours}.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="/hmo-philhealth/">How approval works</a>
-        <a class="btn btn-outline" href={hmo.hub.onlineApproval.url} target="_blank" rel="noopener">Online approval <Icon name="external" /></a>
-      </div>
-    </div>
-    <div>
-      <p class="small"><strong>Accepted HMOs</strong> <Sample /> <ToConfirm note="Names taken from logos on the current site; confirm the official list" /></p>
-      <ul class="chips">{hmo.partners.map((p) => <li>{p}</li>)}</ul>
-    </div>
-  </div>
-</section>
-
-<section class="section section-soft">
-  <div class="container net">
-    <Placeholder label="MPH network map or hospital photo" ratio="4x3" />
-    <div>
-      <span class="eyebrow">Our network of care</span>
-      <h2>One of 27 {site.network.name} hospitals.</h2>
-      <p>{site.network.detail}</p>
-      <ul class="net-figs">
-        {site.network.figures.map((f) => <li><strong>{f.value}</strong><span>{f.label}</span></li>)}
+        <input id="home-q" name="q" type="search" placeholder="Search doctors by name or specialty" />
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+      <ul class="pill-list" style="margin-top:12px;justify-content:center">
+        {specialtyGroups.map((g) => <li><a href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}>{g.name}</a></li>)}
       </ul>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section">
-  <div class="container pillars-c">
-    <div>
-      <span class="eyebrow">{site.why.heading}</span>
-      <h2>Because, we at PDH…</h2>
-      <p class="muted">{site.why.intro}</p>
+  <!-- 5 · Services -->
+  <section class="cp-sec section-soft cp-band">
+    <div class="container">
+      <p class="eyebrow">Services</p>
+      <h2 class="cp-h2">One hospital, every department.</h2>
+      <p class="cp-sub">Open 24/7: ER, laboratory, radiology and pharmacy. Clinics and centers by schedule. Floors and hours as published by PDH.</p>
+      <div class="cp-svc">
+        {[...always, ...clinics].map((s) => (
+          <a class="cp-svc_card cp-reveal" href={`/services/${s.slug}/`}>
+            <span class="icon-circle"><Icon name={s.icon} /></span>
+            <strong>{s.name}</strong>
+            <span class="small muted">{s.location} · {s.hours && s.hours.length > 28 ? 'see hours' : s.hours}</span>
+          </a>
+        ))}
+      </div>
+      <p style="margin-top:20px"><a class="btn btn-outline" href="/services/">All services and departments <Icon name="arrow" /></a></p>
     </div>
-    <div>
-      {site.pillars.map((p, i) => (
-        <details class="acc" open={i === 0}>
-          <summary>{p.title}</summary>
-          <div class="body">{p.text}</div>
-        </details>
-      ))}
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="section section-strong">
-  <div class="container">
-    <span class="eyebrow">Patient stories</span>
-    <h2>Alagang PDH Ako.</h2>
-    <div class="grid grid-2 stories">
-      {site.stories.map((s) => (
-        <article>
-          <p class="big">“{s.quote}”</p>
-          <p class="small">— {s.by} · <a href={s.url} target="_blank" rel="noopener">{s.title}</a></p>
-        </article>
-      ))}
+  <!-- 6 · HMO & PhilHealth: text list plus a logo-wall style grid -->
+  <section class="cp-sec">
+    <div class="container">
+      <div class="cp-two">
+        <div>
+          <p class="eyebrow">HMO &amp; PhilHealth</p>
+          <h2 class="cp-h2">Bring your card. The Hub does the rest.</h2>
+          <p class="cp-sub">HMO Hub, Ground Floor · {hmo.hub.hours}. PhilHealth-accredited.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="/hmo-philhealth/">How it works</a>
+            <a class="btn btn-outline" href={hmo.hub.onlineApproval.url} target="_blank" rel="noopener">Online approval</a>
+          </div>
+        </div>
+        <p class="small muted" style="align-self:end">Accepted HMOs <Sample /> <ToConfirm note="Names taken from logos on the current site; confirm the official list" /></p>
+      </div>
+      <ul class="cp-wall">
+        {hmo.partners.map((p) => <li>{p}</li>)}
+      </ul>
     </div>
-    <div class="grid grid-3 testi">
-      {site.testimonials.slice(0, 3).map((t) => <p class="small">“{t.quote}” — {t.by}</p>)}
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="section">
-  <div class="container">
-    <div class="row-head"><h2>PDH News</h2><a class="btn btn-outline btn-sm" href="/news/">All news</a></div>
-    <div class="grid grid-3">
-      {latest.map((n) => (
-        <a class="card card-link" href={n.url} target="_blank" rel="noopener">
-          <p class="meta"><time datetime={n.date}>{formatDate(n.date)}</time> · {n.category}</p>
-          <h3 style="font-size:1.05rem">{n.title}</h3>
-        </a>
-      ))}
+  <!-- 7 · Packages -->
+  <section class="cp-sec section-soft cp-band">
+    <div class="container">
+      <div class="cp-two" style="align-items:end">
+        <div><p class="eyebrow">Packages &amp; promos</p><h2 class="cp-h2">Bundled tests at one price.</h2></div>
+        <p class="small muted" style="margin:0">Prices as published on pdh.com.ph, November 2026. <a href="/packages/">All packages</a></p>
+      </div>
+      <div class="grid grid-4" style="margin-top:20px">
+        {featuredPackages.slice(0, 4).map((p) => (
+          <a class="card card-link cp-pkg cp-reveal" href={`/packages/#${p.slug}`}>
+            <span class="small muted">{p.category}</span>
+            <h3 style="font-size:1.1rem;margin:6px 0 4px">{p.name}</h3>
+            <span class="cp-pkg_price">{p.priceLabel}</span>
+          </a>
+        ))}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section section-soft contact-c">
-  <div class="container">
-    <div class="contact-card">
+  <!-- 8 · Why PDH + figures -->
+  <section class="cp-sec">
+    <div class="container cp-two">
       <div>
-        <h2>Visit or call.</h2>
-        <p>{site.address.full}</p>
-        <p>Emergency <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /> · Information <a href={`tel:${site.phones.information.tel}`}>{site.phones.information.display}</a> · <a href={`mailto:${site.emails.info}`}>{site.emails.info}</a></p>
+        <p class="eyebrow">{site.why.heading}</p>
+        <h2 class="cp-h2">Because, we at PDH…</h2>
+        <div class="cp-figs">
+          {site.stats.map((s) => <div><span class="cp-figs_num">{s.value}</span><span class="small muted">{s.label}</span></div>)}
+          <div><span class="cp-figs_num">27</span><span class="small muted">MPH hospitals</span></div>
+        </div>
+        <p class="small muted">{site.network.blurb}</p>
       </div>
-      <div class="actions">
-        <a class="btn btn-primary" href="/book/">Send a request</a>
-        <a class="btn btn-outline" href="/contact/#directions">Directions</a>
+      <dl class="cp-pillars">
+        {site.pillars.map((p, i) => <div class="cp-reveal"><dt><span>0{i + 1}</span>{p.title}</dt><dd>{p.text}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <!-- 9 · Patient story -->
+  <section class="cp-sec section-strong cp-quote_band">
+    <div class="container">
+      <p class="eyebrow" style="color:var(--accent)">{site.stories[0].series}</p>
+      <p class="cp-quote">“{site.stories[0].quote}”</p>
+      <p class="small" style="opacity:.85">— {site.stories[0].by} · <a href={site.stories[0].url} target="_blank" rel="noopener" style="color:inherit">Read the story</a></p>
+    </div>
+  </section>
+
+  <!-- 10 · FAQ -->
+  <section class="cp-sec">
+    <div class="container cp-two">
+      <div><p class="eyebrow">FAQs</p><h2 class="cp-h2">Before you come.</h2><p class="cp-sub">Answers use only what PDH has published.</p></div>
+      <div>
+        {faqs.map((f, i) => (
+          <details class="acc" open={i === 0}><summary>{f.q}</summary><div class="body">{f.a}</div></details>
+        ))}
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- 11 · News -->
+  <section class="cp-sec cp-sec_tight">
+    <div class="container cp-two">
+      <div><p class="eyebrow">PDH News</p><h2 class="cp-h2" style="font-size:1.6rem">From the community.</h2><p><a class="btn btn-outline btn-sm" href="/news/">Go to PDH News</a></p></div>
+      <ul class="cp-news">
+        {news.items.slice(0, 4).map((n) => <li><time datetime={n.date}>{formatDate(n.date)}</time><a href={n.url} target="_blank" rel="noopener">{n.title}</a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 12 · Closing band -->
+  <section class="cp-sec section-strong cp-close">
+    <div class="container">
+      <h2 class="cp-h2" style="color:inherit">Ready for your visit?</h2>
+      <p style="opacity:.85">{site.address.full} · Information <a href={`tel:${info.tel}`} style="color:inherit">{info.display}</a> <ToConfirm note={info.note} /> · <a href={`mailto:${site.emails.info}`} style="color:inherit">{site.emails.info}</a></p>
+      <div class="actions">
+        <a class="btn btn-accent btn-lg" href="/book/">Request an appointment</a>
+        <a class="btn btn-outline btn-lg" href="/contact/#directions">Directions &amp; parking</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  const root = document.querySelector('[data-cp]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (root && !reduce) {
+    gsap.registerPlugin(ScrollTrigger);
+    // Gentle reveals (no scroll hijacking)
+    root.querySelectorAll('.cp-reveal').forEach((el, i) => {
+      gsap.fromTo(el, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: (i % 4) * 0.06, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    });
+    // Hero media: light parallax, the honest stand-in for the frame sequence
+    const media = root.querySelector('[data-cp-parallax]');
+    if (media) gsap.fromTo(media, { yPercent: 6, scale: 0.98 }, { yPercent: -6, scale: 1, ease: 'none', scrollTrigger: { trigger: media, start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
+    // Statement: words brighten as they pass the middle of the screen
+    const st = root.querySelector('[data-cp-words]');
+    if (st && st.textContent) {
+      const words = st.textContent.trim().split(/\s+/);
+      st.innerHTML = words.map((w) => `<span class="cp-word">${w}</span>`).join(' ');
+      gsap.to(st.querySelectorAll('.cp-word'), { opacity: 1, stagger: 0.04, ease: 'none', scrollTrigger: { trigger: st, start: 'top 75%', end: 'bottom 45%', scrub: 0.4 } });
+    }
+  } else if (root) {
+    root.querySelectorAll('.cp-reveal').forEach((el) => (el as HTMLElement).style.opacity = '1');
+  }
+</script>
 
 <style>
-  .hero { background: var(--bg-strong); color: var(--ink-on-strong); padding: 48px 0 96px; position: relative; overflow: hidden; }
-  .hero::after { content: ""; position: absolute; right: -120px; top: -120px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(21,184,166,0.35), transparent 70%); pointer-events: none; }
-  @media (min-width: 900px) { .hero { padding: 88px 0 128px; } }
-  .hero .tag { font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; opacity: 0.85; margin-bottom: 16px; }
-  .dotc { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); display: inline-block; }
-  .hero h1 { color: inherit; font-size: clamp(2.8rem, 1.4rem + 7vw, 6.5rem); line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 0.4em; }
-  .hero .hl { color: var(--accent); }
-  .btn-light { background: var(--ink-on-strong); color: var(--ink); }
-  .btn-light:hover { background: #fff; color: var(--ink); }
-  .er-line { margin-top: 20px; font-size: 0.92rem; opacity: 0.9; }
-  .er-line a { color: inherit; }
-  .floating { margin-top: -56px; position: relative; z-index: 2; }
-  .search-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; display: grid; gap: 12px; }
-  @media (min-width: 720px) { .search-card { grid-template-columns: 1fr auto; align-items: center; padding: 20px; } .search-chips { grid-column: 1 / -1; } }
-  .search-in { display: flex; align-items: center; gap: 10px; border: 2px solid var(--line); border-radius: var(--radius-pill); padding: 0 16px; min-height: 52px; }
-  .search-in:focus-within { border-color: var(--primary); }
-  .search-in svg { width: 20px; height: 20px; color: var(--ink-soft); flex: none; }
-  .search-in input { border: none; background: transparent; font: inherit; width: 100%; min-height: 48px; outline: none; }
-  .search-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .search-chips a { display: inline-flex; align-items: center; min-height: 36px; padding: 4px 12px; border-radius: var(--radius-pill); background: var(--accent-soft); color: var(--accent-text); text-decoration: none; font-weight: 600; font-size: 0.88rem; }
-  .row-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
-  .row-head h2 { margin: 0; }
-  .scroller { display: flex; gap: 12px; overflow-x: auto; padding: 4px var(--gutter) 16px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
-  @media (min-width: 1232px) { .scroller { padding-left: calc((100vw - var(--max)) / 2 + var(--gutter)); } }
-  .tile { flex: 0 0 230px; scroll-snap-align: start; display: grid; gap: 6px; align-content: start; padding: 18px; background: var(--card); border-radius: var(--radius); border: 1px solid var(--line); text-decoration: none; color: var(--ink); min-height: 150px; }
-  .tile:hover { border-color: var(--accent); }
-  .tile strong { font-family: var(--font-head); font-size: 1.05rem; line-height: 1.2; }
-  .tile .small { color: var(--ink-soft); }
-  .stats-c { background: var(--accent); color: #0b1a17; padding: 48px 0; }
-  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
-  @media (min-width: 900px) { .stats-grid { grid-template-columns: repeat(3, auto) 1.4fr; gap: 40px; } }
-  .stats-grid .num { font-family: var(--font-head); font-weight: 900; font-size: clamp(3rem, 2rem + 4vw, 5.5rem); line-height: 1; display: block; letter-spacing: -0.04em; }
-  .stats-grid .lbl { font-weight: 700; }
-  .stats-copy { grid-column: 1 / -1; }
-  @media (min-width: 900px) { .stats-copy { grid-column: auto; } }
-  .stats-copy h2, .stats-copy p { color: inherit; }
-  .stats-copy .btn-primary { background: #0b1a17; color: #fff; }
-  .hmo-c, .pillars-c, .net { display: grid; gap: 24px; }
-  @media (min-width: 900px) { .hmo-c, .pillars-c { grid-template-columns: 1fr 1.3fr; gap: 56px; } .net { grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: center; } }
-  .net-figs { list-style: none; padding: 0; margin: 16px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .net-figs li { display: grid; }
-  .net-figs strong { font-family: var(--font-head); font-size: 2rem; line-height: 1; }
-  .net-figs span { font-size: 0.85rem; color: var(--ink-soft); }
-  .stories .big { font-family: var(--font-head); font-size: clamp(1.2rem, 1rem + 1vw, 1.6rem); line-height: 1.3; }
-  .testi { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.18); }
-  .contact-card { background: var(--card); border-radius: var(--radius); padding: 24px; display: grid; gap: 16px; box-shadow: var(--shadow); }
-  @media (min-width: 900px) { .contact-card { grid-template-columns: 1fr auto; align-items: center; padding: 32px; } }
-  .contact-card h2 { margin-bottom: 8px; }
-  .contact-card p { margin: 0 0 6px; }
+  .cp-reveal { opacity: 0; }
+  :global(html.no-js) .cp-reveal, :global([data-theme]) .cp-reveal.is-visible { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .cp-reveal { opacity: 1; } }
+
+  .cp-hero { padding: 72px 0 0; text-align: center; background: linear-gradient(180deg, #ffffff 0%, var(--bg) 60%); }
+  .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 6vw, 6rem); line-height: 1.0; letter-spacing: -0.04em; font-weight: 500; max-width: 14ch; margin: 12px auto 0.3em; }
+  .cp-lead { max-width: 60ch; margin: 0 auto 24px; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); color: var(--ink-soft); }
+  .cp-hero_media { margin-top: 40px; will-change: transform; }
+  .cp-hero_ph { border-radius: 24px; }
+  .cp-statement { padding: 96px 0 56px; }
+  .cp-big { font-size: clamp(1.6rem, 1rem + 2.6vw, 3.2rem); line-height: 1.15; letter-spacing: -0.03em; font-weight: 500; max-width: 24ch; margin: 0; }
+  :global(.cp-word) { opacity: 0.22; transition: opacity 0.2s; }
+  .cp-sec { padding: 56px 0; }
+  @media (min-width: 900px) { .cp-sec { padding: 80px 0; } }
+  .cp-sec_tight { padding-top: 24px; }
+  .cp-band { border-radius: 24px; margin: 0 var(--gutter); }
+  .cp-band .container { padding-left: 8px; padding-right: 8px; }
+  @media (min-width: 900px) { .cp-band .container { padding-left: 24px; padding-right: 24px; } }
+  .cp-h2 { font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem); line-height: 1.05; letter-spacing: -0.035em; font-weight: 500; max-width: 20ch; }
+  .cp-sub { color: var(--ink-soft); max-width: 60ch; }
+  .cp-entry { margin-top: 24px; }
+  .cp-entry_card { display: flex; flex-direction: column; min-height: 280px; }
+  .cp-entry_card h3 { font-size: 1.3rem; letter-spacing: -0.02em; font-weight: 500; }
+  .cp-search { display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 18px; border-radius: 999px; max-width: 760px; margin: 0 auto; }
+  .cp-search svg { width: 20px; height: 20px; color: var(--ink-soft); flex: none; }
+  .cp-search input { flex: 1; border: 0; background: transparent; font: inherit; min-height: 44px; outline: none; color: inherit; min-width: 0; }
+  .cp-search .btn { flex: none; }
+  .cp-svc { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
+  @media (min-width: 720px) { .cp-svc { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1100px) { .cp-svc { grid-template-columns: repeat(4, 1fr); gap: 12px; } }
+  .cp-svc_card { display: grid; gap: 4px; align-content: start; padding: 18px; background: var(--card); border-radius: var(--radius); text-decoration: none; color: inherit; border: 1px solid transparent; min-height: 150px; transition: border-color 0.2s, transform 0.2s; }
+  .cp-svc_card:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .cp-svc_card strong { font-weight: 500; font-size: 1.05rem; letter-spacing: -0.01em; margin-top: 6px; }
+  .cp-two { display: grid; gap: 20px; }
+  @media (min-width: 900px) { .cp-two { grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; } }
+  .cp-wall { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  @media (min-width: 640px) { .cp-wall { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 1000px) { .cp-wall { grid-template-columns: repeat(8, 1fr); } }
+  .cp-wall li { background: var(--card); min-height: 72px; display: grid; place-items: center; text-align: center; padding: 10px; font-size: 0.85rem; font-weight: 500; letter-spacing: -0.01em; }
+  .cp-pkg_price { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.03em; color: var(--accent-text); }
+  .cp-figs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .cp-figs_num { display: block; font-size: clamp(2.2rem, 1.6rem + 2.6vw, 4rem); line-height: 1; letter-spacing: -0.04em; font-weight: 500; }
+  .cp-pillars { margin: 0; display: grid; }
+  .cp-pillars > div { padding: 18px 0; border-top: 1px solid var(--line); display: grid; gap: 6px; }
+  @media (min-width: 720px) { .cp-pillars > div { grid-template-columns: 1fr 1.6fr; gap: 24px; } }
+  .cp-pillars dt { font-weight: 500; font-size: 1.15rem; letter-spacing: -0.02em; display: flex; gap: 12px; align-items: baseline; }
+  .cp-pillars dt span { font-size: 0.8rem; color: var(--ink-soft); }
+  .cp-pillars dd { margin: 0; color: var(--ink-soft); }
+  .cp-quote_band { text-align: center; }
+  .cp-quote { font-size: clamp(1.4rem, 1rem + 2vw, 2.6rem); line-height: 1.15; letter-spacing: -0.03em; font-weight: 500; max-width: 26ch; margin: 8px auto 12px; }
+  .cp-news { list-style: none; padding: 0; margin: 0; }
+  .cp-news li { display: grid; gap: 2px; padding: 12px 0; border-top: 1px solid var(--line); }
+  @media (min-width: 640px) { .cp-news li { grid-template-columns: 150px 1fr; gap: 16px; } }
+  .cp-news time { font-size: 0.85rem; color: var(--ink-soft); padding-top: 2px; }
+  .cp-news a { color: inherit; text-decoration: none; font-weight: 500; }
+  .cp-news a:hover { text-decoration: underline; }
+  .cp-close { text-align: center; }
+  .cp-close .cp-h2 { margin-left: auto; margin-right: auto; }
+  .cp-close .actions { justify-content: center; margin-top: 20px; }
+  .cp-close .btn-outline { color: inherit; }
 </style>
