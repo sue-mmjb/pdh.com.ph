@@ -15,7 +15,7 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 
 | Item | What the prototype shows | Status |
 | --- | --- | --- |
-| Accepted HMOs (hospital-wide) | 32 names read from logo alt text on the homepage | [TO CONFIRM] — official list needed |
+| Accepted HMOs (hospital-wide) | 32 partners with PDH's own logo files | Validated 25 Nov 2026 against the logo strips Sue supplied; marker removed |
 | Per-doctor accredited HMOs | As listed on each doctor's page; 113 doctors show "TBD" or nothing | [TO CONFIRM] for those doctors |
 | Packages | 12 packages/promos with prices, transcribed from the homepage carousel slides (Nov 2026) | Published by PDH — confirm promo validity dates and the Sunday Ultrasound discount amount |
 | Room rates | Not shown | [TO CONFIRM] |
