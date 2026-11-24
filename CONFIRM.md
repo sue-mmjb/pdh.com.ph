@@ -7,7 +7,7 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | Item | What the prototype shows | Where it came from | Status |
 | --- | --- | --- | --- |
 | Emergency (ER) line | 8776 0645 local 8106; mobile 0921 572 0589 | Contact page on current site | [TO CONFIRM] — shown on every page per the brief |
-| Main information line | 8776 0644 local 7000; mobile 0998 520 7295 | Homepage shows two spellings ("8776 0644/51 local 7000" and "8776 06 44 to local 7000"); second mobile 0998 520 7286 also listed | [TO CONFIRM] |
+| Main information line | (02) 8776 0644, 46 to 51 local 7000; mobiles 0998 520 7286 / 7295 | Homepage slides print this consistently; the footer prints two other spellings | [TO CONFIRM] |
 | Messenger link | Facebook page URL used instead | No m.me link in the scrape | [TO CONFIRM] |
 | Visiting hours | "Not published" | Not on the current site | [TO CONFIRM] |
 
@@ -17,11 +17,14 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | --- | --- | --- |
 | Accepted HMOs (hospital-wide) | 32 names read from logo alt text on the homepage | [TO CONFIRM] — official list needed |
 | Per-doctor accredited HMOs | As listed on each doctor's page; 113 doctors show "TBD" or nothing | [TO CONFIRM] for those doctors |
-| Packages | 6 sample packages, no prices | Sample — PDH to supply real packages and prices |
+| Packages | 12 packages/promos with prices, transcribed from the homepage carousel slides (Nov 2026) | Published by PDH — confirm promo validity dates and the Sunday Ultrasound discount amount |
 | Room rates | Not shown | [TO CONFIRM] |
 | PhilHealth process | 3 sample steps | Sample — PDH to supply |
 | HMO approval steps | 4 sample steps | Sample — PDH to supply |
 | "How to prepare" per service | Sample text on 16 services | Sample — PDH to supply |
+| Multi-Diagnostic Center hours | Our Services page: Echo Mon–Fri 7–5, Sat–Sun 7–4; homepage slide: Echo Mon–Sun 6 AM–7 PM, Vascular Mon–Sat 8–5 | [TO CONFIRM] — two schedules published |
+| Doctor schedule codes | Our reading: M T W TH F S; TTHS = Tue/Thu/Sat | [TO CONFIRM] — PDH does not define the codes |
+| How to book (doctor profiles) | 3 generic steps | Sample |
 | Per-service HMO coverage | Points to HMO Hub | [TO CONFIRM] |
 
 ## Services listed on the current site without details
@@ -62,3 +65,12 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 ## Decisions to mention at the demo
 
 - The homepage motion uses GSAP, self-hosted and bundled at build time. The site makes no calls to any outside server, loads no fonts, analytics or widgets from third parties. Say this in one line so nobody reads "GSAP" as an external dependency.
+
+## Sourced from the homepage carousel slides (screenshots, 25 Nov 2026)
+
+- Hero copy: "PDH is a pillar of Trust" and its paragraph are PDH's own words and now replace our paraphrased headlines on all three options.
+- Rehabilitation: Laser Therapy, Cryotherapy, Shockwave, sports injury, pain management, strength and conditioning, assistive device training; laser and shockwave condition lists; appointments local 8211.
+- Hemodialysis: "for as low as Php 6,700.00, inclusive of PhilHealth".
+- Diagnostic prices: 2D Echo 3,959; CT scan 7,220; whole abdomen ultrasound 4,261; ECG 623; chest X-ray (PA) 515.
+- Payment methods: cash, GCash, credit card, debit card; HMO accepted. TikTok handle paranaquedoctorshospital.
+- Legal name on signage and the official logo: UHBI-Parañaque Doctors Hospital, Inc. (the site uses "Parañaque Doctors Hospital").

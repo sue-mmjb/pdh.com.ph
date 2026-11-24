@@ -17,8 +17,10 @@ export const services: Service[] = servicesData.services;
 export const specialtyGroups = servicesData.specialtyGroups;
 export const namedOnlyOnSite = servicesData.namedOnlyOnSite;
 export const doctors: Doctor[] = doctorsData;
+export { packagesData };
 export const packages = packagesData.packages;
 export const packagesAreSample = packagesData.sample;
+export const featuredPackages = packages.filter((p) => p.featured);
 
 export const departments = [...new Set(doctors.map((d) => d.department))].sort();
 export const specializations = [...new Set(doctors.map((d) => d.specialization))].sort();

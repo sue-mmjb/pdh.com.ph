@@ -27,9 +27,27 @@ const isER = s.slug === 'emergency-room';
         <h2 style="font-size:1.3rem">Location and hours</h2>
         <dl class="dl" style="margin-bottom:24px">
           <dt>Floor</dt><dd>{s.location ?? <>Not listed <ToConfirm note="The current site shows TBD for this service's location" /></>}</dd>
-          <dt>Hours</dt><dd>{s.hours ?? <>Not listed <ToConfirm note="The current site shows TBD for this service's schedule" /></>}</dd>
-          <dt>Contact</dt><dd><a href={`tel:${site.phones.trunk.tel}`}>{site.phones.trunk.display}</a></dd>
+          <dt>Hours</dt><dd>{s.hours ?? <>Not listed <ToConfirm note="The current site shows TBD for this service's schedule" /></>}{s.hoursAlt && <> <ToConfirm note={s.hoursAlt} /></>}</dd>
+          <dt>Contact</dt><dd><a href={`tel:${site.phones.trunk.tel}`}>{site.phones.trunk.display}</a>{s.contactLocal && <> · appointments: {site.phones.information.display.replace('local 7000', s.contactLocal)}</>}</dd>
+          {s.priceLine && <><dt>Price</dt><dd>{s.priceLine}</dd></>}
         </dl>
+        {s.hoursAlt && <p class="note-box small" style="margin:-12px 0 24px">{s.hoursAlt}</p>}
+
+        {s.programs && (
+          <>
+            <h2 style="font-size:1.3rem">Programs</h2>
+            <div class="grid grid-2" style="margin-bottom:24px">
+              {s.programs.map((p) => (
+                <div class="card">
+                  <h3 style="font-size:1.05rem">{p.name}</h3>
+                  <p class="small">{p.summary}</p>
+                  <p class="small muted" style="margin:0 0 6px"><strong>Commonly treated conditions</strong></p>
+                  <ul class="chips">{p.conditions.map((c) => <li>{c}</li>)}</ul>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
 
         {s.offered.length > 0 && (
           <>

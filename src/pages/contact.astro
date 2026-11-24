@@ -7,7 +7,7 @@ import { site, rooms } from '../lib/data';
 const p = site.phones;
 const parking = rooms.facilities.find((f) => f.name === 'Parking');
 const mapsQuery = encodeURIComponent(`${site.name}, ${site.address.full}`);
-const lines = [p.emergency, p.information, p.admitting, p.hmoHub, p.hr];
+const lines = [p.emergency, p.information, p.marketing, p.admitting, p.hmoHub, p.hr];
 ---
 <Base title="Contact and directions" description={`${site.name} address, phone lines, email, directions, parking and visiting hours. ${site.address.full}.`}>
   <PageHero eyebrow="Contact us" title="Contact and directions" lead="Thank you for visiting Parañaque Doctors Hospital. Got questions or concerns? We’re here to help—just reach out, and we’ll respond as soon as possible." />

@@ -14,12 +14,30 @@
     "blurb": "Parañaque Doctors Hospital (PDH) is a proud member of Metro Pacific Health (MPH), the largest private hospital group in the country.",
     "detail": "The 27 hospitals that make up MPH include Makati Medical Center, Cardinal Santos Medical Center, Asian Hospital and Medical Center, Riverside Medical Center, and Davao Doctors Hospital, as well as 33 outpatient care centers, 6 cancer centers, 2 allied health colleges, a centralized laboratory, and several pharmacies across the country – all working together to deliver high-quality compassionate healthcare to Filipinos.",
     "figures": [
-      { "value": "27", "label": "Hospitals" },
-      { "value": "33", "label": "Outpatient care centers" },
-      { "value": "6", "label": "Cancer centers" },
-      { "value": "2", "label": "Allied health colleges" }
+      {
+        "value": "27",
+        "label": "Hospitals"
+      },
+      {
+        "value": "33",
+        "label": "Outpatient care centers"
+      },
+      {
+        "value": "6",
+        "label": "Cancer centers"
+      },
+      {
+        "value": "2",
+        "label": "Allied health colleges"
+      }
     ],
-    "namedHospitals": ["Makati Medical Center", "Cardinal Santos Medical Center", "Asian Hospital and Medical Center", "Riverside Medical Center", "Davao Doctors Hospital"]
+    "namedHospitals": [
+      "Makati Medical Center",
+      "Cardinal Santos Medical Center",
+      "Asian Hospital and Medical Center",
+      "Riverside Medical Center",
+      "Davao Doctors Hospital"
+    ]
   },
   "address": {
     "street": "175 Doña Soledad Ave.",
@@ -31,12 +49,62 @@
     "full": "175 Doña Soledad Ave., Better Living Subdivision, Parañaque, 1711 Metro Manila"
   },
   "phones": {
-    "emergency": { "label": "Emergency", "display": "8776 0645 local 8106", "tel": "+63287760645", "mobile": "0921 572 0589", "mobileTel": "+639215720589", "confirmed": false, "note": "Listed on the current site's Contact page. Not yet confirmed by PDH." },
-    "information": { "label": "Information", "display": "8776 0644 local 7000", "tel": "+63287760644", "mobile": "0998 520 7295", "mobileTel": "+639985207295", "confirmed": false, "note": "The homepage shows '8776 0644/51 local 7000' and '8776 06 44 to local 7000'. Confirm the main line." },
-    "trunk": { "label": "Trunk lines", "display": "8776-0644 to 46", "tel": "+63287760644", "confirmed": true },
-    "admitting": { "label": "Admitting Department", "display": "8776 0646 local 8728", "tel": "+63287760646", "mobile": "0947 236 9827", "mobileTel": "+639472369827", "confirmed": true },
-    "hmoHub": { "label": "HMO Hub", "display": "8776 0647 local 8945", "tel": "+63287760647", "mobile": "0921 567 2709", "mobileTel": "+639215672709", "confirmed": true },
-    "hr": { "label": "HR Department", "display": "8776 0644 local 8207", "tel": "+63287760644", "mobile": "0947 341 5241", "mobileTel": "+639473415241", "confirmed": true }
+    "emergency": {
+      "label": "Emergency",
+      "display": "8776 0645 local 8106",
+      "tel": "+63287760645",
+      "mobile": "0921 572 0589",
+      "mobileTel": "+639215720589",
+      "confirmed": false,
+      "note": "Listed on the current site's Contact page. Not yet confirmed by PDH."
+    },
+    "information": {
+      "label": "Information",
+      "display": "(02) 8776 0644, 46 to 51 local 7000",
+      "tel": "+63287760644",
+      "mobile": "0998 520 7295",
+      "mobileTel": "+639985207295",
+      "confirmed": false,
+      "note": "Homepage slides consistently print \"(02) 8776 0644, 46 to 51 local 7000\"; the footer prints two other spellings. Confirm the main line.",
+      "mobile2": "0998 520 7286",
+      "mobile2Tel": "+639985207286"
+    },
+    "trunk": {
+      "label": "Trunk lines",
+      "display": "8776-0644 to 46",
+      "tel": "+63287760644",
+      "confirmed": true
+    },
+    "admitting": {
+      "label": "Admitting Department",
+      "display": "8776 0646 local 8728",
+      "tel": "+63287760646",
+      "mobile": "0947 236 9827",
+      "mobileTel": "+639472369827",
+      "confirmed": true
+    },
+    "hmoHub": {
+      "label": "HMO Hub",
+      "display": "8776 0647 local 8945",
+      "tel": "+63287760647",
+      "mobile": "0921 567 2709",
+      "mobileTel": "+639215672709",
+      "confirmed": true
+    },
+    "hr": {
+      "label": "HR Department",
+      "display": "8776 0644 local 8207",
+      "tel": "+63287760644",
+      "mobile": "0947 341 5241",
+      "mobileTel": "+639473415241",
+      "confirmed": true
+    },
+    "marketing": {
+      "label": "Marketing / packages",
+      "display": "(02) 8776 0644, 46 to 51 local 8107",
+      "tel": "+63287760644",
+      "confirmed": true
+    }
   },
   "emails": {
     "info": "info@pdh.com.ph",
@@ -47,7 +115,12 @@
     "facebook": "https://www.facebook.com/paranaquedoctorshospitaluhbi/",
     "instagram": "https://www.instagram.com/paranaquedoctorshospital/",
     "linkedin": "https://www.linkedin.com/company/paranaquedoctorshospital",
-    "messenger": { "url": "https://www.facebook.com/paranaquedoctorshospitaluhbi/", "confirmed": false, "note": "No Messenger (m.me) link in the scrape; the Facebook page link is used until confirmed." }
+    "messenger": {
+      "url": "https://www.facebook.com/paranaquedoctorshospitaluhbi/",
+      "confirmed": false,
+      "note": "No Messenger (m.me) link in the scrape; the Facebook page link is used until confirmed."
+    },
+    "tiktok": "https://www.tiktok.com/@paranaquedoctorshospital"
   },
   "links": {
     "labResults": "https://lis.pdh.com.ph/",
@@ -56,9 +129,18 @@
     "currentSite": "https://pdh.com.ph/"
   },
   "stats": [
-    { "value": "94", "label": "Beds" },
-    { "value": "320", "label": "Doctors" },
-    { "value": "410", "label": "Employees" }
+    {
+      "value": "94",
+      "label": "Beds"
+    },
+    {
+      "value": "320",
+      "label": "Doctors"
+    },
+    {
+      "value": "410",
+      "label": "Employees"
+    }
   ],
   "why": {
     "heading": "Why PDH?",
@@ -66,13 +148,33 @@
     "detail": "Our accessible location, developing facilities, and dedicated specialists ensure you receive the highest and best quality treatment without the hassle. Whether you’re here for a routine check-up or specialized care, PDH is where expertise meets heart—because you deserve nothing less."
   },
   "pillars": [
-    { "title": "Patient Safety", "text": "Our commitment is to place patient safety and top-tier medical standards at the forefront of everything we do." },
-    { "title": "Compassion & Medical Expertise", "text": "We deliver expert medical care with the warmth and compassion every patient deserves." },
-    { "title": "Cutting-Edge Science & Innovation", "text": "Your well-being inspires our focus on innovation." },
-    { "title": "Accessible & Inclusive Care", "text": "From Outpatient and Emergency to Inpatient and Urgent Care Services, we offer a comprehensive range of healthcare solutions tailored to your needs." },
-    { "title": "Community-Centered Service", "text": "We care beyond the clinic—strengthening lives through outreach and health advocacy." }
+    {
+      "title": "Patient Safety",
+      "text": "Our commitment is to place patient safety and top-tier medical standards at the forefront of everything we do."
+    },
+    {
+      "title": "Compassion & Medical Expertise",
+      "text": "We deliver expert medical care with the warmth and compassion every patient deserves."
+    },
+    {
+      "title": "Cutting-Edge Science & Innovation",
+      "text": "Your well-being inspires our focus on innovation."
+    },
+    {
+      "title": "Accessible & Inclusive Care",
+      "text": "From Outpatient and Emergency to Inpatient and Urgent Care Services, we offer a comprehensive range of healthcare solutions tailored to your needs."
+    },
+    {
+      "title": "Community-Centered Service",
+      "text": "We care beyond the clinic—strengthening lives through outreach and health advocacy."
+    }
   ],
-  "careTypes": ["Outpatient", "Emergency", "Inpatient", "Urgent Care"],
+  "careTypes": [
+    "Outpatient",
+    "Emergency",
+    "Inpatient",
+    "Urgent Care"
+  ],
   "about": {
     "intro": "Parañaque Doctors Hospital (PDH) is a premier Level 2 healthcare institution located in the heart of Parañaque City. It is committed to ensuring the well-being of its community by continuously providing high-quality and affordable healthcare services.",
     "history": "Founded on May 8, 2007, by visionary doctors, PDH officially became a member of the Metro Pacific Health (MPH) Group in 2024 — the largest Philippine private hospital network in the country under the Metro Pacific Investments Corporation (MPIC), led by Mr. Manuel V. Pangilinan.",
@@ -81,44 +183,141 @@
     "vision": "To be the leading healthcare provider, renowned for medical excellence, compassionate care, innovative healthcare services, and dedicated commitment to the well-being of the community.",
     "goal": "To provide healthcare services that combine exceptional quality with affordability, making every experience at PDH truly worth it for our patients and their families.",
     "values": [
-      { "title": "Excellence", "text": "Striving for the highest standards in healthcare delivery" },
-      { "title": "Compassion", "text": "Delivering care with empathy and understanding" },
-      { "title": "Innovation", "text": "Embracing modern medical advancements to enhance patient care" },
-      { "title": "Integrity", "text": "Upholding transparency and ethical practices in all aspects of our operations" },
-      { "title": "Teamwork", "text": "Collaborating effectively to achieve shared goals" }
+      {
+        "title": "Excellence",
+        "text": "Striving for the highest standards in healthcare delivery"
+      },
+      {
+        "title": "Compassion",
+        "text": "Delivering care with empathy and understanding"
+      },
+      {
+        "title": "Innovation",
+        "text": "Embracing modern medical advancements to enhance patient care"
+      },
+      {
+        "title": "Integrity",
+        "text": "Upholding transparency and ethical practices in all aspects of our operations"
+      },
+      {
+        "title": "Teamwork",
+        "text": "Collaborating effectively to achieve shared goals"
+      }
     ],
     "leadership": [
-      { "name": "Juan Alberto B. Goyena", "role": "President and Chief Executive Officer" },
-      { "name": "Bernadette A. San Jose", "role": "Financial Controller" },
-      { "name": "Dr. Frederick G. Tan, MD", "role": "Chief Medical Officer" },
-      { "name": "Maria Franches Stephanie A. Grape", "role": "Human Resources Manager" },
-      { "name": "Diana Ern V. Cleofe", "role": "Sales and Marketing Manager" },
-      { "name": "Aleli Rose I. Sayco", "role": "Ancillary Services Manager" },
-      { "name": "Arch. Antonieto P. Semorlan", "role": "Engineering & Facilities Manager" },
-      { "name": "John Manuel M. Borjal", "role": "MIS Manager" },
-      { "name": "Fabian T. Palomar", "role": "Purchasing and Procurement Manager" },
-      { "name": "Robaldo T. Galon, RN, MAN", "role": "Chief Nurse" }
+      {
+        "name": "Juan Alberto B. Goyena",
+        "role": "President and Chief Executive Officer"
+      },
+      {
+        "name": "Bernadette A. San Jose",
+        "role": "Financial Controller"
+      },
+      {
+        "name": "Dr. Frederick G. Tan, MD",
+        "role": "Chief Medical Officer"
+      },
+      {
+        "name": "Maria Franches Stephanie A. Grape",
+        "role": "Human Resources Manager"
+      },
+      {
+        "name": "Diana Ern V. Cleofe",
+        "role": "Sales and Marketing Manager"
+      },
+      {
+        "name": "Aleli Rose I. Sayco",
+        "role": "Ancillary Services Manager"
+      },
+      {
+        "name": "Arch. Antonieto P. Semorlan",
+        "role": "Engineering & Facilities Manager"
+      },
+      {
+        "name": "John Manuel M. Borjal",
+        "role": "MIS Manager"
+      },
+      {
+        "name": "Fabian T. Palomar",
+        "role": "Purchasing and Procurement Manager"
+      },
+      {
+        "name": "Robaldo T. Galon, RN, MAN",
+        "role": "Chief Nurse"
+      }
     ],
     "barangayPartners": [
-      { "name": "Barangay Don Bosco", "text": "Through our Memorandum of Agreement, we are committed to improving healthcare access for the community. Just present your Barangay ID or any valid ID to enjoy exclusive PDH benefits." },
-      { "name": "Barangay Sun Valley", "text": "Present proof of residence, like your Barangay ID, and enjoy exclusive health benefits at PDH." },
-      { "name": "Barangay Marcelo Green", "text": "Simply show your Barangay ID for special benefits." },
-      { "name": "Barangay San Antonio", "text": "This partnership reaffirms PDH’s dedication to accessible healthcare and wellness." },
-      { "name": "Barangay Upper Bicutan", "text": "Just present your Barangay ID or government-issued ID to enjoy exclusive benefits." },
-      { "name": "Barangay Napindan", "text": "Health education and medical missions to better serve the community." },
-      { "name": "Barangay Moonwalk", "text": "Health education programs and community wellness initiatives." }
+      {
+        "name": "Barangay Don Bosco",
+        "text": "Through our Memorandum of Agreement, we are committed to improving healthcare access for the community. Just present your Barangay ID or any valid ID to enjoy exclusive PDH benefits."
+      },
+      {
+        "name": "Barangay Sun Valley",
+        "text": "Present proof of residence, like your Barangay ID, and enjoy exclusive health benefits at PDH."
+      },
+      {
+        "name": "Barangay Marcelo Green",
+        "text": "Simply show your Barangay ID for special benefits."
+      },
+      {
+        "name": "Barangay San Antonio",
+        "text": "This partnership reaffirms PDH’s dedication to accessible healthcare and wellness."
+      },
+      {
+        "name": "Barangay Upper Bicutan",
+        "text": "Just present your Barangay ID or government-issued ID to enjoy exclusive benefits."
+      },
+      {
+        "name": "Barangay Napindan",
+        "text": "Health education and medical missions to better serve the community."
+      },
+      {
+        "name": "Barangay Moonwalk",
+        "text": "Health education programs and community wellness initiatives."
+      }
     ]
   },
   "testimonials": [
-    { "quote": "I am very satisfied with PDH. Lalo na po sa Admitting Department. Mababait yung staff lalo na po si ma'am na laging naka kulay blue. Thank you din po sa Dr. naming. Salamat ng madami", "by": "EB" },
-    { "quote": "Pagpatuloy lang ang pagbibigay urgent ng needs ng mga pasyente. Mabilis at OK naman over all. Dito na rin ang mga family ko nag papa check.", "by": "NF" },
-    { "quote": "So far, PDH has been very convenient for me, and the healthcare staff are all kind and accommodating. I’m also truly thankful for my doctor’s excellent care and service.", "by": "Anonymous" },
-    { "quote": "Okay naman mabait ang doctor ko dito at pdh na talaga kami dati pa.", "by": "Anonymous" },
-    { "quote": "Mabilis ang proseso maganda malinis at maasikaso ang mga staff", "by": "RS" }
+    {
+      "quote": "I am very satisfied with PDH. Lalo na po sa Admitting Department. Mababait yung staff lalo na po si ma'am na laging naka kulay blue. Thank you din po sa Dr. naming. Salamat ng madami",
+      "by": "EB"
+    },
+    {
+      "quote": "Pagpatuloy lang ang pagbibigay urgent ng needs ng mga pasyente. Mabilis at OK naman over all. Dito na rin ang mga family ko nag papa check.",
+      "by": "NF"
+    },
+    {
+      "quote": "So far, PDH has been very convenient for me, and the healthcare staff are all kind and accommodating. I’m also truly thankful for my doctor’s excellent care and service.",
+      "by": "Anonymous"
+    },
+    {
+      "quote": "Okay naman mabait ang doctor ko dito at pdh na talaga kami dati pa.",
+      "by": "Anonymous"
+    },
+    {
+      "quote": "Mabilis ang proseso maganda malinis at maasikaso ang mga staff",
+      "by": "RS"
+    }
   ],
   "stories": [
-    { "title": "More Than a Hospital: A Second Home Built on Trust and Care", "series": "Alagang PDH Ako Stories", "date": "2025-07-26", "excerpt": "At Parañaque Doctors Hospital, care goes beyond medicine. It’s about building trust, offering comfort, and creating a second home for families facing life’s toughest challenges. This is the story of Thelma and her family.", "quote": "What stands out most to us is the consistent warmth, attentiveness, and genuine care we receive from the PDH team—proof that compassion is at the heart of every visit.", "by": "Rene, Thelma’s husband, PDH patient companion", "url": "https://pdh.com.ph/alagang-pdh-ako-stories-more-than-a-hospital-a-second-home-built-on-trust-and-care/" },
-    { "title": "A Mother’s Journey of Hope and Healing", "series": "Alagang PDH Ako Stories", "date": "2025-03-08", "excerpt": "For Jennifer Danao, January 2025 was a time of worry, uncertainty, and ultimately, gratitude—marked by the dedication of the medical professionals who saved her six-year-old son.", "quote": "From the time we arrived at the ER to the moment we were discharged, I felt assured that Lucio was in good hands.", "by": "Jennifer Danao, mother of a PDH patient", "url": "https://pdh.com.ph/alagang-pdh-ako-stories-a-mothers-journey-of-hope-and-healing/" }
+    {
+      "title": "More Than a Hospital: A Second Home Built on Trust and Care",
+      "series": "Alagang PDH Ako Stories",
+      "date": "2025-07-26",
+      "excerpt": "At Parañaque Doctors Hospital, care goes beyond medicine. It’s about building trust, offering comfort, and creating a second home for families facing life’s toughest challenges. This is the story of Thelma and her family.",
+      "quote": "What stands out most to us is the consistent warmth, attentiveness, and genuine care we receive from the PDH team—proof that compassion is at the heart of every visit.",
+      "by": "Rene, Thelma’s husband, PDH patient companion",
+      "url": "https://pdh.com.ph/alagang-pdh-ako-stories-more-than-a-hospital-a-second-home-built-on-trust-and-care/"
+    },
+    {
+      "title": "A Mother’s Journey of Hope and Healing",
+      "series": "Alagang PDH Ako Stories",
+      "date": "2025-03-08",
+      "excerpt": "For Jennifer Danao, January 2025 was a time of worry, uncertainty, and ultimately, gratitude—marked by the dedication of the medical professionals who saved her six-year-old son.",
+      "quote": "From the time we arrived at the ER to the moment we were discharged, I felt assured that Lucio was in good hands.",
+      "by": "Jennifer Danao, mother of a PDH patient",
+      "url": "https://pdh.com.ph/alagang-pdh-ako-stories-a-mothers-journey-of-hope-and-healing/"
+    }
   ],
   "visiting": {
     "hours": null,
@@ -130,5 +329,18 @@
     "law": "Data Privacy Act of 2012 (Republic Act No. 10173)",
     "dpoEmail": "dpo@pdh.com.ph",
     "updated": "10/8/2026"
-  }
+  },
+  "hero": {
+    "headline": "PDH is a pillar of Trust",
+    "text": "For generations, families have relied on Parañaque Doctors Hospital for expert care. Built on trust, compassion, and innovation, we remain steadfast in our commitment to serving, healing, and uplifting our community—where health and family legacies thrive.",
+    "source": "Current homepage hero slide"
+  },
+  "payment": [
+    "Cash",
+    "GCash",
+    "Credit card",
+    "Debit card",
+    "HMO accepted"
+  ],
+  "legalName": "UHBI-Parañaque Doctors Hospital, Inc."
 }
