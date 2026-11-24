@@ -32,7 +32,7 @@
   },
   "phones": {
     "emergency": { "label": "Emergency", "display": "8776 0645 local 8106", "tel": "+63287760645", "mobile": "0921 572 0589", "mobileTel": "+639215720589", "confirmed": false, "note": "Listed on the current site's Contact page. Not yet confirmed by PDH." },
-    "information": { "label": "Information", "display": "8776 0644 local 7000", "tel": "+63287760644", "mobile": "0998 520 7295", "mobileTel": "+639985207295", "confirmed": false, "note": "The homepage shows '8776 0644/51 local 7000' and '8776 06 44 to local 7000'. Confirm the main line." },
+    "information": { "label": "Information", "display": "8776 0644 local 7000", "tel": "+63287760644", "mobile": "0998 520 7295", "mobileTel": "+639985207295", "confirmed": false, "mobile2": "0998 520 7286", "mobile2Tel": "+639985207286", "note": "The current site spells the main line three ways: '8776 0644/51 local 7000' (footer), '8776 06 44 to local 7000' (homepage) and '(02) 8776 0644, 46 to 51 local 7000' (package banner). Confirm the main line." },
     "trunk": { "label": "Trunk lines", "display": "8776-0644 to 46", "tel": "+63287760644", "confirmed": true },
     "admitting": { "label": "Admitting Department", "display": "8776 0646 local 8728", "tel": "+63287760646", "mobile": "0947 236 9827", "mobileTel": "+639472369827", "confirmed": true },
     "hmoHub": { "label": "HMO Hub", "display": "8776 0647 local 8945", "tel": "+63287760647", "mobile": "0921 567 2709", "mobileTel": "+639215672709", "confirmed": true },
@@ -120,6 +120,18 @@
     { "title": "More Than a Hospital: A Second Home Built on Trust and Care", "series": "Alagang PDH Ako Stories", "date": "2025-07-26", "excerpt": "At Parañaque Doctors Hospital, care goes beyond medicine. It’s about building trust, offering comfort, and creating a second home for families facing life’s toughest challenges. This is the story of Thelma and her family.", "quote": "What stands out most to us is the consistent warmth, attentiveness, and genuine care we receive from the PDH team—proof that compassion is at the heart of every visit.", "by": "Rene, Thelma’s husband, PDH patient companion", "url": "https://pdh.com.ph/alagang-pdh-ako-stories-more-than-a-hospital-a-second-home-built-on-trust-and-care/" },
     { "title": "A Mother’s Journey of Hope and Healing", "series": "Alagang PDH Ako Stories", "date": "2025-03-08", "excerpt": "For Jennifer Danao, January 2025 was a time of worry, uncertainty, and ultimately, gratitude—marked by the dedication of the medical professionals who saved her six-year-old son.", "quote": "From the time we arrived at the ER to the moment we were discharged, I felt assured that Lucio was in good hands.", "by": "Jennifer Danao, mother of a PDH patient", "url": "https://pdh.com.ph/alagang-pdh-ako-stories-a-mothers-journey-of-hope-and-healing/" }
   ],
+  "labPortal": {
+    "_note": "From the lis.pdh.com.ph landing page, screenshots supplied by Sue on 24 Nov 2026.",
+    "name": "Patient Results Portal",
+    "url": "https://lis.pdh.com.ph/",
+    "intro": "Verify using your Mobile Number and Case No. If results are available, you can view your PDF instantly.",
+    "facts": [
+      { "label": "Mobile format", "value": "Must start with 639, no dash or space" },
+      { "label": "Case number", "value": "On the documents given by the Laboratory Department" },
+      { "label": "Verification", "value": "OTP required" },
+      { "label": "Online viewing", "value": "15 days" }
+    ]
+  },
   "visiting": {
     "hours": null,
     "confirmed": false,
@@ -129,6 +141,8 @@
   "privacy": {
     "law": "Data Privacy Act of 2012 (Republic Act No. 10173)",
     "dpoEmail": "dpo@pdh.com.ph",
+    "role": "personal information controller",
+    "npc": { "statement": "PDH is DPO/DPS registered at NPC, valid until June 30, 2027.", "body": "National Privacy Commission", "validUntil": "June 30, 2027", "source": "Data Privacy Notice pop-up on pdh.com.ph and NPC seal on lis.pdh.com.ph, screenshots supplied by Sue on 24 Nov 2026." },
     "updated": "10/8/2026"
   }
 }

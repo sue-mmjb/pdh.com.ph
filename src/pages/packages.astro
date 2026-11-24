@@ -5,25 +5,51 @@ import ToConfirm from '../components/ToConfirm.astro';
 import Sample from '../components/Sample.astro';
 import Icon from '../components/Icon.astro';
 import { packages, site } from '../lib/data';
+const published = packages.filter((p) => !p.sample);
+const samples = packages.filter((p) => p.sample);
+const info = site.phones.information;
 ---
-<Base title="Health packages" description={`Executive check-up, women’s wellness, prenatal, heart health and senior citizen packages at ${site.name}.`}>
-  <PageHero eyebrow="Our packages" title="Health packages" lead="Bundled check-ups at one price, by appointment. The current PDH site lists packages without details, so these are samples for PDH to replace.">
-    <p class="note-box" style="margin-top:16px"><Sample /> Package names, inclusions and prices are placeholders. <ToConfirm note="PDH to supply the real package list and prices" /></p>
-  </PageHero>
+<Base title="Health packages" description={`Health and executive check-up packages at ${site.name}.`}>
+  <PageHero eyebrow="Our packages" title="Health packages" lead="Bundled check-ups at one price, by appointment. PDH publishes its packages as banners on the current site; the ones we could read are listed first, followed by sample layouts for the rest." />
 
-  <section class="section">
-    <div class="container grid grid-3">
-      {packages.map((p) => (
-        <article class="card">
-          <span class="icon-circle"><Icon name="clipboard" /></span>
-          <h2 style="font-size:1.2rem">{p.name} <Sample /></h2>
-          <p class="meta">{p.audience}</p>
-          <ul class="small" style="margin:12px 0">{p.includes.map((i) => <li>{i}</li>)}</ul>
-          <p class="small muted">{p.note}</p>
-          <p><strong>Price:</strong> <ToConfirm note="Prices are never invented; PDH to supply" /></p>
-          <a class="btn btn-primary btn-sm" href={`/book/?service=package-${p.slug}`}>Request this package</a>
-        </article>
-      ))}
+  {published.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2>Published by PDH</h2>
+        <div class="grid grid-3">
+          {published.map((p) => (
+            <article class="card">
+              <span class="icon-circle"><Icon name="clipboard" /></span>
+              <h3 style="font-size:1.2rem">{p.name}</h3>
+              <p><strong>{p.price}</strong> <ToConfirm note={p.source} /></p>
+              <ul class="small" style="margin:12px 0">{p.includes.map((i) => <li>{i}</li>)}</ul>
+              <p class="small muted">{p.note}</p>
+              <p class="small">Inquiries: <a href={`tel:${info.tel}`}>{info.display}</a> or <a href={`tel:${info.mobileTel}`}>{info.mobile}</a></p>
+              <a class="btn btn-primary btn-sm" href={`/book/?service=package-${p.slug}`}>Request this package</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section section-soft">
+    <div class="container">
+      <h2>More packages <Sample /></h2>
+      <p class="note-box" style="margin-bottom:24px">Names, inclusions and prices below are placeholders. <ToConfirm note="PDH to supply the real package list and prices" /></p>
+      <div class="grid grid-3">
+        {samples.map((p) => (
+          <article class="card">
+            <span class="icon-circle"><Icon name="clipboard" /></span>
+            <h3 style="font-size:1.2rem">{p.name} <Sample /></h3>
+            <p class="meta">{p.audience}</p>
+            <ul class="small" style="margin:12px 0">{p.includes.map((i) => <li>{i}</li>)}</ul>
+            <p class="small muted">{p.note}</p>
+            <p><strong>Price:</strong> <ToConfirm note="Prices are never invented; PDH to supply" /></p>
+            <a class="btn btn-primary btn-sm" href={`/book/?service=package-${p.slug}`}>Request this package</a>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 </Base>

@@ -7,7 +7,7 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | Item | What the prototype shows | Where it came from | Status |
 | --- | --- | --- | --- |
 | Emergency (ER) line | 8776 0645 local 8106; mobile 0921 572 0589 | Contact page on current site | [TO CONFIRM] — shown on every page per the brief |
-| Main information line | 8776 0644 local 7000; mobile 0998 520 7295 | Homepage shows two spellings ("8776 0644/51 local 7000" and "8776 06 44 to local 7000"); second mobile 0998 520 7286 also listed | [TO CONFIRM] |
+| Main information line | 8776 0644 local 7000; mobiles 0998 520 7295 and 0998 520 7286 | Current site spells it three ways: "8776 0644/51 local 7000" (footer), "8776 06 44 to local 7000" (homepage), "(02) 8776 0644, 46 to 51 local 7000" (package banner) | [TO CONFIRM] |
 | Messenger link | Facebook page URL used instead | No m.me link in the scrape | [TO CONFIRM] |
 | Visiting hours | "Not published" | Not on the current site | [TO CONFIRM] |
 
@@ -17,7 +17,8 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | --- | --- | --- |
 | Accepted HMOs (hospital-wide) | 32 names read from logo alt text on the homepage | [TO CONFIRM] — official list needed |
 | Per-doctor accredited HMOs | As listed on each doctor's page; 113 doctors show "TBD" or nothing | [TO CONFIRM] for those doctors |
-| Packages | 6 sample packages, no prices | Sample — PDH to supply real packages and prices |
+| Female Executive Package | PHP 5,780.00 with 12 inclusions, "Inclusive of Pap smear kit and Doctors PF" | [TO CONFIRM] — transcribed from the homepage banner (screenshot, 24 Nov 2026); confirm price and that the promo is current |
+| Other packages | 6 sample packages, no prices | Sample — the current site shows packages only as banner images; PDH to supply the full list and prices |
 | Room rates | Not shown | [TO CONFIRM] |
 | PhilHealth process | 3 sample steps | Sample — PDH to supply |
 | HMO approval steps | 4 sample steps | Sample — PDH to supply |
@@ -39,14 +40,15 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | --- | --- |
 | Roster | 288 doctors extracted from the site's own listing (`npm run extract`); site claims 320 doctors |
 | One page with no data | `/doctor/dr-michael-john-pabalate/` on the current site is empty; skipped |
-| Schedules | 3 doctors have no schedule on the site |
-| Photos | None used; PDH to supply |
+| Schedules | 1 doctor (Abuel, Butch Joseph) has an empty schedule on his profile page; the site's listing shows "On call" |
+| Duplicate profile | "Evangelista, Charina Nancy" has two pages on the current site (General Medicine MWF 6–8pm; Family Medicine MF 6–8pm). Both are shown; PDH to say which is correct |
+| Photos | None used. The current site has portraits for roughly a third of the doctors; PDH to supply the files (not hotlinked) |
 
 ## Assets
 
 | Item | Detail |
 | --- | --- |
-| Logo | Not supplied; text wordmark used |
+| Logo | Official lockup in `assets/` is used in the header and footer |
 | Photos | None supplied; labeled placeholders on every image slot |
 | Domain | `astro.config.mjs` uses the Vercel address `https://pdhcomph.vercel.app` until PDH chooses a domain |
 
@@ -58,6 +60,8 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 - Floors and hours for every service (Our Services page)
 - Leadership team names and roles (About page)
 - Data Privacy Notice text and date 10/8/2026 (Privacy Policy page)
+- "PDH is DPO/DPS registered at NPC, valid until June 30, 2027" (Privacy Policy page; from the notice pop-up on the current site)
+- Online lab results: mobile number + case number, OTP, 15 days of online viewing (Services page; from lis.pdh.com.ph)
 
 ## Decisions to mention at the demo
 

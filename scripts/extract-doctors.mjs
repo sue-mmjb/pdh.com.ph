@@ -49,13 +49,18 @@ for (const file of files) {
     }
   }
 
+  // Two pages print the schedule as a bare "- <days> <hours>" line with no "Schedule:" label.
+  const sIdx = lines.findIndex((l) => l.startsWith('Specialization:'));
+  const afterSpec = sIdx >= 0 ? lines[sIdx + 1] || '' : '';
+  const unlabeledSchedule = /^- (?!Schedule:|Room Number:|Contact Number:)\S/.test(afterSpec) ? afterSpec.slice(2).trim() : null;
+
   const clean = (v) => (v && !/^TBD$/i.test(v) ? v : null);
   doctors.push({
     slug,
     name,
     department: dept.replace('Department:', '').trim(),
     specialization,
-    schedule: clean(get('- Schedule:')),
+    schedule: clean(get('- Schedule:')) || unlabeledSchedule,
     room: clean(get('- Room Number:')),
     contact: clean(get('- Contact Number:')),
     hmos,

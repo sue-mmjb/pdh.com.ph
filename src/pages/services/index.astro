@@ -19,6 +19,17 @@ const tbd = services.filter((s) => !s.hours);
     </div>
   </section>
 
+  <section class="section">
+    <div class="container">
+      <div class="card">
+        <h2 style="font-size:1.3rem">Online lab results: {site.labPortal.name}</h2>
+        <p>{site.labPortal.intro}</p>
+        <ul class="small" style="margin:12px 0">{site.labPortal.facts.map((f) => <li><strong>{f.label}:</strong> {f.value}</li>)}</ul>
+        <a class="btn btn-outline" href={site.labPortal.url} target="_blank" rel="noopener"><Icon name="external" /> Open the results portal</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section section-soft">
     <div class="container">
       <h2>Clinics and centers</h2>

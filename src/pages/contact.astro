@@ -24,7 +24,7 @@ const lines = [p.emergency, p.information, p.admitting, p.hmoHub, p.hr];
                 <tr>
                   <th scope="row">{l.label}{!l.confirmed && <> <ToConfirm note={l.note} /></>}</th>
                   <td><a href={`tel:${l.tel}`}>{l.display}</a></td>
-                  <td>{l.mobile ? <a href={`tel:${l.mobileTel}`}>{l.mobile}</a> : '—'}</td>
+                  <td>{l.mobile ? <a href={`tel:${l.mobileTel}`}>{l.mobile}</a> : '—'}{'mobile2' in l && <><br /><a href={`tel:${l.mobile2Tel}`}>{l.mobile2}</a></>}</td>
                 </tr>
               ))}
               <tr><th scope="row">Trunk lines</th><td><a href={`tel:${p.trunk.tel}`}>{p.trunk.display}</a></td><td>—</td></tr>
