@@ -43,7 +43,7 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | Roster | 288 doctors extracted from the site's own listing (`npm run extract`); site claims 320 doctors |
 | One page with no data | `/doctor/dr-michael-john-pabalate/` on the current site is empty; skipped |
 | Schedules | 3 doctors have no schedule on the site |
-| Photos | None used; PDH to supply |
+| Photos | 89 doctors have a photo on pdh.com.ph; those are used. The other 199 show initials. |
 
 ## Assets
 

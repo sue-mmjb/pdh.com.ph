@@ -23,7 +23,7 @@ Source of truth: `context/PDH_Claude_Code_Brief.md`. Supporting material: `conte
 - Every hospital fact lives in `src/data/*.json`, never in page markup. Swapping the data files produces another hospital's site.
 - Each data file has a `_note` saying where its content came from. Values the current site does not confirm carry `confirmed: false` or `sample: true`.
 - Content the current site lacks (packages, preparation notes, HMO process steps, PhilHealth steps) is a labeled sample: wrap it with `<Sample />` on the page.
-- `src/data/doctors.json` is generated: run `npm run extract` to rebuild it from the crawl. Do not hand-edit it.
+- `src/data/doctors.json` is generated: run `npm run extract` to rebuild it from the crawl. Do not hand-edit it. Doctor photos come from `src/data/doctor-photos.json` (slug → `/doctors/<slug>.webp`), which the extract script merges; the files in `public/doctors/` are the photos PDH publishes on its own doctor pages, nothing else.
 - When PDH confirms an item, update the JSON, remove the marker, and tick it off in `CONFIRM.md`.
 
 ## Stack
