@@ -56,14 +56,12 @@ const p = site.phones;
       <span>Website prototype by Iozera. Not the live PDH site. No analytics or tracking.</span>
     </div>
   </div>
-  <!-- Closing mark: PD+H with the orange cross, sized to sit comfortably, fully visible -->
+  <!-- Closing mark: PDH's own PD+H lettering, cropped from the official logo file -->
   <div class="footer-mark" aria-hidden="true">
-    <div class="footer-mark_pdh">PD<svg viewBox="0 0 100 100" class="footer-mark_cross"><path d="M36 8h28v28h28v28H64v28H36V64H8V36h28z" fill="#ff7402"/></svg>H</div>
+    <img src="/brand/pdh-mark.png" alt="" width="1890" height="840" loading="lazy" decoding="async" class="footer-mark_img" />
   </div>
 </footer>
 <style>
-  .footer-mark { max-width: var(--max); margin: 32px auto 0; padding: 0 var(--gutter); pointer-events: none; user-select: none; }
-  .footer-mark_pdh { display: flex; align-items: center; font-family: var(--font-head); font-weight: 800; letter-spacing: -0.05em; line-height: 0.9; font-size: clamp(3.5rem, 9vw, 7.5rem); color: #ffffff; opacity: 0.95; }
-  /* The cross sits between the D and the H and overlaps the H's left stem, as in the logo */
-  .footer-mark_cross { width: 0.62em; height: 0.62em; margin: 0 -0.2em 0 -0.03em; flex: none; position: relative; z-index: 1; }
+  .footer-mark { max-width: var(--max); margin: 32px auto 0; padding: 0 var(--gutter); }
+  .footer-mark_img { display: block; width: min(100%, 360px); height: auto; border-radius: 12px; }
 </style>

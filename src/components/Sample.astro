@@ -1,6 +1,8 @@
 ---
-// Visible badge for placeholder content that is not on the current site.
+// Badge for placeholder content. Rendering switched OFF on 25 Nov 2026 at Sue's request;
+// sample items stay listed in CONFIRM.md. Flip `visible` to show the badges again.
 interface Props { text?: string; }
 const { text = 'Sample' } = Astro.props;
+const visible = false;
 ---
-<span class="badge-sample" title="Placeholder content for the prototype; replace with PDH-supplied content">{text}</span>
+{visible && <span class="badge-sample" title="Placeholder content for the prototype; replace with PDH-supplied content">{text}</span>}
