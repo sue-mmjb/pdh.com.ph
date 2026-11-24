@@ -1,0 +1,23 @@
+---
+// Per-day schedule rows: days on the left, hours on the right. One line per day group so a
+// patient can read it without parsing a sentence.
+import type { ScheduleRow } from '../lib/data';
+interface Props { rows: ScheduleRow[]; compact?: boolean; }
+const { rows, compact = false } = Astro.props;
+---
+<ul class:list={['sched', { 'sched-compact': compact }]}>
+  {rows.map((r) => (
+    <li>
+      {r.days && <span class="sched_days">{r.days}</span>}
+      <span class="sched_time">{r.time}</span>
+    </li>
+  ))}
+</ul>
+<style>
+  .sched { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .sched li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .sched li:last-child { border-bottom: 0; }
+  .sched_days { font-weight: 600; color: var(--ink); }
+  .sched_time { color: var(--ink-soft); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .sched-compact li { padding: 3px 0; border-bottom: 0; font-size: 0.92rem; }
+</style>

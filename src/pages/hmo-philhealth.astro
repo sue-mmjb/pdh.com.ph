@@ -5,6 +5,8 @@ import ToConfirm from '../components/ToConfirm.astro';
 import Sample from '../components/Sample.astro';
 import Icon from '../components/Icon.astro';
 import HmoMarquee from '../components/HmoMarquee.astro';
+import ScheduleTable from '../components/ScheduleTable.astro';
+import { serviceScheduleRows } from '../lib/data';
 import { hmo, site } from '../lib/data';
 ---
 <Base title="HMO & PhilHealth" description={`Accepted HMOs, HMO Hub location and hours, online approval, and PhilHealth at ${site.name}.`}>
@@ -18,7 +20,7 @@ import { hmo, site } from '../lib/data';
         <p>{hmo.hub.summary}</p>
         <dl class="dl">
           <dt>Location</dt><dd>{hmo.hub.location}</dd>
-          <dt>Hours</dt><dd>{hmo.hub.hours}</dd>
+          <dt>Hours</dt><dd><ScheduleTable rows={serviceScheduleRows(hmo.hub.hours)} compact /></dd>
           <dt>Phone</dt><dd><a href={`tel:${site.phones.hmoHub.tel}`}>{hmo.hub.phone}</a> · <a href={`tel:${site.phones.hmoHub.mobileTel}`}>{hmo.hub.mobile}</a></dd>
         </dl>
       </div>

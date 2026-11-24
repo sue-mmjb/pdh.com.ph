@@ -4,7 +4,8 @@
 // black primary buttons and a single orange accent. Order follows the brief, task-first.
 // No frame-sequence hero, no scroll hijacking, no trackers: a photo slot with light parallax and
 // gentle reveals, skipped under reduced motion.
-import { site, hmo, news, services, specialtyGroups, doctors, featuredPackages, formatDate, groupByFloor, shortHours } from '../../lib/data';
+import { site, hmo, news, services, specialtyGroups, doctors, featuredPackages, formatDate, groupByFloor, shortHours, serviceScheduleRows } from '../../lib/data';
+import ScheduleTable from '../ScheduleTable.astro';
 import ToConfirm from '../ToConfirm.astro';
 import Sample from '../Sample.astro';
 import Icon from '../Icon.astro';
@@ -16,14 +17,14 @@ const info = site.phones.information;
 const always = services.filter((s) => s.hours === 'Open 24/7' && ['emergency-room', 'laboratory', 'radiology', 'pharmacy'].includes(s.slug));
 const clinics = services.filter((s) => ['multi-diagnostic-center', 'hemodialysis-center', 'eye-center', 'dental-services', 'ob-ultrasound', 'nuclear-medicine', 'physical-medicine-rehabilitation', 'outpatient-clinics'].includes(s.slug));
 const entry = [
-  { title: 'I need help now', text: 'The Emergency Room is on the Ground Floor and open 24/7. Call first if you can.', cta: 'Call the ER', href: `tel:${er.tel}`, cls: 'btn-emergency', icon: 'emergency', note: `${er.display} · mobile ${er.mobile}`, confirm: true },
-  { title: 'I want to see a doctor', text: `${doctors.length} doctors listed with clinic schedules and room numbers. Outpatient clinics on the 3rd to 6th floors, by appointment.`, cta: 'Find a doctor', href: '/doctors/', cls: 'btn-primary', icon: 'search', note: 'Search by name or specialty' },
-  { title: 'I’m being admitted', text: 'Admitting is on the Ground Floor, open 24/7. Bring a valid ID, your admitting order and PhilHealth or HMO documents.', cta: 'Rooms and admission', href: '/rooms-facilities/', cls: 'btn-outline', icon: 'bed', note: '94 beds · ward to suite' },
+  { title: 'I need help now', text: 'The Emergency Room is on the Ground Floor and open 24/7. Call first if you can.', cta: 'Call the ER', href: `tel:${er.tel}`, cls: 'btn-emergency', art: '/icons/entry/help-now.png', note: `${er.display} · mobile ${er.mobile}`, confirm: true },
+  { title: 'I want to see a doctor', text: `${doctors.length} doctors listed with clinic schedules and room numbers. Outpatient clinics on the 3rd to 6th floors, by appointment.`, cta: 'Find a doctor', href: '/doctors/', cls: 'btn-primary', art: '/icons/entry/see-doctor.png', note: 'Search by name or specialty' },
+  { title: 'I’m being admitted', text: 'Admitting is on the Ground Floor, open 24/7. Bring a valid ID, your admitting order and PhilHealth or HMO documents.', cta: 'Rooms and admission', href: '/rooms-facilities/', cls: 'btn-outline', art: '/icons/entry/admitted.png', note: '94 beds · ward to suite' },
 ];
 // FAQ answers use only facts already published by PDH (see CONFIRM.md for sources).
 const faqs = [
   { q: 'Is the Emergency Room open 24/7?', a: 'Yes. The ER is on the Ground Floor and open 24/7, with laboratory, radiology and pharmacy also open around the clock.' },
-  { q: 'How do I get HMO approval?', a: `Go to the HMO Hub on the Ground Floor (${hmo.hub.hours}) with your HMO card, a valid ID and your doctor’s request, or request approval online before you come.` },
+  { q: 'How do I get HMO approval?', a: `Go to the HMO Hub on the Ground Floor (${serviceScheduleRows(hmo.hub.hours).map((r) => `${r.days} ${r.time}`).join('; ')}) with your HMO card, a valid ID and your doctor’s request, or request approval online before you come.` },
   { q: 'Which HMOs does PDH accept?', a: 'PDH is accredited by PhilHealth and the HMOs listed on the HMO & PhilHealth page. Each doctor’s profile also lists the HMOs they accept.' },
   { q: 'How do I get my laboratory results?', a: 'Online lab results are available at lis.pdh.com.ph. The laboratory itself is on the Ground Floor, open 24/7.' },
   { q: 'How do I pay for a package?', a: 'Packages can be paid in cash, GCash, credit card or debit card, and HMO is accepted. Some promos are cash basis only; each package says so.' },
@@ -34,6 +35,7 @@ const faqs = [
   <!-- 1 · Hero -->
   <section class="cp-hero">
     <div class="container">
+      <img class="cp-hero_logo cp-reveal" src="/brand/pdh-logo-stacked.png" alt={`${site.name}, a member of ${site.network.name}`} width="354" height="264" decoding="async" fetchpriority="high" />
       <p class="eyebrow cp-reveal">Parañaque City · Member of {site.network.name}</p>
       <h1 class="cp-h1 cp-reveal">{site.hero.headline}.</h1>
       <p class="cp-lead cp-reveal">{site.hero.text}</p>
@@ -64,7 +66,7 @@ const faqs = [
       <div class="grid grid-3 cp-entry">
         {entry.map((e) => (
           <article class="card cp-entry_card cp-reveal">
-            <span class="icon-circle"><Icon name={e.icon} /></span>
+            <img class="cp-entry_art" src={e.art} alt="" width="200" height="170" loading="lazy" decoding="async" />
             <h3>{e.title}</h3>
             <p class="muted">{e.text}</p>
             <p class="small muted" style="margin:0 0 14px">{e.note}{e.confirm && <> <ToConfirm note={er.note} /></>}</p>
@@ -121,7 +123,8 @@ const faqs = [
         <div>
           <p class="eyebrow">HMO &amp; PhilHealth</p>
           <h2 class="cp-h2">Bring your card. The Hub does the rest.</h2>
-          <p class="cp-sub">HMO Hub, Ground Floor · {hmo.hub.hours}. PhilHealth-accredited.</p>
+          <p class="cp-sub" style="margin-bottom:8px">HMO Hub, Ground Floor. PhilHealth-accredited.</p>
+          <ScheduleTable rows={serviceScheduleRows(hmo.hub.hours)} compact />
           <div class="actions">
             <a class="btn btn-primary" href="/hmo-philhealth/">How it works</a>
             <a class="btn btn-outline" href={hmo.hub.onlineApproval.url} target="_blank" rel="noopener">Online approval</a>
@@ -248,6 +251,8 @@ const faqs = [
   @media (prefers-reduced-motion: reduce) { .cp-reveal { opacity: 1; } }
 
   .cp-hero { padding: 72px 0 0; text-align: center; background: linear-gradient(180deg, var(--pdh-teal-tint) 0%, #ffffff 70%); }
+  .cp-hero_logo { display: block; width: 132px; height: auto; margin: 0 auto 20px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 92, 94, 0.18); }
+  @media (min-width: 900px) { .cp-hero_logo { width: 160px; } }
   .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 6vw, 6rem); line-height: 1.0; letter-spacing: -0.04em; font-weight: 600; max-width: 14ch; margin: 12px auto 0.3em; }
   .cp-lead { max-width: 60ch; margin: 0 auto 24px; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); color: var(--ink-soft); }
   .cp-hero_media { margin-top: 40px; will-change: transform; }
@@ -266,7 +271,7 @@ const faqs = [
   .cp-sub { color: var(--ink-soft); max-width: 60ch; }
   .cp-entry { margin-top: 24px; }
   .cp-entry_card { display: flex; flex-direction: column; gap: 0; padding: 24px; min-height: 300px; }
-  .cp-entry_card .icon-circle { width: 52px; height: 52px; margin-bottom: 18px; }
+  .cp-entry_art { width: 120px; height: 100px; object-fit: contain; object-position: left bottom; margin: 0 0 18px; }
   .cp-entry_card h3 { font-size: 1.35rem; letter-spacing: -0.02em; font-weight: 600; color: var(--heading); margin: 0 0 8px; }
   .cp-entry_card p { margin: 0 0 10px; }
   .cp-entry_card .btn { margin-top: auto; }

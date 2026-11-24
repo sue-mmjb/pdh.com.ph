@@ -1,5 +1,6 @@
 ---
-import { initials, displayName, type Doctor } from '../lib/data';
+import { initials, displayName, doctorScheduleRows, type Doctor } from '../lib/data';
+const rowsOf = (d: Doctor) => doctorScheduleRows(d.schedule).map((r) => (r.days ? `${r.days} · ${r.time}` : r.time)).join(' / ');
 interface Props { doctor: Doctor; }
 const { doctor: d } = Astro.props;
 ---
@@ -9,6 +10,6 @@ const { doctor: d } = Astro.props;
   <span>
     <h3>{displayName(d.name)}</h3>
     <p class="meta">{d.specialization}{d.specialization !== d.department ? ` · ${d.department}` : ''}</p>
-    <p class="sched">{d.schedule ? d.schedule : 'Schedule: see profile'}{d.room ? ` · Room ${d.room}` : ''}</p>
+    <p class="sched">{rowsOf(d)}{d.room ? ` · Room ${d.room}` : ''}</p>
   </span>
 </a>
