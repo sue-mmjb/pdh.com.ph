@@ -1,0 +1,56 @@
+---
+// Kriss.ai placeholder slot. This is NOT a chatbot: the live widget is plugged in here later by the Kriss team.
+// It never covers page content (small bubble, bottom-right) and always shows the ER contact first.
+import { site } from '../lib/data';
+import Icon from './Icon.astro';
+import ToConfirm from './ToConfirm.astro';
+const er = site.phones.emergency;
+---
+<button class="kriss-bubble" type="button" aria-expanded="false" aria-controls="kriss-panel" data-kriss-toggle>
+  <span class="dot" aria-hidden="true">K</span>
+  <span>Need help?</span>
+</button>
+
+<section class="kriss-panel" id="kriss-panel" hidden aria-labelledby="kriss-title" data-kriss-panel>
+  <div class="kriss-head">
+    <span class="dot icon-circle" style="margin:0;width:36px;height:36px" aria-hidden="true"><Icon name="sparkle" /></span>
+    <div>
+      <h2 id="kriss-title">Kriss.ai assistant — live demo connects here</h2>
+      <p>Placeholder slot. The live assistant will be added by the Kriss team.</p>
+    </div>
+    <button class="kriss-close" type="button" aria-label="Close" data-kriss-close>×</button>
+  </div>
+
+  <div class="kriss-er">
+    <strong>Emergency? Call the ER first.</strong>
+    <p><a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /><br />
+    Mobile: <a href={`tel:${er.mobileTel}`}>{er.mobile}</a></p>
+    <p class="small" style="margin:0">ER is on the Ground Floor, open 24/7. {site.address.full}.
+      <a href="/contact/#directions">Directions</a></p>
+  </div>
+
+  <div class="kriss-links">
+    <a href="/doctors/"><Icon name="search" /> Find a doctor</a>
+    <a href="/hmo-philhealth/"><Icon name="card" /> HMO help</a>
+    <a href="/book/"><Icon name="calendar" /> Book</a>
+    <a href={`tel:${er.tel}`}><Icon name="emergency" /> Emergency</a>
+  </div>
+  <p class="kriss-foot">The live assistant will never diagnose, triage, give medication advice, or ask for symptoms.</p>
+</section>
+
+<script is:inline>
+  (function () {
+    var btn = document.querySelector('[data-kriss-toggle]');
+    var panel = document.querySelector('[data-kriss-panel]');
+    var close = document.querySelector('[data-kriss-close]');
+    if (!btn || !panel) return;
+    function setOpen(open) {
+      panel.hidden = !open;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) { (panel.querySelector('a, button') || panel).focus(); } else { btn.focus(); }
+    }
+    btn.addEventListener('click', function () { setOpen(panel.hidden); });
+    close && close.addEventListener('click', function () { setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) setOpen(false); });
+  })();
+</script>

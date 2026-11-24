@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ToConfirm from '../components/ToConfirm.astro';
+import Sample from '../components/Sample.astro';
+import Icon from '../components/Icon.astro';
+import { hmo, site } from '../lib/data';
+---
+<Base title="HMO & PhilHealth" description={`Accepted HMOs, HMO Hub location and hours, online approval, and PhilHealth at ${site.name}.`}>
+  <PageHero eyebrow="HMO & PhilHealth" title="HMO and PhilHealth help" lead="PDH is accredited by PhilHealth and the HMOs below. The HMO Hub on the Ground Floor handles approvals, or request approval online before you come." />
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <div class="card">
+        <span class="icon-circle"><Icon name="card" /></span>
+        <h2 style="font-size:1.3rem">{hmo.hub.name}</h2>
+        <p>{hmo.hub.summary}</p>
+        <dl class="dl">
+          <dt>Location</dt><dd>{hmo.hub.location}</dd>
+          <dt>Hours</dt><dd>{hmo.hub.hours}</dd>
+          <dt>Phone</dt><dd><a href={`tel:${site.phones.hmoHub.tel}`}>{hmo.hub.phone}</a> · <a href={`tel:${site.phones.hmoHub.mobileTel}`}>{hmo.hub.mobile}</a></dd>
+        </dl>
+      </div>
+      <div class="card">
+        <span class="icon-circle"><Icon name="check" /></span>
+        <h2 style="font-size:1.3rem">{hmo.hub.onlineApproval.label}</h2>
+        <p>{hmo.hub.onlineApproval.blurb}</p>
+        <a class="btn btn-primary" href={hmo.hub.onlineApproval.url} target="_blank" rel="noopener">Request HMO online approval <Icon name="external" /></a>
+        <p class="small muted" style="margin:12px 0 0">Opens PDH’s existing approval form.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <h2>How HMO approval works <Sample /></h2>
+      <p class="muted">A typical flow; PDH will confirm the exact steps.</p>
+      <ol class="steps">
+        {hmo.process.steps.map((s) => <li><div><h3>{s.title}</h3><p>{s.text}</p></div></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Accepted HMOs <ToConfirm note="Names taken from the logos on the current homepage; confirm the official list with PDH" /></h2>
+      <p class="muted">Shown as text so patients, screen readers and search engines can read them. Each doctor’s profile also lists the HMOs they accept.</p>
+      <ul class="cols-3">{hmo.partners.map((p) => <li>{p}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container grid grid-2">
+      <div>
+        <h2>PhilHealth</h2>
+        <p>{hmo.philhealth.statement}</p>
+        <p class="muted">PhilHealth benefit details, case rates and required forms are not on the current site. <ToConfirm note="PhilHealth process details to be supplied by PDH" /></p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:1.05rem">What to bring <Sample /></h3>
+        <ol style="padding-left:1.2em;margin:0">{hmo.philhealth.sampleSteps.map((s) => <li>{s}</li>)}</ol>
+      </div>
+    </div>
+  </section>
+</Base>

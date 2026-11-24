@@ -1,0 +1,12 @@
+{
+  "_note": "The current site has an 'Our Packages' menu item but no package content in the crawl. Every package below is a labeled SAMPLE. Prices are never shown; each shows [TO CONFIRM].",
+  "sample": true,
+  "packages": [
+    { "slug": "basic-executive-checkup", "name": "Basic Executive Check-up", "audience": "Adults who want a yearly baseline", "includes": ["Doctor consultation", "CBC with platelet", "Urinalysis", "Fasting blood sugar", "Lipid profile", "Chest X-ray", "ECG"], "note": "Fasting of 8–10 hours required." },
+    { "slug": "comprehensive-executive-checkup", "name": "Comprehensive Executive Check-up", "audience": "Adults 40 and up, or with family history", "includes": ["Everything in Basic", "Creatinine and uric acid", "Liver function tests", "Treadmill stress test", "Whole abdomen ultrasound"], "note": "Half-day schedule, by appointment." },
+    { "slug": "womens-wellness", "name": "Women’s Wellness Package", "audience": "Women’s preventive care", "includes": ["OB-GYN consultation", "Pap smear", "Breast ultrasound or mammography", "Transvaginal ultrasound", "CBC and urinalysis"], "note": "Mammography is advised from age 40." },
+    { "slug": "prenatal-package", "name": "Prenatal Package", "audience": "Expectant mothers", "includes": ["OB consultation", "Prenatal laboratory panel", "OB ultrasound", "Nutrition counseling"], "note": "OB Ultrasound Services are on the 4th Floor, 8 AM to 5 PM." },
+    { "slug": "heart-health", "name": "Heart Health Package", "audience": "Patients with cardiovascular risk", "includes": ["Cardiology consultation", "ECG", "2D echocardiogram with Doppler", "Lipid profile", "Fasting blood sugar"], "note": "Performed at the Multi-Diagnostic Center, 2nd Floor." },
+    { "slug": "senior-citizen", "name": "Senior Citizen Package", "audience": "Patients 60 and up", "includes": ["Internal medicine consultation", "CBC, urinalysis, fasting blood sugar", "Creatinine", "Chest X-ray", "ECG", "Bone density screening"], "note": "Senior citizen discount applies with a valid ID." }
+  ]
+}

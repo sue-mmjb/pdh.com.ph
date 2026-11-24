@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ToConfirm from '../components/ToConfirm.astro';
+import Sample from '../components/Sample.astro';
+import Icon from '../components/Icon.astro';
+import { packages, site } from '../lib/data';
+---
+<Base title="Health packages" description={`Executive check-up, women’s wellness, prenatal, heart health and senior citizen packages at ${site.name}.`}>
+  <PageHero eyebrow="Our packages" title="Health packages" lead="Bundled check-ups at one price, by appointment. The current PDH site lists packages without details, so these are samples for PDH to replace.">
+    <p class="note-box" style="margin-top:16px"><Sample /> Package names, inclusions and prices are placeholders. <ToConfirm note="PDH to supply the real package list and prices" /></p>
+  </PageHero>
+
+  <section class="section">
+    <div class="container grid grid-3">
+      {packages.map((p) => (
+        <article class="card">
+          <span class="icon-circle"><Icon name="clipboard" /></span>
+          <h2 style="font-size:1.2rem">{p.name} <Sample /></h2>
+          <p class="meta">{p.audience}</p>
+          <ul class="small" style="margin:12px 0">{p.includes.map((i) => <li>{i}</li>)}</ul>
+          <p class="small muted">{p.note}</p>
+          <p><strong>Price:</strong> <ToConfirm note="Prices are never invented; PDH to supply" /></p>
+          <a class="btn btn-primary btn-sm" href={`/book/?service=package-${p.slug}`}>Request this package</a>
+        </article>
+      ))}
+    </div>
+  </section>
+</Base>

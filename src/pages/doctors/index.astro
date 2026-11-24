@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import DoctorCard from '../../components/DoctorCard.astro';
+import Icon from '../../components/Icon.astro';
+import { doctors, departments, specializations, site } from '../../lib/data';
+---
+<Base title="Find a doctor" description={`Search ${doctors.length} doctors at ${site.name} by name, department or specialty. Clinic schedules, room numbers and accepted HMOs from PDH’s own listing.`}>
+  <PageHero eyebrow="Our doctors" title="Find a doctor" lead="At PDH, our expert physicians deliver top-quality, compassionate care across various specialties, including cardiology, neurology, and oncology." />
+
+  <section class="section">
+    <div class="container">
+      <form class="filters" id="doc-filters" role="search" aria-label="Filter doctors" action="/doctors/" method="get">
+        <div class="field">
+          <label for="q">Name or specialty</label>
+          <input id="q" name="q" type="search" placeholder="e.g. Dela Cruz, cardiology" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="dept">Department</label>
+          <select id="dept" name="dept">
+            <option value="">All departments</option>
+            {departments.map((d) => <option value={d}>{d}</option>)}
+          </select>
+        </div>
+        <div class="field">
+          <label for="spec">Specialization</label>
+          <select id="spec" name="spec">
+            <option value="">All specializations</option>
+            {specializations.map((s) => <option value={s}>{s}</option>)}
+          </select>
+        </div>
+        <button class="btn btn-outline" type="reset" id="doc-reset"><Icon name="close" /> Clear</button>
+      </form>
+
+      <p class="results-count" id="doc-count" aria-live="polite">Showing all {doctors.length} doctors</p>
+      <p class="proto-note" style="margin-bottom:16px">To book, call <a href={`tel:${site.phones.information.mobileTel}`}>{site.phones.information.mobile}</a> or <a href="/book/">send a request</a>. Schedules use the codes on PDH’s listing (M T W TH F S = days; TTHS = Tue/Thu/Sat).</p>
+
+      <div class="grid grid-3" id="doc-list">
+        {doctors.map((d) => <DoctorCard doctor={d} />)}
+      </div>
+      <p class="note-box" id="doc-empty" hidden>No doctors match. Try a shorter name or clear the filters.</p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var q = document.getElementById('q'), dept = document.getElementById('dept'), spec = document.getElementById('spec');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('#doc-list .doctor-card'));
+      var count = document.getElementById('doc-count'), empty = document.getElementById('doc-empty');
+      var total = cards.length;
+      function norm(s) { return (s || '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').trim(); }
+      function apply() {
+        var qq = norm(q.value), dv = dept.value, sv = spec.value, shown = 0;
+        cards.forEach(function (c) {
+          var hay = norm(c.getAttribute('data-name') + ' ' + c.getAttribute('data-spec') + ' ' + c.getAttribute('data-dept'));
+          var ok = (!qq || qq.split(' ').every(function (w) { return hay.indexOf(w) >= 0; }))
+            && (!dv || c.getAttribute('data-dept') === dv)
+            && (!sv || c.getAttribute('data-spec') === sv);
+          c.style.display = ok ? '' : 'none';
+          if (ok) shown++;
+        });
+        count.textContent = shown === total ? 'Showing all ' + total + ' doctors' : 'Showing ' + shown + ' of ' + total + ' doctors';
+        empty.hidden = shown !== 0;
+      }
+      // Pre-fill from the homepage search (?q=, ?dept=, ?spec=)
+      try {
+        var p = new URLSearchParams(location.search);
+        if (p.get('q')) q.value = p.get('q');
+        if (p.get('dept')) dept.value = p.get('dept');
+        if (p.get('spec')) spec.value = p.get('spec');
+      } catch (e) {}
+      q.addEventListener('input', apply); dept.addEventListener('change', apply); spec.addEventListener('change', apply);
+      document.getElementById('doc-filters').addEventListener('submit', function (e) { e.preventDefault(); apply(); });
+      document.getElementById('doc-reset').addEventListener('click', function () { setTimeout(apply, 0); });
+      apply();
+    })();
+  </script>
+</Base>

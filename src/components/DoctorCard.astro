@@ -1,0 +1,14 @@
+---
+import { initials, displayName, type Doctor } from '../lib/data';
+interface Props { doctor: Doctor; }
+const { doctor: d } = Astro.props;
+---
+<a class="card card-link doctor-card" href={`/doctors/${d.slug}/`}
+   data-name={d.name.toLowerCase()} data-dept={d.department} data-spec={d.specialization}>
+  <span class="avatar" aria-hidden="true">{initials(d.name)}</span>
+  <span>
+    <h3>{displayName(d.name)}</h3>
+    <p class="meta">{d.specialization}{d.specialization !== d.department ? ` · ${d.department}` : ''}</p>
+    <p class="sched">{d.schedule ? d.schedule : 'Schedule: see profile'}{d.room ? ` · Room ${d.room}` : ''}</p>
+  </span>
+</a>

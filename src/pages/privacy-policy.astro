@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../lib/data';
+---
+<Base title="Privacy Policy" description={`Data Privacy Notice of ${site.name} under the Data Privacy Act of 2012 (RA 10173).`}>
+  <PageHero eyebrow="Data Privacy Notice" title="Your privacy matters" lead={`At ${site.name}, we value your privacy and are committed to protecting your personal information in accordance with the ${site.privacy.law}, its Implementing Rules and Regulations, and other applicable laws and regulations.`} />
+  <section class="section">
+    <div class="container" style="max-width:800px">
+      <p class="note-box">This prototype collects no analytics, uses no tracking pixels or third-party scripts, and its forms send nothing. The full notice below is as published on pdh.com.ph (date updated: {site.privacy.updated}).</p>
+
+      <h2>Personal information we collect</h2>
+      <p>While providing healthcare services, we may collect and process the following personal information:</p>
+      <ul>
+        <li>Personal and demographic information (e.g., name, address, date of birth, sex, civil status, nationality)</li>
+        <li>Contact information (e.g., mobile number and email address)</li>
+        <li>Government-issued identification numbers</li>
+        <li>PhilHealth, HMO, and insurance information</li>
+        <li>Medical history and health records</li>
+        <li>Laboratory and diagnostic results</li>
+        <li>Prescriptions and treatment records</li>
+        <li>Billing and payment information</li>
+        <li>Employment information (for employees and applicants)</li>
+        <li>CCTV recordings and visitor logs</li>
+        <li>System-generated information such as user accounts, access logs, and IP addresses when using our online services</li>
+      </ul>
+
+      <h2>Purpose of processing</h2>
+      <p>Your personal information is processed to provide safe, efficient, and quality healthcare services; register and identify patients; diagnose, treat, and monitor medical conditions; schedule appointments and manage admissions and discharges; process laboratory, pharmacy, radiology, and other ancillary services; process billing, insurance, PhilHealth, and HMO claims; communicate important healthcare and administrative information; maintain medical records and comply with legal, regulatory, and accreditation requirements; protect patients, employees, visitors, and hospital property through security measures; improve hospital services, quality management, and operational efficiency; and perform other legitimate hospital functions permitted by law.</p>
+      <p>PDH processes personal data in accordance with the principles of transparency, legitimate purpose, and proportionality.</p>
+
+      <h2>Legal basis for processing</h2>
+      <p>We process your personal information based on one or more of the following lawful bases: your consent, where required by law; performance of a contract for the provision of healthcare services; protection of your life and health; compliance with legal and regulatory obligations; and the hospital’s legitimate interests, provided these do not override your rights and freedoms.</p>
+
+      <h2>Data sharing</h2>
+      <p>Your personal information may be shared only when necessary and authorized with physicians and healthcare professionals involved in your care; authorized hospital personnel; PhilHealth, HMOs, insurance companies, and other healthcare payors; government agencies as required by law; accredited service providers acting on behalf of the hospital under appropriate confidentiality and data protection agreements; and other parties with your consent or as otherwise permitted by applicable law.</p>
+
+      <h2>How we protect your personal data</h2>
+      <p>PDH implements organizational, physical, and technical safeguards to protect the confidentiality, integrity, and availability of personal data, including the appointment of a Data Protection Officer; data privacy and security policies and procedures; privacy and data protection training; role-based access and authorization controls; secure storage of physical records; access controls for restricted areas; user authentication and account management; security controls for hospital information systems and networks; periodic review of access privileges; incident and personal data breach response procedures; secure transmission and sharing of personal data; and regular monitoring, assessment, and improvement of privacy and security controls.</p>
+
+      <h2>Data retention and disposal</h2>
+      <p>Parañaque Doctors Hospital retains personal and sensitive personal information only for as long as necessary to fulfill the purposes for which it was collected, provide healthcare services, comply with legal and regulatory requirements, and satisfy applicable medical record retention periods under Philippine laws and hospital policies. Paper records are securely destroyed through cross-cut shredding by authorized personnel or an accredited records disposal provider, with disposal documented. Electronic records are disposed of through secure deletion, data wiping, or physical destruction of storage media by the IT Department following hospital information security procedures.</p>
+
+      <h2>Your rights as a data subject</h2>
+      <p>Under the Data Privacy Act, you have the right to be informed about the processing of your personal data; access your personal data; correct or update inaccurate or incomplete personal data; object to certain processing; withdraw consent when consent is the applicable basis for processing; request the blocking, removal, or destruction of personal data in appropriate circumstances; lodge a complaint concerning the processing of your personal data; and exercise other rights provided under the Data Privacy Act and applicable regulations.</p>
+
+      <h2>Contact the Data Protection Officer</h2>
+      <p>For questions, concerns, or requests regarding your personal information or the exercise of your privacy rights, please contact the PDH Data Protection Officer at <a href={`mailto:${site.privacy.dpoEmail}`}>{site.privacy.dpoEmail}</a>.</p>
+
+      <h2>Acknowledgment</h2>
+      <p>By availing of the hospital’s services, submitting your personal information, or using our facilities, systems, or online services, you acknowledge that you have read and understood this Data Privacy Notice and that your personal information will be processed in accordance with applicable laws and the hospital’s privacy policies.</p>
+      <p class="small muted">Date updated: {site.privacy.updated}</p>
+    </div>
+  </section>
+</Base>

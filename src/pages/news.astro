@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { news, site, formatDate } from '../lib/data';
+---
+<Base title="PDH News" description={`News, community health talks and Alagang PDH Ako patient stories from ${site.name}.`}>
+  <PageHero eyebrow="PDH News" title="News and stories" lead="Community health talks, barangay partnerships and Alagang PDH Ako patient stories. Full articles open on the current PDH site." />
+  <section class="section">
+    <div class="container grid grid-3">
+      {news.items.map((n) => (
+        <article class="card">
+          <p class="meta"><time datetime={n.date}>{formatDate(n.date)}</time> · {n.category}</p>
+          <h2 style="font-size:1.1rem">{n.title}</h2>
+          <p class="small muted">{n.excerpt}</p>
+          <a href={n.url} target="_blank" rel="noopener">Read more on pdh.com.ph <Icon name="external" class="inline-ic" /></a>
+        </article>
+      ))}
+    </div>
+  </section>
+  <style>.inline-ic { width: 14px; height: 14px; display: inline; vertical-align: -2px; }</style>
+</Base>

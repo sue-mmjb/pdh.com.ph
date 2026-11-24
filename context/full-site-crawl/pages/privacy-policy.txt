@@ -1,0 +1,105 @@
+URL: https://pdh.com.ph/privacy-policy/
+TITLE: Privacy Policy - Parañaque Doctors Hospital
+DESCRIPTION: DATA PRIVACY NOTICE   Your Privacy Matters At Parañaque Doctors Hospital, we value your privacy and are committed to protecting your personal information in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173), its Implementing Rules and Regulations, and other applicable laws and regulations. Personal Information We Collect While providing healthcare services, […]
+
+Skip to content
+DATA PRIVACY NOTICE
+Your Privacy Matters
+At Parañaque Doctors Hospital, we value your privacy and are committed to protecting your personal information in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173), its Implementing Rules and Regulations, and other applicable laws and regulations.
+Personal Information We Collect
+While providing healthcare services, we may collect and process the following personal information:
+- Personal and demographic information (e.g., name, address, date of birth, sex, civil status, nationality)
+- Contact information (e.g., mobile number and email address)
+- Government-issued identification numbers
+- PhilHealth, HMO, and insurance information
+- Medical history and health records
+- Laboratory and diagnostic results
+- Prescriptions and treatment records
+- Billing and payment information
+- Employment information (for employees and applicants)
+- CCTV recordings and visitor logs
+- System-generated information such as user accounts, access logs, and IP addresses when using our online services
+Purpose of Processing
+Your personal information is processed to:
+- Provide safe, efficient, and quality healthcare services.
+- Register and identify patients.
+- Diagnose, treat, and monitor medical conditions.
+- Schedule appointments and manage admissions and discharges.
+- Process laboratory, pharmacy, radiology, and other ancillary services.
+- Process billing, insurance, PhilHealth, and HMO claims.
+- Communicate important healthcare and administrative information.
+- Maintain medical records and comply with legal, regulatory, and accreditation requirements.
+- Protect patients, employees, visitors, and hospital property through security measures.
+- Improve hospital services, quality management, and operational efficiency.
+- Perform other legitimate hospital functions permitted by law.
+PDH processes personal data in accordance with the principles of transparency, legitimate purpose, and proportionality.
+Legal Basis for Processing
+We process your personal information based on one or more of the following lawful bases:
+- Your consent, where required by law.
+- Performance of a contract for the provision of healthcare services.
+- Protection of your life and health.
+- Compliance with legal and regulatory obligations.
+- The hospital’s legitimate interests, provided these do not override your rights and freedoms.
+Data Sharing
+Your personal information may be shared only when necessary and authorized with:
+- Physicians and healthcare professionals involved in your care.
+- Authorized hospital personnel.
+- PhilHealth, HMOs, insurance companies, and other healthcare payors.
+- Government agencies as required by law.
+- Accredited service providers acting on behalf of the hospital under appropriate confidentiality and data protection agreements.
+- Other parties with your consent or as otherwise permitted by applicable law.
+How We Protect Your Personal Data
+PDH implements organizational, physical, and technical safeguards to protect the confidentiality, integrity, and availability of personal data.
+These measures include, among others:
+- Appointment of a Data Protection Officer;
+- Data privacy and security policies and procedures;
+- Privacy and data protection training;
+- Role-based access and authorization controls;
+- Secure storage of physical records;
+- Access controls for restricted areas;
+- User authentication and account management;
+- Security controls for hospital information systems and networks;
+- Periodic review of access privileges;
+- Incident and personal data breach response procedures;
+- Secure transmission and sharing of personal data; and
+- Regular monitoring, assessment, and improvement of privacy and security controls.
+The DPA and its IRR require reasonable and appropriate organizational, physical, and technical security measures for the protection of personal data.
+Risk
+Privacy risk refers to the possibility that personal data may be accidentally or unlawfully accessed, disclosed, altered, lost, destroyed, or otherwise processed without authorization.
+PDH implements appropriate safeguards to minimize, monitor, and manage risks associated with the processing of personal data, particularly information relating to patients and their health.
+Storage
+Physical records containing personal data are stored in secured areas within the Hospital and are accessible only to authorized personnel.
+Electronic records are stored in authorized hospital information systems, databases, servers, and other approved information technology environments protected by appropriate organizational, physical, and technical safeguards.
+Where personal data is processed or stored by authorized third-party service providers, PDH implements appropriate contractual, security, and privacy measures consistent with applicable requirements.
+Data Retention and Disposal
+Parañaque Doctors Hospital retains personal and sensitive personal information only for as long as necessary to fulfill the purposes for which it was collected, provide healthcare services, comply with legal and regulatory requirements, and satisfy applicable medical record retention periods under Philippine laws and hospital policies.
+Upon expiration of the approved retention period, records are disposed of securely using methods appropriate to their format:
+Manual (Paper-Based) Records
+- Medical records, forms, and other paper documents containing personal data are securely destroyed through cross-cut shredding by authorized personnel or an accredited records disposal provider.
+- Disposal is documented through a Records Disposal Log or Certificate of Destruction and is conducted with the approval of the authorized records custodian.
+Electronic Records
+- Personal data stored in the Hospital Information System (HIS), databases, servers, backup media, and other electronic devices are disposed of through secure deletion, data wiping or physical destruction of storage media when the media is no longer reusable.
+- Electronic disposal is performed by the IT Department following hospital information security procedures to ensure that data cannot be reconstructed or recovered.
+All disposal activities are carried out in a manner that preserves the confidentiality, integrity, and security of personal data and are subject to appropriate documentation and authorization.
+Methods Used for Automated Access
+PDH may use information systems and electronic processes in the collection, storage, retrieval, processing, and management of personal data.
+Where automated processing or automated access is applicable, appropriate safeguards and access controls are implemented to protect personal data and limit access to authorized personnel.
+Your Rights as a Data Subject
+Under the Data Privacy Act, you have the right to:
+- Be informed about the processing of your personal data;
+- Access your personal data;
+- Correct or update inaccurate or incomplete personal data;
+- Object to certain processing;
+- Withdraw consent when consent is the applicable basis for processing;
+- Request the blocking, removal, or destruction of personal data in appropriate circumstances;
+- Lodge a complaint concerning the processing of your personal data; and
+- Exercise other rights provided under the Data Privacy Act and applicable regulations.
+Contact the Data Protection Officer
+For questions, concerns, or requests regarding your personal information or the exercise of your privacy rights, please contact:
+PDH Data Protection Officer
+Email: dpo@pdh.com.ph
+Any Privacy concerns or suspected data breach?
+Access the QR Code below to submit a report:
+Acknowledgment
+By availing of the hospital’s services, submitting your personal information, or using our facilities, systems, or online services, you acknowledge that you have read and understood this Data Privacy Notice and that your personal information will be processed in accordance with applicable laws and the hospital’s privacy policies.
+Date Updated: 10/8/2026

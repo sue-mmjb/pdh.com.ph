@@ -1,0 +1,39 @@
+{
+  "_note": "HMO partners come from the logo alt-text on the current homepage (32 names, logos only). The brief asks for them to be shown as a text list marked [TO CONFIRM]. HMO Hub location/hours/phone are from the current site. The step-by-step process is a labeled sample — not on the current site.",
+  "partners": [
+    "AMAPhil", "AsianCare", "Avega", "BenLife", "Cocolife", "CoopHealth", "EastWest Healthcare", "Etiqa", "Flexicare", "Fortune Life", "Generali", "Getwell Health System", "Healthbridge", "HMI", "HPPI", "ICare", "IMS Wellth Care", "Intellicare", "Kaiser", "Lacson & Lacson", "Maxicare", "MedAsia", "Medicard", "Medilink", "Medocare", "Metrocare", "Optimum", "Pacific", "PhilCare", "Royale Mariners Healthcare", "ValuCare", "Wellcare"
+  ],
+  "partnersConfirmed": false,
+  "hub": {
+    "name": "HMO Hub",
+    "summary": "Facilitates access to healthcare services covered by your health insurance plan.",
+    "location": "Ground Floor",
+    "hours": "6 AM – 7 PM (Monday to Saturday), 6 AM – 2 PM (Sunday and Holidays)",
+    "phone": "8776 0647 local 8945",
+    "mobile": "0921 567 2709",
+    "onlineApproval": {
+      "label": "HMO Online Approval",
+      "blurb": "Need HMO approval for your check-up, lab tests, or procedures? Skip the long lines and get approved online quick and easy.",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSfGbbyaFRjyniWhqtGDN7iIRPqERjcXCGzobQlQkLESc1JbFg/viewform"
+    }
+  },
+  "process": {
+    "sample": true,
+    "steps": [
+      { "title": "Check your coverage", "text": "Confirm with your HMO that PDH and your doctor are accredited for the service you need. Your doctor’s profile lists the HMOs they accept." },
+      { "title": "Go to the HMO Hub", "text": "Bring your HMO card, a valid ID, and your doctor’s request. The Hub is on the Ground Floor." },
+      { "title": "Get your approval", "text": "The Hub coordinates your Letter of Authorization (LOA). For outpatient services you can also request approval online before you come." },
+      { "title": "Proceed to your service", "text": "Present your approval at the clinic, laboratory, or imaging desk. Any amount not covered is settled at the cashier." }
+    ]
+  },
+  "philhealth": {
+    "accredited": true,
+    "statement": "PDH is accredited by the Department of Health (DOH), PhilHealth, and various Health Maintenance Organizations (HMOs).",
+    "detailsConfirmed": false,
+    "sampleSteps": [
+      "Bring your PhilHealth ID or Member Data Record (MDR) and a valid ID.",
+      "Submit the forms at Admitting (inpatient) or the service desk (outpatient).",
+      "Your PhilHealth benefit is deducted from the bill before discharge."
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+---
+import Base from '../layouts/Base.astro';
+import HomeB from '../components/home/HomeB.astro';
+import { site } from '../lib/data';
+---
+<Base title={`${site.name} — Design option B`} description={`${site.description} Prototype design option B.`} theme="b" noindex>
+  <HomeB />
+</Base>

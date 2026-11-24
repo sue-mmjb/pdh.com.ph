@@ -1,0 +1,94 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import DoctorCard from '../../components/DoctorCard.astro';
+import ToConfirm from '../../components/ToConfirm.astro';
+import Icon from '../../components/Icon.astro';
+import { doctors, displayName, initials, services, site } from '../../lib/data';
+
+export function getStaticPaths() {
+  return doctors.map((d) => ({ params: { slug: d.slug }, props: { doctor: d } }));
+}
+const { doctor: d } = Astro.props;
+const name = displayName(d.name);
+const related = doctors.filter((x) => x.slug !== d.slug && x.specialization === d.specialization).slice(0, 3);
+const relatedServices = services.filter((s) => s.doctorMatch.departments.includes(d.department) || s.doctorMatch.specializations.some((sp) => d.specialization.toLowerCase().includes(sp.toLowerCase())));
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Physician',
+  name,
+  medicalSpecialty: d.specialization,
+  worksFor: { '@type': 'Hospital', name: site.name },
+  telephone: site.phones.trunk.tel,
+  url: new URL(Astro.url.pathname, Astro.site).href,
+};
+---
+<Base title={`${name} — ${d.specialization}`} description={`${name}, ${d.specialization} (${d.department}) at ${site.name}. ${d.schedule ? `Clinic schedule: ${d.schedule}.` : ''} ${d.room ? `Room ${d.room}.` : ''} How to book.`} jsonLd={[ld]}>
+  <PageHero eyebrow={d.department} title={name} lead={d.specialization} crumbs={[{ href: '/doctors/', label: 'Doctors' }]} />
+
+  <section class="section">
+    <div class="container doc-grid">
+      <div>
+        <div class="card" style="display:flex;gap:16px;align-items:center;margin-bottom:24px">
+          <span class="avatar" aria-hidden="true" style="width:72px;height:72px;border-radius:50%;background:var(--accent-soft);color:var(--accent-text);display:grid;place-items:center;font-weight:800;font-size:1.4rem;font-family:var(--font-head);flex:none">{initials(d.name)}</span>
+          <div>
+            <p style="margin:0" class="muted small">Photo: supplied by PDH only (no AI-generated images)</p>
+            <p style="margin:4px 0 0" class="small">Listed as <strong>{d.name}</strong> on pdh.com.ph</p>
+          </div>
+        </div>
+
+        <h2 style="font-size:1.3rem">Clinic schedule and location</h2>
+        <dl class="dl" style="margin-bottom:24px">
+          <dt>Specialty</dt><dd>{d.specialization}</dd>
+          <dt>Department</dt><dd>{d.department}</dd>
+          <dt>Schedule</dt><dd>{d.schedule ?? <>Not listed <ToConfirm note="No schedule on the current site" /></>}</dd>
+          <dt>Room</dt><dd>{d.room ? `Room ${d.room}` : <>Not listed <ToConfirm /></>}</dd>
+          <dt>Contact</dt><dd><a href={`tel:${site.phones.trunk.tel}`}>{d.contact ?? site.phones.trunk.display}</a></dd>
+        </dl>
+        <p class="proto-note">Schedule codes follow PDH’s listing: M Mon · T Tue · W Wed · TH Thu · F Fri · S Sat (e.g. “TTHS” = Tue, Thu, Sat).</p>
+
+        <h2 style="font-size:1.3rem">Accredited HMOs</h2>
+        {d.hmos.length > 0
+          ? <ul class="chips" style="margin-bottom:8px">{d.hmos.map((h) => <li>{h}</li>)}</ul>
+          : <p class="muted">{d.hmoNote ?? 'Not listed on the current site'} <ToConfirm note="Accredited HMOs for this doctor are not listed on the current site" /></p>}
+        <p class="small muted">As listed on the doctor’s page on pdh.com.ph. Confirm coverage with the <a href="/hmo-philhealth/">HMO Hub</a> before your visit.</p>
+
+        {relatedServices.length > 0 && (
+          <>
+            <h2 style="font-size:1.3rem;margin-top:24px">Related services</h2>
+            <ul class="pill-list">{relatedServices.map((s) => <li><a href={`/services/${s.slug}/`}>{s.name}</a></li>)}</ul>
+          </>
+        )}
+      </div>
+
+      <aside>
+        <div class="card">
+          <h3 style="font-size:1.05rem">How to book</h3>
+          <ol style="padding-left:1.2em;margin:0 0 12px" class="small">
+            <li>Check the clinic schedule above.</li>
+            <li>Call to reserve a slot, or send a request and we call you back.</li>
+            <li>Bring a valid ID and your HMO card or PhilHealth MDR.</li>
+          </ol>
+          <a class="btn btn-primary" href={`/book/?doctor=${d.slug}`} style="width:100%"><Icon name="calendar" /> Request an appointment</a>
+          <a class="btn btn-outline" href={`tel:${site.phones.information.mobileTel}`} style="width:100%;margin-top:8px"><Icon name="phone" /> Call {site.phones.information.mobile}</a>
+          <p class="small muted" style="margin:12px 0 0">Clinics are on the 3rd to 6th floors, by appointment.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="section section-soft">
+      <div class="container">
+        <h2 style="font-size:1.3rem">Other {d.specialization} doctors</h2>
+        <div class="grid grid-3">{related.map((r) => <DoctorCard doctor={r} />)}</div>
+        <p style="margin-top:16px"><a class="btn btn-outline" href={`/doctors/?spec=${encodeURIComponent(d.specialization)}`}>All {d.specialization} doctors</a></p>
+      </div>
+    </section>
+  )}
+
+  <style>
+    .doc-grid { display: grid; gap: 32px; }
+    @media (min-width: 900px) { .doc-grid { grid-template-columns: 1.6fr 1fr; align-items: start; } aside { position: sticky; top: calc(var(--optionbar-h) + var(--header-h) + 16px); } }
+  </style>
+</Base>

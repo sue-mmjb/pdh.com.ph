@@ -1,0 +1,9 @@
+---
+// Labeled image placeholder. No stock photos, no AI-generated people, nothing hotlinked.
+// Drop real PDH photos into assets/ and replace these with <img> tags.
+interface Props { label: string; ratio?: '16x9' | '4x3' | '1x1' | '3x4'; class?: string; }
+const { label, ratio = '16x9', class: cls = '' } = Astro.props;
+---
+<div class={`ph ph-${ratio} ${cls}`} role="img" aria-label={`Photo placeholder: ${label}`}>
+  <span>Photo placeholder: {label}</span>
+</div>

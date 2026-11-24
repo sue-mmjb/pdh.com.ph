@@ -1,0 +1,59 @@
+---
+import { site } from '../lib/data';
+import ToConfirm from './ToConfirm.astro';
+const p = site.phones;
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="grid grid-4">
+      <div>
+        <h3>{site.name}</h3>
+        <p>{site.address.full}</p>
+        <p class="small">{site.dohLevel} hospital · Member of {site.network.name} since {site.network.memberSince}</p>
+      </div>
+      <div>
+        <h3>Phone lines</h3>
+        <ul>
+          <li><a href={`tel:${p.emergency.tel}`}><strong>Emergency:</strong>&nbsp;{p.emergency.display}</a> <ToConfirm note={p.emergency.note} /></li>
+          <li><a href={`tel:${p.emergency.mobileTel}`}>ER mobile: {p.emergency.mobile}</a></li>
+          <li><a href={`tel:${p.information.tel}`}>Information: {p.information.display}</a> <ToConfirm note={p.information.note} /></li>
+          <li><a href={`tel:${p.information.mobileTel}`}>Mobile: {p.information.mobile}</a></li>
+          <li><a href={`tel:${p.trunk.tel}`}>Trunk lines: {p.trunk.display}</a></li>
+          <li><a href={`tel:${p.admitting.tel}`}>Admitting: {p.admitting.display}</a></li>
+          <li><a href={`tel:${p.hmoHub.tel}`}>HMO Hub: {p.hmoHub.display}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Email</h3>
+        <ul>
+          <li><a href={`mailto:${site.emails.info}`}>{site.emails.info}</a></li>
+          <li><a href={`mailto:${site.emails.marketing}`}>{site.emails.marketing}</a></li>
+          <li><a href={`mailto:${site.emails.dpo}`}>Data Protection Officer: {site.emails.dpo}</a></li>
+        </ul>
+        <h3 style="margin-top:20px">Follow</h3>
+        <ul>
+          <li><a href={site.social.facebook} target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href={site.social.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Quick links</h3>
+        <ul>
+          <li><a href={site.links.labResults} target="_blank" rel="noopener">Online Lab Results</a></li>
+          <li><a href="/book/">Book an appointment</a></li>
+          <li><a href="/doctors/">Find a doctor</a></li>
+          <li><a href="/hmo-philhealth/">HMO &amp; PhilHealth</a></li>
+          <li><a href="/news/">PDH News</a></li>
+          <li><a href="/careers/">Careers</a></li>
+          <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          <li><a href={site.links.feedback} target="_blank" rel="noopener">How was our service?</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
+      <span>Website prototype by Iozera — not the live PDH site. No analytics or tracking.</span>
+    </div>
+  </div>
+</footer>

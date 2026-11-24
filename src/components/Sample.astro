@@ -1,0 +1,6 @@
+---
+// Visible badge for placeholder content that is not on the current site.
+interface Props { text?: string; }
+const { text = 'Sample' } = Astro.props;
+---
+<span class="badge-sample" title="Placeholder content for the prototype; replace with PDH-supplied content">{text}</span>

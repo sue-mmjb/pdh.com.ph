@@ -1,0 +1,112 @@
+﻿PARAÑAQUE DOCTORS HOSPITAL (PDH)
+Website text extraction
+Source: pdh.com.ph homepage HTML included in the supplied website archive
+
+PAGE TITLE
+Home - Parañaque Doctors Hospital
+
+Home
+Our Services Our Packages Our Services Our Facilities Room Gallery Online Lab Result
+Our Packages
+Our Services
+Our Facilities
+Room Gallery
+Online Lab Result
+Our Doctors
+About Us
+PDH News
+Careers
+Contact us
+Privacy Policy
+Home
+Our Services Our Packages Our Services Our Facilities Room Gallery Online Lab Result
+Our Packages
+Our Services
+Our Facilities
+Room Gallery
+Online Lab Result
+Our Doctors
+About Us
+PDH News
+Careers
+Contact us
+Privacy Policy
+Why PDH?
+Here at PDH, we go beyond healthcare—we provide genuine care that feels like home. Patients trust us because we put their well-being first, offering expert medical services, compassionate staff, and a welcoming environment that makes every visit reassuring.
+Because, we at PDH…
+Our accessible location, developing facilities, and dedicated specialists ensure you receive the highest and best quality treatment without the hassle. Whether you’re here for a routine check-up or specialized care, PDH is where expertise meets heart—because you deserve nothing less.
+Patient Safety
+Our commitment is to place patient safety and top-tier medical standards at the forefront of everything we do.
+Compassion & Medical Expertise
+We deliver expert medical care with the warmth and compassion every patient deserves.
+Cutting-Edge Science & Innovation
+Your well-being inspires our focus on innovation.
+Accessible & Inclusive Care
+From Outpatient and Emergency to Inpatient and Urgent Care Services, we offer a comprehensive range of healthcare solutions tailored to your needs.
+Community-Centered Service
+We care beyond the clinic—strengthening lives through outreach and health advocacy.
+94
+Beds
+320
+Doctors
+410
+Employees
+Our HMO Partners
+Our Network of Care
+Parañaque Doctors Hospital (PDH) is a proud member of Metro Pacific Health (MPH), the largest private hospital group in the country. The 27 hospitals that make up MPH include Makati Medical Center, Cardinal Santos Medical Center, Asian Hospital and Medical Center, Riverside Medical Center, and Davao Doctors Hospital, as well as 33 outpatient care centers, 6 cancer centers, 2 allied health colleges, a centralized laboratory, and several pharmacies across the country – all working together to deliver high-quality compassionate healthcare to Filipinos.
+Patient Stories
+Our patients’ stories reflect the heart of what we do at PDH—delivering compassionate care, expert treatment, and a healing experience that truly makes a difference. Their journeys inspire us to keep putting patients first, every step of the way.
+PDH News
+Alagang PDH Ako Stories: More Than a Hospital: A Second Home Built on Trust and Care
+At Parañaque Doctors Hospital, care goes beyond medicine. It’s about building trust, offering comfort, and creating a second home for
+Neuro Talk Kick-Off: Empowering Barangay Napindan with Life-Saving Knowledge
+On March 27, 2025, Parañaque Doctors Hospital
+IM Family Health Talk Kick-Off: Building Stronger Families, One Health Talk at a Time
+On March 24, 2025, Parañaque Doctors Hospital
+Keeping Hearts Healthy: PDH’s Cardiovascular Health Talk Brings Awareness to the Community
+On March 20, 2025, Parañaque Doctors Hospital
+Have a question?
+One of our Customer Care Representatives will get in touch with you soon to help you with your health concerns and inquiries.
+[Form field: post_id]
+[Form field: form_id]
+[Form field: referer_title]
+[Form field: queried_id]
+Name
+[Form field: Name]
+Email
+[Form field: Email]
+Message
+[Message field: Message]
+Send
+175 Doña Soledad Ave., Better Living Subdivision, Parañaque, 1711 Metro Manila
+Information: 8776 0644/51 local 7000 or 0998 520 7295 / 0998 520 7286 Email: marketing@pdh.com.ph
+Information: 8776 06 44 to local 7000 or 09985207295 Email: info@pdh.com.ph
+
+WEBSITE LINKS
+Home: https://pdh.com.ph/
+Our Packages: https://pdh.com.ph/our-services/#our-packages
+Our Services: https://pdh.com.ph/our-services/#services-section
+Our Facilities: https://pdh.com.ph/our-services/#facilities-section
+Room Gallery: https://pdh.com.ph/our-services/#rooms-section
+Online Lab Result: https://lis.pdh.com.ph/
+Our Doctors: https://pdh.com.ph/all-doctors/
+About Us: https://pdh.com.ph/about-us/
+PDH News: https://pdh.com.ph/pdh-news/
+Careers: https://pdh.com.ph/careers/
+Contact us: https://pdh.com.ph/contact-2/
+Privacy Policy: https://pdh.com.ph/privacy-policy/
+Alagang PDH Ako Stories: More Than a Hospital: A Second Home Built on Trust and Care: https://pdh.com.ph/alagang-pdh-ako-stories-more-than-a-hospital-a-second-home-built-on-trust-and-care/
+Read More »: https://pdh.com.ph/alagang-pdh-ako-stories-more-than-a-hospital-a-second-home-built-on-trust-and-care/
+Neuro Talk Kick-Off: Empowering Barangay Napindan with Life-Saving Knowledge: https://pdh.com.ph/neuro-talk-kick-off-empowering-barangay-napindan-with-life-saving-knowledge/
+Read More »: https://pdh.com.ph/neuro-talk-kick-off-empowering-barangay-napindan-with-life-saving-knowledge/
+IM Family Health Talk Kick-Off: Building Stronger Families, One Health Talk at a Time: https://pdh.com.ph/im-family-health-talk-kick-off-building-stronger-families-one-health-talk-at-a-time/
+Read More »: https://pdh.com.ph/im-family-health-talk-kick-off-building-stronger-families-one-health-talk-at-a-time/
+Keeping Hearts Healthy: PDH’s Cardiovascular Health Talk Brings Awareness to the Community: https://pdh.com.ph/keeping-hearts-healthy-pdhs-cardiovascular-health-talk-brings-awareness-to-the-community/
+Read More »: https://pdh.com.ph/keeping-hearts-healthy-pdhs-cardiovascular-health-talk-brings-awareness-to-the-community/
+Go to PDH News: https://pdh.com.ph/pdh-news/
+Home: https://pdh.com.ph
+Our Services: https://pdh.com.ph/our-services/
+Contact Us: https://pdh.com.ph/contact-2/
+
+EXTRACTION NOTE
+This text file contains readable text found in the supplied homepage HTML. Images, videos, styling, scripts, and other non-text assets are not included. The supplied archive contains one main PDH homepage; this is not a full crawl of every linked website page.

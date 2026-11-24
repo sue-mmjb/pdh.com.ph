@@ -1,0 +1,250 @@
+---
+// Option B — "Warm Care": editorial layout on cream paper. Big serif headline with a
+// quick-help sidebar, numbered service list with rules, large inline figures,
+// pull-quote stories, dated news list. Deliberately asymmetric; no card grids.
+import { site, hmo, news, featuredServices, services, specialtyGroups, formatDate } from '../../lib/data';
+import Icon from '../Icon.astro';
+import ToConfirm from '../ToConfirm.astro';
+import Sample from '../Sample.astro';
+import Placeholder from '../Placeholder.astro';
+const er = site.phones.emergency;
+const latest = news.items.slice(0, 5);
+const listed = services.filter((s) => s.hours);
+---
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="kicker">Parañaque Doctors Hospital · est. 2007 · {site.dohLevel}</p>
+      <h1>Where expertise<br /><em>meets heart.</em></h1>
+      <p class="lead">{site.why.detail}</p>
+      <div class="actions">
+        <a class="btn btn-primary btn-lg" href="/doctors/">Find a doctor</a>
+        <a class="btn btn-accent btn-lg" href="/book/">Book an appointment</a>
+      </div>
+    </div>
+    <aside class="help card">
+      <h2>Quick help</h2>
+      <a class="er" href={`tel:${er.tel}`}>
+        <Icon name="emergency" />
+        <span><strong>Emergency</strong><br />{er.display} <ToConfirm note={er.note} /><br /><span class="small">Ground Floor · open 24/7</span></span>
+      </a>
+      <ul>
+        <li><a href={`tel:${site.phones.information.tel}`}><Icon name="phone" /> Information {site.phones.information.display}</a></li>
+        <li><a href="/hmo-philhealth/"><Icon name="card" /> HMO Hub · {hmo.hub.location}</a></li>
+        <li><a href={site.links.labResults} target="_blank" rel="noopener"><Icon name="lab" /> Online lab results</a></li>
+        <li><a href="/contact/#directions"><Icon name="pin" /> Directions &amp; parking</a></li>
+      </ul>
+    </aside>
+  </div>
+  <div class="container"><Placeholder label="Wide photo of the PDH front entrance" ratio="16x9" class="hero-photo" /></div>
+</section>
+
+<section class="section">
+  <div class="container two-col">
+    <div class="col-head">
+      <p class="kicker">Our services</p>
+      <h2>Everything a Level 2 hospital should have, close to home.</h2>
+      <p class="muted">Floors and hours are as published by PDH. Tap a service for what to bring and which doctors to see.</p>
+      <a class="btn btn-outline" href="/services/">All services</a>
+    </div>
+    <ol class="svc-list">
+      {listed.slice(0, 12).map((s) => (
+        <li>
+          <a href={`/services/${s.slug}/`}>
+            <span class="name">{s.name}</span>
+            <span class="where">{s.location} · {s.hours.length > 32 ? 'see hours' : s.hours}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="section figures">
+  <div class="container">
+    <div class="figure-row">
+      {site.stats.map((s) => <div class="figure"><span class="num">{s.value}</span><span class="lbl">{s.label}</span></div>)}
+      <div class="figure"><span class="num">24/7</span><span class="lbl">ER, lab, radiology, pharmacy</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="container two-col">
+    <div class="col-head">
+      <p class="kicker">Find a doctor</p>
+      <h2>320 doctors. Search by name or specialty.</h2>
+      <form class="search-form" action="/doctors/" method="get" role="search">
+        <label class="visually-hidden" for="home-q">Doctor name or specialty</label>
+        <input id="home-q" name="q" type="search" placeholder="Name or specialty" />
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+    <ul class="dept-list">
+      {specialtyGroups.map((g) => (
+        <li><a href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}><strong>{g.name}</strong><span class="muted small">{g.blurb}</span></a></li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-col">
+    <div class="col-head">
+      <p class="kicker">HMO &amp; PhilHealth</p>
+      <h2>Bring your card; the HMO Hub does the rest.</h2>
+      <p class="muted">Ground Floor · {hmo.hub.hours}. PhilHealth-accredited.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/hmo-philhealth/">How it works</a>
+        <a class="btn btn-outline" href={hmo.hub.onlineApproval.url} target="_blank" rel="noopener">Online approval</a>
+      </div>
+    </div>
+    <div>
+      <p class="small"><strong>Accepted HMOs</strong> <Sample /> <ToConfirm note="Names taken from logos on the current site; confirm the official list" /></p>
+      <p class="hmo-run">{hmo.partners.join(' · ')}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-strong network">
+  <div class="container two-col">
+    <div class="col-head">
+      <p class="kicker">Our network of care</p>
+      <h2>A member of {site.network.name}.</h2>
+    </div>
+    <div>
+      <p class="lead" style="color:inherit">{site.network.blurb}</p>
+      <p>{site.network.detail}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="kicker">{site.why.heading}</p>
+    <h2 class="pillars-head">Because, we at PDH…</h2>
+    <dl class="pillars">
+      {site.pillars.map((p, i) => (
+        <div><dt><span class="n">0{i + 1}</span>{p.title}</dt><dd>{p.text}</dd></div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="container">
+    <p class="kicker">Alagang PDH Ako Stories</p>
+    {site.stories.map((s) => (
+      <article class="story">
+        <blockquote>“{s.quote}”</blockquote>
+        <p class="by">— {s.by}</p>
+        <p class="small"><strong>{s.title}.</strong> {s.excerpt} <a href={s.url} target="_blank" rel="noopener">Read on pdh.com.ph</a></p>
+      </article>
+    ))}
+    <div class="testi">
+      {site.testimonials.slice(0, 4).map((t) => <p class="small">“{t.quote}” <span class="muted">— {t.by}</span></p>)}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-col">
+    <div class="col-head">
+      <p class="kicker">PDH News</p>
+      <h2>From the community.</h2>
+      <a class="btn btn-outline" href="/news/">Go to PDH News</a>
+    </div>
+    <ul class="news-list">
+      {latest.map((n) => (
+        <li>
+          <time datetime={n.date}>{formatDate(n.date)}</time>
+          <a href={n.url} target="_blank" rel="noopener">{n.title}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="section section-strong">
+  <div class="container two-col">
+    <div class="col-head">
+      <p class="kicker">Visit us</p>
+      <h2>{site.address.street}, {site.address.subdivision}</h2>
+      <p>{site.address.city}, {site.address.postalCode} {site.address.region}</p>
+    </div>
+    <div>
+      <p>Emergency <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /><br />
+      Information <a href={`tel:${site.phones.information.tel}`}>{site.phones.information.display}</a> · Mobile <a href={`tel:${site.phones.information.mobileTel}`}>{site.phones.information.mobile}</a><br />
+      <a href={`mailto:${site.emails.info}`}>{site.emails.info}</a></p>
+      <div class="actions">
+        <a class="btn btn-accent" href="/book/">Send a request</a>
+        <a class="btn btn-outline" href="/contact/#directions">Directions &amp; parking</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .kicker { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-text); font-weight: 700; margin: 0 0 12px; }
+  .section-strong .kicker { color: var(--accent); }
+  .hero { padding: 40px 0 24px; }
+  .hero-grid { display: grid; gap: 24px; align-items: start; margin-bottom: 24px; }
+  @media (min-width: 900px) { .hero { padding: 72px 0 32px; } .hero-grid { grid-template-columns: 1.5fr 1fr; gap: 56px; } }
+  .hero h1 { font-size: clamp(2.6rem, 1.6rem + 5vw, 5rem); line-height: 1; margin-bottom: 0.4em; }
+  .hero h1 em { font-style: italic; color: var(--accent-text); }
+  .hero .lead { font-size: 1.2rem; }
+  .hero-photo { margin-top: 8px; }
+  .help { padding: 20px; }
+  .help h2 { font-size: 1.1rem; margin-bottom: 12px; }
+  .help .er { display: flex; gap: 12px; align-items: flex-start; padding: 12px; background: var(--emergency-soft); border-radius: var(--radius-sm); text-decoration: none; color: var(--ink); margin-bottom: 12px; }
+  .help .er svg { width: 24px; height: 24px; color: var(--emergency); flex: none; margin-top: 2px; }
+  .help .er strong { color: var(--emergency); }
+  .help ul { list-style: none; padding: 0; margin: 0; }
+  .help li a { display: flex; align-items: center; gap: 10px; min-height: var(--tap); text-decoration: none; color: var(--ink); border-top: 1px solid var(--line); }
+  .help li a svg { width: 18px; height: 18px; color: var(--accent-text); }
+  .help li a:hover { color: var(--accent-text); }
+  .two-col { display: grid; gap: 24px; }
+  @media (min-width: 900px) { .two-col { grid-template-columns: 1fr 1.6fr; gap: 64px; } }
+  .col-head h2 { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem); }
+  .col-head .btn { margin-top: 8px; }
+  .svc-list { list-style: none; padding: 0; margin: 0; counter-reset: svc; columns: 1; column-gap: 40px; }
+  @media (min-width: 640px) { .svc-list { columns: 2; } }
+  .svc-list li { counter-increment: svc; break-inside: avoid; border-top: 1px solid var(--line); }
+  .svc-list a { display: grid; grid-template-columns: 2.2em 1fr; gap: 4px 0; padding: 12px 0; text-decoration: none; color: var(--ink); min-height: var(--tap); }
+  .svc-list a::before { content: counter(svc, decimal-leading-zero); font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.8rem; color: var(--accent-text); font-weight: 700; padding-top: 4px; grid-row: span 2; }
+  .svc-list .name { font-size: 1.1rem; }
+  .svc-list a:hover .name { color: var(--accent-text); text-decoration: underline; }
+  .svc-list .where { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.82rem; color: var(--ink-soft); }
+  .figures { padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .figure-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (min-width: 900px) { .figure-row { grid-template-columns: repeat(4, 1fr); } }
+  .figure .num { font-size: clamp(2.4rem, 1.6rem + 4vw, 4.5rem); line-height: 1; display: block; color: var(--primary); }
+  .figure .lbl { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
+  .search-form { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .search-form input { flex: 1 1 200px; min-height: var(--tap); padding: 10px 14px; border: 1px solid var(--ink); border-radius: var(--radius-sm); font: inherit; background: var(--card); }
+  .dept-list { list-style: none; padding: 0; margin: 0; }
+  .dept-list li { border-top: 1px solid var(--line); }
+  .dept-list a { display: grid; gap: 2px; padding: 12px 0; text-decoration: none; color: var(--ink); min-height: var(--tap); }
+  .dept-list a:hover strong { color: var(--accent-text); text-decoration: underline; }
+  .hmo-run { line-height: 1.9; }
+  .pillars-head { max-width: 20ch; }
+  .pillars { display: grid; gap: 0; margin: 0; }
+  .pillars > div { display: grid; gap: 8px; padding: 20px 0; border-top: 1px solid var(--line); }
+  @media (min-width: 720px) { .pillars > div { grid-template-columns: 1fr 1.6fr; gap: 32px; } }
+  .pillars dt { font-family: var(--font-head); font-size: 1.35rem; display: flex; gap: 12px; align-items: baseline; }
+  .pillars dt .n { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.8rem; color: var(--accent-text); font-weight: 700; }
+  .pillars dd { margin: 0; color: var(--ink-soft); }
+  .story { max-width: 70ch; margin-bottom: 32px; }
+  .story blockquote { margin: 0 0 8px; font-size: clamp(1.3rem, 1rem + 1.4vw, 1.9rem); line-height: 1.3; font-style: italic; }
+  .story .by { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 8px; }
+  .testi { border-top: 1px solid var(--line); padding-top: 16px; columns: 1; column-gap: 32px; }
+  @media (min-width: 720px) { .testi { columns: 2; } }
+  .testi p { break-inside: avoid; }
+  .news-list { list-style: none; padding: 0; margin: 0; }
+  .news-list li { display: grid; gap: 2px; padding: 12px 0; border-top: 1px solid var(--line); }
+  @media (min-width: 640px) { .news-list li { grid-template-columns: 170px 1fr; gap: 16px; } }
+  .news-list time { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.82rem; color: var(--ink-soft); padding-top: 3px; }
+  .news-list a { color: var(--ink); font-size: 1.05rem; text-decoration: none; min-height: var(--tap); display: inline-flex; align-items: center; }
+  .news-list a:hover { color: var(--accent-text); text-decoration: underline; }
+  .network h2 { font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem); }
+</style>

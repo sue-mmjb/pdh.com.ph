@@ -1,0 +1,120 @@
+---
+// Appointment REQUEST form. Collects only name, contact details, preferred channel and the
+// service needed. No symptoms, no medical history, no free-text condition field.
+// Nothing is sent anywhere: on submit the page shows "Prototype: request not sent."
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ToConfirm from '../components/ToConfirm.astro';
+import Icon from '../components/Icon.astro';
+import { services, doctors, packages, displayName, site } from '../lib/data';
+const er = site.phones.emergency;
+---
+<Base title="Book an appointment" description={`Request an appointment at ${site.name}: choose a service or doctor and how you want to be contacted. For emergencies call the ER.`}>
+  <PageHero eyebrow="Book" title="Request an appointment" lead="Tell us who you are and what you need. A Customer Care Representative will contact you to confirm a schedule." />
+
+  <section class="section">
+    <div class="container book-grid">
+      <form class="form card" id="book-form" novalidate>
+        <div class="kriss-er">
+          <strong>Emergency? Don’t use this form.</strong>
+          <p style="margin:0">Call the ER: <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /> or come to the Ground Floor, open 24/7.</p>
+        </div>
+
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="grid grid-2" style="gap:16px">
+          <div class="field">
+            <label for="mobile">Mobile number</label>
+            <input id="mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" required />
+          </div>
+          <div class="field">
+            <label for="email">Email <span class="muted">(optional)</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" />
+          </div>
+        </div>
+
+        <fieldset class="field" style="border:0;padding:0;margin:0">
+          <legend style="font-weight:600;margin-bottom:6px">How should we contact you?</legend>
+          <div class="radio-row">
+            <label><input type="radio" name="channel" value="call" checked /> Call</label>
+            <label><input type="radio" name="channel" value="sms" /> SMS</label>
+            <label><input type="radio" name="channel" value="messenger" /> Messenger</label>
+            <label><input type="radio" name="channel" value="email" /> Email</label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="service">Service needed</label>
+          <select id="service" name="service" required>
+            <option value="">Choose a service</option>
+            <option value="consultation">Doctor consultation</option>
+            <optgroup label="Services">
+              {services.filter((s) => s.slug !== 'emergency-room').map((s) => <option value={s.slug}>{s.name}</option>)}
+            </optgroup>
+            <optgroup label="Packages (sample)">
+              {packages.map((p) => <option value={`package-${p.slug}`}>{p.name}</option>)}
+            </optgroup>
+          </select>
+        </div>
+        <div class="field">
+          <label for="doctor">Preferred doctor <span class="muted">(optional)</span></label>
+          <select id="doctor" name="doctor">
+            <option value="">No preference</option>
+            {doctors.map((d) => <option value={d.slug}>{displayName(d.name)} — {d.specialization}</option>)}
+          </select>
+        </div>
+        <div class="field">
+          <label for="date">Preferred date <span class="muted">(optional)</span></label>
+          <input id="date" name="date" type="date" />
+          <span class="hint">We confirm the actual slot against the doctor’s clinic schedule.</span>
+        </div>
+
+        <p class="small muted" style="margin:0">We only ask for your name, contact details and the service you need. Please do not include symptoms or medical history. See the <a href="/privacy-policy/">Privacy Policy</a> (Data Privacy Act of 2012).</p>
+
+        <div class="form-status" id="book-status" role="status" aria-live="polite">Prototype: request not sent.</div>
+        <button class="btn btn-primary btn-lg" type="submit"><Icon name="calendar" /> Send request</button>
+      </form>
+
+      <aside>
+        <div class="card">
+          <h2 style="font-size:1.1rem">Prefer to call?</h2>
+          <p>Information: <a href={`tel:${site.phones.information.tel}`}>{site.phones.information.display}</a> <ToConfirm note={site.phones.information.note} /><br />
+          Mobile: <a href={`tel:${site.phones.information.mobileTel}`}>{site.phones.information.mobile}</a></p>
+          <p>Admitting: <a href={`tel:${site.phones.admitting.tel}`}>{site.phones.admitting.display}</a></p>
+          <p class="small muted" style="margin:0">Outpatient clinics are on the 3rd to 6th floors, by appointment.</p>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <h2 style="font-size:1.1rem">Using an HMO?</h2>
+          <p class="small">Check your doctor’s accredited HMOs on their profile and request <a href={site.links.hmoOnlineApproval} target="_blank" rel="noopener">online approval</a> before your visit.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('book-form'), status = document.getElementById('book-status');
+      // Pre-select from ?service= or ?doctor= links
+      try {
+        var p = new URLSearchParams(location.search);
+        var svc = document.getElementById('service'), doc = document.getElementById('doctor');
+        if (p.get('service') && svc.querySelector('option[value="' + p.get('service') + '"]')) svc.value = p.get('service');
+        if (p.get('doctor') && doc.querySelector('option[value="' + p.get('doctor') + '"]')) { doc.value = p.get('doctor'); if (!svc.value) svc.value = 'consultation'; }
+      } catch (e) {}
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        status.classList.add('show');
+        status.focus && status.focus();
+        status.scrollIntoView({ block: 'nearest' });
+      });
+    })();
+  </script>
+
+  <style>
+    .book-grid { display: grid; gap: 24px; }
+    @media (min-width: 900px) { .book-grid { grid-template-columns: 1.6fr 1fr; align-items: start; } }
+  </style>
+</Base>

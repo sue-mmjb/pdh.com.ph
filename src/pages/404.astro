@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../lib/data';
+const er = site.phones.emergency;
+---
+<Base title="Page not found" description="The page you were looking for does not exist." noindex>
+  <section class="section">
+    <div class="container" style="max-width:640px">
+      <span class="eyebrow">404</span>
+      <h1>Page not found</h1>
+      <p class="lead">The link may be old or mistyped. Try one of these instead.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/doctors/">Find a doctor</a>
+        <a class="btn btn-outline" href="/services/">Services</a>
+        <a class="btn btn-outline" href="/book/">Book</a>
+        <a class="btn btn-emergency" href={`tel:${er.tel}`}>Emergency</a>
+      </div>
+    </div>
+  </section>
+</Base>

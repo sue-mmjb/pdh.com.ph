@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /option-b/
+Disallow: /option-c/
+
+Sitemap: https://pdh-prototype.example.com/sitemap-index.xml

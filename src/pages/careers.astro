@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { careers, site } from '../lib/data';
+---
+<Base title="Careers" description={`Join the PDH family. Open roles at ${site.name}: nursing, respiratory therapy, echo tech, finance and more.`}>
+  <PageHero eyebrow="PDH Careers" title="Join the PDH family" lead={careers.intro} />
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        {careers.roles.map((r) => (
+          <article class="card">
+            <h2 style="font-size:1.15rem">{r.title}</h2>
+            <p class="small"><strong>Qualifications:</strong> {r.qualifications}</p>
+            <a class="btn btn-outline btn-sm" href={r.url} target="_blank" rel="noopener">Learn more on pdh.com.ph <Icon name="external" /></a>
+          </article>
+        ))}
+      </div>
+      <p class="muted small" style="margin-top:24px">Also listed on the current site: {careers.otherListed.join(', ')}.</p>
+      <div class="card" style="margin-top:24px">
+        <h2 style="font-size:1.15rem">Ready to start your journey with PDH?</h2>
+        <p>Email HR at <a href={`mailto:${site.emails.info}`}>{site.emails.info}</a> or call <a href={`tel:${site.phones.hr.tel}`}>{site.phones.hr.display}</a> · <a href={`tel:${site.phones.hr.mobileTel}`}>{site.phones.hr.mobile}</a>. Follow us on <a href={site.social.linkedin} target="_blank" rel="noopener">LinkedIn</a>.</p>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ToConfirm from '../components/ToConfirm.astro';
+import Placeholder from '../components/Placeholder.astro';
+import Icon from '../components/Icon.astro';
+import { rooms, site } from '../lib/data';
+---
+<Base title="Rooms and facilities" description={`Ward, semi-private, private, suite, isolation and premium labor rooms at ${site.name}, plus HMO Hub, prayer room, parking, canteen and ATM.`}>
+  <PageHero eyebrow="Our facilities" title="Rooms and facilities" lead="A 94-bed inpatient facility with air-conditioned rooms and 24/7 nursing support. Room descriptions and amenities are as published by PDH." />
+
+  <section class="section">
+    <div class="container">
+      <h2>Our rooms</h2>
+      <p class="muted">Room rates are not on the current site. <ToConfirm note="Room rates to be supplied by PDH" /></p>
+      <div class="grid grid-2">
+        {rooms.rooms.map((r) => (
+          <article class="card">
+            <Placeholder label={r.name} ratio="16x9" />
+            <h3 style="margin-top:16px">{r.name}</h3>
+            <p class="meta" style="margin-bottom:8px">{r.capacity}</p>
+            <p class="small">{r.text}</p>
+            {r.amenities.length > 0 && <ul class="chips">{r.amenities.map((a) => <li>{a}</li>)}</ul>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <h2>Facilities</h2>
+      <div class="grid grid-3">
+        {rooms.facilities.map((f) => (
+          <div class="card">
+            <h3 style="font-size:1.1rem">{f.name}</h3>
+            <p class="small">{f.text}</p>
+            <p class="meta"><Icon name="pin" class="inline-ic" /> {f.location}<br /><Icon name="clock" class="inline-ic" /> {f.hours}</p>
+          </div>
+        ))}
+      </div>
+      <p style="margin-top:24px"><a class="btn btn-primary" href="/book/">Request admission information</a></p>
+    </div>
+  </section>
+  <style>.inline-ic { width: 16px; height: 16px; display: inline; vertical-align: -3px; }</style>
+</Base>

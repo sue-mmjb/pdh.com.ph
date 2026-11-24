@@ -1,0 +1,78 @@
+---
+import { site } from '../lib/data';
+import Icon from './Icon.astro';
+import ToConfirm from './ToConfirm.astro';
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/services/', label: 'Services' },
+  { href: '/doctors/', label: 'Doctors' },
+  { href: '/hmo-philhealth/', label: 'HMO & PhilHealth' },
+  { href: '/packages/', label: 'Packages' },
+  { href: '/rooms-facilities/', label: 'Rooms & Facilities' },
+  { href: '/about/', label: 'About' },
+  { href: '/contact/', label: 'Contact' },
+];
+const isCurrent = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+const er = site.phones.emergency;
+const info = site.phones.information;
+---
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <span class="brand-mark" aria-hidden="true">{site.shortName}</span>
+      <span class="brand-text">
+        <strong>{site.name}</strong>
+        <span>Member of {site.network.name}</span>
+      </span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <Icon name="menu" />
+      <span>Menu</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        {nav.map((n) => (
+          <li><a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-sm btn-emergency" href={`tel:${er.tel}`} title={`Emergency: ${er.display} — not yet confirmed`}>
+        <Icon name="emergency" /> <span>Emergency</span>
+      </a>
+      <a class="btn btn-sm btn-ghost" href={`tel:${info.tel}`} title={`Call ${info.display}`} aria-label={`Call ${info.display}`}>
+        <Icon name="phone" /> <span class="lbl-wide">Call</span>
+      </a>
+      <a class="btn btn-sm btn-ghost" href={site.social.messenger.url} target="_blank" rel="noopener" title="Message PDH on Facebook (Messenger link to confirm)" aria-label="Messenger">
+        <Icon name="message" /> <span class="lbl-wide">Messenger</span>
+      </a>
+      <a class="btn btn-sm btn-primary" href="/book/"><Icon name="calendar" /> <span>Book<span class="lbl-wide"> an appointment</span></span></a>
+    </div>
+  </div>
+</header>
+
+<nav class="bottombar" aria-label="Quick actions">
+  <a class="emergency" href={`tel:${er.tel}`}><Icon name="emergency" /><span>Emergency</span></a>
+  <a class="call" href={`tel:${info.tel}`}><Icon name="phone" /><span>Call</span></a>
+  <a class="msg" href={site.social.messenger.url} target="_blank" rel="noopener"><Icon name="message" /><span>Messenger</span></a>
+  <a class="book" href="/book/"><Icon name="calendar" /><span>Book</span></a>
+</nav>
+
+<script is:inline>
+  (function () {
+    var btn = document.querySelector('[data-nav-toggle]');
+    var nav = document.getElementById('site-nav');
+    if (!btn || !nav) return;
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.focus();
+      }
+    });
+  })();
+</script>

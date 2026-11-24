@@ -1,0 +1,6 @@
+---
+// Visible marker for any fact the current site does not confirm. Logged in CONFIRM.md.
+interface Props { note?: string; }
+const { note = 'Not yet confirmed by PDH' } = Astro.props;
+---
+<mark class="tc" title={note}>[TO CONFIRM]</mark>

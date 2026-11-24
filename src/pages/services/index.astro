@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import ToConfirm from '../../components/ToConfirm.astro';
+import Icon from '../../components/Icon.astro';
+import { services, namedOnlyOnSite, specialtyGroups, rooms, site } from '../../lib/data';
+const always = services.filter((s) => s.hours === 'Open 24/7');
+const scheduled = services.filter((s) => s.hours && s.hours !== 'Open 24/7');
+const tbd = services.filter((s) => !s.hours);
+---
+<Base title="Services" description={`Emergency, laboratory, radiology, nuclear medicine, dialysis, rehabilitation, eye, dental and more at ${site.name}. Floors, hours and what to bring.`}>
+  <PageHero eyebrow="Our services" title="Services and departments" lead="Every service below is listed on PDH’s current site with its floor and hours. Open a service for what it covers, which doctors to see, and how to prepare." />
+
+  <section class="section">
+    <div class="container">
+      <h2>Open 24/7</h2>
+      <div class="grid grid-3">{always.map((s) => <ServiceCard service={s} compact />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <h2>Clinics and centers</h2>
+      <div class="grid grid-3">{scheduled.map((s) => <ServiceCard service={s} />)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Also listed by PDH <ToConfirm note="These appear on the current site without a floor or schedule" /></h2>
+      <div class="grid grid-3">{tbd.map((s) => <ServiceCard service={s} compact />)}</div>
+      <p class="muted small" style="margin-top:16px">Named on the current site with no details yet: {namedOnlyOnSite.join(', ')}. <ToConfirm note="No description, floor or hours on the current site" /></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <h2>Doctors by specialty</h2>
+      <div class="grid grid-4">
+        {specialtyGroups.map((g) => (
+          <a class="card card-link" href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}>
+            <h3 style="font-size:1.05rem">{g.name}</h3>
+            <p class="meta">{g.blurb}</p>
+          </a>
+        ))}
+      </div>
+      <p style="margin-top:16px"><a class="btn btn-outline" href="/rooms-facilities/"><Icon name="bed" /> Rooms and facilities</a></p>
+    </div>
+  </section>
+</Base>
