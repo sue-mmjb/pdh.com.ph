@@ -110,7 +110,7 @@ const faqs = [
             {list.map((s) => (
               <a class="cp-svc_card cp-reveal" href={`/services/${s.slug}/`}>
                 <strong class="cp-svc_name">{s.name}</strong>
-                <span class="cp-svc_meta">{list.length < 4 && s.location ? `${s.location} · ` : ''}{shortHours(s)}</span>
+                <span class="cp-svc_meta">{floor.startsWith('Upper') && s.location ? `${s.location} · ` : ''}{shortHours(s)}</span>
                 {s.illustration ? <img class="cp-svc_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle cp-svc_ic"><Icon name={s.icon} /></span>}
               </a>
             ))}
