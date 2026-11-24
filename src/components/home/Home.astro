@@ -16,6 +16,12 @@ const er = site.phones.emergency;
 const info = site.phones.information;
 const always = services.filter((s) => s.hours === 'Open 24/7' && ['emergency-room', 'laboratory', 'radiology', 'pharmacy'].includes(s.slug));
 const clinics = services.filter((s) => ['multi-diagnostic-center', 'hemodialysis-center', 'eye-center', 'dental-services', 'ob-ultrasound', 'nuclear-medicine', 'physical-medicine-rehabilitation', 'outpatient-clinics'].includes(s.slug));
+// Floors with fewer than two featured services are combined into one "Upper floors" row,
+// with each card naming its own floor, so no floor header sits over a single card.
+const rawGroups = groupByFloor([...always, ...clinics]);
+const bigGroups = rawGroups.filter(([, l]) => l.length >= 2);
+const smallOnes = rawGroups.filter(([, l]) => l.length < 2).flatMap(([, l]) => l);
+const floorGroups: [string, typeof services][] = smallOnes.length ? [...bigGroups, ['Upper floors · 3rd to 7th', smallOnes]] : bigGroups;
 const entry = [
   { title: 'I need help now', text: 'The Emergency Room is on the Ground Floor and open 24/7. Call first if you can.', cta: 'Call the ER', href: `tel:${er.tel}`, cls: 'btn-emergency', art: '/icons/entry/help-now.png', note: `${er.display} · mobile ${er.mobile}`, confirm: true },
   { title: 'I want to see a doctor', text: `${doctors.length} doctors listed with clinic schedules and room numbers. Outpatient clinics on the 3rd to 6th floors, by appointment.`, cta: 'Find a doctor', href: '/doctors/', cls: 'btn-primary', art: '/icons/entry/see-doctor.png', note: 'Search by name or specialty' },
@@ -97,14 +103,14 @@ const faqs = [
       <p class="eyebrow">Services</p>
       <h2 class="cp-h2">One hospital, every department.</h2>
       <p class="cp-sub">Open 24/7: ER, laboratory, radiology and pharmacy. Clinics and centers by schedule. Floors and hours as published by PDH.</p>
-      {groupByFloor([...always, ...clinics]).map(([floor, list]) => (
+      {floorGroups.map(([floor, list]) => (
         <div class="cp-floor">
-          <div class="cp-floor_head"><span class="cp-floor_label">{floor}</span><span class="cp-floor_rule"></span></div>
+          <div class="cp-floor_head"><span class="cp-floor_label">{floor}</span><span class="cp-floor_rule" data-cp-rule></span></div>
           <div class="cp-svc">
             {list.map((s) => (
               <a class="cp-svc_card cp-reveal" href={`/services/${s.slug}/`}>
                 <strong class="cp-svc_name">{s.name}</strong>
-                <span class="cp-svc_meta">{shortHours(s)}</span>
+                <span class="cp-svc_meta">{list.length < 4 && s.location ? `${s.location} · ` : ''}{shortHours(s)}</span>
                 {s.illustration ? <img class="cp-svc_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle cp-svc_ic"><Icon name={s.icon} /></span>}
               </a>
             ))}
@@ -228,6 +234,15 @@ const faqs = [
     root.querySelectorAll('.cp-reveal').forEach((el, i) => {
       gsap.fromTo(el, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: (i % 4) * 0.06, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
     });
+    // Header rules: a short bar under every section heading and the floor rules draw
+    // from left to right as they scroll into view, shading from light green to orange.
+    root.querySelectorAll('.cp-h2').forEach((h) => {
+      const r = document.createElement('span'); r.className = 'cp-rule'; r.setAttribute('aria-hidden', 'true');
+      h.insertAdjacentElement('afterend', r);
+    });
+    root.querySelectorAll('.cp-rule, [data-cp-rule]').forEach((r) => {
+      gsap.fromTo(r, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: r, start: 'top 92%', end: 'top 55%', scrub: 0.5 } });
+    });
     // Hero media: light parallax, the honest stand-in for the frame sequence
     const media = root.querySelector('[data-cp-parallax]');
     if (media) gsap.fromTo(media, { yPercent: 6, scale: 0.98 }, { yPercent: -6, scale: 1, ease: 'none', scrollTrigger: { trigger: media, start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
@@ -281,7 +296,8 @@ const faqs = [
   .cp-floor { margin-top: 28px; }
   .cp-floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
   .cp-floor_label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pdh-teal-text); white-space: nowrap; }
-  .cp-floor_rule { flex: 1; height: 1px; background: var(--line); }
+  .cp-floor_rule { flex: 1; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #bfe8e6 0%, #7fd3cf 45%, var(--pdh-orange) 100%); transform-origin: left center; }
+  :global(.cp-rule) { display: block; height: 4px; width: 128px; border-radius: 2px; margin: -8px 0 20px; background: linear-gradient(90deg, #bfe8e6 0%, #7fd3cf 45%, var(--pdh-orange) 100%); transform-origin: left center; }
   .cp-svc { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (min-width: 720px) { .cp-svc { grid-template-columns: repeat(3, 1fr); } }
   @media (min-width: 1100px) { .cp-svc { grid-template-columns: repeat(4, 1fr); gap: 16px; } }

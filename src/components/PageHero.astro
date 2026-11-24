@@ -12,7 +12,13 @@ const { title, eyebrow, lead, crumbs = [] } = Astro.props;
     )}
     {eyebrow && <span class="eyebrow">{eyebrow}</span>}
     <h1>{title}</h1>
+    <span class="page-rule" aria-hidden="true"></span>
     {lead && <p class="lead">{lead}</p>}
     <slot />
   </div>
 </section>
+<style>
+  .page-rule { display: block; height: 4px; width: 128px; border-radius: 2px; margin: -4px 0 18px; background: linear-gradient(90deg, #bfe8e6 0%, #7fd3cf 45%, var(--pdh-orange) 100%); transform-origin: left center; animation: page-rule-draw 1.1s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes page-rule-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @media (prefers-reduced-motion: reduce) { .page-rule { animation: none; } }
+</style>

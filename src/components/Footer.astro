@@ -64,5 +64,6 @@ const p = site.phones;
 <style>
   .footer-mark { max-width: var(--max); margin: 32px auto 0; padding: 0 var(--gutter); pointer-events: none; user-select: none; }
   .footer-mark_pdh { display: flex; align-items: center; font-family: var(--font-head); font-weight: 800; letter-spacing: -0.05em; line-height: 0.9; font-size: clamp(3.5rem, 9vw, 7.5rem); color: #ffffff; opacity: 0.95; }
-  .footer-mark_cross { width: 0.72em; height: 0.72em; margin: 0 -0.02em 0 -0.04em; flex: none; }
+  /* The cross sits between the D and the H and overlaps the H's left stem, as in the logo */
+  .footer-mark_cross { width: 0.62em; height: 0.62em; margin: 0 -0.2em 0 -0.03em; flex: none; position: relative; z-index: 1; }
 </style>
