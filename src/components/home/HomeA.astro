@@ -1,84 +1,71 @@
 ---
-// Option A — "Minimal Editorial". Structure follows the MinimalGoods reference:
-// full-bleed hero with a wordmark that shrinks on scroll, giant stacked headline lines that
-// slide away, a sticky circle that grows to full screen, a category rule row, a staggered
-// grid with parallax tiles and a sticky group title, and the page flipping light ↔ dark as
-// you scroll. All motion is scroll-scrubbed with GSAP bundled locally (no CDN) and is
-// skipped entirely when the visitor prefers reduced motion.
+// Option A — PDH brand on the MinimalGoods motion system, arranged task-first:
+//  1 hero with Find a doctor / Book / Emergency in the first screen
+//  2 doctor search inline
+//  3 services grid (sticky title, parallax tiles)   4 rooms grid
+//  5 HMO & PhilHealth                               6 figures + MPH network (trust band)
+//  7 Why PDH pillars                                8 patient stories (growing circle)
+//  9 news                                          10 contact
+// Motion is scroll-scrubbed with GSAP bundled locally (no CDN) and skipped under reduced motion.
 import { site, hmo, news, services, rooms, specialtyGroups, doctors, formatDate } from '../../lib/data';
 import ToConfirm from '../ToConfirm.astro';
 import Sample from '../Sample.astro';
 import Icon from '../Icon.astro';
 
 const er = site.phones.emergency;
-const gridServices = services.filter((s) => ['emergency-room', 'laboratory', 'radiology', 'multi-diagnostic-center', 'hemodialysis-center', 'eye-center'].includes(s.slug));
-const gridDoctors = specialtyGroups.slice(0, 6).map((g) => ({ ...g, count: doctors.filter((d) => g.departments.includes(d.department)).length }));
+const always = services.filter((s) => s.hours === 'Open 24/7' && ['emergency-room', 'laboratory', 'radiology', 'pharmacy'].includes(s.slug));
+const clinics = services.filter((s) => ['multi-diagnostic-center', 'hemodialysis-center', 'eye-center', 'dental-services', 'ob-ultrasound', 'nuclear-medicine', 'physical-medicine-rehabilitation', 'pulmonary'].includes(s.slug));
+const gridServices = [...always, ...clinics];
 const gridRooms = rooms.rooms.slice(0, 6);
-const gridStories = [...site.stories.map((s) => ({ title: s.title, meta: s.series, url: s.url })), ...news.items.slice(1, 5).map((n) => ({ title: n.title, meta: formatDate(n.date), url: n.url }))];
 const groups = [
   { key: 'services', title: 'Services', href: '/services/' },
-  { key: 'doctors', title: 'Doctors', href: '/doctors/' },
   { key: 'rooms', title: 'Rooms', href: '/rooms-facilities/' },
-  { key: 'stories', title: 'Stories', href: '/news/' },
 ];
 ---
 <div class="mg" data-mg>
-  <!-- Hero: full-bleed photo placeholder with the wordmark that shrinks as you scroll -->
+  <!-- 1 · Hero: headline + the three actions in the first screen, photo slot behind -->
   <section class="mg-hero" data-mg-hero>
-    <div class="mg-hero_img" role="img" aria-label="Photo placeholder: PDH building at dusk, full width">
-      <span class="mg-hero_label">Photo placeholder: PDH façade (supplied by PDH)</span>
-    </div>
-    <div class="mg-hero_mark" data-mg-mark aria-hidden="true">Parañaque Doctors Hospital</div>
-  </section>
-
-  <!-- Thin editorial nav strip under the global header -->
-  <div class="mg-strip">
-    <div class="container mg-strip_in">
-      <span>{site.dohLevel} · Est. 2007 · Member of {site.network.name}</span>
-      <span class="mg-strip_er">ER 24/7 · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></span>
-    </div>
-  </div>
-
-  <!-- Headline lines that slide away + sticky circle that grows -->
-  <section class="mg-head">
-    <div class="container">
+    <div class="mg-hero_img" role="img" aria-label="Photo placeholder: PDH building, full width"></div>
+    <div class="container mg-hero_in">
+      <p class="mg-kicker"><span class="mg-kicker_dot"></span> {site.dohLevel} hospital · Parañaque City · Member of {site.network.name}</p>
       <h1 class="mg-head_text">
-        <span class="mg-head_wrap"><span class="mg-head_move" data-mg-line>Expert</span></span>
-        <span class="mg-head_wrap"><span class="mg-head_move is-alt" data-mg-line>care that</span></span>
-        <span class="mg-head_wrap"><span class="mg-head_move" data-mg-line>feels like</span></span>
-        <span class="mg-head_wrap"><span class="mg-head_move" data-mg-line>home.</span></span>
+        <span class="mg-head_wrap"><span class="mg-head_move" data-mg-line>Expert care</span></span>
+        <span class="mg-head_wrap"><span class="mg-head_move is-alt" data-mg-line>that feels</span></span>
+        <span class="mg-head_wrap"><span class="mg-head_move" data-mg-line>like home.</span></span>
       </h1>
       <div class="mg-head_actions" data-mg-actions>
         <a class="btn btn-primary btn-lg" href="/doctors/"><Icon name="search" /> Find a doctor</a>
-        <a class="btn btn-outline btn-lg" href="/book/"><Icon name="calendar" /> Book</a>
+        <a class="btn btn-accent btn-lg" href="/book/"><Icon name="calendar" /> Book</a>
         <a class="btn btn-emergency btn-lg" href={`tel:${er.tel}`}><Icon name="emergency" /> Emergency</a>
       </div>
-    </div>
-    <div class="mg-circle_wrap" data-mg-circle-wrap>
-      <div class="mg-circle">
-        <div class="mg-circle_el" data-mg-circle>
-          <div class="mg-circle_img" role="img" aria-label="Photo placeholder: nurse with patient at PDH"></div>
-          <div class="mg-circle_copy" data-mg-circle-copy>
-            <p class="eyebrow">Alagang PDH Ako</p>
-            <p class="mg-circle_quote">“{site.stories[0].quote}”</p>
-            <p class="small">— {site.stories[0].by}</p>
-          </div>
-        </div>
-      </div>
+      <p class="mg-hero_er">ER open 24/7 · Ground Floor · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /> · Mobile <a href={`tel:${er.mobileTel}`}>{er.mobile}</a></p>
+      <span class="mg-hero_label">Photo placeholder: PDH façade (supplied by PDH)</span>
     </div>
   </section>
 
-  <!-- Category rule row -->
-  <nav class="mg-cats" aria-label="Specialties">
+  <!-- 2 · Doctor search, inline -->
+  <section class="mg-search_sec">
     <div class="container">
-      <div class="mg-cats_row">
-        {specialtyGroups.map((g) => <a href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}><span class="mg-cats_border"></span>{g.name}</a>)}
-        <a href="/services/"><span class="mg-cats_border"></span>More</a>
-      </div>
+      <form class="mg-search_card" action="/doctors/" method="get" role="search">
+        <div>
+          <p class="eyebrow">Find a doctor</p>
+          <h2 class="mg-search_h">{doctors.length} doctors. Search by name or specialty.</h2>
+        </div>
+        <div class="mg-search_in">
+          <label class="visually-hidden" for="home-q">Doctor name or specialty</label>
+          <Icon name="search" />
+          <input id="home-q" name="q" type="search" placeholder="e.g. cardiology, pediatrics, Dela Cruz" />
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+        <nav class="mg-cats_row" aria-label="Specialties">
+          {specialtyGroups.map((g) => <a href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}><span class="mg-cats_border"></span>{g.name}</a>)}
+          <a href="/doctors/"><span class="mg-cats_border"></span>All doctors</a>
+        </nav>
+      </form>
     </div>
-  </nav>
+  </section>
 
-  <!-- Staggered grid with sticky group title -->
+  <!-- 3 + 4 · Services and rooms: staggered grid with sticky group title -->
   <section class="mg-grid">
     <div class="container mg-grid_in">
       <div class="mg-grid_titles" aria-hidden="true">
@@ -87,36 +74,23 @@ const groups = [
       <div class="mg-grid_contain">
         <div class="mg-grid_wrapper" data-mg-wrapper="services">
           <h2 class="visually-hidden">Services</h2>
+          <p class="mg-grid_lead">Open 24/7: ER, laboratory, radiology and pharmacy. Clinics and centers by schedule. Floors and hours as published by PDH.</p>
           <ul class="mg-grid_list">
             {gridServices.map((s, i) => (
               <li class="mg-grid_item" data-mg-item>
                 <a class="mg-tile" href={`/services/${s.slug}/`}>
-                  <span class="mg-tile_n">0{i + 1}</span>
+                  <span class="mg-tile_n">{s.hours === 'Open 24/7' ? '24/7' : `0${i + 1}`.slice(-2)}</span>
                   <span class="mg-tile_name">{s.name}</span>
                   <span class="mg-tile_meta">{s.location} · {s.hours && s.hours.length > 28 ? 'see hours' : s.hours}</span>
                 </a>
               </li>
             ))}
           </ul>
-          <p class="mg-grid_more"><a href="/services/">All services <Icon name="arrow" class="ic" /></a></p>
-        </div>
-        <div class="mg-grid_wrapper" data-mg-wrapper="doctors">
-          <h2 class="visually-hidden">Doctors</h2>
-          <ul class="mg-grid_list">
-            {gridDoctors.map((g) => (
-              <li class="mg-grid_item" data-mg-item>
-                <a class="mg-tile" href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}>
-                  <span class="mg-tile_n">{g.count}</span>
-                  <span class="mg-tile_name">{g.name}</span>
-                  <span class="mg-tile_meta">{g.blurb}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-          <p class="mg-grid_more"><a href="/doctors/">Search all {doctors.length} doctors <Icon name="arrow" class="ic" /></a></p>
+          <p class="mg-grid_more"><a href="/services/">All services and departments <Icon name="arrow" class="ic" /></a></p>
         </div>
         <div class="mg-grid_wrapper" data-mg-wrapper="rooms">
           <h2 class="visually-hidden">Rooms</h2>
+          <p class="mg-grid_lead">A 94-bed inpatient facility. Air-conditioned rooms with 24/7 nursing support.</p>
           <ul class="mg-grid_list">
             {gridRooms.map((r, i) => (
               <li class="mg-grid_item" data-mg-item>
@@ -130,57 +104,17 @@ const groups = [
           </ul>
           <p class="mg-grid_more"><a href="/rooms-facilities/">Rooms and facilities <Icon name="arrow" class="ic" /></a></p>
         </div>
-        <div class="mg-grid_wrapper" data-mg-wrapper="stories">
-          <h2 class="visually-hidden">Stories and news</h2>
-          <ul class="mg-grid_list">
-            {gridStories.map((s) => (
-              <li class="mg-grid_item" data-mg-item>
-                <a class="mg-tile" href={s.url} target="_blank" rel="noopener">
-                  <span class="mg-tile_n">{s.meta}</span>
-                  <span class="mg-tile_name is-sm">{s.title}</span>
-                  <span class="mg-tile_meta">Read on pdh.com.ph</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-          <p class="mg-grid_more"><a href="/news/">Go to PDH News <Icon name="arrow" class="ic" /></a></p>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- Figures -->
-  <section class="mg-figs" data-mg-light>
-    <div class="container">
-      <div class="mg-figs_row">
-        {site.stats.map((s) => <div><span class="mg-figs_num">{s.value}</span><span class="mg-figs_lbl">{s.label}</span></div>)}
-        <div><span class="mg-figs_num">24/7</span><span class="mg-figs_lbl">ER · Lab · Radiology · Pharmacy</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Find a doctor -->
-  <section class="mg-sec">
-    <div class="container mg-two">
-      <div>
-        <p class="eyebrow">Find a doctor</p>
-        <h2>Search by name or specialty.</h2>
-      </div>
-      <form class="mg-search" action="/doctors/" method="get" role="search">
-        <label class="visually-hidden" for="home-q">Doctor name or specialty</label>
-        <input id="home-q" name="q" type="search" placeholder="e.g. cardiology, pediatrics, Dela Cruz" />
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- HMO & PhilHealth -->
-  <section class="mg-sec">
+  <!-- 5 · HMO & PhilHealth -->
+  <section class="mg-sec" data-mg-light>
     <div class="container mg-two">
       <div>
         <p class="eyebrow">HMO &amp; PhilHealth</p>
         <h2>Bring your card. The Hub does the rest.</h2>
-        <p class="muted">Ground Floor · {hmo.hub.hours}. PhilHealth-accredited.</p>
+        <p class="muted">HMO Hub, Ground Floor · {hmo.hub.hours}. PhilHealth-accredited.</p>
         <div class="actions">
           <a class="btn btn-primary" href="/hmo-philhealth/">How it works</a>
           <a class="btn btn-outline" href={hmo.hub.onlineApproval.url} target="_blank" rel="noopener">Online approval</a>
@@ -193,21 +127,28 @@ const groups = [
     </div>
   </section>
 
-  <!-- Network -->
-  <section class="mg-sec">
-    <div class="container mg-two">
-      <div>
-        <p class="eyebrow">Our network of care</p>
-        <h2>One of 27 {site.network.name} hospitals.</h2>
+  <!-- 6 · Trust band: figures + MPH network (static dark) -->
+  <section class="mg-trust section-strong">
+    <div class="container">
+      <div class="mg-figs_row">
+        {site.stats.map((s) => <div><span class="mg-figs_num">{s.value}</span><span class="mg-figs_lbl">{s.label}</span></div>)}
+        <div><span class="mg-figs_num">24/7</span><span class="mg-figs_lbl">ER · Lab · Radiology · Pharmacy</span></div>
       </div>
-      <div>
-        <p class="lead">{site.network.blurb}</p>
-        <p class="muted">{site.network.detail}</p>
+      <div class="mg-two mg-trust_net">
+        <div>
+          <p class="eyebrow">Our network of care</p>
+          <h2>One of 27 {site.network.name} hospitals.</h2>
+        </div>
+        <div>
+          <p class="lead" style="color:inherit">{site.network.blurb}</p>
+          <p style="opacity:.9">{site.network.detail}</p>
+          <p class="small" style="opacity:.8">Founded {site.founded} · {site.dohLevel} · MPH member since {site.network.memberSince} · accredited by DOH, PhilHealth and HMOs</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Pillars -->
+  <!-- 7 · Why PDH -->
   <section class="mg-sec">
     <div class="container">
       <p class="eyebrow">{site.why.heading}</p>
@@ -219,24 +160,49 @@ const groups = [
     </div>
   </section>
 
-  <!-- Testimonials + news list -->
-  <section class="mg-sec">
-    <div class="container mg-two">
+  <!-- 8 · Patient stories: the growing circle, then testimonials -->
+  <section class="mg-stories">
+    <div class="container"><p class="eyebrow">Alagang PDH Ako Stories</p></div>
+    <div class="mg-circle_wrap" data-mg-circle-wrap>
+      <div class="mg-circle">
+        <div class="mg-circle_el" data-mg-circle>
+          <div class="mg-circle_img" role="img" aria-label="Photo placeholder: nurse with patient at PDH"></div>
+          <div class="mg-circle_copy" data-mg-circle-copy>
+            <p class="eyebrow">{site.stories[0].series}</p>
+            <p class="mg-circle_quote">“{site.stories[0].quote}”</p>
+            <p class="small">— {site.stories[0].by}</p>
+            <a class="btn btn-sm mg-circle_btn" href={site.stories[0].url} target="_blank" rel="noopener">Read the story</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mg-two mg-testi_wrap">
       <div>
-        <p class="eyebrow">Patient stories</p>
-        {site.testimonials.slice(0, 3).map((t) => <p class="mg-testi">“{t.quote}” <span class="muted">— {t.by}</span></p>)}
+        <h2>What patients say.</h2>
+        <p class="muted">Our patients’ stories reflect the heart of what we do at PDH—delivering compassionate care, expert treatment, and a healing experience that truly makes a difference.</p>
       </div>
       <div>
-        <p class="eyebrow">PDH News</p>
-        <ul class="mg-news">
-          {news.items.slice(0, 5).map((n) => <li><time datetime={n.date}>{formatDate(n.date)}</time><a href={n.url} target="_blank" rel="noopener">{n.title}</a></li>)}
-        </ul>
-        <p><a class="btn btn-outline btn-sm" href="/news/">Go to PDH News</a></p>
+        {site.testimonials.slice(0, 4).map((t) => <p class="mg-testi">“{t.quote}” <span class="muted">— {t.by}</span></p>)}
+        <p class="small"><a href={site.stories[1].url} target="_blank" rel="noopener">{site.stories[1].series}: {site.stories[1].title}</a></p>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
+  <!-- 9 · News -->
+  <section class="mg-sec" data-mg-news>
+    <div class="container mg-two">
+      <div>
+        <p class="eyebrow">PDH News</p>
+        <h2>From the community.</h2>
+        <p><a class="btn btn-outline btn-sm" href="/news/">Go to PDH News</a></p>
+      </div>
+      <ul class="mg-news">
+        {news.items.slice(0, 5).map((n) => <li><time datetime={n.date}>{formatDate(n.date)}</time><a href={n.url} target="_blank" rel="noopener">{n.title}</a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10 · Contact -->
   <section class="mg-sec mg-contact">
     <div class="container mg-two">
       <div>
@@ -274,8 +240,6 @@ const groups = [
     // and eased into the CSS variables, so segments never fight over the same properties.
     type Seg = { st: ScrollTrigger; from: number; to: number };
     const segs: Seg[] = [];
-    // Background colours cross-fade over the whole segment; text/line colours flip over a
-    // narrow band around the midpoint so contrast never collapses to grey-on-grey.
     const BG_KEYS = ['--bg', '--bg-soft', '--card'];
     const pick = (o: Record<string, string>, keys: string[], invert = false) => Object.fromEntries(Object.entries(o).filter(([k]) => keys.includes(k) !== invert));
     const mixBg = gsap.utils.interpolate(pick(LIGHT, BG_KEYS), pick(DARK, BG_KEYS));
@@ -305,27 +269,17 @@ const groups = [
       segs.push({ st: ScrollTrigger.create({ trigger, start, end }), from, to });
     const L = 0, D = 1;
 
-    // Hero wordmark shrinks and fades as the hero scrolls out
-    const hero = root.querySelector('[data-mg-hero]');
-    gsap.to('[data-mg-mark]', { scale: 0.35, yPercent: -40, opacity: 0, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 1 } });
-
-    // Headline lines slide down out of their clipping wrappers
+    // Hero: headline lines slide down out of their clipping wrappers; actions fade
     root.querySelectorAll('[data-mg-line]').forEach((el) => {
-      gsap.to(el, { yPercent: 100, ease: 'none', scrollTrigger: { trigger: el, start: 'top 30%', end: 'bottom -10%', scrub: 0.8 } });
+      gsap.to(el, { yPercent: 100, ease: 'none', scrollTrigger: { trigger: el, start: 'top 25%', end: 'bottom -20%', scrub: 0.8 } });
     });
-    gsap.to('[data-mg-actions]', { opacity: 0, y: 20, ease: 'none', scrollTrigger: { trigger: '[data-mg-actions]', start: 'top 25%', end: 'bottom 5%', scrub: 0.8 } });
+    gsap.to('[data-mg-actions]', { opacity: 0, y: 20, ease: 'none', scrollTrigger: { trigger: '[data-mg-actions]', start: 'top 20%', end: 'bottom -10%', scrub: 0.8 } });
 
-    // Sticky circle grows to full screen; its copy fades in
-    const wrap = root.querySelector('[data-mg-circle-wrap]');
-    gsap.fromTo('[data-mg-circle]', { width: 'min(35em, 80vw)', height: 'min(35em, 80vw)', borderRadius: '50%' }, { width: '100vw', height: '100vh', borderRadius: '0%', ease: 'none', scrollTrigger: { trigger: wrap, start: 'top top', end: 'bottom bottom', scrub: 1 } });
-    gsap.fromTo('[data-mg-circle-copy]', { opacity: 0, y: 30 }, { opacity: 1, y: 0, ease: 'none', scrollTrigger: { trigger: wrap, start: '50% bottom', end: 'bottom bottom', scrub: 1 } });
-    if (wrap) flip(wrap, L, D, 'top 10%', 'center center');
-
-    // Grid: alternate dark/light per wrapper, parallax tiles, sticky title switching
+    // Grid: services L→D, rooms D→L; parallax tiles; sticky title switching
     const wrappers = Array.from(root.querySelectorAll('[data-mg-wrapper]'));
     const titles = Array.from(root.querySelectorAll('[data-mg-title]'));
     wrappers.forEach((w, i) => {
-      flip(w, i % 2 === 0 ? D : L, i % 2 === 0 ? L : D);
+      flip(w, i % 2 === 0 ? L : D, i % 2 === 0 ? D : L);
       const key = w.getAttribute('data-mg-wrapper') || '';
       const activate = () => {
         titles.forEach((t) => t.classList.toggle('is-active', t.getAttribute('data-mg-title') === key));
@@ -337,10 +291,19 @@ const groups = [
       const amount = [-20, -40, -60][i % 3];
       gsap.to(el, { yPercent: amount, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 1 + (i % 3) * 0.5 } });
     });
-    // Make sure the rest of the page ends light
-    const figs = root.querySelector('[data-mg-light]');
-    if (figs) flip(figs, wrappers.length % 2 === 0 ? D : L, L, 'top 80%', 'top 30%');
-    // Drive the mix from scroll; recompute after ScrollTrigger refreshes (resize, fonts).
+    // HMO section: make sure the page is light again after the rooms group
+    const hmoSec = root.querySelector('[data-mg-light]');
+    if (hmoSec) flip(hmoSec, wrappers.length % 2 === 0 ? L : D, L, 'top 80%', 'top 30%');
+
+    // Stories: sticky circle grows to full screen (page darkens with it); copy fades in
+    const wrap = root.querySelector('[data-mg-circle-wrap]');
+    gsap.fromTo('[data-mg-circle]', { width: 'min(32em, 80vw)', height: 'min(32em, 80vw)', borderRadius: '50%' }, { width: '100vw', height: '100vh', borderRadius: '0%', ease: 'none', scrollTrigger: { trigger: wrap, start: 'top top', end: 'bottom bottom', scrub: 1 } });
+    gsap.fromTo('[data-mg-circle-copy]', { opacity: 0, y: 30 }, { opacity: 1, y: 0, ease: 'none', scrollTrigger: { trigger: wrap, start: '40% bottom', end: 'bottom bottom', scrub: 1 } });
+    if (wrap) flip(wrap, L, D, 'top 20%', 'center center');
+    // News: back to light for the end of the page
+    const newsSec = root.querySelector('[data-mg-news]');
+    if (newsSec) flip(newsSec, D, L, 'top 80%', 'top 30%');
+
     ScrollTrigger.create({ trigger: root, start: 'top top', end: 'bottom bottom', onUpdate: compute, onRefresh: compute });
     compute();
   }
@@ -349,50 +312,48 @@ const groups = [
 <style>
   .mg { --ease: cubic-bezier(.2,.7,.2,1); }
   .mg .ic { width: 16px; height: 16px; display: inline; vertical-align: -3px; }
+  .mg-kicker { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; display: inline-flex; align-items: center; gap: 8px; margin: 0 0 16px; color: var(--pdh-teal-text); font-weight: 700; }
+  .mg-kicker_dot { width: 10px; height: 10px; background: var(--pdh-orange); display: inline-block; }
 
-  /* Hero */
-  .mg-hero { position: relative; height: calc(100vh - var(--optionbar-h) - var(--header-h)); min-height: 420px; overflow: hidden; }
-  .mg-hero_img { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, var(--pdh-teal-tint) 0 18px, rgba(0,163,165,0.22) 18px 20px); display: grid; place-items: center; }
-  .mg-hero_label { font-size: 0.8rem; background: #ffffff; border: 1px solid var(--pdh-teal); color: var(--pdh-navy); padding: 6px 10px; }
-  .mg-hero_mark { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 4vw; font-family: var(--font-head); font-weight: 900; text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.9; font-size: clamp(2.2rem, 7.4vw, 8.6rem); color: var(--pdh-teal); transform-origin: left bottom; will-change: transform, opacity; }
-
-  /* Strip */
-  .mg-strip { background: var(--pdh-teal-deep); color: #ffffff; border-bottom: 4px solid var(--pdh-orange); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-  .mg-strip_in { display: flex; justify-content: space-between; gap: 16px; min-height: 40px; align-items: center; flex-wrap: wrap; }
-  .mg-strip a { color: inherit; }
-
-  /* Headline + circle */
-  .mg-head { position: relative; }
-  .mg-head .container { padding-top: 10vh; }
-  .mg-head_text { margin: 0; line-height: 0.92; font-size: clamp(3rem, 1.5rem + 11vw, 11rem); letter-spacing: -0.04em; text-transform: uppercase; }
+  /* 1 · Hero */
+  .mg-hero { position: relative; min-height: calc(100vh - var(--optionbar-h) - var(--header-h) - var(--bottombar-h)); display: flex; align-items: center; overflow: hidden; }
+  @media (min-width: 900px) { .mg-hero { min-height: calc(100vh - var(--optionbar-h) - var(--header-h)); } }
+  .mg-hero_img { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, var(--pdh-teal-tint) 0 18px, rgba(0,163,165,0.16) 18px 20px); }
+  .mg-hero_img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,255,255,0.92) 0 40%, rgba(255,255,255,0.55) 70%, rgba(255,255,255,0.2)); }
+  .mg-hero_in { position: relative; padding-top: 40px; padding-bottom: 56px; }
+  .mg-hero_label { position: absolute; right: var(--gutter); bottom: 12px; font-size: 0.72rem; background: #ffffff; border: 1px solid var(--pdh-teal); color: var(--pdh-navy); padding: 4px 8px; }
+  .mg-head_text { margin: 0; line-height: 0.92; font-size: clamp(2.8rem, 1.2rem + 8vw, 7.5rem); letter-spacing: -0.04em; text-transform: uppercase; color: var(--heading); }
   .mg-head_wrap { display: block; overflow: hidden; }
   .mg-head_move { display: block; will-change: transform; }
   .mg-head_move.is-alt { -webkit-text-stroke: 2px var(--pdh-teal); color: transparent; }
-  .mg-head_actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
-  .mg-circle_wrap { height: 200vh; position: relative; margin-top: 10vh; }
-  .mg-circle { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .mg-circle_el { position: relative; width: min(35em, 80vw); height: min(35em, 80vw); border-radius: 50%; overflow: hidden; background: var(--pdh-teal); display: grid; place-items: center; }
-  .mg-circle_img { position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, #2bb8ba, var(--pdh-teal-deep) 75%); }
-  .mg-circle_copy { position: relative; max-width: 42rem; padding: 24px; color: #ffffff; text-align: center; opacity: 0; }
-  .mg-circle_copy .eyebrow { color: var(--pdh-orange); }
-  .mg-circle_quote { font-family: var(--font-head); font-size: clamp(1.2rem, 1rem + 1.6vw, 2.2rem); line-height: 1.15; text-transform: none; letter-spacing: -0.01em; margin: 0 0 8px; }
+  .mg-head_actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .mg-hero_er { margin: 16px 0 0; font-size: 0.9rem; color: var(--ink); }
 
-  /* Category rule row */
-  .mg-cats { padding: 24px 0 0; }
-  .mg-cats_row { display: flex; flex-wrap: wrap; gap: 0 24px; }
-  .mg-cats_row a { position: relative; display: inline-flex; align-items: center; min-height: var(--tap); padding: 10px 0; text-decoration: none; color: inherit; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; flex: 1 1 auto; }
+  /* 2 · Search */
+  .mg-search_sec { margin-top: -28px; position: relative; z-index: 2; }
+  .mg-search_card { background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--pdh-orange); box-shadow: var(--shadow); padding: 20px; display: grid; gap: 16px; }
+  @media (min-width: 900px) { .mg-search_card { grid-template-columns: 1fr 1.4fr; align-items: center; padding: 28px; } .mg-cats_row { grid-column: 1 / -1; } }
+  .mg-search_h { font-size: clamp(1.3rem, 1rem + 1.2vw, 1.9rem); margin: 0; }
+  .mg-search_in { display: flex; align-items: center; gap: 10px; border: 2px solid var(--line); padding: 0 8px 0 14px; min-height: 56px; }
+  .mg-search_in:focus-within { border-color: var(--pdh-teal); }
+  .mg-search_in svg { width: 20px; height: 20px; color: var(--pdh-teal-text); flex: none; }
+  .mg-search_in input { border: none; background: transparent; font: inherit; width: 100%; min-height: 48px; outline: none; color: inherit; }
+  .mg-search_in .btn { flex: none; }
+  .mg-cats_row { display: flex; flex-wrap: wrap; gap: 0 20px; }
+  .mg-cats_row a { position: relative; display: inline-flex; align-items: center; min-height: var(--tap); padding: 10px 0; text-decoration: none; color: inherit; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; flex: 1 1 auto; }
   .mg-cats_border { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--pdh-orange); transform-origin: left; transition: transform 0.3s var(--ease); }
   .mg-cats_row a:hover .mg-cats_border { transform: scaleY(3); }
 
-  /* Grid */
-  .mg-grid { padding: 10vh 0 0; }
+  /* 3 + 4 · Grid */
+  .mg-grid { padding: 8vh 0 0; }
   .mg-grid_in { display: grid; grid-template-columns: 1fr; gap: 16px; }
   @media (min-width: 900px) { .mg-grid_in { grid-template-columns: 1fr 3fr; gap: 48px; } }
   .mg-grid_titles { position: sticky; top: calc(var(--optionbar-h) + var(--header-h)); align-self: start; display: grid; z-index: 2; background: var(--bg); padding: 12px 0; margin: 0 calc(-1 * var(--gutter)); padding-left: var(--gutter); padding-right: var(--gutter); }
   @media (min-width: 900px) { .mg-grid_titles { top: calc(var(--optionbar-h) + var(--header-h) + 16px); background: transparent; padding: 0; margin: 0; } }
-  .mg-grid_title { grid-area: 1 / 1; margin: 0; font-family: var(--font-head); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem); line-height: 1; opacity: 0; transition: opacity 0.4s var(--ease); pointer-events: none; }
+  .mg-grid_title { grid-area: 1 / 1; margin: 0; font-family: var(--font-head); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem); line-height: 1; opacity: 0; transition: opacity 0.4s var(--ease); pointer-events: none; color: var(--heading); }
   .mg-grid_title.is-active { opacity: 1; }
-  .mg-grid_wrapper { padding: 10vh 0 14vh; }
+  .mg-grid_wrapper { padding: 6vh 0 12vh; }
+  .mg-grid_lead { max-width: 52ch; margin: 0 0 24px; color: var(--ink-soft); }
   .mg-grid_list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; align-items: flex-start; }
   .mg-grid_item { will-change: transform; }
   .mg-grid_item:nth-child(6n+1) { width: 48%; margin-right: 4%; }
@@ -411,42 +372,55 @@ const groups = [
   }
   .mg-tile { display: grid; gap: 8px; align-content: space-between; aspect-ratio: 3 / 4; padding: 14px; border: 1px solid var(--line); background: var(--card); text-decoration: none; color: inherit; transition: background 0.3s var(--ease), color 0.3s var(--ease); }
   .mg-tile:hover { background: var(--pdh-teal); color: #ffffff; border-color: var(--pdh-teal); }
-  .mg-tile_n { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-text); }
+  .mg-tile_n { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-text); font-weight: 700; }
   .mg-tile:hover .mg-tile_n { color: #ffffff; }
   .mg-tile_name { font-family: var(--font-head); font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; font-size: clamp(1rem, 0.6rem + 1.6vw, 1.8rem); overflow-wrap: anywhere; }
-  .mg-tile_name.is-sm { font-size: clamp(0.85rem, 0.6rem + 0.9vw, 1.1rem); text-transform: none; letter-spacing: 0; font-weight: 700; }
-  .mg-tile_meta { font-size: 0.78rem; opacity: 0.8; }
+  .mg-tile_meta { font-size: 0.78rem; opacity: 0.85; }
   .mg-grid_more { margin: 16px 0 0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
   .mg-grid_more a { color: inherit; }
 
-  /* Figures */
-  .mg-figs { border-top: 4px solid var(--pdh-orange); border-bottom: 1px solid var(--line); padding: 32px 0; }
-  .mg-figs_row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  /* 6 · Trust band */
+  .mg-trust { padding: 56px 0; border-top: 4px solid var(--pdh-orange); }
+  .mg-figs_row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
   @media (min-width: 900px) { .mg-figs_row { grid-template-columns: repeat(4, 1fr); } }
-  .mg-figs_num { font-family: var(--font-head); font-weight: 900; font-size: clamp(2.6rem, 1.6rem + 5vw, 6rem); line-height: 0.95; letter-spacing: -0.04em; display: block; color: var(--heading); }
+  .mg-figs_num { font-family: var(--font-head); font-weight: 900; font-size: clamp(2.6rem, 1.6rem + 5vw, 6rem); line-height: 0.95; letter-spacing: -0.04em; display: block; color: var(--pdh-orange); }
   .mg-figs_lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-top: 8px; }
+  .mg-trust_net { padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.25); }
+  .mg-trust .eyebrow { color: var(--pdh-orange); }
 
   /* Sections */
   .mg-sec { padding: 56px 0; border-top: 1px solid var(--line); }
-  .mg-sec:first-of-type { border-top: 0; }
   .mg-two { display: grid; gap: 24px; }
   @media (min-width: 900px) { .mg-two { grid-template-columns: 1fr 1.6fr; gap: 64px; } }
-  .mg-search { display: flex; gap: 8px; flex-wrap: wrap; align-self: center; }
-  .mg-search input { flex: 1 1 220px; min-height: var(--tap); padding: 10px 14px; border: 1px solid currentColor; background: transparent; color: inherit; font: inherit; }
-  .mg-search input::placeholder { color: inherit; opacity: 0.6; }
   .mg-pillars_head { max-width: 16ch; }
   .mg-pillars { margin: 24px 0 0; display: grid; }
   .mg-pillars > div { display: grid; gap: 6px; padding: 18px 0; border-top: 1px solid var(--line); }
   @media (min-width: 720px) { .mg-pillars > div { grid-template-columns: 1fr 1.6fr; gap: 32px; } }
-  .mg-pillars dt { font-family: var(--font-head); font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; font-size: 1.25rem; display: flex; gap: 12px; align-items: baseline; }
+  .mg-pillars dt { font-family: var(--font-head); font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; font-size: 1.25rem; display: flex; gap: 12px; align-items: baseline; color: var(--heading); }
   .mg-pillars dt span { font-family: var(--font-body); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--accent-text); }
-  .mg-pillars dd { margin: 0; opacity: 0.85; }
+  .mg-pillars dd { margin: 0; opacity: 0.9; }
+
+  /* 8 · Stories */
+  .mg-stories { padding-top: 40px; border-top: 1px solid var(--line); }
+  .mg-circle_wrap { height: 150vh; position: relative; }
+  .mg-circle { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .mg-circle_el { position: relative; width: min(32em, 80vw); height: min(32em, 80vw); border-radius: 50%; overflow: hidden; background: var(--pdh-teal); display: grid; place-items: center; }
+  .mg-circle_img { position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, #2bb8ba, var(--pdh-teal-deep) 75%); }
+  .mg-circle_copy { position: relative; max-width: 42rem; padding: 24px; color: #ffffff; text-align: center; opacity: 0; }
+  .mg-circle_copy .eyebrow { color: var(--pdh-orange); }
+  .mg-circle_quote { font-family: var(--font-head); font-size: clamp(1.2rem, 1rem + 1.6vw, 2.2rem); line-height: 1.15; text-transform: none; letter-spacing: -0.01em; margin: 0 0 8px; }
+  .mg-circle_btn { background: var(--pdh-orange); color: var(--pdh-navy); margin-top: 8px; }
+  .mg-testi_wrap { padding: 48px 0 56px; }
   .mg-testi { border-top: 1px solid var(--line); padding-top: 10px; }
-  .mg-news { list-style: none; padding: 0; margin: 0 0 16px; }
+
+  /* 9 · News */
+  .mg-news { list-style: none; padding: 0; margin: 0; }
   .mg-news li { display: grid; gap: 2px; padding: 10px 0; border-top: 1px solid var(--line); }
   @media (min-width: 640px) { .mg-news li { grid-template-columns: 150px 1fr; gap: 16px; } }
-  .mg-news time { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; padding-top: 4px; }
+  .mg-news time { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; padding-top: 4px; color: var(--accent-text); font-weight: 700; }
   .mg-news a { color: inherit; text-decoration: none; }
   .mg-news a:hover { text-decoration: underline; }
+
+  /* 10 · Contact */
   .mg-contact h2 { font-size: clamp(1.6rem, 1.2rem + 2vw, 2.6rem); }
 </style>
