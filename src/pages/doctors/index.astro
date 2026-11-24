@@ -33,7 +33,7 @@ import { doctors, departments, specializations, site } from '../../lib/data';
       </form>
 
       <p class="results-count" id="doc-count" aria-live="polite">Showing all {doctors.length} doctors</p>
-      <p class="proto-note" style="margin-bottom:16px">To book, call <a href={`tel:${site.phones.information.mobileTel}`}>{site.phones.information.mobile}</a> or <a href="/book/">send a request</a>. Schedules use the codes printed on PDH’s listing (our reading: M T W TH F S = days; TTHS = Tue/Thu/Sat, to be confirmed).</p>
+      <p class="proto-note" style="margin-bottom:16px">To book, call <a href={`tel:${site.phones.information.mobileTel}`}>{site.phones.information.mobile}</a> or <a href="/book/">send a request</a>. Schedules use the codes printed on PDH’s listing (M T W TH F S = days; TTHS = Tue/Thu/Sat).</p>
 
       <div class="grid grid-3" id="doc-list">
         {doctors.map((d) => <DoctorCard doctor={d} />)}

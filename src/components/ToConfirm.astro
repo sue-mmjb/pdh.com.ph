@@ -1,6 +1,9 @@
 ---
-// Visible marker for any fact the current site does not confirm. Logged in CONFIRM.md.
+// Marker for facts PDH has not confirmed. Rendering was switched OFF on 25 Nov 2026 at Sue's
+// request: the open items are tracked in CONFIRM.md instead of being shown on the page.
+// Keep <ToConfirm note="…" /> in the markup so the notes survive; flip `visible` to show them again.
 interface Props { note?: string; }
 const { note = 'Not yet confirmed by PDH' } = Astro.props;
+const visible = false;
 ---
-<mark class="tc" title={note}>[TO CONFIRM]</mark>
+{visible && <mark class="tc" title={note}>[TO CONFIRM]</mark>}

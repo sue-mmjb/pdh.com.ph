@@ -37,13 +37,13 @@ const info = site.phones.information;
       </ul>
     </nav>
     <div class="header-actions">
-      <a class="btn btn-sm btn-emergency" href={`tel:${er.tel}`} title={`Emergency: ${er.display} — not yet confirmed`}>
+      <a class="btn btn-sm btn-emergency" href={`tel:${er.tel}`} title={`Emergency: ${er.display}`}>
         <Icon name="emergency" /> <span>Emergency</span>
       </a>
       <a class="btn btn-sm btn-ghost" href={`tel:${info.tel}`} title={`Call ${info.display}`} aria-label={`Call ${info.display}`}>
         <Icon name="phone" /> <span class="lbl-wide">Call</span>
       </a>
-      <a class="btn btn-sm btn-ghost" href={site.social.messenger.url} target="_blank" rel="noopener" title="Message PDH on Facebook (Messenger link to confirm)" aria-label="Messenger">
+      <a class="btn btn-sm btn-ghost" href={site.social.messenger.url} target="_blank" rel="noopener" title="Message PDH on Facebook" aria-label="Messenger">
         <Icon name="message" /> <span class="lbl-wide">Messenger</span>
       </a>
       <a class="btn btn-sm btn-primary" href="/book/"><Icon name="calendar" /> <span>Book<span class="lbl-wide"> an appointment</span></span></a>

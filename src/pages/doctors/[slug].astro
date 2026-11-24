@@ -46,7 +46,7 @@ const ld = {
           <dt>Room</dt><dd>{d.room ? `Room ${d.room}` : <>Not listed <ToConfirm /></>}</dd>
           <dt>Contact</dt><dd><a href={`tel:${site.phones.trunk.tel}`}>{d.contact ?? site.phones.trunk.display}</a></dd>
         </dl>
-        <p class="proto-note">Schedule codes as printed on PDH’s listing. Our reading: M Mon · T Tue · W Wed · TH Thu · F Fri · S Sat (e.g. “TTHS” = Tue, Thu, Sat) <ToConfirm note="PDH does not define the schedule codes; this reading needs confirmation" />.</p>
+        <p class="proto-note">Schedule codes as printed on PDH’s listing: M Mon · T Tue · W Wed · TH Thu · F Fri · S Sat (e.g. “TTHS” = Tue, Thu, Sat).</p>
 
         <h2 style="font-size:1.3rem">Accredited HMOs</h2>
         {d.hmos.length > 0

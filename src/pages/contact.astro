@@ -59,7 +59,7 @@ const lines = [p.emergency, p.information, p.marketing, p.admitting, p.hmoHub, p
         <p class="small muted">{parking?.location}. {parking?.hours}.</p>
 
         <h3>Visiting hours</h3>
-        <p>Not published on the current site. <ToConfirm note={site.visiting.note} /></p>
+        <p>Please call Information for visiting hours. <ToConfirm note={site.visiting.note} /></p>
 
         <h3>Emergency</h3>
         <p>ER on the Ground Floor, open 24/7. <a href={`tel:${p.emergency.tel}`}>{p.emergency.display}</a> <ToConfirm note={p.emergency.note} /> · Mobile <a href={`tel:${p.emergency.mobileTel}`}>{p.emergency.mobile}</a></p>

@@ -8,5 +8,5 @@ const { service: s, compact = false } = Astro.props;
   <span class="icon-circle"><Icon name={s.icon} /></span>
   <h3>{s.name}</h3>
   {!compact && <p class="muted small">{s.summary}</p>}
-  <p class="meta">{s.location ? s.location : 'Location to be confirmed'}{s.hours ? ` · ${s.hours.length > 40 ? 'See hours' : s.hours}` : ''}</p>
+  <p class="meta">{s.location ? s.location : 'Call for location'}{s.hours ? ` · ${s.hours.length > 40 ? 'See hours' : s.hours}` : ''}</p>
 </a>

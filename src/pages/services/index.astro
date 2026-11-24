@@ -28,9 +28,9 @@ const tbd = services.filter((s) => !s.hours);
 
   <section class="section">
     <div class="container">
-      <h2>Also listed by PDH <ToConfirm note="These appear on the current site without a floor or schedule" /></h2>
+      <h2>Also at PDH <ToConfirm note="These appear on the current site without a floor or schedule" /></h2>
       <div class="grid grid-3">{tbd.map((s) => <ServiceCard service={s} compact />)}</div>
-      <p class="muted small" style="margin-top:16px">Named on the current site with no details yet: {namedOnlyOnSite.join(', ')}. <ToConfirm note="No description, floor or hours on the current site" /></p>
+      <p class="muted small" style="margin-top:16px">Also: {namedOnlyOnSite.join(', ')}. Call Information for details. <ToConfirm note="No description, floor or hours on the current site" /></p>
     </div>
   </section>
 

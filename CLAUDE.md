@@ -6,8 +6,8 @@ Source of truth: `context/PDH_Claude_Code_Brief.md`. Supporting material: `conte
 
 ## Hard rules
 
-- **NEVER invent facts.** No made-up doctor names, HMOs, prices, hours, phone numbers or services. Use only what the context files state. Where something is missing or inconsistent, render the `<ToConfirm />` marker on the page and log it in `CONFIRM.md`.
-- **The ER number is not confirmed.** The Emergency button must appear on every page (header, mobile bottom bar, Kriss panel, footer) with a `[TO CONFIRM]` marker next to the number.
+- **NEVER invent facts.** No made-up doctor names, HMOs, prices, hours, phone numbers or services. Use only what the context files state. Where something is missing or inconsistent, keep a `<ToConfirm note="…" />` in the markup (it renders nothing) and log it in `CONFIRM.md`.
+- **The ER number is not confirmed by PDH.** The Emergency button must appear on every page (header, mobile bottom bar, Kriss panel, footer). Visible `[TO CONFIRM]` markers were switched off site-wide on 25 Nov 2026 at Sue's request (`src/components/ToConfirm.astro`, `visible = false`); open items are tracked only in `CONFIRM.md`.
 - Spell the name **"Parañaque Doctors Hospital"** — no apostrophe.
 - Do not state a DOH hospital level anywhere on the site (Sue, 25 Nov 2026) until PDH confirms it; `site.dohLevel` is null on purpose.
 - **No analytics, tracking pixels, cookies or third-party scripts.** The only scripts are small inline first-party ones (menu toggle, Kriss panel toggle, doctor filter, form stub, theme memory) and GSAP, which is installed from npm and bundled into the site at build time — never loaded from a CDN, never phoning home. Google Fonts are not used either; fonts are system stacks. Animations are skipped when the visitor prefers reduced motion. Decision confirmed by Sue on 25 Nov 2026: keep GSAP bundled locally; do not replace it with CSS-only motion unless PDH rules out libraries.
