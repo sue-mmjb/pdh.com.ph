@@ -52,7 +52,9 @@ const faqs = [
           <a class="btn btn-outline btn-lg" href="/services/">Services and hours <Icon name="arrow" /></a>
         </div>
       </div>
-      <form class="cp-hero_card cp-reveal" action="/doctors/" method="get" role="search">
+      <div class="cp-hero_cardwrap cp-reveal">
+      <img class="cp-hero_mascot" src="/brand/pdh-mascot.png" alt="" width="290" height="239" decoding="async" />
+      <form class="cp-hero_card" action="/doctors/" method="get" role="search">
         <label class="cp-hero_lbl" for="hero-q">Find the right doctor</label>
         <div class="cp-hero_field"><Icon name="search" /><input id="hero-q" name="q" type="search" placeholder="Doctor name or specialty" autocomplete="off" /></div>
         <label class="visually-hidden" for="hero-dept">Department</label>
@@ -62,12 +64,11 @@ const faqs = [
         </select>
         <button class="btn btn-primary btn-lg cp-hero_btn" type="submit"><Icon name="search" /> Find a doctor</button>
         <div class="cp-hero_now">
-          <p class="cp-hero_now_h"><span class="cp-chip_dot"></span><strong>Open 24/7</strong><span>ER · Laboratory · Radiology · Pharmacy</span></p>
-          <p class="cp-hero_now_p">Emergency Room, Ground Floor · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></p>
+          <p class="cp-hero_now_p"><span class="cp-chip_dot"></span>Emergency Room, Ground Floor · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></p>
           <a class="btn btn-emergency btn-sm" href={`tel:${er.tel}`}><Icon name="emergency" /> Call the ER</a>
         </div>
-        <p class="small muted cp-hero_foot">{doctors.length} doctors listed with clinic days and room numbers. HMO accreditation is on each profile.</p>
       </form>
+      </div>
     </div>
   </section>
 
@@ -94,16 +95,6 @@ const faqs = [
           </article>
         ))}
       </div>
-    </div>
-  </section>
-
-  <!-- 4 · Browse by specialty -->
-  <section class="cp-sec cp-sec_tight">
-    <div class="container">
-      <p class="small muted" style="text-align:center;margin:0 0 10px">Browse doctors by specialty</p>
-      <ul class="pill-list cp-pills" style="justify-content:center">
-        {specialtyGroups.map((g) => <li><a href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}>{g.name}</a></li>)}
-      </ul>
     </div>
   </section>
 
@@ -237,21 +228,25 @@ const faqs = [
 <script>
   import { gsap } from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { heartbeatAll } from '../../scripts/heartbeat';
   const root = document.querySelector('[data-cp]');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Heading rules: a heartbeat line as wide as the heading's text, under every section heading
+  if (root) {
+    root.querySelectorAll('.cp-h2').forEach((h) => {
+      const r = document.createElement('span'); r.className = 'cp-rule'; r.setAttribute('aria-hidden', 'true');
+      h.insertAdjacentElement('afterend', r);
+    });
+    heartbeatAll('.cp-rule', root);
+  }
   if (root && !reduce) {
     gsap.registerPlugin(ScrollTrigger);
     // Gentle reveals (no scroll hijacking)
     root.querySelectorAll('.cp-reveal').forEach((el, i) => {
       gsap.fromTo(el, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: (i % 4) * 0.06, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
     });
-    // Header rules: a short bar under every section heading and the floor rules draw
-    // from left to right as they scroll into view, shading from light green to orange.
-    root.querySelectorAll('.cp-h2').forEach((h) => {
-      const r = document.createElement('span'); r.className = 'cp-rule'; r.setAttribute('aria-hidden', 'true');
-      h.insertAdjacentElement('afterend', r);
-    });
-    root.querySelectorAll('.cp-rule, [data-cp-rule]').forEach((r) => {
+    // Floor rules draw from left to right as they scroll into view, shading from light green to orange.
+    root.querySelectorAll('[data-cp-rule]').forEach((r) => {
       gsap.fromTo(r, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: r, start: 'top 92%', end: 'top 55%', scrub: 0.5 } });
     });
     // Hero media: light parallax, the honest stand-in for the frame sequence
@@ -281,7 +276,7 @@ const faqs = [
   @media (min-width: 900px) { .cp-hero { padding: 88px 0 72px; min-height: 640px; display: flex; align-items: center; } .cp-hero_grid { grid-template-columns: 1.15fr 1fr; gap: 64px; width: 100%; } }
   .cp-hero_copy { text-align: left; }
   .cp-h1 { font-size: clamp(2.8rem, 1.4rem + 4.8vw, 5.4rem); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600; max-width: 12ch; margin: 12px 0 0.3em; }
-  .cp-hero_rule { margin: 2px 0 18px; }
+  .cp-hero_rule { margin: 4px 0 14px; }
   .cp-lead { max-width: 50ch; margin: 0 0 24px; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem); color: var(--ink-soft); }
   /* The card: the hospital's version of the fee calculator, a doctor search that really works */
   .cp-hero_card { display: grid; gap: 12px; padding: 24px; background: #f6f5f2; border: 1px solid rgba(16,48,63,0.06); border-radius: 28px;
@@ -294,12 +289,14 @@ const faqs = [
   .cp-hero_field:focus-within { border-color: var(--pdh-teal); box-shadow: 0 0 0 3px rgba(0,163,165,0.18); }
   .cp-hero_sel { min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 16px; background: #fff; font: inherit; color: var(--ink); }
   .cp-hero_btn { width: 100%; justify-content: center; border-radius: 999px; }
-  .cp-hero_now { margin-top: 6px; padding: 16px 18px; background: #fff; border-radius: 18px; border: 1px solid var(--line); display: grid; gap: 8px; justify-items: start; }
-  .cp-hero_now_h { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
-  .cp-hero_now_h strong { color: var(--pdh-teal-deep); font-weight: 700; font-size: 1rem; }
-  .cp-hero_now_p { margin: 0; font-size: 0.92rem; color: var(--ink); }
+  .cp-hero_cardwrap { position: relative; margin-top: 64px; }
+  .cp-hero_card { position: relative; z-index: 1; }
+  /* PDH's mascot peeks over the top edge of the card; the lower part hides behind it */
+  .cp-hero_mascot { position: absolute; z-index: 0; right: 22px; bottom: calc(100% - 46px); width: 136px; height: auto; pointer-events: none; filter: drop-shadow(0 6px 10px rgba(0,92,94,0.18)); }
+  @media (min-width: 900px) { .cp-hero_cardwrap { margin-top: 0; } .cp-hero_mascot { width: 150px; right: 26px; bottom: calc(100% - 50px); } }
+  .cp-hero_now { margin-top: 6px; padding: 14px 18px; background: #fff; border-radius: 18px; border: 1px solid var(--line); display: grid; gap: 10px; justify-items: start; }
+  .cp-hero_now_p { margin: 0; font-size: 0.92rem; color: var(--ink); display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
   .cp-chip_dot { width: 10px; height: 10px; border-radius: 50%; background: var(--pdh-orange); box-shadow: 0 0 0 4px rgba(255,116,2,0.2); flex: none; }
-  .cp-hero_foot { margin: 2px 0 0; font-size: 0.8rem; }
   .cp-statement { padding: 96px 0 56px; }
   .cp-big { font-size: clamp(1.6rem, 1rem + 2.6vw, 3.2rem); line-height: 1.15; letter-spacing: -0.03em; font-weight: 600; font-family: var(--font-head); max-width: 24ch; margin: 0; color: var(--heading); }
   :global(.cp-word) { opacity: 0.22; transition: opacity 0.2s; }
@@ -328,7 +325,7 @@ const faqs = [
   .cp-floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
   .cp-floor_label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pdh-teal-text); white-space: nowrap; }
   .cp-floor_rule { flex: 1; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #bfe8e6 0%, #7fd3cf 45%, var(--pdh-orange) 100%); transform-origin: left center; }
-  :global(.cp-rule) { display: block; height: 4px; width: 128px; border-radius: 2px; margin: -8px 0 20px; background: linear-gradient(90deg, #bfe8e6 0%, #7fd3cf 45%, var(--pdh-orange) 100%); transform-origin: left center; }
+  :global(.cp-rule) { display: block; height: 22px; width: 128px; max-width: 100%; margin: -6px 0 16px; }
   .cp-svc { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (min-width: 720px) { .cp-svc { grid-template-columns: repeat(3, 1fr); } }
   @media (min-width: 1100px) { .cp-svc { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
