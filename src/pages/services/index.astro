@@ -4,7 +4,7 @@ import PageHero from '../../components/PageHero.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import ToConfirm from '../../components/ToConfirm.astro';
 import Icon from '../../components/Icon.astro';
-import { services, namedOnlyOnSite, specialtyGroups, rooms, site } from '../../lib/data';
+import { services, namedOnlyOnSite, specialtyGroups, rooms, site, groupByFloor } from '../../lib/data';
 const always = services.filter((s) => s.hours === 'Open 24/7');
 const scheduled = services.filter((s) => s.hours && s.hours !== 'Open 24/7');
 const tbd = services.filter((s) => !s.hours);
@@ -14,25 +14,24 @@ const tbd = services.filter((s) => !s.hours);
 
   <section class="section">
     <div class="container">
-      <h2>Open 24/7</h2>
-      <div class="grid grid-3">{always.map((s) => <ServiceCard service={s} compact />)}</div>
+      <h2>By floor</h2>
+      <p class="muted" style="max-width:60ch">Where to go once you are inside. Floors and hours as published by PDH.</p>
+      {groupByFloor(services).map(([floor, list]) => (
+        <div class="floor">
+          <div class="floor_head"><h3 class="floor_label">{floor}</h3><span class="floor_rule"></span><span class="floor_count">{list.length} {list.length === 1 ? 'service' : 'services'}</span></div>
+          <div class="grid grid-3">{list.map((s) => <ServiceCard service={s} compact />)}</div>
+        </div>
+      ))}
+      <p class="muted small" style="margin-top:24px">Also at PDH: {namedOnlyOnSite.join(', ')}. Call Information for details. <ToConfirm note="No description, floor or hours on the current site" /></p>
     </div>
   </section>
-
-  <section class="section section-soft">
-    <div class="container">
-      <h2>Clinics and centers</h2>
-      <div class="grid grid-3">{scheduled.map((s) => <ServiceCard service={s} />)}</div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2>Also at PDH <ToConfirm note="These appear on the current site without a floor or schedule" /></h2>
-      <div class="grid grid-3">{tbd.map((s) => <ServiceCard service={s} compact />)}</div>
-      <p class="muted small" style="margin-top:16px">Also: {namedOnlyOnSite.join(', ')}. Call Information for details. <ToConfirm note="No description, floor or hours on the current site" /></p>
-    </div>
-  </section>
+  <style>
+    .floor { margin-top: 32px; }
+    .floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .floor_label { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pdh-teal-text); margin: 0; white-space: nowrap; }
+    .floor_rule { flex: 1; height: 1px; background: var(--line); }
+    .floor_count { font-size: 0.8rem; color: var(--ink-soft); white-space: nowrap; }
+  </style>
 
   <section class="section section-soft">
     <div class="container">

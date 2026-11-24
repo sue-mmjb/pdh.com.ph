@@ -4,7 +4,7 @@
 // black primary buttons and a single orange accent. Order follows the brief, task-first.
 // No frame-sequence hero, no scroll hijacking, no trackers: a photo slot with light parallax and
 // gentle reveals, skipped under reduced motion.
-import { site, hmo, news, services, specialtyGroups, doctors, featuredPackages, formatDate } from '../../lib/data';
+import { site, hmo, news, services, specialtyGroups, doctors, featuredPackages, formatDate, groupByFloor, shortHours } from '../../lib/data';
 import ToConfirm from '../ToConfirm.astro';
 import Sample from '../Sample.astro';
 import Icon from '../Icon.astro';
@@ -96,15 +96,20 @@ const faqs = [
       <p class="eyebrow">Services</p>
       <h2 class="cp-h2">One hospital, every department.</h2>
       <p class="cp-sub">Open 24/7: ER, laboratory, radiology and pharmacy. Clinics and centers by schedule. Floors and hours as published by PDH.</p>
-      <div class="cp-svc">
-        {[...always, ...clinics].map((s) => (
-          <a class="cp-svc_card cp-reveal" href={`/services/${s.slug}/`}>
-            <strong>{s.name}</strong>
-            <span class="small muted">{s.location} · {s.hours && s.hours.length > 28 ? 'see hours' : s.hours}</span>
-            {s.illustration ? <img class="cp-svc_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle cp-svc_ic"><Icon name={s.icon} /></span>}
-          </a>
-        ))}
-      </div>
+      {groupByFloor([...always, ...clinics]).map(([floor, list]) => (
+        <div class="cp-floor">
+          <div class="cp-floor_head"><span class="cp-floor_label">{floor}</span><span class="cp-floor_rule"></span></div>
+          <div class="cp-svc">
+            {list.map((s) => (
+              <a class="cp-svc_card cp-reveal" href={`/services/${s.slug}/`}>
+                <strong class="cp-svc_name">{s.name}</strong>
+                <span class="cp-svc_meta">{shortHours(s)}</span>
+                {s.illustration ? <img class="cp-svc_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle cp-svc_ic"><Icon name={s.icon} /></span>}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
       <p style="margin-top:20px"><a class="btn btn-outline" href="/services/">All services and departments <Icon name="arrow" /></a></p>
     </div>
   </section>
@@ -260,22 +265,30 @@ const faqs = [
   .cp-h2 { font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem); line-height: 1.05; letter-spacing: -0.035em; font-weight: 600; max-width: 20ch; }
   .cp-sub { color: var(--ink-soft); max-width: 60ch; }
   .cp-entry { margin-top: 24px; }
-  .cp-entry_card { display: flex; flex-direction: column; min-height: 280px; }
-  .cp-entry_card h3 { font-size: 1.3rem; letter-spacing: -0.02em; font-weight: 500; }
+  .cp-entry_card { display: flex; flex-direction: column; gap: 0; padding: 24px; min-height: 300px; }
+  .cp-entry_card .icon-circle { width: 52px; height: 52px; margin-bottom: 18px; }
+  .cp-entry_card h3 { font-size: 1.35rem; letter-spacing: -0.02em; font-weight: 600; color: var(--heading); margin: 0 0 8px; }
+  .cp-entry_card p { margin: 0 0 10px; }
+  .cp-entry_card .btn { margin-top: auto; }
   .cp-search { display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 18px; border-radius: 999px; max-width: 760px; margin: 0 auto; }
   .cp-search svg { width: 20px; height: 20px; color: var(--ink-soft); flex: none; }
   .cp-search input { flex: 1; border: 0; background: transparent; font: inherit; min-height: 44px; outline: none; color: inherit; min-width: 0; }
   .cp-search .btn { flex: none; }
-  .cp-svc { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
+  .cp-floor { margin-top: 28px; }
+  .cp-floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .cp-floor_label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pdh-teal-text); white-space: nowrap; }
+  .cp-floor_rule { flex: 1; height: 1px; background: var(--line); }
+  .cp-svc { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (min-width: 720px) { .cp-svc { grid-template-columns: repeat(3, 1fr); } }
-  @media (min-width: 1100px) { .cp-svc { grid-template-columns: repeat(4, 1fr); gap: 12px; } }
-  .cp-svc_card { position: relative; display: grid; gap: 4px; align-content: start; padding: 18px 96px 18px 18px; background: var(--card); border-radius: var(--radius); text-decoration: none; color: inherit; border: 1px solid transparent; min-height: 150px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+  @media (min-width: 1100px) { .cp-svc { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
+  .cp-svc_card { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 104px; background: var(--card); border-radius: var(--radius); text-decoration: none; color: inherit; border: 1px solid transparent; min-height: 196px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
   .cp-svc_card:hover { border-color: var(--pdh-teal); transform: translateY(-2px); }
-  .cp-svc_art { position: absolute; right: 10px; bottom: 8px; width: 84px; height: 84px; object-fit: contain; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
+  .cp-svc_name { font-family: var(--font-head); font-weight: 600; font-size: 1.05rem; line-height: 1.25; letter-spacing: -0.01em; color: var(--heading); text-wrap: balance; }
+  .cp-svc_meta { font-size: 0.85rem; color: var(--ink-soft); }
+  .cp-svc_art { position: absolute; right: 12px; bottom: 10px; width: 88px; height: 88px; object-fit: contain; object-position: right bottom; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
   .cp-svc_card:hover .cp-svc_art { transform: translateY(-4px) scale(1.06); }
   .cp-svc_ic { position: absolute; right: 14px; bottom: 14px; margin: 0; }
-  @media (min-width: 900px) { .cp-svc_card { padding-right: 110px; } .cp-svc_art { width: 96px; height: 96px; right: 12px; bottom: 10px; } }
-  .cp-svc_card strong { font-weight: 500; font-size: 1.05rem; letter-spacing: -0.01em; margin-top: 6px; }
+  @media (min-width: 900px) { .cp-svc_card { padding-bottom: 112px; min-height: 210px; } .cp-svc_art { width: 96px; height: 96px; } }
   .cp-two { display: grid; gap: 20px; }
   @media (min-width: 900px) { .cp-two { grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; } }
   .cp-marquee { margin-top: 24px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }

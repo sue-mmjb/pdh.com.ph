@@ -1,19 +1,23 @@
 ---
 import Icon from './Icon.astro';
-import type { Service } from '../lib/data';
+import { shortHours, type Service } from '../lib/data';
 interface Props { service: Service; compact?: boolean; }
 const { service: s, compact = false } = Astro.props;
 ---
 <a class="card card-link svc-card" href={`/services/${s.slug}/`}>
   {s.illustration ? <img class="svc-card_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle"><Icon name={s.icon} /></span>}
-  <h3>{s.name}</h3>
+  <h3 class="svc-card_name">{s.name}</h3>
   {!compact && <p class="muted small">{s.summary}</p>}
-  <p class="meta">{s.location ? s.location : 'Call for location'}{s.hours ? ` · ${s.hours.length > 40 ? 'See hours' : s.hours}` : ''}</p>
+  <p class="meta">{shortHours(s)}</p>
 </a>
 
 <style>
-  .svc-card { position: relative; overflow: hidden; }
-  .svc-card:has(.svc-card_art) { padding-right: 104px; min-height: 140px; }
-  .svc-card_art { position: absolute; right: 10px; bottom: 8px; width: 88px; height: 88px; object-fit: contain; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
+  .svc-card { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px; }
+  .svc-card h3 { margin: 0; }
+  .svc-card_name { font-size: 1.05rem; line-height: 1.25; text-wrap: balance; }
+  .svc-card .meta { margin: 0; }
+  .svc-card { padding-bottom: 104px; min-height: 196px; }
+  .svc-card .icon-circle { position: absolute; right: 16px; bottom: 16px; margin: 0; }
+  .svc-card_art { position: absolute; right: 12px; bottom: 10px; width: 88px; height: 88px; object-fit: contain; object-position: right bottom; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
   .svc-card:hover .svc-card_art { transform: translateY(-4px) scale(1.06); }
 </style>

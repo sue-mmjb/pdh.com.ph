@@ -63,6 +63,26 @@ export function formatDate(iso: string) {
 
 export const featuredServices = services.filter((s) => s.featured);
 
+/** Floor order for grouping services, as PDH labels them. */
+export const FLOOR_ORDER = ['Ground Floor', '2nd Floor', '3rd Floor', '3rd to 6th Floor', '4th Floor', '5th Floor', '7th Floor', 'Basement Parking and Allocated Parking Space for Patients and Visitors'];
+export function groupByFloor(list: Service[]) {
+  const groups = new Map<string, Service[]>();
+  for (const s of list) {
+    const key = s.location ?? 'Location on request';
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key)!.push(s);
+  }
+  const order = (k: string) => { const i = FLOOR_ORDER.indexOf(k); return i === -1 ? 99 : i; };
+  return [...groups.entries()].sort((a, b) => order(a[0]) - order(b[0]));
+}
+/** Short hours label for cards. */
+export function shortHours(s: Service) {
+  if (!s.hours) return 'Call for schedule';
+  if (s.hours === 'Open 24/7') return 'Open 24/7';
+  if (/^By appointment$/i.test(s.hours)) return 'By appointment';
+  return s.hours.length > 26 ? 'See hours' : s.hours;
+}
+
 /** schema.org Hospital using confirmed facts only. */
 export function hospitalJsonLd(siteUrl: string) {
   return {
