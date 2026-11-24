@@ -62,7 +62,7 @@ const er = site.phones.emergency;
           <label for="doctor">Preferred doctor <span class="muted">(optional)</span></label>
           <select id="doctor" name="doctor">
             <option value="">No preference</option>
-            {doctors.map((d) => <option value={d.slug}>{displayName(d.name)} — {d.specialization}</option>)}
+            {doctors.map((d) => <option value={d.slug}>{displayName(d.name)}, {d.specialization}</option>)}
           </select>
         </div>
         <div class="field">

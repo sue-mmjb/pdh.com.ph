@@ -3,7 +3,7 @@
   "name": "Parañaque Doctors Hospital",
   "shortName": "PDH",
   "legalNote": "No apostrophe in the name.",
-  "tagline": "Alagang PDH — care that feels like home",
+  "tagline": "Alagang PDH, care that feels like home",
   "description": "Parañaque Doctors Hospital (PDH) is a healthcare institution in the heart of Parañaque City, committed to high-quality and affordable healthcare services.",
   "dohLevel": null,
   "founded": "May 8, 2007",
@@ -144,8 +144,8 @@
   ],
   "why": {
     "heading": "Why PDH?",
-    "intro": "Here at PDH, we go beyond healthcare—we provide genuine care that feels like home. Patients trust us because we put their well-being first, offering expert medical services, compassionate staff, and a welcoming environment that makes every visit reassuring.",
-    "detail": "Our accessible location, developing facilities, and dedicated specialists ensure you receive the highest and best quality treatment without the hassle. Whether you’re here for a routine check-up or specialized care, PDH is where expertise meets heart—because you deserve nothing less."
+    "intro": "Here at PDH, we go beyond healthcare. We provide genuine care that feels like home. Patients trust us because we put their well-being first, offering expert medical services, compassionate staff, and a welcoming environment that makes every visit reassuring.",
+    "detail": "Our accessible location, developing facilities, and dedicated specialists ensure you receive the highest and best quality treatment without the hassle. Whether you’re here for a routine check-up or specialized care, PDH is where expertise meets heart, because you deserve nothing less."
   },
   "pillars": [
     {
@@ -166,7 +166,7 @@
     },
     {
       "title": "Community-Centered Service",
-      "text": "We care beyond the clinic—strengthening lives through outreach and health advocacy."
+      "text": "We care beyond the clinic, strengthening lives through outreach and health advocacy."
     }
   ],
   "careTypes": [
@@ -177,8 +177,8 @@
   ],
   "about": {
     "intro": "Parañaque Doctors Hospital (PDH) is a premier healthcare institution located in the heart of Parañaque City. It is committed to ensuring the well-being of its community by continuously providing high-quality and affordable healthcare services.",
-    "history": "Founded on May 8, 2007, by visionary doctors, PDH officially became a member of the Metro Pacific Health (MPH) Group in 2024 — the largest Philippine private hospital network in the country under the Metro Pacific Investments Corporation (MPIC), led by Mr. Manuel V. Pangilinan.",
-    "facilitiesLine": "With a comprehensive range of medical facilities—including a 94-bed inpatient facility, Emergency Room (ER), Intensive Care Unit (ICU), Neonatal Intensive Care Unit (NICU), Operating Room (OR), Delivery Room (DR), Laboratory, and Radiology, PDH is also accredited by the Department of Health (DOH), PhilHealth, and various Health Maintenance Organizations (HMOs), ensuring accessible healthcare and full compliance with government-regulated standards.",
+    "history": "Founded on May 8, 2007, by visionary doctors, PDH officially became a member of the Metro Pacific Health (MPH) Group in 2024, the largest Philippine private hospital network in the country under the Metro Pacific Investments Corporation (MPIC), led by Mr. Manuel V. Pangilinan.",
+    "facilitiesLine": "With a comprehensive range of medical facilities, including a 94-bed inpatient facility, Emergency Room (ER), Intensive Care Unit (ICU), Neonatal Intensive Care Unit (NICU), Operating Room (OR), Delivery Room (DR), Laboratory, and Radiology, PDH is also accredited by the Department of Health (DOH), PhilHealth, and various Health Maintenance Organizations (HMOs), ensuring accessible healthcare and full compliance with government-regulated standards.",
     "mission": "To deliver “Alagang PDH”, our unique way of delivering high quality and compassionate care that is affordable, accessible, and patient-centered.",
     "vision": "To be the leading healthcare provider, renowned for medical excellence, compassionate care, innovative healthcare services, and dedicated commitment to the well-being of the community.",
     "goal": "To provide healthcare services that combine exceptional quality with affordability, making every experience at PDH truly worth it for our patients and their families.",
@@ -305,7 +305,7 @@
       "series": "Alagang PDH Ako Stories",
       "date": "2025-07-26",
       "excerpt": "At Parañaque Doctors Hospital, care goes beyond medicine. It’s about building trust, offering comfort, and creating a second home for families facing life’s toughest challenges. This is the story of Thelma and her family.",
-      "quote": "What stands out most to us is the consistent warmth, attentiveness, and genuine care we receive from the PDH team—proof that compassion is at the heart of every visit.",
+      "quote": "What stands out most to us is the consistent warmth, attentiveness, and genuine care we receive from the PDH team, proof that compassion is at the heart of every visit.",
       "by": "Rene, Thelma’s husband, PDH patient companion",
       "url": "https://pdh.com.ph/alagang-pdh-ako-stories-more-than-a-hospital-a-second-home-built-on-trust-and-care/"
     },
@@ -313,7 +313,7 @@
       "title": "A Mother’s Journey of Hope and Healing",
       "series": "Alagang PDH Ako Stories",
       "date": "2025-03-08",
-      "excerpt": "For Jennifer Danao, January 2025 was a time of worry, uncertainty, and ultimately, gratitude—marked by the dedication of the medical professionals who saved her six-year-old son.",
+      "excerpt": "For Jennifer Danao, January 2025 was a time of worry, uncertainty, and ultimately, gratitude, marked by the dedication of the medical professionals who saved her six-year-old son.",
       "quote": "From the time we arrived at the ER to the moment we were discharged, I felt assured that Lucio was in good hands.",
       "by": "Jennifer Danao, mother of a PDH patient",
       "url": "https://pdh.com.ph/alagang-pdh-ako-stories-a-mothers-journey-of-hope-and-healing/"
@@ -332,7 +332,7 @@
   },
   "hero": {
     "headline": "PDH is a pillar of Trust",
-    "text": "For generations, families have relied on Parañaque Doctors Hospital for expert care. Built on trust, compassion, and innovation, we remain steadfast in our commitment to serving, healing, and uplifting our community—where health and family legacies thrive.",
+    "text": "For generations, families have relied on Parañaque Doctors Hospital for expert care. Built on trust, compassion, and innovation, we remain steadfast in our commitment to serving, healing, and uplifting our community, where health and family legacies thrive.",
     "source": "Current homepage hero slide"
   },
   "payment": [

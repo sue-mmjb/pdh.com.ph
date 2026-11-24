@@ -1,5 +1,5 @@
 {
-  "_note": "HMO partners come from the logo alt-text on the current homepage (32 names, logos only). Validated against PDH's partner logo strips (screenshots supplied by Sue, 25 Nov 2026); shown as a text list plus the logo marquee. HMO Hub location/hours/phone are from the current site. The step-by-step process is a labeled sample — not on the current site. 'logos' are PDH's own partner logo files copied from the current site into public/hmo/ (originals in assets/hmo/), trimmed and sized to a common height.",
+  "_note": "HMO partners come from the logo alt-text on the current homepage (32 names, logos only). Validated against PDH's partner logo strips (screenshots supplied by Sue, 25 Nov 2026); shown as a text list plus the logo marquee. HMO Hub location/hours/phone are from the current site. The step-by-step process is a labeled sample, not on the current site. 'logos' are PDH's own partner logo files copied from the current site into public/hmo/ (originals in assets/hmo/), trimmed and sized to a common height.",
   "partners": [
     "AMAPhil",
     "AsianCare",

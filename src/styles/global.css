@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------
-   PDH prototype — global styles
+   PDH prototype: global styles
    One design ("Calm Platform"). All colours, radii and type live in :root; swap them there.
    ------------------------------------------------------------------ */
 
@@ -29,7 +29,7 @@
   --pdh-blue: #1580b0;
   --pdh-blue-text: #0e6c97;
   --pdh-navy: #10303f;
-  /* Calm Platform — the single design. Direction taken from terminal-industries.com: light grey bands, one calm
+  /* Calm Platform: the single design. Direction taken from terminal-industries.com: light grey bands, one calm
      sans at a large scale, floating pill navigation, rounded cards, black primary buttons and
      PDH orange as the single accent. Mechanics (frame-sequence hero, scroll hijack) left out. */
   --bg: #ffffff;
@@ -194,7 +194,7 @@ ul, ol { padding-left: 1.25em; }
 .header-actions .btn { flex: none; }
 body { overflow-x: clip; }
 
-/* Mobile bottom action bar: Emergency / Call / Messenger / Book — always visible */
+/* Mobile bottom action bar: Emergency / Call / Messenger / Book: always visible */
 .bottombar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 55; height: var(--bottombar-h); background: var(--card); border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, 1fr); padding: 6px; gap: 6px; box-shadow: 0 -4px 16px rgba(0,0,0,0.06); }
 .bottombar a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: var(--tap); border-radius: var(--radius-sm); text-decoration: none; font-size: 0.72rem; font-weight: 700; color: var(--ink); }
 .bottombar a svg { width: 20px; height: 20px; }
@@ -308,7 +308,7 @@ details.acc[open] summary::after { content: "−"; }
 details.acc .body { padding: 0 16px 16px; color: var(--ink-soft); }
 
 /* ---------- Calm Platform overrides (after base rules so they win) ---------- */
-/* Floating pill header — PDH teal with the orange rule, white nav, logo lockup */
+/* Floating pill header: PDH teal with the orange rule, white nav, logo lockup */
 .site-header { background: transparent; border-bottom: 0; padding: 10px var(--gutter) 0; pointer-events: none; }
 .site-header .bar { pointer-events: auto; max-width: 1240px; margin: 0 auto; min-height: 60px; padding: 6px 8px 6px 12px; background: var(--pdh-teal); color: #ffffff; border-bottom: 3px solid var(--pdh-orange); border-radius: 999px; box-shadow: 0 8px 30px rgba(0,92,94,0.22); }
 .brand { color: #ffffff; }
