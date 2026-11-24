@@ -182,13 +182,16 @@ ul, ol { padding-left: 1.25em; }
 .site-nav a:hover, .site-nav a[aria-current="page"] { background: var(--bg-soft); color: var(--accent-text); }
 .header-actions { display: none; }
 @media (min-width: 900px) {
-  .nav-toggle { display: none; }
-  .site-nav { display: block; margin-left: 12px; }
-  .site-nav ul { flex-direction: row; gap: 2px; }
-  .site-nav a { padding: 8px 10px; font-size: 0.95rem; }
-  .header-actions { display: flex; gap: 8px; margin-left: auto; }
+  .header-actions { display: flex; gap: 8px; margin-left: auto; flex: none; }
+  .nav-toggle { margin-left: 12px; }
 }
-@media (min-width: 1100px) { .site-nav a { padding: 8px 12px; } }
+@media (min-width: 1100px) {
+  .nav-toggle { display: none; }
+  .site-nav { display: block; margin-left: 12px; min-width: 0; }
+  .site-nav ul { flex-direction: row; gap: 2px; flex-wrap: nowrap; }
+  .site-nav a { padding: 8px 10px; font-size: 0.95rem; }
+}
+@media (min-width: 1300px) { .site-nav a { padding: 8px 12px; } }
 /* Header action labels: icon-only until the bar has room, so nothing overflows */
 .header-actions .lbl-wide { display: none; }
 .site-header .container { max-width: none; }

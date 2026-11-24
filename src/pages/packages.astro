@@ -14,7 +14,7 @@ const c = packagesData.contacts;
     <div class="container grid grid-3">
       {packages.map((p) => (
         <article class="card pkg" id={p.slug}>
-          <img src={p.image} alt={`${p.name} promo slide from PDH`} loading="lazy" decoding="async" width="1600" height="557" style="width:calc(100% + 40px);margin:-20px -20px 14px;max-width:none;border-radius:var(--radius) var(--radius) 0 0;height:auto;display:block" />
+          {p.cutout && <img class="pkg-cutout" src={p.cutout} alt="" loading="lazy" decoding="async" />}
           <p class="eyebrow" style="margin-bottom:4px">{p.category}</p>
           <h2 style="font-size:1.2rem">{p.name}</h2>
           <p class="pkg-price">{p.priceLabel}</p>
@@ -36,7 +36,7 @@ const c = packagesData.contacts;
           {p.includes.length > 0 && <ul class="small" style="margin:8px 0">{p.includes.map((i) => <li>{i}</li>)}</ul>}
           {p.terms && <details class="acc" style="margin:8px 0"><summary>Terms and conditions</summary><div class="body"><ul class="small" style="margin:8px 0 0">{p.terms.map((t) => <li>{t}</li>)}</ul></div></details>}
           {p.note && <p class="small muted">{p.note}</p>}
-          <div class="actions" style="margin-top:auto">
+          <div class="actions pkg-actions" style="margin-top:auto">
             <a class="btn btn-primary btn-sm" href={`/book/?service=package-${p.slug}`}><Icon name="calendar" /> Request</a>
             <a class="btn btn-outline btn-sm" href={`tel:${c.main.tel}`} title={`${c.main.display.replace('local 7000', p.contactLocal)}`}><Icon name="phone" /> Call {p.contactLocal}</a>
           </div>
@@ -62,7 +62,11 @@ const c = packagesData.contacts;
   </section>
 
   <style>
-    .pkg { display: flex; flex-direction: column; }
+    .pkg { display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .pkg:has(.pkg-cutout) { padding-right: 150px; }
+    .pkg-cutout { position: absolute; right: 0; bottom: 0; height: 200px; width: auto; max-width: 160px; object-fit: contain; object-position: right bottom; pointer-events: none; }
+    .pkg-actions { position: relative; z-index: 1; }
+    @media (max-width: 639px) { .pkg:has(.pkg-cutout) { padding-right: 120px; } .pkg-cutout { height: 160px; max-width: 120px; } }
     .pkg-price { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 1.6rem; color: var(--accent-text); margin: 0 0 8px; letter-spacing: -0.02em; }
     .pkg-tiers { display: grid; gap: 8px; margin: 4px 0 8px; }
     .pkg-tier { border: 1px solid var(--line); padding: 10px 12px; border-radius: var(--radius-sm); }
