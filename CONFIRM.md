@@ -15,7 +15,8 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 
 | Item | What the prototype shows | Status |
 | --- | --- | --- |
-| Accepted HMOs (hospital-wide) | 32 names read from logo alt text on the homepage | [TO CONFIRM] — official list needed |
+| Accepted HMOs (hospital-wide) | 32 names read from logo alt text on the homepage | [TO CONFIRM] — official list needed. The logo wall on the live Contact page appears to show 33 logos, including "Pacific Cross" (we list "Pacific"), "HPPI Hive Health" (we list "HPPI") and "AsianLife" (not in our list). List left unchanged until PDH sends it |
+| Data breach reporting form | DPO email shown instead | [TO CONFIRM] — the live Privacy page gives the form only as a QR image; PDH to supply the URL |
 | Per-doctor accredited HMOs | As listed on each doctor's page; 113 doctors show "TBD" or nothing | [TO CONFIRM] for those doctors |
 | Female Executive Package | PHP 5,780.00 with 12 inclusions, "Inclusive of Pap smear kit and Doctors PF" | [TO CONFIRM] — transcribed from the homepage banner (screenshot, 24 Nov 2026); confirm price and that the promo is current |
 | Other packages | 6 sample packages, no prices | Sample — the current site shows packages only as banner images; PDH to supply the full list and prices |
