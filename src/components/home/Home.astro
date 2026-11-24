@@ -38,27 +38,36 @@ const faqs = [
 ];
 ---
 <div class="cp" data-cp>
-  <!-- 1 · Hero: the building as the backdrop, copy on the right over a white fade -->
+  <!-- 1 · Hero: headline on the left, a working "find a doctor" card on the right (10flat-style) -->
   <section class="cp-hero">
-    <img class="cp-hero_bg" src={site.photos.facade.src} alt="" width={site.photos.facade.w} height={site.photos.facade.h} fetchpriority="high" decoding="async" data-cp-parallax />
-    <div class="cp-hero_fade" aria-hidden="true"></div>
+    <div class="cp-hero_glow" aria-hidden="true"></div>
     <div class="container cp-hero_grid">
-      <div class="cp-hero_spacer" aria-hidden="true">
-        <div class="cp-chip cp-chip_a cp-reveal"><span class="cp-chip_dot"></span><strong>Open 24/7</strong><span>ER · Laboratory · Radiology · Pharmacy</span></div>
-        <div class="cp-chip cp-chip_b cp-reveal"><strong>94</strong><span>beds</span><strong>320</strong><span>doctors</span><strong>32</strong><span>HMO partners</span></div>
-      </div>
       <div class="cp-hero_copy">
         <p class="eyebrow cp-reveal">Parañaque City · Member of {site.network.name}</p>
         <h1 class="cp-h1 cp-reveal">{site.hero.headline}.</h1>
         <span class="cp-rule cp-hero_rule cp-reveal" aria-hidden="true"></span>
         <p class="cp-lead cp-reveal">{site.hero.text}</p>
         <div class="actions cp-reveal">
-          <a class="btn btn-primary btn-lg" href="/doctors/"><Icon name="search" /> Find a doctor</a>
-          <a class="btn btn-accent btn-lg" href="/book/"><Icon name="calendar" /> Book</a>
-          <a class="btn btn-emergency btn-lg" href={`tel:${er.tel}`}><Icon name="emergency" /> Emergency</a>
+          <a class="btn btn-accent btn-lg" href="/book/"><Icon name="calendar" /> Book an appointment</a>
+          <a class="btn btn-outline btn-lg" href="/services/">Services and hours <Icon name="arrow" /></a>
         </div>
-        <p class="small cp-reveal cp-hero_er">ER open 24/7 · Ground Floor · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></p>
       </div>
+      <form class="cp-hero_card cp-reveal" action="/doctors/" method="get" role="search">
+        <label class="cp-hero_lbl" for="hero-q">Find the right doctor</label>
+        <div class="cp-hero_field"><Icon name="search" /><input id="hero-q" name="q" type="search" placeholder="Doctor name or specialty" autocomplete="off" /></div>
+        <label class="visually-hidden" for="hero-dept">Department</label>
+        <select id="hero-dept" name="dept" class="cp-hero_sel">
+          <option value="">Any department</option>
+          {specialtyGroups.map((g) => <option value={g.departments[0]}>{g.name}</option>)}
+        </select>
+        <button class="btn btn-primary btn-lg cp-hero_btn" type="submit"><Icon name="search" /> Find a doctor</button>
+        <div class="cp-hero_now">
+          <p class="cp-hero_now_h"><span class="cp-chip_dot"></span><strong>Open 24/7</strong><span>ER · Laboratory · Radiology · Pharmacy</span></p>
+          <p class="cp-hero_now_p">Emergency Room, Ground Floor · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></p>
+          <a class="btn btn-emergency btn-sm" href={`tel:${er.tel}`}><Icon name="emergency" /> Call the ER</a>
+        </div>
+        <p class="small muted cp-hero_foot">{doctors.length} doctors listed with clinic days and room numbers. HMO accreditation is on each profile.</p>
+      </form>
     </div>
   </section>
 
@@ -88,16 +97,11 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 4 · Search -->
+  <!-- 4 · Browse by specialty -->
   <section class="cp-sec cp-sec_tight">
     <div class="container">
-      <form class="cp-search card" action="/doctors/" method="get" role="search">
-        <label class="visually-hidden" for="home-q">Doctor name or specialty</label>
-        <Icon name="search" />
-        <input id="home-q" name="q" type="search" placeholder="Search doctors by name or specialty" />
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
-      <ul class="pill-list cp-pills" style="margin-top:14px;justify-content:center">
+      <p class="small muted" style="text-align:center;margin:0 0 10px">Browse doctors by specialty</p>
+      <ul class="pill-list cp-pills" style="justify-content:center">
         {specialtyGroups.map((g) => <li><a href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}>{g.name}</a></li>)}
       </ul>
     </div>
@@ -270,26 +274,32 @@ const faqs = [
   :global(html.no-js) .cp-reveal, :global([data-theme]) .cp-reveal.is-visible { opacity: 1; }
   @media (prefers-reduced-motion: reduce) { .cp-reveal { opacity: 1; } }
 
-  .cp-hero { position: relative; overflow: hidden; min-height: 560px; display: flex; align-items: center; padding: 40px 0; background: var(--pdh-teal-tint); }
-  .cp-hero_bg { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; object-position: 28% 45%; will-change: transform; }
-  .cp-hero_fade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.35) 40%, rgba(255,255,255,0.90) 55%, rgba(255,255,255,0.96) 100%); }
-  .cp-hero_grid { position: relative; display: grid; gap: 24px; width: 100%; }
-  .cp-hero_spacer { position: relative; min-height: 180px; }
-  @media (min-width: 900px) { .cp-hero { min-height: 680px; padding: 72px 0; } .cp-hero_grid { grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; } .cp-hero_spacer { min-height: 420px; } }
+  .cp-hero { position: relative; overflow: hidden; padding: 56px 0 40px; background: #fbfbfa; }
+  .cp-hero_glow { position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(55% 75% at 8% 0%, rgba(0,163,165,0.20), transparent 70%), radial-gradient(35% 50% at 100% 100%, rgba(255,116,2,0.10), transparent 70%); }
+  .cp-hero_grid { position: relative; display: grid; gap: 32px; align-items: center; }
+  @media (min-width: 900px) { .cp-hero { padding: 88px 0 72px; min-height: 640px; display: flex; align-items: center; } .cp-hero_grid { grid-template-columns: 1.15fr 1fr; gap: 64px; width: 100%; } }
   .cp-hero_copy { text-align: left; }
-  .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 4.2vw, 4.8rem); line-height: 1.0; letter-spacing: -0.04em; font-weight: 600; max-width: 12ch; margin: 12px 0 0.3em; }
+  .cp-h1 { font-size: clamp(2.8rem, 1.4rem + 4.8vw, 5.4rem); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600; max-width: 12ch; margin: 12px 0 0.3em; }
   .cp-hero_rule { margin: 2px 0 18px; }
-  .cp-lead { max-width: 52ch; margin: 0 0 22px; font-size: clamp(1rem, 0.9rem + 0.45vw, 1.15rem); color: var(--ink); }
-  .cp-hero_er { margin: 14px 0 0; color: var(--ink); }
-  .cp-chip { position: absolute; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(255,255,255,0.94); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 10px 30px rgba(0,92,94,0.16); font-size: 0.82rem; color: var(--ink-soft); white-space: nowrap; }
-  .cp-chip strong { color: var(--pdh-teal-deep); font-weight: 700; font-size: 0.95rem; }
+  .cp-lead { max-width: 50ch; margin: 0 0 24px; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem); color: var(--ink-soft); }
+  /* The card: the hospital's version of the fee calculator, a doctor search that really works */
+  .cp-hero_card { display: grid; gap: 12px; padding: 24px; background: #f6f5f2; border: 1px solid rgba(16,48,63,0.06); border-radius: 28px;
+    box-shadow: 0 30px 70px rgba(0,92,94,0.14), 0 2px 0 #fff inset; }
+  @media (min-width: 900px) { .cp-hero_card { padding: 28px; } }
+  .cp-hero_lbl { font-family: var(--font-head); font-weight: 600; font-size: 1.15rem; color: var(--heading); letter-spacing: -0.01em; }
+  .cp-hero_field { display: flex; align-items: center; gap: 10px; padding: 0 16px; min-height: 52px; background: #fff; border: 1px solid var(--line); border-radius: 16px; color: var(--ink-soft); }
+  .cp-hero_field :global(svg) { flex: none; }
+  .cp-hero_field input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 1rem; color: var(--ink); padding: 12px 0; outline: none; }
+  .cp-hero_field:focus-within { border-color: var(--pdh-teal); box-shadow: 0 0 0 3px rgba(0,163,165,0.18); }
+  .cp-hero_sel { min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 16px; background: #fff; font: inherit; color: var(--ink); }
+  .cp-hero_btn { width: 100%; justify-content: center; border-radius: 999px; }
+  .cp-hero_now { margin-top: 6px; padding: 16px 18px; background: #fff; border-radius: 18px; border: 1px solid var(--line); display: grid; gap: 8px; justify-items: start; }
+  .cp-hero_now_h { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
+  .cp-hero_now_h strong { color: var(--pdh-teal-deep); font-weight: 700; font-size: 1rem; }
+  .cp-hero_now_p { margin: 0; font-size: 0.92rem; color: var(--ink); }
   .cp-chip_dot { width: 10px; height: 10px; border-radius: 50%; background: var(--pdh-orange); box-shadow: 0 0 0 4px rgba(255,116,2,0.2); flex: none; }
-  .cp-chip_a { top: 0; left: 0; }
-  .cp-chip_b { bottom: 0; left: 0; gap: 6px; }
-  .cp-chip_b strong { margin-left: 6px; }
-  .cp-chip_b strong:first-child { margin-left: 0; }
-  @media (max-width: 899px) { .cp-hero_fade { background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.55) 32%, rgba(255,255,255,0.94) 48%, rgba(255,255,255,0.97) 100%); } .cp-hero_bg { object-position: center 20%; } }
-  @media (max-width: 599px) { .cp-chip { font-size: 0.74rem; padding: 8px 12px; } .cp-chip_a span { display: none; } }
+  .cp-hero_foot { margin: 2px 0 0; font-size: 0.8rem; }
   .cp-statement { padding: 96px 0 56px; }
   .cp-big { font-size: clamp(1.6rem, 1rem + 2.6vw, 3.2rem); line-height: 1.15; letter-spacing: -0.03em; font-weight: 600; font-family: var(--font-head); max-width: 24ch; margin: 0; color: var(--heading); }
   :global(.cp-word) { opacity: 0.22; transition: opacity 0.2s; }
@@ -333,8 +343,9 @@ const faqs = [
   .cp-two { display: grid; gap: 20px; }
   @media (min-width: 900px) { .cp-two { grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; } }
   .cp-marquee { margin-top: 24px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
-  .cp-pkg { display: grid; align-content: start; padding: 22px 96px 22px 22px; position: relative; overflow: hidden; min-height: 150px; }
-  .cp-pkg_cut { position: absolute; right: 0; bottom: 0; height: 118px; width: auto; max-width: 96px; object-fit: contain; object-position: right bottom; pointer-events: none; }
+  .cp-pkg { display: grid; align-content: start; padding: 22px 30% 22px 22px; position: relative; overflow: hidden; min-height: 170px; isolation: isolate; }
+  .cp-pkg_cut { position: absolute; right: -6px; bottom: 0; height: 100%; max-height: 220px; width: auto; max-width: 58%; object-fit: contain; object-position: right bottom; pointer-events: none; z-index: -1;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 35%, #000 70%); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 35%, #000 70%); }
   .cp-pkg_price { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.03em; color: var(--accent-text); }
   .cp-figs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
   .cp-figs_num { display: block; font-size: clamp(2.2rem, 1.6rem + 2.6vw, 4rem); line-height: 1; letter-spacing: -0.04em; font-weight: 500; color: var(--pdh-teal-text); }

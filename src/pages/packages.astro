@@ -62,13 +62,17 @@ const c = packagesData.contacts;
   </section>
 
   <style>
-    .pkg { display: flex; flex-direction: column; position: relative; overflow: hidden; }
-    .pkg:has(.pkg-cutout) { padding-right: 150px; }
-    .pkg-cutout { position: absolute; right: 0; bottom: 0; height: 200px; width: auto; max-width: 160px; object-fit: contain; object-position: right bottom; pointer-events: none; }
+    /* The model from PDH's promo slide sits behind the card content, faded towards the text so it stays readable */
+    .pkg { display: flex; flex-direction: column; position: relative; overflow: hidden; isolation: isolate; }
+    .pkg > :not(.pkg-cutout) { position: relative; z-index: 1; }
+    .pkg-cutout { position: absolute; z-index: 0; right: -10px; bottom: 0; height: min(100%, 380px); width: auto; max-width: 64%; object-fit: contain; object-position: right bottom; pointer-events: none;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.35) 30%, #000 65%); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.35) 30%, #000 65%); }
+    .pkg::before { content: ""; position: absolute; z-index: 0; inset: 0; pointer-events: none; background: linear-gradient(90deg, #fff 38%, rgba(255,255,255,0.72) 62%, rgba(255,255,255,0.28) 100%); }
+    .pkg-tiers, .pkg .table, .pkg .acc { background: rgba(255,255,255,0.78); border-radius: 12px; }
     .pkg-actions { position: relative; z-index: 1; }
     /* between 900 and 1099px three columns are too tight for a model beside the copy: two columns instead */
     @media (min-width: 900px) and (max-width: 1099px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 639px) { .pkg:has(.pkg-cutout) { padding-right: 120px; } .pkg-cutout { height: 160px; max-width: 120px; } }
+    @media (max-width: 639px) { .pkg-cutout { height: min(100%, 300px); max-width: 58%; } }
     .pkg-price { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 1.6rem; color: var(--accent-text); margin: 0 0 8px; letter-spacing: -0.02em; }
     .pkg-tiers { display: grid; gap: 8px; margin: 4px 0 8px; }
     .pkg-tier { border: 1px solid var(--line); padding: 10px 12px; border-radius: var(--radius-sm); }
