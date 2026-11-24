@@ -66,6 +66,8 @@ const c = packagesData.contacts;
     .pkg:has(.pkg-cutout) { padding-right: 150px; }
     .pkg-cutout { position: absolute; right: 0; bottom: 0; height: 200px; width: auto; max-width: 160px; object-fit: contain; object-position: right bottom; pointer-events: none; }
     .pkg-actions { position: relative; z-index: 1; }
+    /* between 900 and 1099px three columns are too tight for a model beside the copy: two columns instead */
+    @media (min-width: 900px) and (max-width: 1099px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 639px) { .pkg:has(.pkg-cutout) { padding-right: 120px; } .pkg-cutout { height: 160px; max-width: 120px; } }
     .pkg-price { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 1.6rem; color: var(--accent-text); margin: 0 0 8px; letter-spacing: -0.02em; }
     .pkg-tiers { display: grid; gap: 8px; margin: 4px 0 8px; }
