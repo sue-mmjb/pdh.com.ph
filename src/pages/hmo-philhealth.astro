@@ -4,6 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import ToConfirm from '../components/ToConfirm.astro';
 import Sample from '../components/Sample.astro';
 import Icon from '../components/Icon.astro';
+import HmoMarquee from '../components/HmoMarquee.astro';
 import { hmo, site } from '../lib/data';
 ---
 <Base title="HMO & PhilHealth" description={`Accepted HMOs, HMO Hub location and hours, online approval, and PhilHealth at ${site.name}.`}>
@@ -44,7 +45,8 @@ import { hmo, site } from '../lib/data';
   <section class="section">
     <div class="container">
       <h2>Accepted HMOs <ToConfirm note="Names taken from the logos on the current homepage; confirm the official list with PDH" /></h2>
-      <p class="muted">Shown as text so patients, screen readers and search engines can read them. Each doctor’s profile also lists the HMOs they accept.</p>
+      <HmoMarquee />
+      <p class="muted" style="margin-top:16px">Also listed as text so patients, screen readers and search engines can read them. Each doctor’s profile also lists the HMOs they accept.</p>
       <ul class="cols-3">{hmo.partners.map((p) => <li>{p}</li>)}</ul>
     </div>
   </section>

@@ -1,7 +1,38 @@
 {
-  "_note": "HMO partners come from the logo alt-text on the current homepage (32 names, logos only). The brief asks for them to be shown as a text list marked [TO CONFIRM]. HMO Hub location/hours/phone are from the current site. The step-by-step process is a labeled sample — not on the current site.",
+  "_note": "HMO partners come from the logo alt-text on the current homepage (32 names, logos only). The brief asks for them to be shown as a text list marked [TO CONFIRM]. HMO Hub location/hours/phone are from the current site. The step-by-step process is a labeled sample — not on the current site. 'logos' are PDH's own partner logo files copied from the current site into public/hmo/ (originals in assets/hmo/), trimmed and sized to a common height.",
   "partners": [
-    "AMAPhil", "AsianCare", "Avega", "BenLife", "Cocolife", "CoopHealth", "EastWest Healthcare", "Etiqa", "Flexicare", "Fortune Life", "Generali", "Getwell Health System", "Healthbridge", "HMI", "HPPI", "ICare", "IMS Wellth Care", "Intellicare", "Kaiser", "Lacson & Lacson", "Maxicare", "MedAsia", "Medicard", "Medilink", "Medocare", "Metrocare", "Optimum", "Pacific", "PhilCare", "Royale Mariners Healthcare", "ValuCare", "Wellcare"
+    "AMAPhil",
+    "AsianCare",
+    "Avega",
+    "BenLife",
+    "Cocolife",
+    "CoopHealth",
+    "EastWest Healthcare",
+    "Etiqa",
+    "Flexicare",
+    "Fortune Life",
+    "Generali",
+    "Getwell Health System",
+    "Healthbridge",
+    "HMI",
+    "HPPI",
+    "ICare",
+    "IMS Wellth Care",
+    "Intellicare",
+    "Kaiser",
+    "Lacson & Lacson",
+    "Maxicare",
+    "MedAsia",
+    "Medicard",
+    "Medilink",
+    "Medocare",
+    "Metrocare",
+    "Optimum",
+    "Pacific",
+    "PhilCare",
+    "Royale Mariners Healthcare",
+    "ValuCare",
+    "Wellcare"
   ],
   "partnersConfirmed": false,
   "hub": {
@@ -20,10 +51,22 @@
   "process": {
     "sample": true,
     "steps": [
-      { "title": "Check your coverage", "text": "Confirm with your HMO that PDH and your doctor are accredited for the service you need. Your doctor’s profile lists the HMOs they accept." },
-      { "title": "Go to the HMO Hub", "text": "Bring your HMO card, a valid ID, and your doctor’s request. The Hub is on the Ground Floor." },
-      { "title": "Get your approval", "text": "The Hub coordinates your Letter of Authorization (LOA). For outpatient services you can also request approval online before you come." },
-      { "title": "Proceed to your service", "text": "Present your approval at the clinic, laboratory, or imaging desk. Any amount not covered is settled at the cashier." }
+      {
+        "title": "Check your coverage",
+        "text": "Confirm with your HMO that PDH and your doctor are accredited for the service you need. Your doctor’s profile lists the HMOs they accept."
+      },
+      {
+        "title": "Go to the HMO Hub",
+        "text": "Bring your HMO card, a valid ID, and your doctor’s request. The Hub is on the Ground Floor."
+      },
+      {
+        "title": "Get your approval",
+        "text": "The Hub coordinates your Letter of Authorization (LOA). For outpatient services you can also request approval online before you come."
+      },
+      {
+        "title": "Proceed to your service",
+        "text": "Present your approval at the clinic, laboratory, or imaging desk. Any amount not covered is settled at the cashier."
+      }
     ]
   },
   "philhealth": {
@@ -35,5 +78,199 @@
       "Submit the forms at Admitting (inpatient) or the service desk (outpatient).",
       "Your PhilHealth benefit is deducted from the bill before discharge."
     ]
-  }
+  },
+  "logos": [
+    {
+      "name": "Generali",
+      "file": "/hmo/generali.png",
+      "width": 198,
+      "height": 160
+    },
+    {
+      "name": "Royale Mariners Healthcare",
+      "file": "/hmo/royale-mariners-healthcare.png",
+      "width": 158,
+      "height": 160
+    },
+    {
+      "name": "Lacson & Lacson",
+      "file": "/hmo/lacson-lacson.png",
+      "width": 526,
+      "height": 160
+    },
+    {
+      "name": "HMI",
+      "file": "/hmo/hmi.png",
+      "width": 400,
+      "height": 160
+    },
+    {
+      "name": "Wellcare",
+      "file": "/hmo/wellcare.png",
+      "width": 224,
+      "height": 160
+    },
+    {
+      "name": "ICare",
+      "file": "/hmo/icare.png",
+      "width": 418,
+      "height": 160
+    },
+    {
+      "name": "Metrocare",
+      "file": "/hmo/metrocare.png",
+      "width": 320,
+      "height": 160
+    },
+    {
+      "name": "Healthbridge",
+      "file": "/hmo/healthbridge.png",
+      "width": 374,
+      "height": 160
+    },
+    {
+      "name": "Medocare",
+      "file": "/hmo/medocare.png",
+      "width": 348,
+      "height": 160
+    },
+    {
+      "name": "Fortune Life",
+      "file": "/hmo/fortune-life.png",
+      "width": 522,
+      "height": 160
+    },
+    {
+      "name": "Optimum",
+      "file": "/hmo/optimum.png",
+      "width": 774,
+      "height": 160
+    },
+    {
+      "name": "IMS Wellth Care",
+      "file": "/hmo/ims-wellth-care.png",
+      "width": 202,
+      "height": 160
+    },
+    {
+      "name": "MedAsia",
+      "file": "/hmo/medasia.png",
+      "width": 600,
+      "height": 160
+    },
+    {
+      "name": "Intellicare",
+      "file": "/hmo/intellicare.png",
+      "width": 528,
+      "height": 160
+    },
+    {
+      "name": "AMAPhil",
+      "file": "/hmo/amaphil.png",
+      "width": 370,
+      "height": 160
+    },
+    {
+      "name": "Getwell Health System",
+      "file": "/hmo/getwell-health-system.png",
+      "width": 186,
+      "height": 160
+    },
+    {
+      "name": "Pacific",
+      "file": "/hmo/pacific.png",
+      "width": 484,
+      "height": 160
+    },
+    {
+      "name": "Flexicare",
+      "file": "/hmo/flexicare.png",
+      "width": 706,
+      "height": 160
+    },
+    {
+      "name": "Etiqa",
+      "file": "/hmo/etiqa.png",
+      "width": 368,
+      "height": 160
+    },
+    {
+      "name": "Kaiser",
+      "file": "/hmo/kaiser.png",
+      "width": 980,
+      "height": 160
+    },
+    {
+      "name": "Avega",
+      "file": "/hmo/avega.png",
+      "width": 506,
+      "height": 160
+    },
+    {
+      "name": "PhilCare",
+      "file": "/hmo/philcare.png",
+      "width": 406,
+      "height": 160
+    },
+    {
+      "name": "BenLife",
+      "file": "/hmo/benlife.png",
+      "width": 494,
+      "height": 160
+    },
+    {
+      "name": "EastWest Healthcare",
+      "file": "/hmo/eastwest-healthcare.png",
+      "width": 474,
+      "height": 160
+    },
+    {
+      "name": "CoopHealth",
+      "file": "/hmo/coophealth.png",
+      "width": 160,
+      "height": 160
+    },
+    {
+      "name": "AsianCare",
+      "file": "/hmo/asiancare.png",
+      "width": 320,
+      "height": 160
+    },
+    {
+      "name": "Maxicare",
+      "file": "/hmo/maxicare.png",
+      "width": 494,
+      "height": 160
+    },
+    {
+      "name": "ValuCare",
+      "file": "/hmo/valucare.png",
+      "width": 534,
+      "height": 160
+    },
+    {
+      "name": "Medilink",
+      "file": "/hmo/medilink.png",
+      "width": 572,
+      "height": 160
+    },
+    {
+      "name": "HPPI",
+      "file": "/hmo/hppi.png",
+      "width": 348,
+      "height": 160
+    },
+    {
+      "name": "Medicard",
+      "file": "/hmo/medicard.png",
+      "width": 578,
+      "height": 160
+    },
+    {
+      "name": "Cocolife",
+      "file": "/hmo/cocolife.png",
+      "width": 608,
+      "height": 160
+    }
+  ]
 }

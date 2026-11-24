@@ -51,10 +51,10 @@
   --radius-sm: 10px;
   --radius-pill: 999px;
   --shadow: 0 1px 2px rgba(0, 92, 94, 0.05), 0 12px 32px rgba(0, 92, 94, 0.08);
-  --font-body: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-head: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-  --head-weight: 500;
-  --head-tracking: -0.035em;
+  --font-body: "Instrument Sans Variable", "Instrument Sans", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --font-head: "Schibsted Grotesk Variable", "Schibsted Grotesk", "Segoe UI", system-ui, Arial, sans-serif;
+  --head-weight: 600;
+  --head-tracking: -0.03em;
   --head-transform: none;
 }
 
