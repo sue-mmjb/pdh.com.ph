@@ -1,6 +1,6 @@
 # PDH Website Prototype — project rules
 
-Website prototype for **Parañaque Doctors Hospital (PDH)**, a Level 2 private hospital in Parañaque City, Philippines, and a member of Metro Pacific Health. Iozera delivers a working site at the first meeting instead of a proposal. The site must look finished, work on a phone first, and be reusable as a template for other hospitals.
+Website prototype for **Parañaque Doctors Hospital (PDH)**, a private hospital in Parañaque City, Philippines, and a member of Metro Pacific Health. Iozera delivers a working site at the first meeting instead of a proposal. The site must look finished, work on a phone first, and be reusable as a template for other hospitals.
 
 Source of truth: `context/PDH_Claude_Code_Brief.md`. Supporting material: `context/PDH_Website_Text_Only.txt` (homepage scrape) and `context/full-site-crawl/` (413-page crawl of pdh.com.ph, 25 Nov 2026, including 288 doctor pages).
 
@@ -9,6 +9,7 @@ Source of truth: `context/PDH_Claude_Code_Brief.md`. Supporting material: `conte
 - **NEVER invent facts.** No made-up doctor names, HMOs, prices, hours, phone numbers or services. Use only what the context files state. Where something is missing or inconsistent, render the `<ToConfirm />` marker on the page and log it in `CONFIRM.md`.
 - **The ER number is not confirmed.** The Emergency button must appear on every page (header, mobile bottom bar, Kriss panel, footer) with a `[TO CONFIRM]` marker next to the number.
 - Spell the name **"Parañaque Doctors Hospital"** — no apostrophe.
+- Do not state a DOH hospital level anywhere on the site (Sue, 25 Nov 2026) until PDH confirms it; `site.dohLevel` is null on purpose.
 - **No analytics, tracking pixels, cookies or third-party scripts.** The only scripts are small inline first-party ones (menu toggle, Kriss panel toggle, doctor filter, form stub, theme memory) and GSAP, which is installed from npm and bundled into the site at build time — never loaded from a CDN, never phoning home. Google Fonts are not used either; fonts are system stacks. Animations are skipped when the visitor prefers reduced motion. Decision confirmed by Sue on 25 Nov 2026: keep GSAP bundled locally; do not replace it with CSS-only motion unless PDH rules out libraries.
 - **Forms** collect only name, contact details, preferred channel and service needed. No symptoms, medical history or free-text condition field. Forms send nothing; on submit they show "Prototype: request not sent."
 - **Kriss.ai is a placeholder slot only** (`src/components/Kriss.astro`). Do not build or fake an AI chatbot.

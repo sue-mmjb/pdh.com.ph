@@ -55,7 +55,7 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 
 ## Not confirmed but shown as published (verify at sign-off)
 
-- DOH level: "Level 2" (About page)
+- DOH level: PDH's About page says "Level 2", but the site does not state it (removed 25 Nov 2026 at Sue's request) until PDH confirms the classification
 - Founded May 8, 2007; MPH member since 2024 (About page)
 - Stats 94 beds / 320 doctors / 410 employees (homepage)
 - Floors and hours for every service (Our Services page)

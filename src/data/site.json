@@ -4,8 +4,8 @@
   "shortName": "PDH",
   "legalNote": "No apostrophe in the name.",
   "tagline": "Alagang PDH — care that feels like home",
-  "description": "Parañaque Doctors Hospital (PDH) is a Level 2 healthcare institution in the heart of Parañaque City, committed to high-quality and affordable healthcare services.",
-  "dohLevel": "Level 2",
+  "description": "Parañaque Doctors Hospital (PDH) is a healthcare institution in the heart of Parañaque City, committed to high-quality and affordable healthcare services.",
+  "dohLevel": null,
   "founded": "May 8, 2007",
   "network": {
     "name": "Metro Pacific Health",
@@ -176,7 +176,7 @@
     "Urgent Care"
   ],
   "about": {
-    "intro": "Parañaque Doctors Hospital (PDH) is a premier Level 2 healthcare institution located in the heart of Parañaque City. It is committed to ensuring the well-being of its community by continuously providing high-quality and affordable healthcare services.",
+    "intro": "Parañaque Doctors Hospital (PDH) is a premier healthcare institution located in the heart of Parañaque City. It is committed to ensuring the well-being of its community by continuously providing high-quality and affordable healthcare services.",
     "history": "Founded on May 8, 2007, by visionary doctors, PDH officially became a member of the Metro Pacific Health (MPH) Group in 2024 — the largest Philippine private hospital network in the country under the Metro Pacific Investments Corporation (MPIC), led by Mr. Manuel V. Pangilinan.",
     "facilitiesLine": "With a comprehensive range of medical facilities—including a 94-bed inpatient facility, Emergency Room (ER), Intensive Care Unit (ICU), Neonatal Intensive Care Unit (NICU), Operating Room (OR), Delivery Room (DR), Laboratory, and Radiology, PDH is also accredited by the Department of Health (DOH), PhilHealth, and various Health Maintenance Organizations (HMOs), ensuring accessible healthcare and full compliance with government-regulated standards.",
     "mission": "To deliver “Alagang PDH”, our unique way of delivering high quality and compassionate care that is affordable, accessible, and patient-centered.",
@@ -342,5 +342,6 @@
     "Debit card",
     "HMO accepted"
   ],
-  "legalName": "UHBI-Parañaque Doctors Hospital, Inc."
+  "legalName": "UHBI-Parañaque Doctors Hospital, Inc.",
+  "dohLevelNote": "PDH's About page says 'Level 2'; withheld from the site at Sue's request (25 Nov 2026) until PDH confirms the DOH classification."
 }
