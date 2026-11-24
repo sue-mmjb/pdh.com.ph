@@ -45,7 +45,10 @@ const faqs = [
       <p class="small muted cp-reveal" style="text-align:center;margin-top:14px">ER open 24/7 · Ground Floor · <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></p>
     </div>
     <div class="container cp-hero_media" data-cp-parallax>
-      <Placeholder label="PDH building or information desk (supplied by PDH)" ratio="16x9" class="cp-hero_ph" />
+      <picture class="cp-hero_pic">
+        <source srcset="/photos/pdh-facade.webp" type="image/webp" />
+        <img class="cp-hero_img" src="/photos/pdh-facade.jpg" alt="Parañaque Doctors Hospital building on Doña Soledad Avenue, with the Emergency entrance at street level" width="909" height="489" fetchpriority="high" decoding="async" />
+      </picture>
     </div>
   </section>
 
@@ -245,7 +248,8 @@ const faqs = [
   .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 6vw, 6rem); line-height: 1.0; letter-spacing: -0.04em; font-weight: 600; max-width: 14ch; margin: 12px auto 0.3em; }
   .cp-lead { max-width: 60ch; margin: 0 auto 24px; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); color: var(--ink-soft); }
   .cp-hero_media { margin-top: 40px; will-change: transform; }
-  .cp-hero_ph { border-radius: 24px; }
+  .cp-hero_pic { display: block; }
+  .cp-hero_img { display: block; width: 100%; height: auto; aspect-ratio: 909 / 489; object-fit: cover; border-radius: 24px; box-shadow: 0 24px 60px rgba(0, 92, 94, 0.18); }
   .cp-statement { padding: 96px 0 56px; }
   .cp-big { font-size: clamp(1.6rem, 1rem + 2.6vw, 3.2rem); line-height: 1.15; letter-spacing: -0.03em; font-weight: 600; font-family: var(--font-head); max-width: 24ch; margin: 0; color: var(--heading); }
   :global(.cp-word) { opacity: 0.22; transition: opacity 0.2s; }
