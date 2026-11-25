@@ -16,8 +16,17 @@ import { rooms, site } from '../lib/data';
       <div class="grid grid-2">
         {rooms.rooms.map((r) => (
           <article class="card">
-            <Placeholder label={r.name} ratio="16x9" />
-            <h3 style="margin-top:16px">{r.name}</h3>
+            {r.photos.length > 0 ? (
+              <div class="room-photos">
+                <img class="room-photo-main" src={r.photos[0].src} alt={r.photos[0].alt} width="831" height="302" loading="lazy" decoding="async" />
+                <div class="room-photo-row">
+                  {r.photos.slice(1).map((ph) => <img src={ph.src} alt={ph.alt} width="831" height="302" loading="lazy" decoding="async" />)}
+                </div>
+              </div>
+            ) : (
+              <Placeholder label={r.name} ratio="16x9" />
+            )}
+            <h3 style="margin-top:16px">{r.name} {r.status && <span class="badge-sample">{r.status}</span>}</h3>
             <p class="meta" style="margin-bottom:8px">{r.capacity}</p>
             <p class="small">{r.text}</p>
             {r.amenities.length > 0 && <ul class="chips">{r.amenities.map((a) => <li>{a}</li>)}</ul>}
@@ -42,5 +51,11 @@ import { rooms, site } from '../lib/data';
       <p style="margin-top:24px"><a class="btn btn-primary" href="/book/">Request admission information</a></p>
     </div>
   </section>
-  <style>.inline-ic { width: 16px; height: 16px; display: inline; vertical-align: -3px; }</style>
+  <style>
+    .room-photos { display: grid; gap: 8px; }
+    .room-photos img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); object-fit: cover; }
+    .room-photo-main { aspect-ratio: 831 / 302; }
+    .room-photo-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .room-photo-row img { aspect-ratio: 2 / 1; }
+    .inline-ic { width: 16px; height: 16px; display: inline; vertical-align: -3px; }</style>
 </Base>

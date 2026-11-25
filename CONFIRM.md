@@ -50,7 +50,9 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | Item | Detail |
 | --- | --- |
 | Logo | Official lockup in `assets/` is used in the header and footer |
-| Photos | None supplied; labeled placeholders on every image slot |
+| Room photos | 20 photos of the Ward, Semi-private, Private, Suite and Isolation rooms, cropped from screenshots of PDH's current site (low resolution). PDH to confirm use and supply originals |
+| Premium Labor Room | Marked "Soon to open", as on the current site; no photo. PDH to confirm opening status |
+| Other photos | None supplied; labeled placeholders on every other image slot |
 | Domain | `astro.config.mjs` uses the Vercel address `https://pdhcomph.vercel.app` until PDH chooses a domain |
 
 ## Not confirmed but shown as published (verify at sign-off)
