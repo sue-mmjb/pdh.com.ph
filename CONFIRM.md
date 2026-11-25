@@ -94,3 +94,4 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | Chatbot | Launcher and panel are a labelled placeholder; the working demo is a separate link | Done |
 | Hero and people photos | PDH doctors' published photos; staff and patient photos cropped from PDH's own slides | [TO CONFIRM] PDH approves these for the homepage |
 | Loading performance | Images re-encoded (cut-outs 2.2 MB to 0.2 MB); not yet measured on a slow connection | Test pending |
+| Department photos | Real photos on 11 service cards (ER building, Laboratory, Multi-Diagnostic, Hemodialysis, Rehabilitation, ICU, Outpatient, Admitting, Patient Experience, OB Ultrasound, Pulmonary); the other 12 keep illustrations | PDH to supply approved department photos for the rest |

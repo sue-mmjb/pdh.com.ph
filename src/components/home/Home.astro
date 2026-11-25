@@ -153,7 +153,9 @@ const faqs = [
               <a class="cp-svc_card cp-reveal" href={`/services/${s.slug}/`}>
                 <strong class="cp-svc_name">{s.name}</strong>
                 <span class="cp-svc_meta">{floor.startsWith('Upper') && s.location ? `${s.location} · ` : ''}{shortHours(s)}</span>
-                {s.illustration ? <img class="cp-svc_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle cp-svc_ic"><Icon name={s.icon} /></span>}
+                {s.image
+                  ? <img class="cp-svc_photo" src={s.image} alt="" width="160" height="120" loading="lazy" decoding="async" />
+                  : s.illustration ? <img class="cp-svc_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle cp-svc_ic"><Icon name={s.icon} /></span>}
               </a>
             ))}
           </div>
@@ -412,6 +414,8 @@ const faqs = [
   .cp-svc_meta { font-size: 0.85rem; color: var(--ink-soft); }
   .cp-svc_art { position: absolute; right: 10px; bottom: 8px; width: 64px; height: 64px; object-fit: contain; object-position: right bottom; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
   .cp-svc_card:hover .cp-svc_art { transform: translateY(-4px) scale(1.06); }
+  .cp-svc_photo { position: absolute; right: 10px; bottom: 10px; width: 76px; height: 60px; object-fit: cover; object-position: center 30%; border-radius: 10px; box-shadow: 0 5px 14px rgba(0,92,94,0.16); pointer-events: none; }
+  @media (min-width: 900px) { .cp-svc_photo { width: 84px; height: 64px; } }
   .cp-svc_ic { position: absolute; right: 14px; bottom: 14px; margin: 0; }
   @media (min-width: 900px) { .cp-svc_card { padding-right: 92px; min-height: 120px; } .cp-svc_art { width: 72px; height: 72px; } }
   .cp-two { display: grid; gap: 20px; }
