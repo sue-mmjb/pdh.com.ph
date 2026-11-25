@@ -49,6 +49,8 @@ const faqs = [
 <div class="cp" data-cp>
   <!-- 1 · Hero: headline, two equal searches (doctor and service), real PDH people -->
   <section class="cp-hero">
+    <img class="cp-hero_bg" src="/photos/hero-doctor.webp" alt="" width="977" height="1082" fetchpriority="high" decoding="async" />
+    <div class="cp-hero_fade" aria-hidden="true"></div>
     <div class="cp-hero_glow" aria-hidden="true"></div>
     <div class="container cp-hero_grid">
       <div class="cp-hero_copy">
@@ -61,7 +63,7 @@ const faqs = [
           <form class="cp-hero_search" action="/doctors/" method="get" role="search">
             <label class="cp-hero_lbl" for="hero-q">Find a doctor</label>
             <div class="cp-hero_row">
-              <div class="cp-hero_field"><Icon name="search" /><input id="hero-q" name="q" type="search" list="hero-doc-suggest" placeholder="Name, specialty or concern (e.g. heart)" autocomplete="off" /></div>
+              <div class="cp-hero_field"><Icon name="search" /><input id="hero-q" name="q" type="search" list="hero-doc-suggest" placeholder="Name or specialty" autocomplete="off" /></div>
               <button class="btn btn-primary cp-hero_btn" type="submit">Search</button>
             </div>
             <datalist id="hero-doc-suggest"><option value="Cardiology"></option><option value="Pediatrics"></option><option value="Obstetrics & Gynecology"></option><option value="Internal Medicine"></option><option value="Dermatology"></option><option value="ENT"></option><option value="Ophthalmology"></option><option value="Orthopedic Surgery"></option><option value="Neurology"></option><option value="Nephrology"></option><option value="Pulmonology"></option><option value="Gastroenterology"></option><option value="Endocrinology"></option><option value="Oncology"></option><option value="Urology"></option><option value="Dentistry"></option><option value="General Surgery"></option><option value="Family Medicine"></option><option value="Rehabilitation"></option><option value="Radiology"></option></datalist>
@@ -69,7 +71,7 @@ const faqs = [
           <form class="cp-hero_search" action="/services/" method="get" role="search">
             <label class="cp-hero_lbl" for="hero-s">Find a service</label>
             <div class="cp-hero_row">
-              <div class="cp-hero_field"><Icon name="search" /><input id="hero-s" name="q" type="search" list="hero-svc-suggest" placeholder="Service or need (e.g. dialysis, x-ray)" autocomplete="off" /></div>
+              <div class="cp-hero_field"><Icon name="search" /><input id="hero-s" name="q" type="search" list="hero-svc-suggest" placeholder="Service or need" autocomplete="off" /></div>
               <button class="btn btn-accent cp-hero_btn" type="submit">Search</button>
             </div>
             <datalist id="hero-svc-suggest"><option value="Emergency Room"></option><option value="Laboratory"></option><option value="Radiology"></option><option value="Pharmacy"></option><option value="Hemodialysis"></option><option value="Physical Medicine and Rehabilitation"></option><option value="Eye Center"></option><option value="Dental Services"></option><option value="OB Ultrasound"></option><option value="Multi-Diagnostic Center"></option><option value="ICU"></option><option value="NICU"></option><option value="Admitting"></option><option value="Medical Records"></option><option value="Animal Bite Center"></option><option value="Nuclear Medicine"></option></datalist>
@@ -330,21 +332,27 @@ const faqs = [
   @media (prefers-reduced-motion: reduce) { .cp-reveal { opacity: 1; } }
 
   .cp-hero { position: relative; overflow: hidden; padding: 40px 0 32px; background: #fbfbfa; }
+  /* PDH's own hero photo (doctor with stethoscope) as the backdrop, fading into the page on the text side */
+  .cp-hero_bg { position: absolute; top: 0; right: 0; height: 100%; width: auto; max-width: none; object-fit: cover; object-position: right top; pointer-events: none; }
+  .cp-hero_fade { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(251,251,250,0.55) 0%, rgba(251,251,250,0.9) 42%, #fbfbfa 62%, #fbfbfa 100%); }
+  @media (min-width: 900px) {
+    .cp-hero_bg { height: 100%; }
+    .cp-hero_fade { background: linear-gradient(90deg, #fbfbfa 0%, #fbfbfa 34%, rgba(251,251,250,0.9) 44%, rgba(251,251,250,0.3) 56%, rgba(251,251,250,0) 68%), linear-gradient(180deg, rgba(251,251,250,0) 62%, #fbfbfa 100%); } }
   .cp-hero_glow { position: absolute; inset: 0; pointer-events: none;
     background: radial-gradient(55% 75% at 8% 0%, rgba(0,163,165,0.20), transparent 70%), radial-gradient(35% 50% at 100% 100%, rgba(255,116,2,0.10), transparent 70%); }
-  .cp-hero_grid { position: relative; display: grid; gap: 20px; grid-template-areas: "copy" "card" "more"; }
+  .cp-hero_grid { position: relative; display: grid; gap: 18px; grid-template-areas: "copy" "card" "more"; }
   .cp-hero_copy { grid-area: copy; text-align: left; }
   .cp-hero_cardwrap { grid-area: card; }
   .cp-hero_more { grid-area: more; }
-  @media (min-width: 900px) { .cp-hero { padding: 72px 0 48px; }
-    .cp-hero_grid { grid-template-columns: 1.1fr 1fr; grid-template-areas: "copy card" "more card"; column-gap: 56px; row-gap: 8px; align-items: start; }
-    .cp-hero_cardwrap { align-self: center; } }
-  .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 4.4vw, 5rem); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600; max-width: 12ch; margin: 12px 0 0.3em; }
+  @media (min-width: 900px) { .cp-hero { padding: 64px 0 40px; }
+    .cp-hero_grid { grid-template-columns: minmax(0, 640px) 1fr; grid-template-areas: "copy ." "card ." "more ."; row-gap: 18px; align-items: start; } }
+  .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 3.6vw, 4.4rem); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600; max-width: 12ch; margin: 12px 0 0.3em; }
   .cp-hero_rule { margin: 4px 0 0; }
   .cp-lead { max-width: 46ch; margin: 0 0 18px; font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem); color: var(--ink-soft); }
   /* The card: two equal searches, doctor and service */
-  .cp-hero_card { display: grid; gap: 14px; padding: 20px; background: #f6f5f2; border: 1px solid rgba(16,48,63,0.06); border-radius: 24px; box-shadow: 0 24px 60px rgba(0,92,94,0.14), 0 2px 0 #fff inset; }
-  @media (min-width: 900px) { .cp-hero_card { padding: 24px; } }
+  .cp-hero_card { display: grid; gap: 14px; padding: 20px; background: rgba(255,255,255,0.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(16,48,63,0.06); border-radius: 24px; box-shadow: 0 24px 60px rgba(0,92,94,0.14), 0 2px 0 #fff inset; }
+  @media (min-width: 900px) { .cp-hero_card { padding: 22px 24px; grid-template-columns: 1fr 1fr; column-gap: 20px; } .cp-hero_now { grid-column: 1 / -1; } }
   .cp-hero_search { display: grid; gap: 8px; }
   .cp-hero_lbl { font-family: var(--font-head); font-weight: 600; font-size: 1.05rem; color: var(--heading); letter-spacing: -0.01em; }
   .cp-hero_row { display: flex; gap: 8px; }
@@ -364,7 +372,7 @@ const faqs = [
   .cp-faces_txt strong { color: var(--heading); }
   .cp-faces:hover .cp-faces_txt { color: var(--pdh-teal-text); }
   /* Real PDH staff and patients, below the hero */
-  .cp-people { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 28px; }
+  .cp-people { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 24px; }
   @media (min-width: 720px) { .cp-people { grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 36px; } }
   .cp-people img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px; background: #e6f6f6; box-shadow: 0 10px 30px rgba(0,92,94,0.12); }
   .cp-people_cap { grid-column: 1 / -1; margin: 4px 0 0; font-size: 0.85rem; color: var(--ink-soft); }
