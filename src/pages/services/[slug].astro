@@ -82,7 +82,11 @@ const isER = s.slug === 'emergency-room';
       </div>
 
       <aside>
-        {s.image ? <img src={s.image} alt={`${s.name} at PDH`} loading="lazy" decoding="async" style="width:100%;height:auto;border-radius:var(--radius)" /> : <Placeholder label={`${s.name} at PDH`} ratio="4x3" />}
+        {s.image
+          ? <img src={s.image} alt={`${s.name} at PDH`} loading="lazy" decoding="async" style="width:100%;height:auto;border-radius:var(--radius)" />
+          : s.illustration
+            ? <div class="svc-art" aria-hidden="true"><img src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /></div>
+            : <Placeholder label={`${s.name} at PDH`} ratio="4x3" />}
         <div class="card" style="margin-top:16px">
           <h3 style="font-size:1.05rem">Next step</h3>
           {isER
@@ -107,6 +111,10 @@ const isER = s.slug === 'emergency-room';
   )}
 
   <style>
+  /* Departments without a PDH photo yet show their illustration on a tinted panel */
+  .svc-art { aspect-ratio: 4 / 3; display: grid; place-items: center; border-radius: var(--radius); background: radial-gradient(70% 70% at 50% 60%, #ffffff 0%, var(--pdh-teal-tint) 70%, #d9f0f0 100%); border: 1px solid var(--line); }
+  .svc-art img { width: 58%; height: auto; max-width: 220px; filter: drop-shadow(0 12px 18px rgba(0,92,94,0.18)); }
+
     .svc-grid { display: grid; gap: 32px; }
     @media (min-width: 900px) { .svc-grid { grid-template-columns: 1.6fr 1fr; align-items: start; } aside { position: sticky; top: calc(var(--optionbar-h) + var(--header-h) + 16px); } }
   </style>

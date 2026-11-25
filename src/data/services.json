@@ -120,12 +120,13 @@
       "icon": "heart",
       "hoursAlt": "A homepage slide lists Echocardiogram (pedia & adult) Monday–Sunday 6 AM–7 PM and Vascular procedures Monday–Saturday 8 AM–5 PM, which differs from the Our Services page.",
       "hoursConfirmed": false,
-      "image": "/photos/svc-consultation.webp",
+      "image": "/photos/svc-echo.webp",
       "illustration": "/icons/services/multi-diagnostic-center.png"
     },
     {
       "slug": "pulmonary",
       "name": "Pulmonary",
+      "image": "/photos/svc-consultation.webp",
       "short": "Pulmonary",
       "summary": "We provide expert services for respiratory conditions.",
       "detail": "We offer procedures designed to address respiratory conditions and support patients through accurate diagnoses for healthier lungs.",
