@@ -151,11 +151,14 @@ const faqs = [
           <div class="cp-svc">
             {list.map((s) => (
               <a class="cp-svc_card cp-reveal" href={`/services/${s.slug}/`}>
-                <strong class="cp-svc_name">{s.name}{s.status && <span class="cp-svc_soon">{s.status}</span>}</strong>
+                <span class="cp-svc_band">
+                  {s.image
+                    ? <img class="cp-svc_photo" src={s.image} alt="" width="430" height="240" loading="lazy" decoding="async" />
+                    : s.illustration ? <img class="cp-svc_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle cp-svc_ic"><Icon name={s.icon} /></span>}
+                  {s.status && <span class="cp-svc_soon">{s.status}</span>}
+                </span>
+                <strong class="cp-svc_name">{s.name}</strong>
                 <span class="cp-svc_meta">{floor.startsWith('Upper') && s.location ? `${s.location} · ` : ''}{shortHours(s)}</span>
-                {s.image
-                  ? <img class="cp-svc_photo" src={s.image} alt="" width="160" height="120" loading="lazy" decoding="async" />
-                  : s.illustration ? <img class="cp-svc_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle cp-svc_ic"><Icon name={s.icon} /></span>}
               </a>
             ))}
           </div>
@@ -408,17 +411,20 @@ const faqs = [
   .cp-svc { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (min-width: 720px) { .cp-svc { grid-template-columns: repeat(3, 1fr); } }
   @media (min-width: 1100px) { .cp-svc { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
-  .cp-svc_card { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 14px 84px 14px 14px; background: var(--card); border-radius: var(--radius); text-decoration: none; color: inherit; border: 1px solid transparent; min-height: 112px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+  .cp-svc_card { position: relative; display: flex; flex-direction: column; gap: 3px; padding: 0 14px 14px; background: var(--card); border-radius: var(--radius); text-decoration: none; color: inherit; border: 1px solid transparent; overflow: hidden; transition: border-color 0.2s, transform 0.25s, box-shadow 0.25s; }
+  .cp-svc_band { position: relative; display: block; height: 104px; margin: 0 -14px 10px; overflow: hidden; background: var(--pdh-teal-tint); }
   .cp-svc_card:hover { border-color: var(--pdh-teal); transform: translateY(-2px); }
   .cp-svc_name { font-family: var(--font-head); font-weight: 600; font-size: 0.98rem; line-height: 1.25; letter-spacing: -0.01em; color: var(--heading); text-wrap: balance; }
-  .cp-svc_soon { display: inline-block; margin-left: 6px; padding: 2px 7px; border-radius: 999px; background: var(--pdh-orange); color: #fff; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; }
+  .cp-svc_soon { position: absolute; left: 10px; top: 10px; padding: 3px 8px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,0.18); background: var(--pdh-orange); color: #fff; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; }
   .cp-svc_meta { font-size: 0.85rem; color: var(--ink-soft); }
-  .cp-svc_art { position: absolute; right: 10px; bottom: 8px; width: 64px; height: 64px; object-fit: contain; object-position: right bottom; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
+  .cp-svc_art { position: absolute; right: 10px; bottom: 6px; width: 72px; height: 72px; object-fit: contain; object-position: right bottom; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
   .cp-svc_card:hover .cp-svc_art { transform: translateY(-4px) scale(1.06); }
-  .cp-svc_photo { position: absolute; right: 10px; bottom: 10px; width: 76px; height: 60px; object-fit: cover; object-position: center 30%; border-radius: 10px; box-shadow: 0 5px 14px rgba(0,92,94,0.16); pointer-events: none; }
-  @media (min-width: 900px) { .cp-svc_photo { width: 84px; height: 64px; } }
+  .cp-svc_photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; transition: transform 0.45s cubic-bezier(.2,.7,.2,1); }
+  .cp-svc_card:hover .cp-svc_photo { transform: scale(1.06); }
+  .cp-svc_card:hover { box-shadow: 0 14px 34px rgba(0,92,94,0.14); }
+  @media (prefers-reduced-motion: reduce) { .cp-svc_photo { transition: none; } .cp-svc_card:hover .cp-svc_photo { transform: none; } }
   .cp-svc_ic { position: absolute; right: 14px; bottom: 14px; margin: 0; }
-  @media (min-width: 900px) { .cp-svc_card { padding-right: 92px; min-height: 120px; } .cp-svc_art { width: 72px; height: 72px; } }
+  @media (min-width: 900px) { .cp-svc_band { height: 116px; } }
   .cp-two { display: grid; gap: 20px; }
   @media (min-width: 900px) { .cp-two { grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; } }
   .cp-marquee { margin-top: 24px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }

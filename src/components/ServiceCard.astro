@@ -5,24 +5,29 @@ interface Props { service: Service; compact?: boolean; }
 const { service: s, compact = false } = Astro.props;
 ---
 <a class="card card-link svc-card" href={`/services/${s.slug}/`} data-text={[s.name, s.short, s.summary, s.location, ...(s.offered || [])].filter(Boolean).join(' ').toLowerCase()}>
-  {s.image
-    ? <img class="svc-card_photo" src={s.image} alt="" width="160" height="120" loading="lazy" decoding="async" />
-    : s.illustration ? <img class="svc-card_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle"><Icon name={s.icon} /></span>}
-  <h3 class="svc-card_name">{s.name}{s.status && <span class="svc-soon">{s.status}</span>}</h3>
+  <span class="svc-card_band">
+    {s.image
+      ? <img class="svc-card_photo" src={s.image} alt="" width="430" height="240" loading="lazy" decoding="async" />
+      : s.illustration ? <img class="svc-card_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle"><Icon name={s.icon} /></span>}
+    {s.status && <span class="svc-soon">{s.status}</span>}
+  </span>
+  <h3 class="svc-card_name">{s.name}</h3>
   {!compact && <p class="muted small">{s.summary}</p>}
   <p class="meta">{shortHours(s)}</p>
 </a>
 
 <style>
-  .svc-card { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px; }
-  .svc-card h3 { margin: 0; }
-  .svc-soon { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; background: var(--pdh-orange); color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; }
+  /* Photo band on top (PDH's own department photo), name and hours below; the photo zooms gently on hover */
+  .svc-card { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px; padding: 0 18px 18px; transition: transform 0.25s, box-shadow 0.25s, border-color 0.2s; }
+  .svc-card:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,92,94,0.14); }
+  .svc-card h3 { margin: 14px 0 0; }
   .svc-card_name { font-size: 1.05rem; line-height: 1.25; text-wrap: balance; }
   .svc-card .meta { margin: 0; }
-  .svc-card { padding-bottom: 104px; min-height: 196px; }
+  .svc-card_band { position: relative; display: block; height: 140px; margin: 0 -18px; overflow: hidden; background: var(--pdh-teal-tint); }
+  .svc-card_photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; transition: transform 0.45s cubic-bezier(.2,.7,.2,1); }
+  .svc-card:hover .svc-card_photo { transform: scale(1.06); }
+  .svc-card_art { position: absolute; right: 16px; bottom: 10px; width: 96px; height: 96px; object-fit: contain; }
   .svc-card .icon-circle { position: absolute; right: 16px; bottom: 16px; margin: 0; }
-  .svc-card_art { position: absolute; right: 12px; bottom: 10px; width: 88px; height: 88px; object-fit: contain; object-position: right bottom; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
-  .svc-card:hover .svc-card_art { transform: translateY(-4px) scale(1.06); }
-  .svc-card_photo { position: absolute; right: 12px; bottom: 12px; width: 112px; height: 84px; object-fit: cover; object-position: center 30%; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,92,94,0.16); pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
-  .svc-card:hover .svc-card_photo { transform: translateY(-3px) scale(1.03); }
+  .svc-soon { position: absolute; left: 12px; top: 12px; padding: 4px 10px; border-radius: 999px; background: var(--pdh-orange); color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; box-shadow: 0 4px 12px rgba(0,0,0,0.18); }
+  @media (prefers-reduced-motion: reduce) { .svc-card, .svc-card_photo { transition: none; } .svc-card:hover .svc-card_photo { transform: none; } }
 </style>
