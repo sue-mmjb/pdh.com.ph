@@ -16,10 +16,22 @@ export function heartbeatRule(rule: HTMLElement, heading: Element | null): void 
   const draw = () => {
     const fallback = rule.parentElement ? rule.parentElement.clientWidth : 240;
     const w = Math.max(96, Math.round(textWidth(heading) || fallback));
-    const h = 34, mid = 13;
-    const sx = Math.round(w * 0.62);
-    // the heart: its top notch sits on the line, lobes rise above it, the tip dips below
-    const d = `M0 ${mid} H${sx} c-4 -12 -18 -12 -14 0 c2 6 8 9 14 16 c6 -7 12 -10 14 -16 c4 -12 -10 -12 -14 0 H${w}`;
+    const h = 48, y = 34;                     // baseline; the heart rises above it
+    const cx = Math.round(w * 0.6);           // where the stroke loops into the heart
+    const f = (v: number) => Math.round(v * 10) / 10;
+    // One calligraphic stroke: a swell, a dip, up into the right lobe, over the notch and the
+    // left lobe, down to the tip, across the crossing and out into a closing wave.
+    const d = [
+      `M0 ${y}`,
+      `C${f(w * 0.10)} ${y - 16} ${f(w * 0.20)} ${y - 14} ${f(w * 0.32)} ${y - 2}`,
+      `C${f(w * 0.40)} ${y + 6} ${f(w * 0.47)} ${y + 10} ${cx - 16} ${y + 6}`,
+      `C${cx - 4} ${y - 4} ${cx + 4} ${y - 30} ${cx + 18} ${y - 31}`,
+      `C${cx + 32} ${y - 32} ${cx + 32} ${y - 14} ${cx + 10} ${y - 10}`,
+      `C${cx + 4} ${y - 24} ${cx - 10} ${y - 36} ${cx - 22} ${y - 26}`,
+      `C${cx - 34} ${y - 16} ${cx - 18} ${y + 2} ${cx - 2} ${y + 10}`,
+      `C${cx + 6} ${y + 4} ${cx + 10} ${y - 2} ${cx + 22} ${y - 2}`,
+      `C${f(w * 0.74)} ${y - 12} ${f(w * 0.86)} ${y + 8} ${w} ${y}`,
+    ].join(' ');
     rule.style.width = `${w}px`;
     rule.innerHTML = `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true" focusable="false">` +
       `<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#bfe8e6"/><stop offset="0.45" stop-color="#7fd3cf"/><stop offset="1" stop-color="#ff7402"/></linearGradient></defs>` +

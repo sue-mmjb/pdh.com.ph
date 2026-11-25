@@ -356,8 +356,8 @@ details.acc .body { padding: 0 16px 16px; color: var(--ink-soft); }
 /* Heart signature heading rules (built by src/scripts/heartbeat.ts): a faint guide line, then the
    signature writes itself once the rule scrolls into view */
 .cp-rule svg, .page-rule svg { display: block; overflow: visible; }
-.hb-base, .hb-sweep { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-.hb-base { opacity: 0.22; }
+.hb-base, .hb-sweep { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.hb-base { opacity: 0.4; }
 .hb-sweep { stroke-dashoffset: var(--hb-len, 0); }
 .is-on .hb-sweep { animation: hb-write 5.2s cubic-bezier(.4,.2,.3,1) infinite; }
 @keyframes hb-write {
