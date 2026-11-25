@@ -297,7 +297,7 @@
       "preparation": null,
       "featured": false,
       "icon": "monitor",
-      "image": "/photos/pillar-patient-safety.webp",
+      "image": "/photos/pillar-accessible.webp",
       "illustration": "/icons/services/icu.png"
     },
     {
@@ -366,7 +366,7 @@
       "preparation": "Check your doctor’s clinic schedule on their profile, then call to book. Bring previous results and a list of your medications.",
       "featured": true,
       "icon": "stethoscope",
-      "image": "/photos/pillar-compassion.webp",
+      "image": "/photos/pillar-patient-safety.webp",
       "illustration": "/icons/services/outpatient-clinics.png"
     },
     {
@@ -582,7 +582,7 @@
       "preparation": null,
       "featured": false,
       "icon": "smile",
-      "image": "/photos/pillar-accessible.webp",
+      "image": "/photos/pillar-compassion.webp",
       "illustration": "/icons/services/patient-experience.png"
     }
   ],
