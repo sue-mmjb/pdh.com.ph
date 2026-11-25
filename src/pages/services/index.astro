@@ -70,6 +70,13 @@ const tbd = services.filter((s) => !s.hours);
     .svc-search label { display: block; font-weight: 600; margin-bottom: 6px; }
     .svc-search_row { display: flex; flex-wrap: wrap; gap: 8px; }
     .svc-search_row input { flex: 1 1 240px; min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 12px; font: inherit; }
+    /* Specialty cards: a PDH photo band on top, zooming gently on hover, like the service cards */
+    .spec-card { padding-top: 0; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+    .spec-card:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,92,94,0.14); }
+    .spec-card_band { display: block; height: 120px; margin: 0 -20px 12px; overflow: hidden; background: var(--pdh-teal-tint); }
+    .spec-card_photo { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.45s cubic-bezier(.2,.7,.2,1); }
+    .spec-card:hover .spec-card_photo { transform: scale(1.06); }
+    @media (prefers-reduced-motion: reduce) { .spec-card, .spec-card_photo { transition: none; } .spec-card:hover .spec-card_photo { transform: none; } }
     .floor { margin-top: 32px; }
     .floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
     .floor_label { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pdh-teal-text); margin: 0; white-space: nowrap; }
@@ -82,7 +89,8 @@ const tbd = services.filter((s) => !s.hours);
       <h2>Doctors by specialty</h2>
       <div class="grid grid-4">
         {specialtyGroups.map((g) => (
-          <a class="card card-link" href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}>
+          <a class="card card-link spec-card" href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}>
+            {g.image && <span class="spec-card_band"><img class="spec-card_photo" src={g.image} alt="" width="430" height="240" loading="lazy" decoding="async" style={`object-position:${g.imagePos || 'center 45%'}`} /></span>}
             <h3 style="font-size:1.05rem">{g.name}</h3>
             <p class="meta">{g.blurb}</p>
           </a>

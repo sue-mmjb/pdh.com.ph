@@ -601,42 +601,42 @@
   ],
   "specialtyGroups": [
     {
-      "name": "Internal Medicine",
+      "name": "Internal Medicine", "image": "/photos/svc-consultation.webp", "imagePos": "center 30%",
       "departments": [
         "Internal Medicine"
       ],
       "blurb": "Cardiology, pulmonology, nephrology, neurology, endocrinology, gastroenterology, oncology, infectious diseases and more."
     },
     {
-      "name": "Pediatrics",
+      "name": "Pediatrics", "image": "/services/picu.webp", "imagePos": "center 45%",
       "departments": [
         "Pediatrics"
       ],
       "blurb": "Well-baby and sick-child care, immunizations and newborn screening."
     },
     {
-      "name": "Obstetrics & Gynecology",
+      "name": "Obstetrics & Gynecology", "image": "/services/ob-ultrasound.webp", "imagePos": "center 45%",
       "departments": [
         "Obstetrics & Gynecology"
       ],
       "blurb": "Prenatal care, delivery, sonology and women’s health."
     },
     {
-      "name": "Surgery",
+      "name": "Surgery", "image": "/services/operating-room.webp", "imagePos": "center 45%",
       "departments": [
         "Surgery"
       ],
       "blurb": "General, orthopedic, neuro, thoracic and vascular surgery; urology."
     },
     {
-      "name": "Anesthesiology",
+      "name": "Anesthesiology", "image": "/services/operating-room.webp", "imagePos": "right 40%",
       "departments": [
         "Anesthesiology"
       ],
       "blurb": "Anesthesia care for every procedure."
     },
     {
-      "name": "ENT, Eye & Dental",
+      "name": "ENT, Eye & Dental", "image": "/services/eye-center.webp", "imagePos": "center 45%",
       "departments": [
         "ENT",
         "Ophthalmology",
@@ -646,7 +646,7 @@
       "blurb": "Ear, nose and throat; eye center; dental services."
     },
     {
-      "name": "Radiology & Pathology",
+      "name": "Radiology & Pathology", "image": "/services/radiology.webp", "imagePos": "center 50%",
       "departments": [
         "Radiology",
         "Pathology"
@@ -654,7 +654,7 @@
       "blurb": "Imaging, laboratory and diagnostic specialists."
     },
     {
-      "name": "Rehabilitation",
+      "name": "Rehabilitation", "image": "/photos/people-rehab-cryo.webp", "imagePos": "center 35%",
       "departments": [
         "Physical Medicine & Rehabilitation"
       ],
