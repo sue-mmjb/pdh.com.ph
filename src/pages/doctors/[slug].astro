@@ -26,7 +26,7 @@ const ld = {
 };
 ---
 <Base title={`${name}, ${d.specialization}`} description={`${name}, ${d.specialization} (${d.department}) at ${site.name}. ${d.schedule ? `Clinic schedule: ${d.schedule}.` : ''} ${d.room ? `Room ${d.room}.` : ''} How to book.`} jsonLd={[ld]}>
-  <PageHero eyebrow={d.department} title={name} lead={d.specialization} crumbs={[{ href: '/doctors/', label: 'Doctors' }]} />
+  <PageHero photo="/services/outpatient-clinics.webp" photoAlt="The Outpatient Department desk at PDH" photoPos="center 50%" eyebrow={d.department} title={name} lead={d.specialization} crumbs={[{ href: '/doctors/', label: 'Doctors' }]} />
 
   <section class="section">
     <div class="container doc-grid">

@@ -5,7 +5,7 @@ import Icon from '../components/Icon.astro';
 import { news, site, formatDate } from '../lib/data';
 ---
 <Base title="PDH News" description={`News, community health talks and Alagang PDH Ako patient stories from ${site.name}.`}>
-  <PageHero eyebrow="PDH News" title="News and stories" lead="Community health talks, barangay partnerships and Alagang PDH Ako patient stories. Full articles open on the current PDH site." />
+  <PageHero photo="/photos/news-health-talk.webp" photoAlt="A PDH health talk" photoPos="center 35%" eyebrow="PDH News" title="News and stories" lead="Community health talks, barangay partnerships and Alagang PDH Ako patient stories. Full articles open on the current PDH site." />
   <section class="section">
     <div class="container grid grid-3">
       {news.items.map((n) => (

@@ -1,9 +1,13 @@
 ---
-interface Props { title: string; eyebrow?: string; lead?: string; crumbs?: { href: string; label: string }[]; }
-const { title, eyebrow, lead, crumbs = [] } = Astro.props;
+// `photo`: a PDH photo of the place this page is about, shown as the backdrop so each page feels like
+// that part of the hospital. `photoPos` is the object-position for the crop.
+interface Props { title: string; eyebrow?: string; lead?: string; crumbs?: { href: string; label: string }[]; photo?: string; photoAlt?: string; photoPos?: string; }
+const { title, eyebrow, lead, crumbs = [], photo, photoAlt = '', photoPos = 'center 40%' } = Astro.props;
 ---
-<section class="page-hero">
-  <div class="container">
+<section class={`page-hero${photo ? ' page-hero_photo' : ''}`}>
+  {photo && <img class="page-hero_bg" src={photo} alt={photoAlt} width="430" height="240" fetchpriority="high" decoding="async" style={`object-position:${photoPos}`} />}
+  {photo && <div class="page-hero_fade" aria-hidden="true"></div>}
+  <div class="container page-hero_in">
     {crumbs.length > 0 && (
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
@@ -23,4 +27,12 @@ const { title, eyebrow, lead, crumbs = [] } = Astro.props;
 </script>
 <style>
   .page-rule { display: block; height: 48px; width: 128px; max-width: 100%; margin: -14px 0 4px; }
+  .page-hero_photo { position: relative; overflow: hidden; min-height: 300px; display: flex; align-items: flex-end; padding-bottom: 28px; }
+  .page-hero_bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  .page-hero_fade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(251,251,250,0.2) 0%, rgba(251,251,250,0.86) 55%, #fbfbfa 100%); }
+  .page-hero_in { position: relative; }
+  @media (min-width: 900px) {
+    .page-hero_photo { min-height: 360px; align-items: center; padding: 48px 0; }
+    .page-hero_fade { background: linear-gradient(90deg, #fbfbfa 0%, rgba(251,251,250,0.96) 38%, rgba(251,251,250,0.55) 58%, rgba(251,251,250,0.08) 100%), linear-gradient(180deg, rgba(251,251,250,0) 70%, #fbfbfa 100%); }
+    .page-hero_photo .page-hero_in > * { max-width: 60ch; } }
 </style>

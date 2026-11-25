@@ -10,7 +10,7 @@ const scheduled = services.filter((s) => s.hours && s.hours !== 'Open 24/7');
 const tbd = services.filter((s) => !s.hours);
 ---
 <Base title="Services" description={`Emergency, laboratory, radiology, nuclear medicine, dialysis, rehabilitation, eye, dental and more at ${site.name}. Floors, hours and what to bring.`}>
-  <PageHero eyebrow="Our services" title="Services and departments" lead="Every service below is listed on PDH’s current site with its floor and hours. Open a service for what it covers, which doctors to see, and how to prepare." />
+  <PageHero photo="/services/laboratory.webp" photoAlt="The Laboratory at PDH" photoPos="center 55%" eyebrow="Our services" title="Services and departments" lead="Every service below is listed on PDH’s current site with its floor and hours. Open a service for what it covers, which doctors to see, and how to prepare." />
 
   <section class="section">
     <div class="container">

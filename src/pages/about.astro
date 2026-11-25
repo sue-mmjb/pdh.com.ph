@@ -7,7 +7,7 @@ import { site } from '../lib/data';
 const a = site.about;
 ---
 <Base title="About PDH" description={`${a.intro} Founded ${site.founded}; member of ${site.network.name} since ${site.network.memberSince}.`}>
-  <PageHero eyebrow="About us" title={site.name} lead={a.intro} />
+  <PageHero photo="/photos/pdh-lobby.webp" photoAlt="The PDH lobby" photoPos="center 50%" eyebrow="About us" title={site.name} lead={a.intro} />
 
   <section class="section">
     <div class="container about-grid">
