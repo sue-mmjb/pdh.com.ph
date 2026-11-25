@@ -98,6 +98,26 @@ const faqs = [
     </div>
   </section>
 
+  <!-- 4 · Alagang PDH ako: PDH's own slogan and video. The Vimeo player loads only after a press on Play
+       (click-to-load, dnt=1), so the page itself loads nothing from Vimeo. Decision: Sue, 25 Nov 2026. -->
+  <section class="cp-sec cp-slogan">
+    <div class="container cp-slogan_grid">
+      <div class="cp-slogan_copy">
+        <p class="eyebrow cp-reveal">Our promise</p>
+        <h2 class="cp-h2 cp-slogan_h cp-reveal">Alagang PDH ako!</h2>
+        <p class="cp-sub cp-reveal">The words PDH lives by: care from your own hospital in Parañaque. Hear it from the people of PDH in the hospital’s own video.</p>
+        <p class="cp-reveal"><a class="btn btn-outline" href="/about/">About PDH <Icon name="arrow" /></a></p>
+      </div>
+      <div class="cp-video cp-reveal" data-cp-video="1071704173">
+        <button class="cp-video_btn" type="button" aria-label="Play the video Alagang PDH Ako. The Vimeo player loads when you press play.">
+          <img class="cp-video_poster" src="/photos/alagang-pdh-ako.webp" alt="" width="1293" height="675" loading="lazy" decoding="async" />
+          <span class="cp-video_play"><span class="cp-video_tri" aria-hidden="true"></span>Play the video</span>
+        </button>
+        <p class="small muted cp-video_note">Alagang PDH Ako, by Parañaque Doctors Hospital, 5 min. Plays from Vimeo only after you press play. <a href="https://vimeo.com/1071704173" target="_blank" rel="noopener">Open on Vimeo</a></p>
+      </div>
+    </div>
+  </section>
+
   <!-- 5 · Services -->
   <section class="cp-sec section-soft cp-band">
     <div class="container">
@@ -239,10 +259,29 @@ const faqs = [
     });
     heartbeatAll('.cp-rule', root);
   }
+  // Video: the Vimeo player is created only when the visitor presses play (dnt=1: no tracking cookies)
+  root?.querySelectorAll('[data-cp-video]').forEach((box) => {
+    const btn = box.querySelector('.cp-video_btn');
+    btn?.addEventListener('click', () => {
+      const id = (box as HTMLElement).dataset.cpVideo;
+      const f = document.createElement('iframe');
+      f.src = `https://player.vimeo.com/video/${id}?dnt=1&autoplay=1&title=0&byline=0&portrait=0`;
+      f.title = 'Alagang PDH Ako'; f.allow = 'autoplay; fullscreen; picture-in-picture'; f.setAttribute('allowfullscreen', '');
+      f.className = 'cp-video_frame';
+      btn.replaceWith(f);
+    });
+  });
   if (root && !reduce) {
     gsap.registerPlugin(ScrollTrigger);
-    // Gentle reveals (no scroll hijacking)
+    const phone = window.matchMedia('(max-width: 899px)').matches;
+    // Gentle reveals (no scroll hijacking). On phones, cards float with the scroll instead:
+    // they rise and brighten as they travel up the screen, tied to the scroll position.
     root.querySelectorAll('.cp-reveal').forEach((el, i) => {
+      const isCard = el.matches('.card, .cp-svc_card, .cp-pkg, .cp-video');
+      if (phone && isCard) {
+        gsap.fromTo(el, { opacity: 0.35, y: 36, scale: 0.97 }, { opacity: 1, y: -10, scale: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 100%', end: 'top 40%', scrub: 0.35 } });
+        return;
+      }
       gsap.fromTo(el, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: (i % 4) * 0.06, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
     });
     // Floor rules draw from left to right as they scroll into view, shading from light green to orange.
@@ -297,6 +336,18 @@ const faqs = [
   .cp-hero_now { margin-top: 6px; padding: 14px 18px; background: #fff; border-radius: 18px; border: 1px solid var(--line); display: grid; gap: 10px; justify-items: start; }
   .cp-hero_now_p { margin: 0; font-size: 0.92rem; color: var(--ink); display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
   .cp-chip_dot { width: 10px; height: 10px; border-radius: 50%; background: var(--pdh-orange); box-shadow: 0 0 0 4px rgba(255,116,2,0.2); flex: none; }
+  .cp-slogan { padding-bottom: 24px; }
+  .cp-slogan_grid { display: grid; gap: 24px; align-items: center; }
+  @media (min-width: 900px) { .cp-slogan_grid { grid-template-columns: 0.8fr 1.2fr; gap: 48px; } }
+  .cp-slogan_h { font-size: clamp(2.4rem, 1.4rem + 3.4vw, 4rem); color: var(--pdh-orange-text); font-style: italic; }
+  .cp-video_btn { position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: 24px; overflow: hidden; cursor: pointer; background: var(--pdh-teal-tint); box-shadow: 0 24px 60px rgba(0,92,94,0.16); aspect-ratio: 16 / 9; }
+  .cp-video_poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(.2,.7,.2,1); }
+  .cp-video_btn:hover .cp-video_poster { transform: scale(1.03); }
+  .cp-video_play { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px 12px 16px; border-radius: 999px; background: var(--pdh-orange); color: #fff; font-weight: 700; font-size: 1rem; box-shadow: 0 10px 24px rgba(0,0,0,0.18); white-space: nowrap; }
+  .cp-video_tri { width: 0; height: 0; border-left: 14px solid #fff; border-top: 9px solid transparent; border-bottom: 9px solid transparent; }
+  .cp-video_btn:focus-visible { outline: 3px solid var(--pdh-orange); outline-offset: 3px; }
+  :global(.cp-video_frame) { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 24px; background: #000; }
+  .cp-video_note { margin: 10px 4px 0; }
   .cp-statement { padding: 96px 0 56px; }
   .cp-big { font-size: clamp(1.6rem, 1rem + 2.6vw, 3.2rem); line-height: 1.15; letter-spacing: -0.03em; font-weight: 600; font-family: var(--font-head); max-width: 24ch; margin: 0; color: var(--heading); }
   :global(.cp-word) { opacity: 0.22; transition: opacity 0.2s; }
@@ -321,22 +372,22 @@ const faqs = [
   .cp-search .btn { flex: none; }
   .cp-pills { gap: 8px; max-width: 980px; margin-left: auto; margin-right: auto; }
   .cp-pills a { font-size: 0.86rem; }
-  .cp-floor { margin-top: 28px; }
-  .cp-floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .cp-floor { margin-top: 18px; }
+  .cp-floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
   .cp-floor_label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pdh-teal-text); white-space: nowrap; }
   .cp-floor_rule { flex: 1; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #bfe8e6 0%, #7fd3cf 45%, var(--pdh-orange) 100%); transform-origin: left center; }
-  :global(.cp-rule) { display: block; height: 22px; width: 128px; max-width: 100%; margin: -6px 0 16px; }
+  :global(.cp-rule) { display: block; height: 34px; width: 128px; max-width: 100%; margin: -10px 0 10px; }
   .cp-svc { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (min-width: 720px) { .cp-svc { grid-template-columns: repeat(3, 1fr); } }
   @media (min-width: 1100px) { .cp-svc { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
-  .cp-svc_card { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 104px; background: var(--card); border-radius: var(--radius); text-decoration: none; color: inherit; border: 1px solid transparent; min-height: 196px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+  .cp-svc_card { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 14px 84px 14px 14px; background: var(--card); border-radius: var(--radius); text-decoration: none; color: inherit; border: 1px solid transparent; min-height: 112px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
   .cp-svc_card:hover { border-color: var(--pdh-teal); transform: translateY(-2px); }
-  .cp-svc_name { font-family: var(--font-head); font-weight: 600; font-size: 1.05rem; line-height: 1.25; letter-spacing: -0.01em; color: var(--heading); text-wrap: balance; }
+  .cp-svc_name { font-family: var(--font-head); font-weight: 600; font-size: 0.98rem; line-height: 1.25; letter-spacing: -0.01em; color: var(--heading); text-wrap: balance; }
   .cp-svc_meta { font-size: 0.85rem; color: var(--ink-soft); }
-  .cp-svc_art { position: absolute; right: 12px; bottom: 10px; width: 88px; height: 88px; object-fit: contain; object-position: right bottom; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
+  .cp-svc_art { position: absolute; right: 10px; bottom: 8px; width: 64px; height: 64px; object-fit: contain; object-position: right bottom; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
   .cp-svc_card:hover .cp-svc_art { transform: translateY(-4px) scale(1.06); }
   .cp-svc_ic { position: absolute; right: 14px; bottom: 14px; margin: 0; }
-  @media (min-width: 900px) { .cp-svc_card { padding-bottom: 112px; min-height: 210px; } .cp-svc_art { width: 96px; height: 96px; } }
+  @media (min-width: 900px) { .cp-svc_card { padding-right: 92px; min-height: 120px; } .cp-svc_art { width: 72px; height: 72px; } }
   .cp-two { display: grid; gap: 20px; }
   @media (min-width: 900px) { .cp-two { grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; } }
   .cp-marquee { margin-top: 24px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }

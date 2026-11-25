@@ -353,10 +353,16 @@ details.acc .body { padding: 0 16px 16px; color: var(--ink-soft); }
 .steps li::before { background: var(--pdh-orange); color: var(--pdh-navy); }
 .form-status { background: var(--accent-soft); color: var(--accent-text); }
 
-/* Heartbeat heading rules (built by src/scripts/heartbeat.ts) */
+/* Heart signature heading rules (built by src/scripts/heartbeat.ts): a faint guide line, then the
+   signature writes itself once the rule scrolls into view */
 .cp-rule svg, .page-rule svg { display: block; overflow: visible; }
 .hb-base, .hb-sweep { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-.hb-base { opacity: 0.32; }
-.hb-sweep { stroke-dashoffset: var(--hb-dash, 0); animation: hb-sweep 2.8s linear infinite; }
-@keyframes hb-sweep { from { stroke-dashoffset: var(--hb-dash, 0); } to { stroke-dashoffset: var(--hb-end, -1000); } }
-@media (prefers-reduced-motion: reduce) { .hb-sweep { animation: none; display: none; } .hb-base { opacity: 1; } }
+.hb-base { opacity: 0.22; }
+.hb-sweep { stroke-dashoffset: var(--hb-len, 0); transition: stroke-dashoffset 1.6s cubic-bezier(.3,.6,.2,1); }
+.is-on .hb-sweep { stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: reduce) { .hb-sweep { stroke-dashoffset: 0; transition: none; } }
+
+/* Phone card motion (src/scripts/cards.ts): cards fade in and drift with the scroll on narrow screens */
+@property --rv { syntax: '<length>'; inherits: false; initial-value: 28px; }
+.cards-motion .card:not(.cp-reveal) { --rv: 28px; opacity: 0; transform: translateY(calc(var(--py, 0px) + var(--rv))) scale(0.985); transition: opacity 0.6s ease, --rv 0.7s cubic-bezier(.2,.7,.2,1), scale 0.6s ease; will-change: transform, opacity; }
+.cards-motion .card:not(.cp-reveal).is-in { --rv: 0px; opacity: 1; scale: 1; }

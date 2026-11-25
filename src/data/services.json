@@ -120,7 +120,7 @@
       "icon": "heart",
       "hoursAlt": "A homepage slide lists Echocardiogram (pedia & adult) Monday–Sunday 6 AM–7 PM and Vascular procedures Monday–Saturday 8 AM–5 PM, which differs from the Our Services page.",
       "hoursConfirmed": false,
-      "image": "/packages/cardio-services.webp",
+      "image": "/photos/svc-consultation.webp",
       "illustration": "/icons/services/multi-diagnostic-center.png"
     },
     {
@@ -172,7 +172,7 @@
       "featured": true,
       "icon": "kidney",
       "priceLine": "For as low as Php 6,700.00, inclusive of PhilHealth (homepage slide, Nov 2026)",
-      "image": "/packages/hemodialysis.webp",
+      "image": "/photos/svc-hemodialysis-nurse.webp",
       "illustration": "/icons/services/hemodialysis-center.png"
     },
     {
@@ -371,6 +371,7 @@
     {
       "slug": "ob-ultrasound",
       "name": "OB Ultrasound Services",
+      "image": "/photos/svc-ob-ultrasound.webp",
       "short": "OB Ultrasound",
       "summary": "Advanced imaging to monitor maternal and fetal health, ensuring safe pregnancies and informed care.",
       "location": "4th Floor",
