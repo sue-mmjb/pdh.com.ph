@@ -51,6 +51,8 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | --- | --- |
 | Logo | PDH's horizontal lockup (2048 px, from the current site) in the header; official square logo for favicon and social image |
 | Photos | 42 of PDH's own images from pdh.com.ph now used (façade, lobby, pillars, rooms, news, MPH map, NPC seal, 19 promo slides); placeholders remain on 14 service pages with no PDH photo |
+| Room photos | 20 photos of the Ward, Semi-private, Private, Suite and Isolation rooms, cropped from screenshots of PDH's current site (low resolution). PDH to confirm use and supply originals |
+| Premium Labor Room | Marked "Soon to open", as on the current site; no photo. PDH to confirm opening status |
 | Domain | `astro.config.mjs` uses the Vercel address `https://pdhcomph.vercel.app` until PDH chooses a domain |
 
 ## Not confirmed but shown as published (verify at sign-off)

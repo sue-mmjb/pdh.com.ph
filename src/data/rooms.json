@@ -1,95 +1,12 @@
 {
-  "_note": "Rooms and facilities from pdh.com.ph/our-services (crawled 25 Nov 2026). Room rates are not on the current site. Room photos are PDH's own room-gallery images; which photo shows which room type is our reading of the pictures and should be confirmed by PDH.",
+  "_note": "Rooms and facilities from pdh.com.ph/our-services (crawled 25 Nov 2026). Room rates are not on the current site. Room photos are PDH's own, cropped from phone screenshots of that page supplied by Sue on 25 Nov 2026 (files in public/rooms/, copies in assets/rooms/); PDH to supply full-resolution originals. The Premium Labor Room is shown as 'Soon to open' on the current site.",
   "rooms": [
-    {
-      "slug": "ward",
-      "name": "Ward",
-      "capacity": "Shared by four patients",
-      "text": "Our air-conditioned ward rooms provide a clean, spacious, and comfortable healing space, shared by four patients. Divided into Pediatric, Male, Female, and OB categories, each ward is designed for optimal patient care with essential amenities and 24/7 nursing support.",
-      "amenities": [
-        "Bed",
-        "Bedside Table",
-        "Chair",
-        "Shared Comfort Room"
-      ],
-      "image": "/photos/room-ward.webp"
-    },
-    {
-      "slug": "semi-private",
-      "name": "Semi-private Room",
-      "capacity": "Two patients",
-      "text": "Designed for comfort and privacy, our air-conditioned semi-private rooms accommodate two patients, offering a spacious and well-equipped healing environment with essential amenities and 24/7 nursing support.",
-      "amenities": [
-        "Bed",
-        "Bedside Table",
-        "Chair",
-        "Television",
-        "Refrigerator",
-        "Couch",
-        "Shared Comfort Room"
-      ],
-      "image": "/photos/room-semi-private.webp"
-    },
-    {
-      "slug": "private",
-      "name": "Private Room",
-      "capacity": "One patient",
-      "text": "Our air-conditioned private rooms ensure a comfortable and restful stay with enhanced privacy, essential amenities, and round-the-clock nursing care.",
-      "amenities": [
-        "Bed",
-        "Bedside Table",
-        "Chair",
-        "Cabinet",
-        "Television",
-        "Refrigerator",
-        "Couch",
-        "Private Comfort Room"
-      ],
-      "image": "/photos/room-private.webp"
-    },
-    {
-      "slug": "suite",
-      "name": "Suite",
-      "capacity": "One patient, premium",
-      "text": "For a premium healing experience, our air-conditioned suite rooms offer spacious accommodations with exclusive amenities, personalized care, and 24/7 nursing support.",
-      "amenities": [
-        "Bed",
-        "Bedside Table",
-        "Chair (Lazy Boy for Presidential Suite)",
-        "Cabinet",
-        "Television",
-        "Refrigerator",
-        "Couch",
-        "Coffee Table",
-        "Private Comfort Room"
-      ],
-      "image": "/photos/room-suite.webp"
-    },
-    {
-      "slug": "isolation",
-      "name": "Isolation Room",
-      "capacity": "One patient",
-      "text": "Our isolation rooms provide a secure environment for patients requiring containment, equipped with filtration and infection control measures for safety.",
-      "amenities": [
-        "Bed",
-        "Bedside Table",
-        "Cabinet",
-        "Television",
-        "Refrigerator",
-        "Couch",
-        "Private Comfort Room",
-        "Anteroom"
-      ],
-      "image": "/photos/room-isolation-anteroom.webp"
-    },
-    {
-      "slug": "premium-labor-room",
-      "name": "Premium Labor Room",
-      "capacity": "Mothers in labor",
-      "text": "Our premium labor room provides an advanced, comfortable, and private environment for mothers during childbirth. Equipped with the newest facilities and a dedicated team of healthcare professionals, the room ensures a smooth and safe delivery experience. It is designed to provide a serene atmosphere for both mothers and their families, with necessary amenities to enhance comfort during labor.",
-      "amenities": [],
-      "image": "/photos/room-labor.webp"
-    }
+    { "slug": "ward", "photos": [{ "src": "/rooms/ward-3.jpg", "alt": "Ward with three beds and curtain dividers" }, { "src": "/rooms/ward-1.jpg", "alt": "Ward beds separated by green curtains" }, { "src": "/rooms/ward-2.jpg", "alt": "Ward bed with bedside table and overbed table" }, { "src": "/rooms/ward-4.jpg", "alt": "Ward bed and bedside cabinet, close view" }], "name": "Ward", "capacity": "Shared by four patients", "text": "Our air-conditioned ward rooms provide a clean, spacious, and comfortable healing space, shared by four patients. Divided into Pediatric, Male, Female, and OB categories, each ward is designed for optimal patient care with essential amenities and 24/7 nursing support.", "amenities": ["Bed", "Bedside Table", "Chair", "Shared Comfort Room"] },
+    { "slug": "semi-private", "photos": [{ "src": "/rooms/semi-private-1.jpg", "alt": "Semi-private room bed with PDH linens and visitor chair" }, { "src": "/rooms/semi-private-2.jpg", "alt": "Semi-private room with two beds and a curtain divider" }, { "src": "/rooms/semi-private-3.jpg", "alt": "Semi-private room with two beds, bench and chair" }, { "src": "/rooms/semi-private-4.jpg", "alt": "Semi-private room cabinet, bench and chair" }], "name": "Semi-private Room", "capacity": "Two patients", "text": "Designed for comfort and privacy, our air-conditioned semi-private rooms accommodate two patients, offering a spacious and well-equipped healing environment with essential amenities and 24/7 nursing support.", "amenities": ["Bed", "Bedside Table", "Chair", "Television", "Refrigerator", "Couch", "Shared Comfort Room"] },
+    { "slug": "private", "photos": [{ "src": "/rooms/private-4.jpg", "alt": "Private room bed by the window" }, { "src": "/rooms/private-1.jpg", "alt": "Private room entrance with refrigerator" }, { "src": "/rooms/private-2.jpg", "alt": "Private room window side with bench and bedside cabinet" }, { "src": "/rooms/private-3.jpg", "alt": "Private room bed with overbed table" }], "name": "Private Room", "capacity": "One patient", "text": "Our air-conditioned private rooms ensure a comfortable and restful stay with enhanced privacy, essential amenities, and round-the-clock nursing care.", "amenities": ["Bed", "Bedside Table", "Chair", "Cabinet", "Television", "Refrigerator", "Couch", "Private Comfort Room"] },
+    { "slug": "suite", "photos": [{ "src": "/rooms/suite-4.jpg", "alt": "Suite with sitting area, bench and bed" }, { "src": "/rooms/suite-1.jpg", "alt": "Suite sitting area with table, chairs and refrigerator" }, { "src": "/rooms/suite-2.jpg", "alt": "Suite bed with overbed table and lounge chair" }, { "src": "/rooms/suite-3.jpg", "alt": "Suite entrance with television and refrigerator" }], "name": "Suite", "capacity": "One patient, premium", "text": "For a premium healing experience, our air-conditioned suite rooms offer spacious accommodations with exclusive amenities, personalized care, and 24/7 nursing support.", "amenities": ["Bed", "Bedside Table", "Chair (Lazy Boy for Presidential Suite)", "Cabinet", "Television", "Refrigerator", "Couch", "Coffee Table", "Private Comfort Room"] },
+    { "slug": "isolation", "photos": [{ "src": "/rooms/isolation-1.jpg", "alt": "Isolation room bed by the window" }, { "src": "/rooms/isolation-2.jpg", "alt": "Isolation room entrance with television and refrigerator" }, { "src": "/rooms/isolation-3.jpg", "alt": "Isolation room couch and refrigerator" }, { "src": "/rooms/isolation-4.jpg", "alt": "Isolation room seen from the couch" }], "name": "Isolation Room", "capacity": "One patient", "text": "Our isolation rooms provide a secure environment for patients requiring containment, equipped with filtration and infection control measures for safety.", "amenities": ["Bed", "Bedside Table", "Cabinet", "Television", "Refrigerator", "Couch", "Private Comfort Room", "Anteroom"] },
+    { "slug": "premium-labor-room", "photos": [], "status": "Soon to open", "name": "Premium Labor Room", "capacity": "Mothers in labor", "text": "Our premium labor room provides an advanced, comfortable, and private environment for mothers during childbirth. Equipped with the newest facilities and a dedicated team of healthcare professionals, the room ensures a smooth and safe delivery experience. It is designed to provide a serene atmosphere for both mothers and their families, with necessary amenities to enhance comfort during labor.", "amenities": [] }
   ],
   "facilities": [
     {
