@@ -374,6 +374,10 @@ details.acc .body { padding: 0 16px 16px; color: var(--ink-soft); }
 @property --rv { syntax: '<length>'; inherits: false; initial-value: 28px; }
 .cards-motion .card:not(.cp-reveal) { --rv: 28px; opacity: 0; transform: translateY(calc(var(--py, 0px) + var(--rv))) scale(0.985); transition: opacity 0.6s ease, --rv 0.7s cubic-bezier(.2,.7,.2,1), scale 0.6s ease; will-change: transform, opacity; }
 .cards-motion .card:not(.cp-reveal).is-in { --rv: 0px; opacity: 1; scale: 1; }
+/* The photo inside a card pans against the scroll (slightly larger so the edges never show) */
+.cards-motion .svc-card_photo, .cards-motion .spec-card_photo, .cards-motion .program_photo, .cards-motion .room-photo-main, .cards-motion .cp-entry_art { transform: translateY(var(--px, 0px)) scale(1.12); will-change: transform; }
+.cards-motion .svc-card:hover .svc-card_photo, .cards-motion .spec-card:hover .spec-card_photo { transform: translateY(var(--px, 0px)) scale(1.18); }
+.cards-motion .pkg-cutout { transform: translateY(var(--px, 0px)); will-change: transform; }
 
 /* Feedback round 1 (25 Nov 2026): slimmer phone controls */
 @media (max-width: 899px) {
