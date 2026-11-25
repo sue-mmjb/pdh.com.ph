@@ -32,9 +32,9 @@ const people = [
 ];
 const leadShort = site.hero.text.split('. ')[0] + '.';
 const entry = [
-  { title: 'I need help now', text: 'The Emergency Room is on the Ground Floor and open 24/7. Call first if you can.', cta: 'Call the ER', href: `tel:${er.tel}`, cls: 'btn-emergency', art: '/icons/entry/help-now.png', note: `${er.display} · mobile ${er.mobile}`, confirm: true },
-  { title: 'I want to see a doctor', text: `${doctors.length} doctors listed with clinic schedules and room numbers. Outpatient clinics on the 3rd to 6th floors, by appointment.`, cta: 'Find a doctor', href: '/doctors/', cls: 'btn-primary', art: '/icons/entry/see-doctor.png', note: 'Search by name or specialty' },
-  { title: 'I’m being admitted', text: 'Admitting is on the Ground Floor, open 24/7. Bring a valid ID, your admitting order and PhilHealth or HMO documents.', cta: 'Rooms and admission', href: '/rooms-facilities/', cls: 'btn-outline', art: '/icons/entry/admitted.png', note: '94 beds · ward to suite' },
+  { title: 'I need help now', text: 'The Emergency Room is on the Ground Floor and open 24/7. Call first if you can.', cta: 'Call the ER', href: `tel:${er.tel}`, cls: 'btn-emergency', art: '/services/emergency-room.webp', artAlt: 'The Emergency Room entrance at PDH', note: `${er.display} · mobile ${er.mobile}`, confirm: true },
+  { title: 'I want to see a doctor', text: `${doctors.length} doctors listed with clinic schedules and room numbers. Outpatient clinics on the 3rd to 6th floors, by appointment.`, cta: 'Find a doctor', href: '/doctors/', cls: 'btn-primary', art: '/services/outpatient-clinics.webp', artAlt: 'The Outpatient Department desk at PDH', note: 'Search by name or specialty' },
+  { title: 'I’m being admitted', text: 'Admitting is on the Ground Floor, open 24/7. Bring a valid ID, your admitting order and PhilHealth or HMO documents.', cta: 'Rooms and admission', href: '/rooms-facilities/', cls: 'btn-outline', art: '/services/admitting.webp', artAlt: 'The Admitting Department desk at PDH', note: '94 beds · ward to suite' },
 ];
 // FAQ answers use only facts already published by PDH (see CONFIRM.md for sources).
 const faqs = [
@@ -108,7 +108,7 @@ const faqs = [
       <div class="grid grid-3 cp-entry">
         {entry.map((e) => (
           <article class="card cp-entry_card cp-reveal">
-            <img class="cp-entry_art" src={e.art} alt="" width="200" height="170" loading="lazy" decoding="async" />
+            <img class="cp-entry_art" src={e.art} alt={e.artAlt} width="430" height="240" loading="lazy" decoding="async" />
             <h3>{e.title}</h3>
             <p class="muted">{e.text}</p>
             <p class="small muted" style="margin:0 0 14px">{e.note}{e.confirm && <> <ToConfirm note={er.note} /></>}</p>
@@ -388,8 +388,8 @@ const faqs = [
   .cp-h2 { font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem); line-height: 1.05; letter-spacing: -0.035em; font-weight: 600; max-width: 20ch; }
   .cp-sub { color: var(--ink-soft); max-width: 60ch; }
   .cp-entry { margin-top: 24px; }
-  .cp-entry_card { display: flex; flex-direction: column; gap: 0; padding: 24px; min-height: 300px; }
-  .cp-entry_art { width: 120px; height: 100px; object-fit: contain; object-position: left bottom; margin: 0 0 18px; }
+  .cp-entry_card { display: flex; flex-direction: column; gap: 0; padding: 0 24px 24px; min-height: 300px; overflow: hidden; }
+  .cp-entry_art { display: block; width: calc(100% + 48px); max-width: none; height: 170px; object-fit: cover; object-position: center 45%; margin: 0 -24px 18px; }
   .cp-entry_card h3 { font-size: 1.35rem; letter-spacing: -0.02em; font-weight: 600; color: var(--heading); margin: 0 0 8px; }
   .cp-entry_card p { margin: 0 0 10px; }
   .cp-entry_card p.small { margin-bottom: 18px; }
