@@ -4,7 +4,7 @@ import { shortHours, type Service } from '../lib/data';
 interface Props { service: Service; compact?: boolean; }
 const { service: s, compact = false } = Astro.props;
 ---
-<a class="card card-link svc-card" href={`/services/${s.slug}/`}>
+<a class="card card-link svc-card" href={`/services/${s.slug}/`} data-text={[s.name, s.short, s.summary, s.location, ...(s.offered || [])].filter(Boolean).join(' ').toLowerCase()}>
   {s.illustration ? <img class="svc-card_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle"><Icon name={s.icon} /></span>}
   <h3 class="svc-card_name">{s.name}</h3>
   {!compact && <p class="muted small">{s.summary}</p>}

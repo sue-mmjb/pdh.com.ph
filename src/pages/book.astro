@@ -1,120 +1,71 @@
 ---
-// Appointment REQUEST form. Collects only name, contact details, preferred channel and the
-// service needed. No symptoms, no medical history, no free-text condition field.
-// Nothing is sent anywhere: on submit the page shows "Prototype: request not sent."
+// How to book: PDH's own contact channels. The appointment request form was removed on
+// 25 Nov 2026 after PDH's feedback; it can return once its scope and handling process are agreed.
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import ToConfirm from '../components/ToConfirm.astro';
 import Icon from '../components/Icon.astro';
-import { services, doctors, packages, displayName, site } from '../lib/data';
+import { site } from '../lib/data';
 const er = site.phones.emergency;
 ---
-<Base title="Book an appointment" description={`Request an appointment at ${site.name}: choose a service or doctor and how you want to be contacted. For emergencies call the ER.`}>
-  <PageHero eyebrow="Book" title="Request an appointment" lead="Tell us who you are and what you need. A Customer Care Representative will contact you to confirm a schedule." />
+<Base title="Book an appointment" description={`How to book at ${site.name}: call Information, message PDH on Facebook or email, with your doctor or service in mind. For emergencies call the ER.`}>
+  <PageHero eyebrow="Book" title="Book an appointment" lead="Use PDH's own channels to book. Have your doctor or service in mind; every doctor's clinic days and room are on their profile." />
 
   <section class="section">
     <div class="container book-grid">
-      <form class="form card" id="book-form" novalidate>
+      <div>
         <div class="kriss-er">
-          <strong>Emergency? Don’t use this form.</strong>
-          <p style="margin:0">Call the ER: <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /> or come to the Ground Floor, open 24/7.</p>
+          <strong>Emergency? Don't book, come in or call.</strong>
+          <p style="margin:0">ER: <a href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /> · Ground Floor, open 24/7.</p>
         </div>
-
-        <div class="field">
-          <label for="name">Full name</label>
-          <input id="name" name="name" type="text" autocomplete="name" required />
+        <div class="channels">
+          <a class="card channel" href={`tel:${site.phones.information.tel}`}>
+            <span class="icon-circle"><Icon name="phone" /></span>
+            <span><strong>Call Information</strong><br />{site.phones.information.display}<br /><span class="small muted">Mobile {site.phones.information.mobile} · {site.phones.information.mobile2}</span></span>
+          </a>
+          <a class="card channel" href={site.social.messenger.url} target="_blank" rel="noopener">
+            <span class="icon-circle"><Icon name="message" /></span>
+            <span><strong>Message PDH on Facebook</strong><br /><span class="small muted">Opens Messenger in a new tab</span></span>
+          </a>
+          <a class="card channel" href={`mailto:${site.emails.info}`}>
+            <span class="icon-circle"><Icon name="mail" /></span>
+            <span><strong>Email</strong><br />{site.emails.info}</span>
+          </a>
+          <a class="card channel" href={`tel:${site.phones.admitting.tel}`}>
+            <span class="icon-circle"><Icon name="bed" /></span>
+            <span><strong>Admitting</strong><br />{site.phones.admitting.display}<br /><span class="small muted">For admissions and rooms</span></span>
+          </a>
         </div>
-        <div class="grid grid-2" style="gap:16px">
-          <div class="field">
-            <label for="mobile">Mobile number</label>
-            <input id="mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" required />
-          </div>
-          <div class="field">
-            <label for="email">Email <span class="muted">(optional)</span></label>
-            <input id="email" name="email" type="email" autocomplete="email" />
-          </div>
-        </div>
-
-        <fieldset class="field" style="border:0;padding:0;margin:0">
-          <legend style="font-weight:600;margin-bottom:6px">How should we contact you?</legend>
-          <div class="radio-row">
-            <label><input type="radio" name="channel" value="call" checked /> Call</label>
-            <label><input type="radio" name="channel" value="sms" /> SMS</label>
-            <label><input type="radio" name="channel" value="messenger" /> Messenger</label>
-            <label><input type="radio" name="channel" value="email" /> Email</label>
-          </div>
-        </fieldset>
-
-        <div class="field">
-          <label for="service">Service needed</label>
-          <select id="service" name="service" required>
-            <option value="">Choose a service</option>
-            <option value="consultation">Doctor consultation</option>
-            <optgroup label="Services">
-              {services.filter((s) => s.slug !== 'emergency-room').map((s) => <option value={s.slug}>{s.name}</option>)}
-            </optgroup>
-            <optgroup label="Packages (sample)">
-              {packages.map((p) => <option value={`package-${p.slug}`}>{p.name}</option>)}
-            </optgroup>
-          </select>
-        </div>
-        <div class="field">
-          <label for="doctor">Preferred doctor <span class="muted">(optional)</span></label>
-          <select id="doctor" name="doctor">
-            <option value="">No preference</option>
-            {doctors.map((d) => <option value={d.slug}>{displayName(d.name)}, {d.specialization}</option>)}
-          </select>
-        </div>
-        <div class="field">
-          <label for="date">Preferred date <span class="muted">(optional)</span></label>
-          <input id="date" name="date" type="date" />
-          <span class="hint">We confirm the actual slot against the doctor’s clinic schedule.</span>
-        </div>
-
-        <p class="small muted" style="margin:0">We only ask for your name, contact details and the service you need. Please do not include symptoms or medical history. See the <a href="/privacy-policy/">Privacy Policy</a> (Data Privacy Act of 2012).</p>
-
-        <div class="form-status" id="book-status" role="status" aria-live="polite">Prototype: request not sent.</div>
-        <button class="btn btn-primary btn-lg" type="submit"><Icon name="calendar" /> Send request</button>
-      </form>
+        <h2 style="font-size:1.15rem;margin-top:28px">Before you call</h2>
+        <ul>
+          <li>Pick your doctor on <a href="/doctors/">Find a doctor</a>: each profile lists clinic days, room number and accepted HMOs.</li>
+          <li>Using an HMO? Request <a href={site.links.hmoOnlineApproval} target="_blank" rel="noopener">online approval</a> or visit the HMO Hub on the Ground Floor before your visit.</li>
+          <li>Packages are booked the same way; each package names its own local number on the <a href="/packages/">Packages page</a>.</li>
+        </ul>
+        <p class="small muted">An online request form is not part of this prototype. It can be added once its scope and PDH's handling process are agreed.</p>
+      </div>
 
       <aside>
         <div class="card">
-          <h2 style="font-size:1.1rem">Prefer to call?</h2>
-          <p>Information: <a href={`tel:${site.phones.information.tel}`}>{site.phones.information.display}</a> <ToConfirm note={site.phones.information.note} /><br />
-          Mobile: <a href={`tel:${site.phones.information.mobileTel}`}>{site.phones.information.mobile}</a></p>
-          <p>Admitting: <a href={`tel:${site.phones.admitting.tel}`}>{site.phones.admitting.display}</a></p>
-          <p class="small muted" style="margin:0">Outpatient clinics are on the 3rd to 6th floors, by appointment.</p>
+          <h2 style="font-size:1.1rem">Outpatient clinics</h2>
+          <p class="small" style="margin:0">3rd to 6th floors, by appointment. Clinic days vary by doctor.</p>
         </div>
         <div class="card" style="margin-top:16px">
-          <h2 style="font-size:1.1rem">Using an HMO?</h2>
-          <p class="small">Check your doctor’s accredited HMOs on their profile and request <a href={site.links.hmoOnlineApproval} target="_blank" rel="noopener">online approval</a> before your visit.</p>
+          <h2 style="font-size:1.1rem">Find a doctor</h2>
+          <p class="small">Search by name, specialty or concern.</p>
+          <a class="btn btn-primary" href="/doctors/" style="width:100%"><Icon name="search" /> Find a doctor</a>
         </div>
       </aside>
     </div>
   </section>
 
-  <script is:inline>
-    (function () {
-      var form = document.getElementById('book-form'), status = document.getElementById('book-status');
-      // Pre-select from ?service= or ?doctor= links
-      try {
-        var p = new URLSearchParams(location.search);
-        var svc = document.getElementById('service'), doc = document.getElementById('doctor');
-        if (p.get('service') && svc.querySelector('option[value="' + p.get('service') + '"]')) svc.value = p.get('service');
-        if (p.get('doctor') && doc.querySelector('option[value="' + p.get('doctor') + '"]')) { doc.value = p.get('doctor'); if (!svc.value) svc.value = 'consultation'; }
-      } catch (e) {}
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!form.checkValidity()) { form.reportValidity(); return; }
-        status.classList.add('show');
-        status.focus && status.focus();
-        status.scrollIntoView({ block: 'nearest' });
-      });
-    })();
-  </script>
-
   <style>
     .book-grid { display: grid; gap: 24px; }
     @media (min-width: 900px) { .book-grid { grid-template-columns: 1.6fr 1fr; align-items: start; } }
+    .channels { display: grid; gap: 12px; margin-top: 16px; }
+    @media (min-width: 640px) { .channels { grid-template-columns: 1fr 1fr; } }
+    .channel { display: flex; gap: 14px; align-items: center; text-decoration: none; color: inherit; }
+    .channel .icon-circle { margin: 0; flex: none; }
+    .channel:hover { border-color: var(--pdh-teal); }
   </style>
 </Base>

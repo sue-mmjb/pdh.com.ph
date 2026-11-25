@@ -6,17 +6,17 @@ import Icon from './Icon.astro';
 import ToConfirm from './ToConfirm.astro';
 const er = site.phones.emergency;
 ---
-<button class="kriss-bubble" type="button" aria-expanded="false" aria-controls="kriss-panel" data-kriss-toggle>
-  <span class="dot" aria-hidden="true">K</span>
-  <span>Need help?</span>
+<button class="kriss-bubble" type="button" aria-expanded="false" aria-controls="kriss-panel" aria-label="Need help? Open the assistant placeholder" data-kriss-toggle>
+  <img class="kriss-face" src="/brand/pdh-mascot-face.webp" alt="" width="192" height="192" decoding="async" />
+  <span class="kriss-lbl">Need help?</span>
 </button>
 
 <section class="kriss-panel" id="kriss-panel" hidden aria-labelledby="kriss-title" data-kriss-panel>
   <div class="kriss-head">
     <span class="dot icon-circle" style="margin:0;width:36px;height:36px" aria-hidden="true"><Icon name="sparkle" /></span>
     <div>
-      <h2 id="kriss-title">Kriss.ai assistant: live demo connects here</h2>
-      <p>Placeholder slot. The live assistant will be added by the Kriss team.</p>
+      <h2 id="kriss-title">Kriss.ai assistant (placeholder)</h2>
+      <p>This bubble is a placeholder slot on the prototype, not a working assistant. A separate working demo exists; the link below opens it in a new tab.</p>
     </div>
     <button class="kriss-close" type="button" aria-label="Close" data-kriss-close>×</button>
   </div>

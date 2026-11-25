@@ -52,7 +52,7 @@
       "contactLocal": "local 7000",
       "featured": true,
       "image": "/packages/female-executive-package.webp",
-      "cutout": "/packages/cutouts/female-executive-package.png"
+      "cutout": "/packages/cutouts/female-executive-package.webp"
     },
     {
       "slug": "male-executive-package",
@@ -78,7 +78,7 @@
       "contactLocal": "local 7000",
       "featured": true,
       "image": "/packages/male-executive-package.webp",
-      "cutout": "/packages/cutouts/male-executive-package.png"
+      "cutout": "/packages/cutouts/male-executive-package.webp"
     },
     {
       "slug": "circumcision-package",
@@ -95,7 +95,7 @@
       "contactLocal": "local 7000",
       "featured": false,
       "image": "/packages/circumcision-package.webp",
-      "cutout": "/packages/cutouts/circumcision-package.png"
+      "cutout": "/packages/cutouts/circumcision-package.webp"
     },
     {
       "slug": "thyroid-screening-package",
@@ -126,7 +126,7 @@
       "contactLocal": "local 8107",
       "featured": false,
       "image": "/packages/thyroid-screening-package.webp",
-      "cutout": "/packages/cutouts/thyroid-screening-package.png"
+      "cutout": "/packages/cutouts/thyroid-screening-package.webp"
     },
     {
       "slug": "prenatal-package",
@@ -176,7 +176,7 @@
       "contactLocal": "local 7000",
       "featured": true,
       "image": "/packages/prenatal-package.webp",
-      "cutout": "/packages/cutouts/prenatal-package.png"
+      "cutout": "/packages/cutouts/prenatal-package.webp"
     },
     {
       "slug": "heart-care-bundle",
@@ -192,7 +192,7 @@
       "contactLocal": "local 7000",
       "featured": true,
       "image": "/packages/heart-care-bundle.webp",
-      "cutout": "/packages/cutouts/heart-care-bundle.png"
+      "cutout": "/packages/cutouts/heart-care-bundle.webp"
     },
     {
       "slug": "sunday-ultrasound-promo",
@@ -215,7 +215,7 @@
       "contactLocal": "local 7000",
       "featured": false,
       "image": "/packages/sunday-ultrasound-promo.webp",
-      "cutout": "/packages/cutouts/sunday-ultrasound-promo.png"
+      "cutout": "/packages/cutouts/sunday-ultrasound-promo.webp"
     },
     {
       "slug": "hypertension-package",
@@ -241,7 +241,7 @@
       "contactLocal": "local 8107",
       "featured": false,
       "image": "/packages/hypertension-package.webp",
-      "cutout": "/packages/cutouts/hypertension-package.png"
+      "cutout": "/packages/cutouts/hypertension-package.webp"
     },
     {
       "slug": "essential-lab-package",
@@ -264,7 +264,7 @@
       "contactLocal": "local 8107",
       "featured": false,
       "image": "/packages/essential-lab-package.webp",
-      "cutout": "/packages/cutouts/essential-lab-package.png"
+      "cutout": "/packages/cutouts/essential-lab-package.webp"
     },
     {
       "slug": "lipid-panel-package",
@@ -283,7 +283,7 @@
       "contactLocal": "local 8107",
       "featured": false,
       "image": "/packages/lipid-panel-package.webp",
-      "cutout": "/packages/cutouts/lipid-panel-package.png"
+      "cutout": "/packages/cutouts/lipid-panel-package.webp"
     },
     {
       "slug": "kidney-function-test",
@@ -306,7 +306,7 @@
       "contactLocal": "local 8107",
       "featured": false,
       "image": "/packages/kidney-function-test.webp",
-      "cutout": "/packages/cutouts/kidney-function-test.png"
+      "cutout": "/packages/cutouts/kidney-function-test.webp"
     },
     {
       "slug": "diagnostic-price-list",
@@ -341,7 +341,7 @@
       "contactLocal": "local 7000",
       "featured": true,
       "image": "/packages/diagnostic-price-list.webp",
-      "cutout": "/packages/cutouts/diagnostic-price-list.png"
+      "cutout": "/packages/cutouts/diagnostic-price-list.webp"
     },
     {
       "slug": "hemodialysis",
@@ -356,7 +356,7 @@
       "contactLocal": "local 7000",
       "featured": false,
       "image": "/packages/hemodialysis.webp",
-      "cutout": "/packages/cutouts/hemodialysis.png"
+      "cutout": "/packages/cutouts/hemodialysis.webp"
     }
   ]
 }

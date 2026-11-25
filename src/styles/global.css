@@ -374,3 +374,21 @@ details.acc .body { padding: 0 16px 16px; color: var(--ink-soft); }
 @property --rv { syntax: '<length>'; inherits: false; initial-value: 28px; }
 .cards-motion .card:not(.cp-reveal) { --rv: 28px; opacity: 0; transform: translateY(calc(var(--py, 0px) + var(--rv))) scale(0.985); transition: opacity 0.6s ease, --rv 0.7s cubic-bezier(.2,.7,.2,1), scale 0.6s ease; will-change: transform, opacity; }
 .cards-motion .card:not(.cp-reveal).is-in { --rv: 0px; opacity: 1; scale: 1; }
+
+/* Feedback round 1 (25 Nov 2026): slimmer phone controls */
+@media (max-width: 899px) {
+  :root { --bottombar-h: 56px; }
+  .site-header { padding-top: 6px; }
+  .site-header .bar { min-height: 50px; padding: 3px 5px 3px 10px; gap: 8px; }
+  .brand-logo-wide { height: 32px; }
+  .nav-toggle { min-height: 40px; padding: 0 12px; font-size: 0.9rem; }
+  .bottombar { padding: 5px; gap: 5px; }
+  .bottombar a { font-size: 0.68rem; gap: 1px; }
+  .bottombar a svg { width: 18px; height: 18px; }
+}
+.kriss-bubble { right: 12px; bottom: calc(var(--bottombar-h) + 10px); min-width: 48px; min-height: 48px; padding: 0; width: 48px; height: 48px; border-radius: 50%; justify-content: center; overflow: hidden; background: #fff; border: 2px solid var(--pdh-orange); box-shadow: 0 6px 18px rgba(0,0,0,0.16); }
+.kriss-face { width: 40px; height: 40px; object-fit: cover; object-position: 40% 20%; border-radius: 50%; display: block; }
+.kriss-lbl { display: none; }
+@media (min-width: 900px) { .kriss-bubble { width: auto; height: auto; min-height: 48px; padding: 4px 16px 4px 4px; border-radius: 999px; gap: 10px; bottom: 20px; right: 20px; } .kriss-lbl { display: inline; font-weight: 700; font-size: 0.9rem; color: var(--pdh-navy); } }
+.kriss-panel { bottom: calc(var(--bottombar-h) + 66px); }
+@media (min-width: 900px) { .kriss-panel { bottom: 80px; } }

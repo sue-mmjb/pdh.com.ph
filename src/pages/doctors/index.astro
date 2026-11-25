@@ -13,7 +13,8 @@ import { doctors, departments, specializations, site } from '../../lib/data';
       <form class="filters" id="doc-filters" role="search" aria-label="Filter doctors" action="/doctors/" method="get">
         <div class="field">
           <label for="q">Name or specialty</label>
-          <input id="q" name="q" type="search" placeholder="e.g. Dela Cruz, cardiology" autocomplete="off" />
+          <input id="q" name="q" type="search" list="doc-suggest" placeholder="e.g. Dela Cruz, cardiology, heart" autocomplete="off" />
+          <datalist id="doc-suggest"><option value="Cardiology"></option><option value="Pediatrics"></option><option value="Obstetrics & Gynecology"></option><option value="Internal Medicine"></option><option value="Dermatology"></option><option value="ENT"></option><option value="Ophthalmology"></option><option value="Orthopedic Surgery"></option><option value="Neurology"></option><option value="Nephrology"></option><option value="Pulmonology"></option><option value="Gastroenterology"></option><option value="Endocrinology"></option><option value="Oncology"></option><option value="Urology"></option><option value="Dentistry"></option><option value="General Surgery"></option><option value="Family Medicine"></option><option value="Rehabilitation"></option><option value="Radiology"></option></datalist>
         </div>
         <div class="field">
           <label for="dept">Department</label>
@@ -33,12 +34,12 @@ import { doctors, departments, specializations, site } from '../../lib/data';
       </form>
 
       <p class="results-count" id="doc-count" aria-live="polite">Showing all {doctors.length} doctors</p>
-      <p class="proto-note" style="margin-bottom:16px">To book, call <a href={`tel:${site.phones.information.mobileTel}`}>{site.phones.information.mobile}</a> or <a href="/book/">send a request</a>. Clinic days are shown in full; room numbers are as listed by PDH.</p>
+      <p class="proto-note" style="margin-bottom:16px">To book, call <a href={`tel:${site.phones.information.mobileTel}`}>{site.phones.information.mobile}</a> or <a href="/book/">use PDH's contact channels</a>. Clinic days are shown in full; room numbers are as listed by PDH.</p>
 
       <div class="grid grid-3" id="doc-list">
         {doctors.map((d) => <DoctorCard doctor={d} />)}
       </div>
-      <p class="note-box" id="doc-empty" hidden>No doctors match. Try a shorter name or clear the filters.</p>
+      <p class="note-box" id="doc-empty" hidden>No doctors match. Try a specialty (for example cardiology, pediatrics, OB-GYN), a concern (heart, kidney, skin) or a shorter name, or clear the filters.</p>
     </div>
   </section>
 
@@ -48,12 +49,15 @@ import { doctors, departments, specializations, site } from '../../lib/data';
       var cards = Array.prototype.slice.call(document.querySelectorAll('#doc-list .doctor-card'));
       var count = document.getElementById('doc-count'), empty = document.getElementById('doc-empty');
       var total = cards.length;
+      // Common patient words map to the specialty names PDH uses (heart -> cardiology)
+      var SYN = {"heart":["cardiology","cardiovascular"],"cardio":["cardiology"],"kidney":["nephrology","urology"],"skin":["dermatology"],"child":["pediatrics"],"children":["pediatrics"],"kid":["pediatrics"],"kids":["pediatrics"],"baby":["pediatrics","neonatology"],"newborn":["neonatology"],"infant":["pediatrics","neonatology"],"eye":["ophthalmology"],"eyes":["ophthalmology"],"vision":["ophthalmology"],"teeth":["dentistry"],"tooth":["dentistry"],"dental":["dentistry"],"braces":["orthodontics"],"bone":["orthopedic"],"bones":["orthopedic"],"joint":["orthopedic","rheumatology"],"fracture":["orthopedic"],"spine":["orthopedic","neurosurgery"],"pregnancy":["obstetrics","perinatology"],"pregnant":["obstetrics","perinatology"],"prenatal":["obstetrics","perinatology"],"ob":["obstetrics"],"obgyn":["obstetrics"],"women":["gynecology"],"gyne":["gynecology"],"lung":["pulmonology"],"lungs":["pulmonology"],"breathing":["pulmonology"],"asthma":["pulmonology","allergology"],"cough":["pulmonology"],"brain":["neurology","neurosurgery"],"nerve":["neurology"],"nerves":["neurology"],"stroke":["neurology"],"seizure":["neurology"],"headache":["neurology"],"cancer":["oncology","hematology"],"tumor":["oncology"],"chemo":["oncology"],"ear":["ent"],"nose":["ent"],"throat":["ent"],"sinus":["ent"],"stomach":["gastroenterology"],"digestive":["gastroenterology"],"liver":["gastroenterology"],"ulcer":["gastroenterology"],"diabetes":["endocrinology","diabetology"],"sugar":["endocrinology","diabetology"],"thyroid":["endocrinology"],"hormone":["endocrinology"],"blood":["hematology"],"anemia":["hematology"],"infection":["infectious"],"fever":["infectious","general medicine","family medicine"],"arthritis":["rheumatology"],"surgery":["surgery"],"operation":["surgery"],"xray":["radiology"],"scan":["radiology"],"imaging":["radiology"],"ultrasound":["sonology","radiology"],"therapy":["rehabilitation"],"rehab":["rehabilitation"],"physical":["rehabilitation"],"allergy":["allergology"],"allergies":["allergology"],"checkup":["family medicine","general medicine","internal medicine"],"general":["general medicine","family medicine"],"family":["family medicine"],"anesthesia":["anesthesiology"],"fertility":["infertility","reproductive"],"infertility":["infertility"],"vascular":["vascular"],"veins":["vascular"],"urine":["urology"],"prostate":["urology"],"bladder":["urology"],"icu":["intensivist"],"critical":["intensivist"],"elderly":["internal medicine","general medicine"],"senior":["internal medicine"],"pedia":["pediatrics"],"neuro":["neurology","neurosurgery"],"ortho":["orthopedic"],"derma":["dermatology"],"gastro":["gastroenterology"],"endo":["endocrinology"],"nephro":["nephrology"],"uro":["urology"],"onco":["oncology"],"pulmo":["pulmonology"],"optha":["ophthalmology"],"opthalmology":["ophthalmology"],"ophtha":["ophthalmology"]};
       function norm(s) { return (s || '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').trim(); }
+      function hit(hay, w) { if (hay.indexOf(w) >= 0) return true; var alts = SYN[w] || SYN[w.replace(/s$/, '')] || []; return alts.some(function (t) { return hay.indexOf(t) >= 0; }); }
       function apply() {
         var qq = norm(q.value), dv = dept.value, sv = spec.value, shown = 0;
         cards.forEach(function (c) {
           var hay = norm(c.getAttribute('data-name') + ' ' + c.getAttribute('data-spec') + ' ' + c.getAttribute('data-dept'));
-          var ok = (!qq || qq.split(' ').every(function (w) { return hay.indexOf(w) >= 0; }))
+          var ok = (!qq || qq.split(' ').every(function (w) { return hit(hay, w); }))
             && (!dv || c.getAttribute('data-dept') === dv)
             && (!sv || c.getAttribute('data-spec') === sv);
           c.style.display = ok ? '' : 'none';

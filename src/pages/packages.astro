@@ -39,7 +39,7 @@ const c = packagesData.contacts;
           {p.terms && <details class="acc" style="margin:8px 0"><summary>Terms and conditions</summary><div class="body"><ul class="small" style="margin:8px 0 0">{p.terms.map((t) => <li>{t}</li>)}</ul></div></details>}
           {p.note && <p class="small muted">{p.note}</p>}
           <div class="actions pkg-actions" style="margin-top:auto">
-            <a class="btn btn-primary btn-sm" href={`/book/?service=package-${p.slug}`}><Icon name="calendar" /> Request</a>
+            <a class="btn btn-primary btn-sm" href={`/book/?service=package-${p.slug}`}><Icon name="calendar" /> Book</a>
             <a class="btn btn-outline btn-sm" href={`tel:${c.main.tel}`} title={`${c.main.display.replace('local 7000', p.contactLocal)}`}><Icon name="phone" /> Call {p.contactLocal}</a>
           </div>
         </article>

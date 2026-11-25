@@ -91,7 +91,7 @@ const isER = s.slug === 'emergency-room';
           <h3 style="font-size:1.05rem">Next step</h3>
           {isER
             ? <a class="btn btn-emergency" href={`tel:${er.tel}`} style="width:100%"><Icon name="emergency" /> Call the ER</a>
-            : <a class="btn btn-primary" href={`/book/?service=${s.slug}`} style="width:100%"><Icon name="calendar" /> Request an appointment</a>}
+            : <a class="btn btn-primary" href={`/book/?service=${s.slug}`} style="width:100%"><Icon name="calendar" /> Book an appointment</a>}
           <a class="btn btn-outline" href={`tel:${site.phones.information.tel}`} style="width:100%;margin-top:8px"><Icon name="phone" /> Call {site.phones.information.display}</a>
           {s.extraLink && <a class="btn btn-ghost" href={s.extraLink.href} target="_blank" rel="noopener" style="width:100%;margin-top:8px">{s.extraLink.label} <Icon name="external" /></a>}
         </div>

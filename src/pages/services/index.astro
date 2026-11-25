@@ -14,6 +14,16 @@ const tbd = services.filter((s) => !s.hours);
 
   <section class="section">
     <div class="container">
+      <form class="svc-search" id="svc-search" role="search" action="/services/" method="get">
+        <label for="svc-q">Find a service by name or need</label>
+        <div class="svc-search_row">
+          <input id="svc-q" name="q" type="search" list="svc-suggest" placeholder="e.g. dialysis, x-ray, heart, baby" autocomplete="off" />
+          <datalist id="svc-suggest"><option value="Emergency Room"></option><option value="Laboratory"></option><option value="Radiology"></option><option value="Pharmacy"></option><option value="Hemodialysis"></option><option value="Physical Medicine and Rehabilitation"></option><option value="Eye Center"></option><option value="Dental Services"></option><option value="OB Ultrasound"></option><option value="Multi-Diagnostic Center"></option><option value="ICU"></option><option value="NICU"></option><option value="Admitting"></option><option value="Medical Records"></option><option value="Animal Bite Center"></option><option value="Nuclear Medicine"></option></datalist>
+          <button class="btn btn-primary" type="submit">Search</button>
+          <button class="btn btn-outline" type="reset" id="svc-reset">Clear</button>
+        </div>
+        <p class="results-count" id="svc-count" aria-live="polite">Showing all {services.length} services</p>
+      </form>
       <h2>By floor</h2>
       <p class="muted" style="max-width:60ch">Where to go once you are inside. Floors and hours as published by PDH.</p>
       {groupByFloor(services).map(([floor, list]) => (
@@ -22,10 +32,44 @@ const tbd = services.filter((s) => !s.hours);
           <div class="grid grid-3">{list.map((s) => <ServiceCard service={s} compact />)}</div>
         </div>
       ))}
+      <p class="note-box" id="svc-empty" hidden>No service matches. Try another word (for example dialysis, x-ray, heart, baby) or clear the search. For anything else, call Information.</p>
       <p class="muted small" style="margin-top:24px">Also at PDH: {namedOnlyOnSite.join(', ')}. Call Information for details. <ToConfirm note="No description, floor or hours on the current site" /></p>
     </div>
   </section>
+  <script is:inline>
+    (function () {
+      var q = document.getElementById('svc-q'), count = document.getElementById('svc-count'), empty = document.getElementById('svc-empty');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.svc-card[data-text]'));
+      var floors = Array.prototype.slice.call(document.querySelectorAll('.floor'));
+      var total = cards.length;
+      // Common patient words map to the service names PDH uses (dialysis -> Hemodialysis Center)
+      var SYN = {"heart":["multi-diagnostic","cardio","ecg","echo"],"cardio":["multi-diagnostic","cardio"],"ecg":["multi-diagnostic"],"echo":["multi-diagnostic","ultrasound"],"dialysis":["hemodialysis"],"kidney":["hemodialysis","nephrology"],"lab":["laboratory"],"labs":["laboratory"],"blood":["laboratory"],"test":["laboratory","multi-diagnostic"],"tests":["laboratory","multi-diagnostic"],"medicine":["pharmacy"],"medicines":["pharmacy"],"drug":["pharmacy"],"drugs":["pharmacy"],"prescription":["pharmacy"],"emergency":["emergency"],"er":["emergency"],"accident":["emergency"],"eye":["eye center","ophthalmology"],"eyes":["eye center"],"glasses":["eye center"],"teeth":["dental"],"tooth":["dental"],"dentist":["dental"],"xray":["radiology"],"x-ray":["radiology"],"ct":["radiology"],"scan":["radiology"],"mri":["radiology"],"imaging":["radiology"],"mammogram":["radiology"],"therapy":["physical medicine","rehabilitation"],"rehab":["rehabilitation"],"physio":["rehabilitation"],"stroke":["rehabilitation","neurology"],"baby":["nicu","ob ultrasound","pediatric"],"newborn":["nicu"],"pregnant":["ob ultrasound","obstetrics"],"pregnancy":["ob ultrasound","obstetrics"],"ultrasound":["ob ultrasound","radiology"],"icu":["intensive","icu"],"intensive":["intensive"],"child":["picu","pediatric"],"children":["picu","pediatric"],"chemo":["chemo"],"cancer":["chemo","oncology"],"bite":["animal bite"],"dog":["animal bite"],"cat":["animal bite"],"rabies":["animal bite"],"vaccine":["animal bite"],"records":["medical records"],"certificate":["medical records"],"results":["laboratory","medical records"],"admission":["admitting"],"admitted":["admitting"],"room":["admitting"],"rooms":["admitting"],"breastfeeding":["breastfeeding"],"nursing":["breastfeeding"],"lung":["pulmonary"],"lungs":["pulmonary"],"breathing":["pulmonary"],"nuclear":["nuclear medicine"],"thyroid":["nuclear medicine","laboratory"],"operation":["operating room"],"surgery":["operating room"],"clinic":["outpatient"],"consultation":["outpatient"],"consult":["outpatient"],"doctor":["outpatient"],"complaint":["patient experience"],"feedback":["patient experience"]};
+      function norm(s) { return (s || '').toLowerCase().replace(/[^a-z0-9 -]/g, ' ').trim(); }
+      function hit(hay, w) { if (hay.indexOf(w) >= 0) return true; var alts = SYN[w] || SYN[w.replace(/s$/, '')] || []; return alts.some(function (t) { return hay.indexOf(t) >= 0; }); }
+      function apply() {
+        var qq = norm(q.value), shown = 0;
+        cards.forEach(function (c) {
+          var hay = c.getAttribute('data-text');
+          var ok = !qq || qq.split(' ').every(function (w) { return hit(hay, w); });
+          c.style.display = ok ? '' : 'none';
+          if (ok) shown++;
+        });
+        floors.forEach(function (f) { var any = Array.prototype.some.call(f.querySelectorAll('.svc-card'), function (c) { return c.style.display !== 'none'; }); f.style.display = any ? '' : 'none'; });
+        count.textContent = shown === total ? 'Showing all ' + total + ' services' : 'Showing ' + shown + ' of ' + total + ' services';
+        empty.hidden = shown !== 0;
+      }
+      try { var p = new URLSearchParams(location.search); if (p.get('q')) q.value = p.get('q'); } catch (e) {}
+      q.addEventListener('input', apply);
+      document.getElementById('svc-search').addEventListener('submit', function (e) { e.preventDefault(); apply(); });
+      document.getElementById('svc-reset').addEventListener('click', function () { setTimeout(apply, 0); });
+      apply();
+    })();
+  </script>
   <style>
+    .svc-search { margin-bottom: 8px; }
+    .svc-search label { display: block; font-weight: 600; margin-bottom: 6px; }
+    .svc-search_row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .svc-search_row input { flex: 1 1 240px; min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 12px; font: inherit; }
     .floor { margin-top: 32px; }
     .floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
     .floor_label { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pdh-teal-text); margin: 0; white-space: nowrap; }

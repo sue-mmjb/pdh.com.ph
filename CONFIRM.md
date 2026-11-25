@@ -80,3 +80,17 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 - Room photos: PDH's room-gallery images are assigned to Ward, Semi-private, Private, Suite, Isolation (anteroom) and Premium Labor Room by what each picture shows. PDH should confirm which photo belongs to which room type.
 - News photos: the cardiovascular-talk photo is certain; the photos on the IM Family Health Talk and Barangay Partnership items are PDH event photos matched by content and should be confirmed.
 - Essential Lab Package (Promo 9), PHP 1,500, was added from a slide that is in PDH's site files but not in the live carousel we screenshotted; confirm it is current.
+
+## PDH feedback round 1 (25 Nov 2026)
+
+| Item | What the prototype shows | Status |
+| --- | --- | --- |
+| Package prices | 13 packages and promos as published on the homepage slides, Nov 2026 | [TO CONFIRM] prices and validity dates |
+| Statistics | 94 beds, 320 doctors, 32 HMO partners, 27 MPH hospitals | [TO CONFIRM] against PDH's current figures |
+| Contact numbers | As listed in "Contact numbers" above | [TO CONFIRM] |
+| Doctor schedules | 288 doctors, clinic days spelled out from PDH's day codes; no time range failed a start-before-end check | [TO CONFIRM] the day-code reading (TTHS etc.) |
+| Preparation instructions | Sample text on 16 services | Sample, PDH to supply |
+| Appointment request form | Removed; /book/ lists PDH's channels | Scope to be agreed with PDH |
+| Chatbot | Launcher and panel are a labelled placeholder; the working demo is a separate link | Done |
+| Hero and people photos | PDH doctors' published photos; staff and patient photos cropped from PDH's own slides | [TO CONFIRM] PDH approves these for the homepage |
+| Loading performance | Images re-encoded (cut-outs 2.2 MB to 0.2 MB); not yet measured on a slow connection | Test pending |
