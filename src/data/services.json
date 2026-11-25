@@ -202,12 +202,12 @@
       "icon": "rehab",
       "programs": [
         {
-          "name": "Cryotherapy",
+          "name": "Cryotherapy", "image": "/photos/people-rehab-cryo.webp",
           "summary": "Cold therapy for pain and inflammation, as offered on PDH's rehabilitation slides.",
           "conditions": []
         },
         {
-          "name": "Laser Therapy",
+          "name": "Laser Therapy", "image": "/photos/people-rehab-laser.webp",
           "summary": "Reduce acute and chronic pain, inflammation and accelerate tissue repair and healing.",
           "conditions": [
             "Osteoarthritis",
@@ -222,7 +222,7 @@
           ]
         },
         {
-          "name": "Shockwave",
+          "name": "Shockwave", "image": "/photos/people-rehab-shockwave.webp",
           "summary": "Non-invasive high energy pulse treatment for chronic musculoskeletal pain, tendinopathies and ligament injuries.",
           "conditions": [
             "Plantar fasciitis",
@@ -236,7 +236,7 @@
           ]
         },
         {
-          "name": "Cardiovascular Rehabilitation",
+          "name": "Cardiovascular Rehabilitation", "image": "/photos/people-cardio-rehab.webp",
           "summary": "A medically supervised program that helps patients recover and strengthen their heart through safe exercise, monitoring, and lifestyle guidance.",
           "conditions": [
             "Heart attack (myocardial infarction)",
@@ -253,13 +253,6 @@
       ],
       "contactLocal": "local 8211",
       "image": "/services/physical-medicine-rehabilitation.webp",
-      "gallery": [
-        "/packages/rehab-today.webp",
-        "/packages/rehab-laser-therapy.webp",
-        "/packages/rehab-shockwave.webp",
-        "/packages/rehab-cryotherapy.webp",
-        "/packages/cardio-rehab-services.webp"
-      ],
       "illustration": "/icons/services/physical-medicine-rehabilitation.png"
     },
     {

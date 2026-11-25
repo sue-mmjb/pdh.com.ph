@@ -36,18 +36,13 @@ const isER = s.slug === 'emergency-room';
         </dl>
         {s.hoursAlt && <p class="note-box small" style="margin:-12px 0 24px">{s.hoursAlt}</p>}
 
-        {s.gallery && (
-          <>
-            <h2 style="font-size:1.3rem">From PDH</h2>
-            <div class="grid grid-2" style="margin-bottom:24px">{s.gallery.map((g) => <img src={g} alt="PDH rehabilitation services slide" loading="lazy" decoding="async" style="width:100%;height:auto;border-radius:var(--radius-sm);border:1px solid var(--line)" />)}</div>
-          </>
-        )}
         {s.programs && (
           <>
             <h2 style="font-size:1.3rem">Programs</h2>
             <div class="grid grid-2" style="margin-bottom:24px">
               {s.programs.map((p) => (
-                <div class="card">
+                <div class="card program">
+                  {p.image && <img class="program_photo" src={p.image} alt={`${p.name} at PDH rehabilitation`} width="374" height="242" loading="lazy" decoding="async" />}
                   <h3 style="font-size:1.05rem">{p.name}</h3>
                   <p class="small">{p.summary}</p>
                   {p.conditions.length > 0 && <><p class="small muted" style="margin:0 0 6px"><strong>{p.name === 'Cardiovascular Rehabilitation' ? 'Recommended for patients with' : 'Commonly treated conditions'}</strong></p>
@@ -114,6 +109,8 @@ const isER = s.slug === 'emergency-room';
 
   <style>
   /* Departments without a PDH photo yet show their illustration on a tinted panel */
+  .program { padding-top: 0; overflow: hidden; }
+  .program_photo { display: block; width: calc(100% + 40px); max-width: none; height: 160px; margin: 0 -20px 14px; object-fit: cover; object-position: center 35%; }
   .svc-art { aspect-ratio: 4 / 3; display: grid; place-items: center; border-radius: var(--radius); background: radial-gradient(70% 70% at 50% 60%, #ffffff 0%, var(--pdh-teal-tint) 70%, #d9f0f0 100%); border: 1px solid var(--line); }
   .svc-art img { width: 58%; height: auto; max-width: 220px; filter: drop-shadow(0 12px 18px rgba(0,92,94,0.18)); }
 
