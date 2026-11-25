@@ -4,7 +4,7 @@ PDH-supplied brand files and photos only. No stock photos, no AI-generated image
 
 - `pdh-logo-horizontal.png` — header lockup on teal (from PDH's current site header). Served from `public/brand/`.
 - `pdh-logo-official-2048.jpg` — official square logo. Resized copies in `public/brand/` and used for the favicon, touch icon and social image.
-- `rooms/` — 20 room photos (Ward, Semi-private, Private, Suite, Isolation; four each) cropped from phone screenshots of PDH's Our Services page, supplied by Sue on 25 Nov 2026. Screen-capture quality (831×302). Served from `public/rooms/`; paths and alt text are in `src/data/rooms.json`.
+- `rooms/` — 20 room photos (Ward, Semi-private, Private, Suite, Isolation; four each) cropped from phone screenshots of PDH's Our Services page, supplied by Sue on 25 Nov 2026. Screen-capture quality (831×302). Served from `public/rooms/`; paths and alt text are in `src/data/rooms.json`. `rooms/soon-to-open.png` is PDH's own "Soon to open" banner (supplied by Sue, 26 Nov 2026), shown on the Premium Labor Room card.
 
 - `photos/pdh-facade-source.webp` — building façade from PDH's homepage slider (909×489, supplied by Sue 25 Nov 2026). Used as the homepage hero photo; a higher-resolution original from PDH would sharpen it on desktop.
 
