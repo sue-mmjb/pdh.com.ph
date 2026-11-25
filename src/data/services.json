@@ -1,5 +1,5 @@
 {
-  "_note": "Clinical services and departments from pdh.com.ph/our-services (crawled 25 Nov 2026). 'offered' lists come from each service's own page. 'preparation' is NOT on the current site: every entry is a labeled sample. 'doctorMatch' maps a service to doctor departments/specializations in doctors.json. A null location or hours means the current site shows TBD. 'programs', 'priceLine', 'hoursAlt' and 'contactLocal' come from the homepage carousel slides (Nov 2026). 'illustration' is a teal line illustration supplied by Sue (assets/icons/service-illustrations-sheet.webp).",
+  "_note": "Service photos (public/services/, copies in assets/services/) are PDH's own, cropped from screenshots of pdh.com.ph/our-services supplied by Sue on 26 Nov 2026; PDH to supply originals. Clinical services and departments from pdh.com.ph/our-services (crawled 25 Nov 2026). 'offered' lists come from each service's own page. 'preparation' is NOT on the current site: every entry is a labeled sample. 'doctorMatch' maps a service to doctor departments/specializations in doctors.json. A null location or hours means the current site shows TBD. 'programs', 'priceLine', 'hoursAlt' and 'contactLocal' come from the homepage carousel slides (Nov 2026). 'illustration' is a teal line illustration supplied by Sue (assets/icons/service-illustrations-sheet.webp).",
   "services": [
     {
       "slug": "emergency-room",
@@ -16,11 +16,12 @@
       "preparation": null,
       "featured": true,
       "icon": "emergency",
-      "image": "/photos/pdh-facade.webp",
+      "image": "/services/emergency-room.webp",
       "illustration": "/icons/services/emergency-room.png"
     },
     {
       "slug": "radiology",
+      "image": "/services/radiology.webp",
       "name": "Radiology",
       "short": "Radiology",
       "summary": "Provides essential imaging services such as X-rays, CT scans, and ultrasounds, for accurate diagnoses.",
@@ -70,11 +71,12 @@
         "label": "View online lab results",
         "href": "https://lis.pdh.com.ph/"
       },
-      "image": "/photos/pillar-innovation.webp",
+      "image": "/services/laboratory.webp",
       "illustration": "/icons/services/laboratory.png"
     },
     {
       "slug": "nuclear-medicine",
+      "image": "/services/nuclear-medicine.webp",
       "name": "Nuclear Medicine",
       "short": "Nuclear Medicine",
       "summary": "The only Nuclear Medicine Department in Parañaque, bringing advanced diagnostic and therapeutic care closer to the community.",
@@ -120,13 +122,13 @@
       "icon": "heart",
       "hoursAlt": "A homepage slide lists Echocardiogram (pedia & adult) Monday–Sunday 6 AM–7 PM and Vascular procedures Monday–Saturday 8 AM–5 PM, which differs from the Our Services page.",
       "hoursConfirmed": false,
-      "image": "/photos/svc-echo.webp",
+      "image": "/services/multi-diagnostic-center.webp",
       "illustration": "/icons/services/multi-diagnostic-center.png"
     },
     {
       "slug": "pulmonary",
       "name": "Pulmonary",
-      "image": "/photos/svc-consultation.webp",
+      "image": "/services/pulmonary.webp",
       "short": "Pulmonary",
       "summary": "We provide expert services for respiratory conditions.",
       "detail": "We offer procedures designed to address respiratory conditions and support patients through accurate diagnoses for healthier lungs.",
@@ -173,7 +175,7 @@
       "featured": true,
       "icon": "kidney",
       "priceLine": "For as low as Php 6,700.00, inclusive of PhilHealth (homepage slide, Nov 2026)",
-      "image": "/photos/svc-hemodialysis-nurse.webp",
+      "image": "/services/hemodialysis-center.webp",
       "illustration": "/icons/services/hemodialysis-center.png"
     },
     {
@@ -250,7 +252,7 @@
         }
       ],
       "contactLocal": "local 8211",
-      "image": "/photos/people-rehab-shockwave.webp",
+      "image": "/services/physical-medicine-rehabilitation.webp",
       "gallery": [
         "/packages/rehab-today.webp",
         "/packages/rehab-laser-therapy.webp",
@@ -262,6 +264,7 @@
     },
     {
       "slug": "operating-room",
+      "image": "/services/operating-room.webp",
       "name": "Operating Room (OR)",
       "short": "Surgery",
       "summary": "Our OR is equipped to support a wide array of surgical procedures. Led by our expert medical team, we provide cutting-edge techniques and unmatched surgical precision.",
@@ -297,11 +300,12 @@
       "preparation": null,
       "featured": false,
       "icon": "monitor",
-      "image": "/photos/pillar-accessible.webp",
+      "image": "/services/icu.webp",
       "illustration": "/icons/services/icu.png"
     },
     {
       "slug": "nicu",
+      "image": "/services/nicu.webp",
       "name": "NICU (Neonatal Intensive Care Unit)",
       "short": "NICU",
       "summary": "Specialized care and intensive monitoring for premature and critically ill newborns, ensuring the best outcomes.",
@@ -327,6 +331,7 @@
     },
     {
       "slug": "picu",
+      "image": "/services/picu.webp",
       "name": "PICU (Pediatric Intensive Care Unit)",
       "short": "PICU",
       "summary": "Expert care for children with severe or critical conditions, offering specialized pediatric treatment.",
@@ -366,13 +371,13 @@
       "preparation": "Check your doctor’s clinic schedule on their profile, then call to book. Bring previous results and a list of your medications.",
       "featured": true,
       "icon": "stethoscope",
-      "image": "/photos/pillar-patient-safety.webp",
+      "image": "/services/outpatient-clinics.webp",
       "illustration": "/icons/services/outpatient-clinics.png"
     },
     {
       "slug": "ob-ultrasound",
       "name": "OB Ultrasound Services",
-      "image": "/photos/svc-ob-ultrasound.webp",
+      "image": "/services/ob-ultrasound.webp",
       "short": "OB Ultrasound",
       "summary": "Advanced imaging to monitor maternal and fetal health, ensuring safe pregnancies and informed care.",
       "location": "4th Floor",
@@ -401,6 +406,7 @@
     },
     {
       "slug": "breastfeeding-station",
+      "image": "/services/breastfeeding-station.webp",
       "name": "Breastfeeding Station",
       "short": "Breastfeeding",
       "summary": "A comfortable and safe space for mothers to breastfeed their infants.",
@@ -418,6 +424,8 @@
     },
     {
       "slug": "animal-bite-center",
+      "status": "Soon to open",
+      "image": "/services/animal-bite-center.webp",
       "name": "Animal Bite Center",
       "short": "Animal Bite",
       "summary": "Provides pre and post-exposure prophylaxis (PEP) for animal bites.",
@@ -435,6 +443,7 @@
     },
     {
       "slug": "eye-center",
+      "image": "/services/eye-center.webp",
       "name": "Eye Center",
       "short": "Eye Center",
       "summary": "Equipped to handle a variety of eye-related health concerns, including common and specialized eye diseases.",
@@ -464,6 +473,7 @@
     },
     {
       "slug": "dental-services",
+      "image": "/services/dental-services.webp",
       "name": "Dental Services",
       "short": "Dental",
       "summary": "Comprehensive dental care, offering expert treatments to maintain oral health and confident smiles.",
@@ -498,6 +508,7 @@
     },
     {
       "slug": "pharmacy",
+      "image": "/services/pharmacy.webp",
       "name": "Pharmacy",
       "short": "Pharmacy",
       "summary": "Convenience and easy access to essential medications, ensuring your needs are met promptly.",
@@ -528,10 +539,12 @@
       "preparation": "Bring a valid ID, your admitting order, and PhilHealth or HMO documents.",
       "featured": false,
       "icon": "clipboard",
-      "image": "/photos/pdh-lobby.webp"
+      "image": "/services/admitting.webp"
     },
     {
       "slug": "chemo-infusion-center",
+      "status": "Soon to open",
+      "image": "/services/chemo-infusion-center.webp",
       "name": "Chemo Infusion Center",
       "short": "Chemo Infusion",
       "summary": "Serves both inpatients and outpatients, offering safe, personalized chemotherapy treatments in a caring and comfortable setting.",
@@ -552,6 +565,7 @@
     },
     {
       "slug": "medical-records",
+      "image": "/services/medical-records.webp",
       "name": "Medical Records",
       "short": "Medical Records",
       "summary": "Secure and organized access to medical records, ensuring patients and healthcare providers receive timely and accurate information.",
@@ -569,6 +583,7 @@
     },
     {
       "slug": "patient-experience",
+      "status": "Soon to open",
       "name": "Patient Experience Department",
       "short": "Patient Experience",
       "summary": "Dedicated to enhancing patient satisfaction, our team ensures compassionate care, clear communication, and a positive hospital journey.",
@@ -582,7 +597,7 @@
       "preparation": null,
       "featured": false,
       "icon": "smile",
-      "image": "/photos/pillar-compassion.webp",
+      "image": "/services/patient-experience.webp",
       "illustration": "/icons/services/patient-experience.png"
     }
   ],

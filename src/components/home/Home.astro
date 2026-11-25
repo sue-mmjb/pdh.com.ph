@@ -151,7 +151,7 @@ const faqs = [
           <div class="cp-svc">
             {list.map((s) => (
               <a class="cp-svc_card cp-reveal" href={`/services/${s.slug}/`}>
-                <strong class="cp-svc_name">{s.name}</strong>
+                <strong class="cp-svc_name">{s.name}{s.status && <span class="cp-svc_soon">{s.status}</span>}</strong>
                 <span class="cp-svc_meta">{floor.startsWith('Upper') && s.location ? `${s.location} · ` : ''}{shortHours(s)}</span>
                 {s.image
                   ? <img class="cp-svc_photo" src={s.image} alt="" width="160" height="120" loading="lazy" decoding="async" />
@@ -411,6 +411,7 @@ const faqs = [
   .cp-svc_card { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 14px 84px 14px 14px; background: var(--card); border-radius: var(--radius); text-decoration: none; color: inherit; border: 1px solid transparent; min-height: 112px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
   .cp-svc_card:hover { border-color: var(--pdh-teal); transform: translateY(-2px); }
   .cp-svc_name { font-family: var(--font-head); font-weight: 600; font-size: 0.98rem; line-height: 1.25; letter-spacing: -0.01em; color: var(--heading); text-wrap: balance; }
+  .cp-svc_soon { display: inline-block; margin-left: 6px; padding: 2px 7px; border-radius: 999px; background: var(--pdh-orange); color: #fff; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; }
   .cp-svc_meta { font-size: 0.85rem; color: var(--ink-soft); }
   .cp-svc_art { position: absolute; right: 10px; bottom: 8px; width: 64px; height: 64px; object-fit: contain; object-position: right bottom; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
   .cp-svc_card:hover .cp-svc_art { transform: translateY(-4px) scale(1.06); }

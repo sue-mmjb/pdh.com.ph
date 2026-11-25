@@ -43,6 +43,7 @@ import ScheduleTable from '../components/ScheduleTable.astro';
       <div class="grid grid-3">
         {rooms.facilities.map((f) => (
           <div class="card">
+            {f.image && <img src={f.image} alt={`${f.name} at PDH`} width="420" height="240" loading="lazy" decoding="async" style="display:block;width:calc(100% + 40px);margin:-20px -20px 14px;max-width:none;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0" />}
             <h3 style="font-size:1.1rem">{f.name}</h3>
             <p class="small">{f.text}</p>
             <p class="meta"><Icon name="pin" class="inline-ic" /> {f.location}</p>

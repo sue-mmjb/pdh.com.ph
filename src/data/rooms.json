@@ -10,43 +10,43 @@
   ],
   "facilities": [
     {
-      "name": "HMO Hub",
+      "name": "HMO Hub", "image": "/services/facility-hmo-hub.webp",
       "text": "Facilitates access to healthcare services covered by your health insurance plan.",
       "location": "Ground Floor",
       "hours": "6 AM – 7 PM (Monday to Saturday), 6 AM – 2 PM (Sunday and Holidays)"
     },
     {
-      "name": "Prayer Room",
+      "name": "Prayer Room", "image": "/services/facility-prayer-room.webp",
       "text": "A peaceful chapel for prayer and reflection for patients, families, and staff.",
       "location": "2nd Floor",
       "hours": "Open 24/7"
     },
     {
-      "name": "Parking",
+      "name": "Parking", "image": "/services/facility-parking.webp",
       "text": "Ample, convenient parking available for patients and visitors, with special slots for Persons with Disabilities (PWD) and Senior Citizens.",
       "location": "Basement Parking and Allocated Parking Space for Patients and Visitors",
       "hours": "Open 24/7"
     },
     {
-      "name": "Dietary / Canteen",
+      "name": "Dietary / Canteen", "image": "/services/facility-canteen.webp",
       "text": "Our Dietary Services and Canteen offer a wide selection of meals that satisfy both cravings and care needs. From comfort food to medically tailored meal plans, every dish is prepared with your health and well-being in mind.",
       "location": "Ground Floor",
       "hours": "6 AM – 8 PM (Monday to Sunday)"
     },
     {
-      "name": "Automated Teller Machine (ATM)",
+      "name": "Automated Teller Machine (ATM)", "image": "/services/facility-atm.webp",
       "text": "Conveniently located ATM within the hospital ensure easy access to banking services for patients, visitors, and staff.",
       "location": "Ground Floor",
       "hours": "Open 24/7"
     },
     {
-      "name": "Breastfeeding Station",
+      "name": "Breastfeeding Station", "image": "/services/breastfeeding-station.webp",
       "text": "A comfortable and safe space for mothers to breastfeed their infants.",
       "location": "4th Floor",
       "hours": "Open 24/7"
     },
     {
-      "name": "Pharmacy",
+      "name": "Pharmacy", "image": "/services/pharmacy.webp",
       "text": "Convenience and easy access to essential medications.",
       "location": "Ground Floor",
       "hours": "Open 24/7"

@@ -96,4 +96,5 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | Chatbot | Launcher and panel are a labelled placeholder; the working demo is a separate link | Done |
 | Hero and people photos | PDH doctors' published photos; staff and patient photos cropped from PDH's own slides | [TO CONFIRM] PDH approves these for the homepage |
 | Loading performance | Images re-encoded (cut-outs 2.2 MB to 0.2 MB); not yet measured on a slow connection | Test pending |
-| Department photos | Real photos on 11 service cards (ER building, Laboratory, Multi-Diagnostic, Hemodialysis, Rehabilitation, ICU, Outpatient, Admitting, Patient Experience, OB Ultrasound, Pulmonary); the other 12 keep illustrations | PDH to supply approved department photos for the rest |
+| Department photos | Every service and facility shows PDH's own photo, cropped from screenshots of pdh.com.ph/our-services (26 Nov 2026, about 430 px wide); Animal Bite Center, Chemo Infusion Center and Patient Experience show PDH's Soon to open banner | PDH to supply full-resolution originals and confirm opening dates |
+| Neurology Center, Women's Health Center, Cardiac Rehabilitation Facility | Shown on PDH's Our Services page (the first two as Soon to open) but not in the prototype's service list; PDH to confirm whether to list them | [TO CONFIRM] |

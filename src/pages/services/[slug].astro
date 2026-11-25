@@ -18,7 +18,9 @@ const er = site.phones.emergency;
 const isER = s.slug === 'emergency-room';
 ---
 <Base title={s.name} description={`${s.name} at ${site.name}: ${s.summary} ${s.location ? `Location: ${s.location}.` : ''} ${s.hours ? `Hours: ${s.hours}.` : ''}`}>
-  <PageHero eyebrow="Our services" title={s.name} lead={s.summary} crumbs={[{ href: '/services/', label: 'Services' }]} />
+  <PageHero eyebrow="Our services" title={s.name} lead={s.summary} crumbs={[{ href: '/services/', label: 'Services' }]}>
+    {s.status && <p class="note-box" style="margin-top:12px"><strong>{s.status}.</strong> PDH lists this service as soon to open; location and hours will follow. Call Information for updates.</p>}
+  </PageHero>
 
   <section class="section">
     <div class="container svc-grid">
