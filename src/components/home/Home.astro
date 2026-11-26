@@ -33,7 +33,7 @@ const people = [
 const leadShort = site.hero.text.split('. ')[0] + '.';
 const entry = [
   { title: 'I need help now', text: 'The Emergency Room is on the Ground Floor and open 24/7. Call first if you can.', cta: 'Call the ER', href: `tel:${er.tel}`, cls: 'btn-emergency', art: '/services/emergency-room.webp', artAlt: 'The Emergency Room entrance at PDH', note: `${er.display} · mobile ${er.mobile}`, confirm: true },
-  { title: 'I want to see a doctor', text: `${doctors.length} doctors listed with clinic schedules and room numbers. Outpatient clinics on the 3rd to 6th floors, by appointment.`, cta: 'Find a doctor', href: '/doctors/', cls: 'btn-primary', art: '/services/outpatient-clinics.webp', artAlt: 'The Outpatient Department desk at PDH', note: 'Search by name or specialty' },
+  { title: 'I want to see a doctor', text: `${doctors.length} doctors in the directory with clinic schedules and room numbers. Outpatient clinics on the 3rd to 6th floors, by appointment.`, cta: 'Find a doctor', href: '/doctors/', cls: 'btn-primary', art: '/services/outpatient-clinics.webp', artAlt: 'The Outpatient Department desk at PDH', note: 'Search by name or specialty' },
   { title: 'I’m being admitted', text: 'Admitting is on the Ground Floor, open 24/7. Bring a valid ID, your admitting order and PhilHealth or HMO documents.', cta: 'Rooms and admission', href: '/rooms-facilities/', cls: 'btn-outline', art: '/services/admitting.webp', artAlt: 'The Admitting Department desk at PDH', note: '94 beds · ward to suite' },
 ];
 // FAQ answers use only facts already published by PDH (see CONFIRM.md for sources).
@@ -86,7 +86,7 @@ const faqs = [
         <p class="cp-lead cp-reveal">{leadShort}</p>
         <a class="cp-faces cp-reveal" href="/doctors/" aria-label={`See all ${doctors.length} doctors`}>
           <span class="cp-faces_row">{faces.map((d) => <img src={d.photo} alt="" width="48" height="48" loading="eager" decoding="async" />)}</span>
-          <span class="cp-faces_txt"><span class="cp-faces_main"><strong>{doctors.length} doctors</strong> <Icon name="arrow" /></span><span class="cp-faces_sub">with clinic days and room numbers</span></span>
+          <span class="cp-faces_txt"><span class="cp-faces_main"><strong>{doctors.length} doctors</strong> <Icon name="arrow" /></span><span class="cp-faces_sub">in the directory, with clinic days and room numbers</span></span>
         </a>
         <div class="actions cp-reveal">
           <a class="btn btn-outline" href="/book/"><Icon name="calendar" /> How to book</a>

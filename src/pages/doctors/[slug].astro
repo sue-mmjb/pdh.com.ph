@@ -54,7 +54,7 @@ const ld = {
         <h2 style="font-size:1.3rem">Accredited HMOs</h2>
         {d.hmos.length > 0
           ? <ul class="chips" style="margin-bottom:8px">{d.hmos.map((h) => <li>{h}</li>)}</ul>
-          : <p class="muted">{d.hmoNote ?? 'Not listed on the current site'} <ToConfirm note="Accredited HMOs for this doctor are not listed on the current site" /></p>}
+          : <p class="muted">Contact the <a href="/hmo-philhealth/">HMO Hub</a> to confirm this doctor’s accreditation and your coverage. <ToConfirm note="Accredited HMOs for this doctor are not listed on the current site" /></p>}
         <p class="small muted">As listed on the doctor’s page on pdh.com.ph. Confirm coverage with the <a href="/hmo-philhealth/">HMO Hub</a> before your visit.</p>
 
         {relatedServices.length > 0 && (
