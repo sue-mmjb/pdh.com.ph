@@ -17,7 +17,7 @@ const needs = [
 const az = [...services].sort((a, b) => a.name.localeCompare(b.name));
 ---
 <Base title="Services" description={`Emergency, laboratory, radiology, nuclear medicine, dialysis, rehabilitation, eye, dental and more at ${site.name}. Floors, hours and what to bring.`}>
-  <PageHero photo="/services/laboratory.webp" photoAlt="The Laboratory at PDH" photoPos="center 55%" eyebrow="Our services" title="Services and departments" lead="Every service below is listed on PDH’s current site with its floor and hours. Open a service for what it covers, which doctors to see, and how to prepare." />
+  <PageHero photo="/services/laboratory.webp" photoAlt="The Laboratory at PDH" photoPos="center 55%" eyebrow="Our services" title="Services and departments" lead="Find each service with its floor and hours. Open a service for what it covers, which doctors to see, and how to prepare." />
 
   <section class="section">
     <div class="container">
@@ -37,7 +37,7 @@ const az = [...services].sort((a, b) => a.name.localeCompare(b.name));
       </ul>
 
       <h2 style="margin-top:28px">All services</h2>
-      <p class="muted" style="max-width:60ch">Each card shows the floor, hours and contact as published by PDH. Open one for what it covers and how to prepare.</p>
+      <p class="muted" style="max-width:60ch">Each card shows the floor, hours and contact. Open one for what it covers and how to prepare.</p>
       <div class="grid grid-3" id="svc-all">{az.map((s) => <ServiceCard service={s} />)}</div>
 
       <div id="svc-floors">

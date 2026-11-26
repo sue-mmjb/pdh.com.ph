@@ -174,7 +174,7 @@
       "preparation": "Bring your nephrologist’s dialysis order, recent lab results, and your PhilHealth or HMO documents for coverage.",
       "featured": true,
       "icon": "kidney",
-      "priceLine": "For as low as Php 6,700.00, inclusive of PhilHealth (homepage slide, Nov 2026)",
+      "priceLine": "For as low as Php 6,700.00, inclusive of PhilHealth",
       "image": "/services/hemodialysis-center.webp",
       "illustration": "/icons/services/hemodialysis-center.png"
     },
@@ -189,7 +189,7 @@
       "offered": [
         "Physical Therapy: Electrotherapy & Ultrasound Therapy, Transcutaneous/Electrical Nerve Stimulation, Traction Machines, Infrared Radiation & Hydrotherapy, Manual Therapy & Exercise/Gym Equipment",
         "Occupational Therapy: Adult & Pediatric Management, Dysphagia Management, Activities of Daily Living (ADL)",
-        "Also offered (homepage slides): Laser Therapy, Cryotherapy, Shockwave Therapy, Sports injury treatment, Pain Management Program, Strength and Conditioning, Assistive Device Training"
+        "Also offered: Laser Therapy, Cryotherapy, Shockwave Therapy, Sports injury treatment, Pain Management Program, Strength and Conditioning, Assistive Device Training"
       ],
       "doctorMatch": {
         "departments": [
@@ -203,7 +203,7 @@
       "programs": [
         {
           "name": "Cryotherapy", "image": "/photos/people-rehab-cryo.webp",
-          "summary": "Cold therapy for pain and inflammation, as offered on PDH's rehabilitation slides.",
+          "summary": "Cold therapy for pain and inflammation.",
           "conditions": []
         },
         {

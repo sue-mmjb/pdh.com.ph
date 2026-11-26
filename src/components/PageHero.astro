@@ -27,14 +27,16 @@ const { title, eyebrow, lead, crumbs = [], photo, photoAlt = '', photoPos = 'cen
 </script>
 <style>
   .page-rule { display: block; height: 48px; width: 128px; max-width: 100%; margin: -14px 0 4px; }
-  .page-hero_photo { position: relative; overflow: hidden; min-height: 300px; display: flex; align-items: flex-end; padding-bottom: 28px; }
-  .page-hero_bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-  .page-hero_fade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(251,251,250,0.35) 0%, rgba(251,251,250,0.93) 42%, #fbfbfa 100%); }
-  /* text over the photo: a soft white halo keeps it readable where the fade thins */
-  .page-hero_photo h1, .page-hero_photo .lead, .page-hero_photo .eyebrow, .page-hero_photo .breadcrumb { text-shadow: 0 0 2px #fbfbfa, 0 0 14px rgba(251,251,250,0.9), 0 0 28px rgba(251,251,250,0.8); }
-  .page-hero_in { position: relative; }
+  /* Phones and tablets: the photo is a banner above the text, never behind it, so signs in the photo cannot cross the words */
+  .page-hero_photo { position: relative; overflow: hidden; padding-top: 0; padding-bottom: 28px; }
+  .page-hero_bg { display: block; width: 100%; height: 210px; object-fit: cover; pointer-events: none; }
+  .page-hero_fade { position: absolute; left: 0; right: 0; top: 150px; height: 61px; pointer-events: none; background: linear-gradient(180deg, rgba(251,251,250,0) 0%, #fbfbfa 100%); }
+  .page-hero_in { position: relative; margin-top: 12px; }
   @media (min-width: 900px) {
-    .page-hero_photo { min-height: 360px; align-items: center; padding: 48px 0; }
-    .page-hero_fade { background: linear-gradient(90deg, #fbfbfa 0%, #fbfbfa 42%, rgba(251,251,250,0.94) 56%, rgba(251,251,250,0.5) 74%, rgba(251,251,250,0.08) 100%), linear-gradient(180deg, rgba(251,251,250,0) 70%, #fbfbfa 100%); }
+    .page-hero_photo { min-height: 360px; display: flex; align-items: center; padding: 48px 0; }
+    .page-hero_bg { position: absolute; inset: 0; height: 100%; }
+    .page-hero_in { margin-top: 0; }
+    .page-hero_photo h1, .page-hero_photo .lead, .page-hero_photo .eyebrow, .page-hero_photo .breadcrumb { text-shadow: 0 0 2px #fbfbfa, 0 0 14px rgba(251,251,250,0.9), 0 0 28px rgba(251,251,250,0.8); }
+    .page-hero_fade { inset: 0; height: auto; background: linear-gradient(90deg, #fbfbfa 0%, #fbfbfa 42%, rgba(251,251,250,0.94) 56%, rgba(251,251,250,0.5) 74%, rgba(251,251,250,0.08) 100%), linear-gradient(180deg, rgba(251,251,250,0) 70%, #fbfbfa 100%); }
     .page-hero_photo .page-hero_in > * { max-width: min(60ch, 58%); } }
 </style>

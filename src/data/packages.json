@@ -2,7 +2,7 @@
   "_note": "Packages and promos transcribed from the image slides in the hero carousel of pdh.com.ph (screenshots supplied 25 Nov 2026). Prices are PDH's published prices on that date; promos may have end dates PDH has not published. Contact lines are the ones printed on each slide. 'image' is PDH's own promo slide for that package (public/packages/).",
   "sample": false,
   "source": "pdh.com.ph homepage carousel, 25 Nov 2026",
-  "priceNote": "Prices as published on pdh.com.ph in November 2026. Promo prices and availability may change; confirm when booking.",
+  "priceNote": "Prices as of November 2026. Promo prices and availability may change; confirm when booking.",
   "payment": [
     "Cash",
     "GCash",
@@ -211,7 +211,7 @@
         "Discounts (Senior Citizen, PWD, and Stockholders) are not applicable",
         "Doctor’s fee is cash basis only"
       ],
-      "note": "Enjoy a discount on the listed ultrasound services. The discounted amount is not stated on the slide.",
+      "note": "Enjoy a discount on the listed ultrasound services. Ask for the discounted rate when you book.",
       "contactLocal": "local 7000",
       "featured": false,
       "image": "/packages/sunday-ultrasound-promo.webp",

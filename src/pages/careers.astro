@@ -17,7 +17,7 @@ import { careers, site } from '../lib/data';
           </article>
         ))}
       </div>
-      <p class="muted small" style="margin-top:24px">Also listed on the current site: {careers.otherListed.join(', ')}.</p>
+      <p class="muted small" style="margin-top:24px">Other roles: {careers.otherListed.join(', ')}.</p>
       <div class="card" style="margin-top:24px">
         <h2 style="font-size:1.15rem">Ready to start your journey with PDH?</h2>
         <p>Email HR at <a href={`mailto:${site.emails.info}`}>{site.emails.info}</a> or call <a href={`tel:${site.phones.hr.tel}`}>{site.phones.hr.display}</a> · <a href={`tel:${site.phones.hr.mobileTel}`}>{site.phones.hr.mobile}</a>. Follow us on <a href={site.social.linkedin} target="_blank" rel="noopener">LinkedIn</a>.</p>

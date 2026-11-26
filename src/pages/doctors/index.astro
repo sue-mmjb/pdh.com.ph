@@ -34,7 +34,7 @@ import { doctors, departments, specializations, site } from '../../lib/data';
       </form>
 
       <p class="results-count" id="doc-count" aria-live="polite">Showing all {doctors.length} doctors</p>
-      <p class="proto-note" style="margin-bottom:16px">To book, call <a href={`tel:${site.phones.information.mobileTel}`}>{site.phones.information.mobile}</a> or <a href="/book/">use PDH's contact channels</a>. Clinic days are shown in full; room numbers are as listed by PDH.</p>
+      <p class="proto-note" style="margin-bottom:16px">To book, call <a href={`tel:${site.phones.information.mobileTel}`}>{site.phones.information.mobile}</a> or <a href="/book/">use PDH's contact channels</a>.</p>
 
       <div class="grid grid-3" id="doc-list">
         {doctors.map((d) => <DoctorCard doctor={d} />)}

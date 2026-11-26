@@ -102,3 +102,10 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 | Neurology Center, Women's Health Center, Cardiac Rehabilitation Facility | Shown on PDH's Our Services page (the first two as Soon to open) but not in the prototype's service list; PDH to confirm whether to list them | [TO CONFIRM] |
 | Doctor counts | The directory lists 288 doctors (PDH's doctor pages); PDH's own figure is 320. The site labels the figure "Doctors, per PDH" and the directory count "in the directory" | PDH to confirm which figure to publish |
 | "The only Nuclear Medicine Department in Parañaque" | PDH's own wording on its Nuclear Medicine page, shown as published | [TO CONFIRM] a claim PDH must stand behind |
+
+## Added 26 Nov 2026
+
+- About page photos: barangay partner and Core Values photos are crops from screenshots of PDH's About Us page (low resolution). No photo was available for Barangay Don Bosco or Barangay Marcelo Green. PDH to supply originals.
+- Explanatory labels removed from the pages at Sue's request (video note, "as published by PDH", "as listed on pdh.com.ph", prototype notes). The sources are still recorded in each data file's `_note`.
+- "How to prepare" text on service pages is still sample content. The on-page note now reads "Please confirm preparation instructions with the department before your visit." PDH to supply real instructions.
+- Data breach reporting form: the live site publishes it only as a QR image; the Privacy page points to the DPO email until PDH supplies the link.

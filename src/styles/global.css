@@ -277,8 +277,7 @@ body { overflow-x: clip; }
 .dl dd { margin: 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
 .chips li { background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 4px 12px; font-size: 0.88rem; }
-.cols-3 { columns: 1; column-gap: 32px; list-style: none; padding: 0; margin: 0; }
-@media (min-width: 560px) { .cols-3 { columns: 2; } }
+.cols-3 { columns: 2; column-gap: 20px; list-style: none; padding: 0; margin: 0; }
 @media (min-width: 900px) { .cols-3 { columns: 3; } }
 .cols-3 li { break-inside: avoid; padding: 6px 0; border-bottom: 1px solid var(--line); }
 
@@ -299,6 +298,15 @@ body { overflow-x: clip; }
 .table th, .table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .table th { font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
 .table-wrap { overflow-x: auto; }
+/* Phone: each row of a stacked table becomes its own block so phone numbers stay on one line */
+@media (max-width: 639px) {
+  .table-stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .table-stack, .table-stack tbody, .table-stack tr, .table-stack th, .table-stack td { display: block; }
+  .table-stack tr { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .table-stack th, .table-stack td { border: 0; padding: 2px 0; }
+  .table-stack td:empty { display: none; }
+  .table-stack td a { white-space: nowrap; }
+}
 
 /* ---------- Misc ---------- */
 .quote { border-left: 4px solid var(--accent); padding: 4px 0 4px 16px; margin: 0; font-style: italic; }

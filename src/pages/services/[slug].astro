@@ -34,7 +34,6 @@ const isER = s.slug === 'emergency-room';
           <dt>Contact</dt><dd><a href={`tel:${site.phones.trunk.tel}`}>{site.phones.trunk.display}</a>{s.contactLocal && <> · appointments: {site.phones.information.display.replace('local 7000', s.contactLocal)}</>}</dd>
           {s.priceLine && <><dt>Price</dt><dd>{s.priceLine}</dd></>}
         </dl>
-        {s.hoursAlt && <p class="note-box small" style="margin:-12px 0 24px">{s.hoursAlt}</p>}
 
         {s.programs && (
           <>
@@ -67,7 +66,7 @@ const isER = s.slug === 'emergency-room';
         {s.preparation
           ? <p>{s.preparation}</p>
           : <p class="muted">No preparation needed from your side. Bring a valid ID and any PhilHealth or HMO documents.</p>}
-        <p class="proto-note">Preparation notes are prototype samples to be replaced by PDH’s own instructions.</p>
+        <p class="proto-note">Please confirm preparation instructions with the department before your visit.</p>
 
         {isER && (
           <div class="kriss-er" style="margin-top:24px">
@@ -100,7 +99,6 @@ const isER = s.slug === 'emergency-room';
     <section class="section section-soft">
       <div class="container">
         <h2>Doctors for this service</h2>
-        <p class="muted">From PDH’s doctor listing, matched by department or specialization. Schedules are the clinic hours published on the current site.</p>
         <div class="grid grid-3">{docs.slice(0, 12).map((d) => <DoctorCard doctor={d} />)}</div>
         {docs.length > 12 && <p style="margin-top:16px"><a class="btn btn-outline" href={`/doctors/?dept=${encodeURIComponent(s.doctorMatch.departments[0] ?? '')}&q=${encodeURIComponent(s.doctorMatch.specializations[0] ?? '')}`}>See all {docs.length} doctors</a></p>}
       </div>

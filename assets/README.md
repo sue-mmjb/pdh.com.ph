@@ -13,3 +13,4 @@ PDH-supplied brand files and photos only. No stock photos, no AI-generated image
 
 Still needed from PDH: a transparent-background logo (SVG or PNG), full-resolution originals of the room photos, and photos of the departments that still show illustrations.
 Suggested photo names: `hero-facade.jpg`, `er-entrance.jpg`, `room-private.jpg`, `room-suite.jpg`, `lab.jpg`, `radiology.jpg`.
+- `about/` — five barangay partnership photos (Sun Valley, San Antonio, Upper Bicutan, Napindan, Moonwalk) and the five Core Values photos, cropped from phone screenshots of PDH's About Us page supplied by Sue. Screen-capture quality. Served from `public/about/`; paths and alt text are in `src/data/site.json`.

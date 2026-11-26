@@ -96,7 +96,7 @@ const faqs = [
     </div>
     <div class="container cp-people cp-reveal" aria-label="People of PDH">
       {people.map((p) => <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />)}
-      <p class="cp-people_cap"><strong>The people of PDH.</strong> Photos from PDH's own publications.</p>
+      <p class="cp-people_cap"><strong>The people of PDH.</strong></p>
     </div>
   </section>
 
@@ -134,7 +134,6 @@ const faqs = [
           <img class="cp-video_poster" src="/photos/alagang-pdh-ako.webp" alt="" width="1293" height="675" loading="lazy" decoding="async" />
           <span class="cp-video_play"><span class="cp-video_tri" aria-hidden="true"></span>Play the video</span>
         </button>
-        <p class="small muted cp-video_note">Alagang PDH Ako, by Parañaque Doctors Hospital, 5 min. Plays from Vimeo only after you press play. <a href="https://vimeo.com/1071704173" target="_blank" rel="noopener">Open on Vimeo</a></p>
       </div>
     </div>
   </section>
@@ -144,7 +143,7 @@ const faqs = [
     <div class="container">
       <p class="eyebrow">Services</p>
       <h2 class="cp-h2">One hospital, every department.</h2>
-      <p class="cp-sub">Open 24/7: ER, laboratory, radiology and pharmacy. Clinics and centers by schedule. Floors and hours as published by PDH.</p>
+      <p class="cp-sub">Open 24/7: ER, laboratory, radiology and pharmacy. Clinics and centers by schedule.</p>
       {floorGroups.map(([floor, list]) => (
         <div class="cp-floor">
           <div class="cp-floor_head"><span class="cp-floor_label">{floor}</span><span class="cp-floor_rule" data-cp-rule></span></div>
@@ -182,8 +181,8 @@ const faqs = [
             <a class="btn btn-outline" href={hmo.hub.onlineApproval.url} target="_blank" rel="noopener">Online approval</a>
           </div>
         </div>
-        <p class="small muted" style="align-self:end">Accepted HMO partners, as published by PDH</p>
       </div>
+      <p class="small muted" style="margin:28px 0 8px">Accepted HMO partners</p>
       <div class="cp-marquee"><HmoMarquee /></div>
       <p class="small muted" style="text-align:center;margin:8px 0 0">32 HMO partners · <a href="/hmo-philhealth/">see the full list</a></p>
     </div>
@@ -194,7 +193,7 @@ const faqs = [
     <div class="container">
       <p class="eyebrow">Packages &amp; promos</p>
       <h2 class="cp-h2">Bundled tests at one price.</h2>
-      <p class="cp-sub">Prices as published on pdh.com.ph, November 2026. <a href="/packages/">See all packages</a>.</p>
+      <p class="cp-sub">Prices as of November 2026. <a href="/packages/">See all packages</a>.</p>
       <div class="grid grid-4" style="margin-top:8px">
         {featuredPackages.slice(0, 4).map((p) => (
           <a class="card card-link cp-pkg cp-reveal" href={`/packages/#${p.slug}`}>
@@ -239,7 +238,7 @@ const faqs = [
   <!-- 10 · FAQ -->
   <section class="cp-sec">
     <div class="container cp-two">
-      <div><p class="eyebrow">FAQs</p><h2 class="cp-h2">Before you come.</h2><p class="cp-sub">Answers use only what PDH has published.</p></div>
+      <div><p class="eyebrow">FAQs</p><h2 class="cp-h2">Before you come.</h2></div>
       <div>
         {faqs.map((f, i) => (
           <details class="acc" open={i === 0}><summary>{f.q}</summary><div class="body">{f.a}</div></details>
@@ -367,6 +366,7 @@ const faqs = [
   .cp-hero_row { display: flex; gap: 8px; }
   .cp-hero_field { flex: 1 1 0; min-width: 0; contain: inline-size; display: flex; align-items: center; gap: 10px; padding: 0 14px; min-height: 48px; background: #fff; border: 1px solid var(--line); border-radius: 14px; color: var(--ink-soft); }
   .cp-hero_field :global(svg) { flex: none; }
+  @media (max-width: 480px) { .cp-hero_field { padding: 0 12px; } .cp-hero_field :global(svg) { display: none; } .cp-hero_field input { font-size: 0.95rem; } }
   .cp-hero_field input { flex: 1 1 0; width: 0; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 1rem; color: var(--ink); padding: 10px 0; outline: none; }
   .cp-hero_field:focus-within { border-color: var(--pdh-teal); box-shadow: 0 0 0 3px rgba(0,163,165,0.18); }
   .cp-hero_btn { flex: none; border-radius: 14px; min-height: 48px; padding-inline: 14px; }
@@ -405,7 +405,6 @@ const faqs = [
   .cp-video_tri { width: 0; height: 0; border-left: 14px solid #fff; border-top: 9px solid transparent; border-bottom: 9px solid transparent; }
   .cp-video_btn:focus-visible { outline: 3px solid var(--pdh-orange); outline-offset: 3px; }
   :global(.cp-video_frame) { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 24px; background: #000; }
-  .cp-video_note { margin: 10px 4px 0; }
   .cp-sec { padding: 56px 0; }
   @media (min-width: 900px) { .cp-sec { padding: 80px 0; } }
   .cp-sec_tight { padding-top: 24px; }

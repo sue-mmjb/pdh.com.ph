@@ -1,14 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import ToConfirm from '../components/ToConfirm.astro';
 import { site } from '../lib/data';
 ---
 <Base title="Privacy Policy" description={`Data Privacy Notice of ${site.name} under the Data Privacy Act of 2012 (RA 10173).`}>
   <PageHero photo="/photos/pdh-lobby.webp" photoAlt="The PDH lobby" photoPos="center 50%" eyebrow="Data Privacy Notice" title="Your privacy matters" lead={`At ${site.name}, we value your privacy and are committed to protecting your personal information in accordance with the ${site.privacy.law}, its Implementing Rules and Regulations, and other applicable laws and regulations.`} />
   <section class="section">
     <div class="container" style="max-width:800px">
-      <p class="note-box">This prototype collects no analytics, uses no tracking pixels or third-party scripts, and its forms send nothing. The full notice below is as published on pdh.com.ph (date updated: {site.privacy.updated}).</p>
 
       <h2>Personal information we collect</h2>
       <p>While providing healthcare services, we may collect and process the following personal information:</p>
@@ -62,16 +60,15 @@ import { site } from '../lib/data';
 
       <div class="card" style="display:flex;gap:16px;align-items:center;margin:24px 0">
         <img src={site.privacy.npcSeal} alt="National Privacy Commission seal: Data Protection Officer and Data Processing System registered" width="120" height="209" loading="lazy" decoding="async" style="width:96px;height:auto;flex:none" />
-        <p style="margin:0" class="small">PDH is registered with the National Privacy Commission (Data Protection Officer and Data Processing System), as shown on the seal published on pdh.com.ph.</p>
+        <p style="margin:0" class="small">PDH is registered with the National Privacy Commission (Data Protection Officer and Data Processing System).</p>
       </div>
       <h2>Online laboratory results (PDH LIS)</h2>
       <p>The patient results portal at <a href={site.links.labResults} target="_blank" rel="noopener">lis.pdh.com.ph</a> has its own Data Privacy Policy, shown before you sign in. It covers the mobile number, case number and one-time password used to verify you, the protected PDF reports, and the cookies and session data the portal needs to work. Results are available online for 15 days. Privacy questions about the portal go to the same Data Protection Officer below.</p>
       <h2>Contact the Data Protection Officer</h2>
       <p>For questions, concerns, or requests regarding your personal information or the exercise of your privacy rights, please contact the PDH Data Protection Officer at <a href={`mailto:${site.privacy.dpoEmail}`}>{site.privacy.dpoEmail}</a>.</p>
-      <p>{site.privacy.npc.statement}</p>
 
       <h2>Any privacy concerns or suspected data breach?</h2>
-      <p>PDH’s current site offers a Data Breach Incident Reporting Form through a QR code. <ToConfirm note="The reporting form link is only published as a QR image; PDH to supply the URL" /> Until the link is supplied, report to the Data Protection Officer at <a href={`mailto:${site.privacy.dpoEmail}`}>{site.privacy.dpoEmail}</a>.</p>
+      <p>To report a privacy concern or a suspected data breach, write to the Data Protection Officer at <a href={`mailto:${site.privacy.dpoEmail}`}>{site.privacy.dpoEmail}</a>.</p>
 
       <h2>Acknowledgment</h2>
       <p>By availing of the hospital’s services, submitting your personal information, or using our facilities, systems, or online services, you acknowledge that you have read and understood this Data Privacy Notice and that your personal information will be processed in accordance with applicable laws and the hospital’s privacy policies.</p>

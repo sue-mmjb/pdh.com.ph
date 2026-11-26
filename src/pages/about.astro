@@ -5,6 +5,8 @@ import Placeholder from '../components/Placeholder.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../lib/data';
 const a = site.about;
+// Partners with a PDH photo first, so the photo cards line up
+const partners = [...a.barangayPartners].sort((x, y) => Number(!!y.photo) - Number(!!x.photo));
 ---
 <Base title="About PDH" description={`${a.intro} Founded ${site.founded}; member of ${site.network.name} since ${site.network.memberSince}.`}>
   <PageHero photo="/photos/pdh-lobby.webp" photoAlt="The PDH lobby" photoPos="center 50%" eyebrow="About us" title={site.name} lead={a.intro} />
@@ -35,8 +37,14 @@ const a = site.about;
   <section class="section">
     <div class="container">
       <h2>Core values</h2>
-      <div class="grid grid-3">
-        {a.values.map((v) => <div class="card"><span class="icon-circle"><Icon name="check" /></span><h3 style="font-size:1.1rem">{v.title}</h3><p class="muted" style="margin:0">{v.text}</p></div>)}
+      <div class="about-values">
+        {a.values.map((v) => (
+          <div class="card about-pcard">
+            <img class="about-pcard_img" src={v.photo} alt={v.photoAlt} width="160" height="132" loading="lazy" decoding="async" />
+            <h3>{v.title}</h3>
+            <p class="muted small">{v.text}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -58,7 +66,13 @@ const a = site.about;
       <h2>{a.barangayHeading}</h2>
       <p class="lead">{a.barangayIntro}</p>
       <div class="grid grid-3">
-        {a.barangayPartners.map((b) => <div class="card"><h3 style="font-size:1.05rem">{b.name}</h3><p class="small muted" style="margin:0">{b.text}</p></div>)}
+        {partners.map((b) => (
+          <div class="card about-pcard">
+            {b.photo && <img class="about-pcard_img about-pcard_img--wide" src={b.photo} alt={b.photoAlt} width="395" height="263" loading="lazy" decoding="async" />}
+            <h3>{b.name}</h3>
+            <p class="small muted">{b.text}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -74,6 +88,14 @@ const a = site.about;
   </section>
 
   <style>
+    .about-values { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (min-width: 900px) { .about-values { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; } }
+    .about-pcard { overflow: hidden; padding: 0 16px 18px; }
+    .about-pcard_img { display: block; width: calc(100% + 32px); max-width: none; margin: 0 -16px; aspect-ratio: 160 / 132; object-fit: cover; }
+    .about-pcard_img--wide { aspect-ratio: 3 / 2; object-position: center 30%; }
+    .about-pcard h3 { font-size: 1.05rem; margin: 14px 0 6px; }
+    .about-pcard:not(:has(img)) h3 { margin-top: 18px; }
+    .about-pcard p { margin: 0; }
     .about-grid { display: grid; gap: 24px; }
     @media (min-width: 900px) { .about-grid { grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: start; } }
   </style>

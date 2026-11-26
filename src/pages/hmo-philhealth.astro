@@ -29,7 +29,6 @@ import { hmo, site } from '../lib/data';
         <h2 style="font-size:1.3rem">{hmo.hub.onlineApproval.label}</h2>
         <p>{hmo.hub.onlineApproval.blurb}</p>
         <a class="btn btn-primary" href={hmo.hub.onlineApproval.url} target="_blank" rel="noopener">Request HMO online approval <Icon name="external" /></a>
-        <p class="small muted" style="margin:12px 0 0">Opens PDH’s existing approval form.</p>
       </div>
     </div>
   </section>
@@ -48,7 +47,7 @@ import { hmo, site } from '../lib/data';
     <div class="container">
       <h2>Accepted HMOs</h2>
       <HmoMarquee />
-      <p class="muted" style="margin-top:16px">Also listed as text so patients, screen readers and search engines can read them. Each doctor’s profile also lists the HMOs they accept.</p>
+      <p class="muted" style="margin-top:16px">Each doctor’s profile also lists the HMOs they accept.</p>
       <ul class="cols-3">{hmo.partners.map((p) => <li>{p}</li>)}</ul>
     </div>
   </section>

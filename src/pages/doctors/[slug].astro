@@ -31,31 +31,26 @@ const ld = {
   <section class="section">
     <div class="container doc-grid">
       <div>
-        <div class="card" style="display:flex;gap:16px;align-items:center;margin-bottom:24px">
+        <div style="margin-bottom:24px">
           {d.photo
             ? <img src={d.photo} alt={`${name}`} width="400" height="400" decoding="async" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;flex:none;background:var(--pdh-teal-tint)" />
             : <span class="avatar" aria-hidden="true" style="width:96px;height:96px;border-radius:50%;background:var(--pdh-teal-tint);color:var(--pdh-teal-text);display:grid;place-items:center;font-weight:800;font-size:1.6rem;font-family:var(--font-head);flex:none">{initials(d.name)}</span>}
-          <div>
-            <p style="margin:0" class="small">Listed as <strong>{d.name}</strong> on pdh.com.ph</p>
-            {!d.photo && <p style="margin:4px 0 0" class="muted small">No photo published by PDH for this doctor.</p>}
-          </div>
         </div>
 
         <h2 style="font-size:1.3rem">Clinic schedule and location</h2>
         <dl class="dl" style="margin-bottom:24px">
           <dt>Specialty</dt><dd>{d.specialization}</dd>
           <dt>Department</dt><dd>{d.department}</dd>
-          <dt>Clinic days</dt><dd><ScheduleTable rows={doctorScheduleRows(d.schedule)} compact />{d.schedule && <span class="small muted">As listed: {d.schedule}</span>}</dd>
+          <dt>Clinic days</dt><dd><ScheduleTable rows={doctorScheduleRows(d.schedule)} compact /></dd>
           <dt>Room</dt><dd>{d.room ? `Room ${d.room}` : <>Not listed <ToConfirm /></>}</dd>
           <dt>Contact</dt><dd><a href={`tel:${site.phones.trunk.tel}`}>{d.contact ?? site.phones.trunk.display}</a></dd>
         </dl>
-        <p class="proto-note">Clinic days are expanded from the codes on PDH’s listing (M Mon · T Tue · W Wed · TH Thu · F Fri · S Sat).</p>
 
         <h2 style="font-size:1.3rem">Accredited HMOs</h2>
         {d.hmos.length > 0
           ? <ul class="chips" style="margin-bottom:8px">{d.hmos.map((h) => <li>{h}</li>)}</ul>
           : <p class="muted">Contact the <a href="/hmo-philhealth/">HMO Hub</a> to confirm this doctor’s accreditation and your coverage. <ToConfirm note="Accredited HMOs for this doctor are not listed on the current site" /></p>}
-        <p class="small muted">As listed on the doctor’s page on pdh.com.ph. Confirm coverage with the <a href="/hmo-philhealth/">HMO Hub</a> before your visit.</p>
+        <p class="small muted">Confirm coverage with the <a href="/hmo-philhealth/">HMO Hub</a> before your visit.</p>
 
         {relatedServices.length > 0 && (
           <>
