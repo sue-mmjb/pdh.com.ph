@@ -1,13 +1,362 @@
 {
-  "_note": "The crawl has an 'Our Packages' menu item but no package text, because the current site publishes packages as banner images. Packages with sample:false are transcribed from PDH's own banners (see each 'source'); their price is shown with [TO CONFIRM] until PDH confirms it is current. Packages with sample:true are labeled SAMPLES and never show a price.",
-  "sample": true,
+  "_note": "Packages and promos transcribed from the image slides in the hero carousel of pdh.com.ph (screenshots supplied 25 Nov 2026). Prices are PDH's published prices on that date; promos may have end dates PDH has not published. Contact lines are the ones printed on each slide. 'image' is PDH's own promo slide for that package (public/packages/).",
+  "sample": false,
+  "source": "pdh.com.ph homepage carousel, 25 Nov 2026",
+  "priceNote": "Prices as published on pdh.com.ph in November 2026. Promo prices and availability may change; confirm when booking.",
+  "payment": [
+    "Cash",
+    "GCash",
+    "Credit card",
+    "Debit card",
+    "HMO accepted"
+  ],
+  "contacts": {
+    "main": {
+      "display": "(02) 8776 0644, 46 to 51 local 7000",
+      "tel": "+63287760644"
+    },
+    "mobiles": [
+      {
+        "display": "0998 520 7286",
+        "tel": "+639985207286"
+      },
+      {
+        "display": "0998 520 7295",
+        "tel": "+639985207295"
+      }
+    ],
+    "email": "marketing@pdh.com.ph"
+  },
   "packages": [
-    { "slug": "female-executive-package", "sample": false, "confirmed": false, "name": "Female Executive Package", "audience": null, "includes": ["CBC", "Urinalysis", "HbA1c", "FBS", "Lipid Profile", "ALT/SGPT", "AST/SGOT", "Creatinine", "BUA", "Pap Smear", "Chest X-ray", "12-Lead ECG"], "note": "Inclusive of Pap smear kit and Doctors PF.", "price": "PHP 5,780.00", "source": "Homepage banner on pdh.com.ph, screenshot supplied by Sue on 24 Nov 2026. Price and validity not yet confirmed by PDH." },
-    { "slug": "basic-executive-checkup", "sample": true, "name": "Basic Executive Check-up", "audience": "Adults who want a yearly baseline", "includes": ["Doctor consultation", "CBC with platelet", "Urinalysis", "Fasting blood sugar", "Lipid profile", "Chest X-ray", "ECG"], "note": "Fasting of 8–10 hours required." },
-    { "slug": "comprehensive-executive-checkup", "sample": true, "name": "Comprehensive Executive Check-up", "audience": "Adults 40 and up, or with family history", "includes": ["Everything in Basic", "Creatinine and uric acid", "Liver function tests", "Treadmill stress test", "Whole abdomen ultrasound"], "note": "Half-day schedule, by appointment." },
-    { "slug": "womens-wellness", "sample": true, "name": "Women’s Wellness Package", "audience": "Women’s preventive care", "includes": ["OB-GYN consultation", "Pap smear", "Breast ultrasound or mammography", "Transvaginal ultrasound", "CBC and urinalysis"], "note": "Mammography is advised from age 40." },
-    { "slug": "prenatal-package", "sample": true, "name": "Prenatal Package", "audience": "Expectant mothers", "includes": ["OB consultation", "Prenatal laboratory panel", "OB ultrasound", "Nutrition counseling"], "note": "OB Ultrasound Services are on the 4th Floor, 8 AM to 5 PM." },
-    { "slug": "heart-health", "sample": true, "name": "Heart Health Package", "audience": "Patients with cardiovascular risk", "includes": ["Cardiology consultation", "ECG", "2D echocardiogram with Doppler", "Lipid profile", "Fasting blood sugar"], "note": "Performed at the Multi-Diagnostic Center, 2nd Floor." },
-    { "slug": "senior-citizen", "sample": true, "name": "Senior Citizen Package", "audience": "Patients 60 and up", "includes": ["Internal medicine consultation", "CBC, urinalysis, fasting blood sugar", "Creatinine", "Chest X-ray", "ECG", "Bone density screening"], "note": "Senior citizen discount applies with a valid ID." }
+    {
+      "slug": "female-executive-package",
+      "name": "Female Executive Package",
+      "category": "Executive check-up",
+      "price": 5780,
+      "priceLabel": "PHP 5,780.00",
+      "includes": [
+        "CBC",
+        "Urinalysis",
+        "HbA1c",
+        "FBS",
+        "Lipid profile",
+        "ALT/SGPT",
+        "AST/SGOT",
+        "Creatinine",
+        "BUA",
+        "Pap smear",
+        "Chest X-ray",
+        "12-lead ECG"
+      ],
+      "note": "Inclusive of Pap smear kit and doctor’s PF.",
+      "contactLocal": "local 7000",
+      "featured": true,
+      "image": "/packages/female-executive-package.webp",
+      "cutout": "/packages/cutouts/female-executive-package.webp"
+    },
+    {
+      "slug": "male-executive-package",
+      "name": "Male Executive Package",
+      "category": "Executive check-up",
+      "price": 5980,
+      "priceLabel": "PHP 5,980.00",
+      "includes": [
+        "CBC",
+        "Urinalysis",
+        "HbA1c",
+        "FBS",
+        "Lipid profile",
+        "ALT/SGPT",
+        "AST/SGOT",
+        "Creatinine",
+        "BUA",
+        "PSA",
+        "Chest X-ray",
+        "12-lead ECG"
+      ],
+      "note": null,
+      "contactLocal": "local 7000",
+      "featured": true,
+      "image": "/packages/male-executive-package.webp",
+      "cutout": "/packages/cutouts/male-executive-package.webp"
+    },
+    {
+      "slug": "circumcision-package",
+      "name": "Circumcision Package",
+      "category": "Procedure",
+      "price": 5500,
+      "priceLabel": "PHP 5,500.00",
+      "includes": [
+        "Professional fee",
+        "Facility fee",
+        "Medical supplies"
+      ],
+      "note": "Safe and painless circumcision package. Quick, professional, and designed for your comfort.",
+      "contactLocal": "local 7000",
+      "featured": false,
+      "image": "/packages/circumcision-package.webp",
+      "cutout": "/packages/cutouts/circumcision-package.webp"
+    },
+    {
+      "slug": "thyroid-screening-package",
+      "name": "Thyroid Screening Package",
+      "category": "Screening",
+      "price": null,
+      "priceLabel": "Php 4,000 or Php 2,350",
+      "tiers": [
+        {
+          "name": "Package 1",
+          "priceLabel": "Php 4,000",
+          "includes": [
+            "Thyroid panel (TSH, FT3, FT4)",
+            "Thyroid ultrasound"
+          ]
+        },
+        {
+          "name": "Package 2",
+          "priceLabel": "Php 2,350",
+          "includes": [
+            "TSH",
+            "Thyroid ultrasound"
+          ]
+        }
+      ],
+      "includes": [],
+      "note": "With free ENT consultation.",
+      "contactLocal": "local 8107",
+      "featured": false,
+      "image": "/packages/thyroid-screening-package.webp",
+      "cutout": "/packages/cutouts/thyroid-screening-package.webp"
+    },
+    {
+      "slug": "prenatal-package",
+      "name": "Prenatal Package",
+      "category": "Maternity",
+      "price": null,
+      "priceLabel": "From Php 2,700",
+      "tiers": [
+        {
+          "name": "Prenatal 1",
+          "priceLabel": "Php 2,700",
+          "includes": [
+            "Complete blood count",
+            "Urinalysis (UA)",
+            "Blood typing",
+            "HBsAg",
+            "RPR (quali)",
+            "Fasting blood sugar"
+          ]
+        },
+        {
+          "name": "Prenatal 1A",
+          "priceLabel": "Php 4,700",
+          "includes": [
+            "Complete blood count (CBC)",
+            "Blood typing",
+            "Fasting blood sugar",
+            "HBsAg",
+            "Anti-HBs",
+            "Rubella IgG",
+            "RPR (quali)",
+            "Urinalysis"
+          ]
+        },
+        {
+          "name": "Prenatal 2",
+          "priceLabel": "Php 2,900",
+          "includes": [
+            "Complete blood count",
+            "75 OGTT (2 samples)",
+            "Urine C/S"
+          ]
+        }
+      ],
+      "includes": [],
+      "note": null,
+      "contactLocal": "local 7000",
+      "featured": true,
+      "image": "/packages/prenatal-package.webp",
+      "cutout": "/packages/cutouts/prenatal-package.webp"
+    },
+    {
+      "slug": "heart-care-bundle",
+      "name": "Heart Care Bundle",
+      "category": "Cardiology",
+      "price": 3450,
+      "priceLabel": "PHP 3,450.00",
+      "includes": [
+        "2D-Echo with Doppler",
+        "ECG (free)"
+      ],
+      "note": "Kumusta ang tibok ng puso mo? Bundle price includes a free ECG.",
+      "contactLocal": "local 7000",
+      "featured": true,
+      "image": "/packages/heart-care-bundle.webp",
+      "cutout": "/packages/cutouts/heart-care-bundle.webp"
+    },
+    {
+      "slug": "sunday-ultrasound-promo",
+      "name": "Sunday Ultrasound Promo",
+      "category": "Promo",
+      "price": null,
+      "priceLabel": "Discounted",
+      "includes": [
+        "Whole abdomen (8 hrs fasting)",
+        "KUB (kidneys, ureter, bladder)",
+        "KUBP (kidneys, ureter, bladder, prostate)"
+      ],
+      "terms": [
+        "Available every Sunday, 7:00 AM – 3:00 PM",
+        "Cash basis only",
+        "Discounts (Senior Citizen, PWD, and Stockholders) are not applicable",
+        "Doctor’s fee is cash basis only"
+      ],
+      "note": "Enjoy a discount on the listed ultrasound services. The discounted amount is not stated on the slide.",
+      "contactLocal": "local 7000",
+      "featured": false,
+      "image": "/packages/sunday-ultrasound-promo.webp",
+      "cutout": "/packages/cutouts/sunday-ultrasound-promo.webp"
+    },
+    {
+      "slug": "hypertension-package",
+      "name": "Hypertension Package (Promo 12)",
+      "category": "Screening",
+      "price": 2500,
+      "priceLabel": "PHP 2,500.00",
+      "includes": [
+        "FBS",
+        "SGOT",
+        "SGPT",
+        "Creatinine",
+        "Triglycerides",
+        "Potassium",
+        "Sodium",
+        "BUN",
+        "Blood uric acid",
+        "Total cholesterol",
+        "HDL/LDL/VLDL",
+        "ECG (free)"
+      ],
+      "note": "Huwag magpakampante sa high blood pressure. Available Wednesday, Thursday, Friday and Sunday, 6:00 AM – 10:00 AM. With free ECG.",
+      "contactLocal": "local 8107",
+      "featured": false,
+      "image": "/packages/hypertension-package.webp",
+      "cutout": "/packages/cutouts/hypertension-package.webp"
+    },
+    {
+      "slug": "essential-lab-package",
+      "name": "Essential Lab Package (Promo 9)",
+      "category": "Screening",
+      "price": 1500,
+      "priceLabel": "PHP 1,500.00",
+      "includes": [
+        "FBS (fasting blood sugar)",
+        "SGOT",
+        "SGPT",
+        "Creatinine",
+        "BUA (blood uric acid)",
+        "BUN (blood urea nitrogen)",
+        "Triglycerides",
+        "Total cholesterol",
+        "HDL/LDL/VLDL"
+      ],
+      "note": "Monitor your blood sugar, kidney, liver, and cholesterol levels to stay healthy and prevent risks. Available Wednesday, Thursday, Friday and Sunday, 6:00 AM – 10:00 AM.",
+      "contactLocal": "local 8107",
+      "featured": false,
+      "image": "/packages/essential-lab-package.webp",
+      "cutout": "/packages/cutouts/essential-lab-package.webp"
+    },
+    {
+      "slug": "lipid-panel-package",
+      "name": "Lipid Panel Package",
+      "category": "Screening",
+      "price": 1260,
+      "priceLabel": "PHP 1,260.00",
+      "includes": [
+        "Total cholesterol",
+        "Triglycerides",
+        "HDL",
+        "LDL",
+        "VLDL"
+      ],
+      "note": "A comprehensive analysis that assesses your heart health.",
+      "contactLocal": "local 8107",
+      "featured": false,
+      "image": "/packages/lipid-panel-package.webp",
+      "cutout": "/packages/cutouts/lipid-panel-package.webp"
+    },
+    {
+      "slug": "kidney-function-test",
+      "name": "Kidney Function Test",
+      "category": "Screening",
+      "price": 1370,
+      "priceLabel": "PHP 1,370.00",
+      "includes": [
+        "BUN",
+        "Creatinine",
+        "BUA",
+        "Sodium (Na)",
+        "Potassium (K)",
+        "Chloride (Cl)",
+        "Phosphorus (P)",
+        "Magnesium (Mg)",
+        "TPAG"
+      ],
+      "note": null,
+      "contactLocal": "local 8107",
+      "featured": false,
+      "image": "/packages/kidney-function-test.webp",
+      "cutout": "/packages/cutouts/kidney-function-test.webp"
+    },
+    {
+      "slug": "diagnostic-price-list",
+      "name": "Diagnostic Tests",
+      "category": "Price list",
+      "price": null,
+      "priceLabel": "From Php 515",
+      "items": [
+        {
+          "name": "2D Echo (adult)",
+          "priceLabel": "Php 3,959"
+        },
+        {
+          "name": "CT scan",
+          "priceLabel": "Php 7,220"
+        },
+        {
+          "name": "Whole abdomen ultrasound",
+          "priceLabel": "Php 4,261"
+        },
+        {
+          "name": "ECG (adult and pedia)",
+          "priceLabel": "Php 623"
+        },
+        {
+          "name": "Chest X-ray (PA)",
+          "priceLabel": "Php 515"
+        }
+      ],
+      "includes": [],
+      "note": "Magpa-test na, para sa kampanteng bukas. Pay with cash, GCash, credit card or debit card; HMO accepted.",
+      "contactLocal": "local 7000",
+      "featured": true,
+      "image": "/packages/diagnostic-price-list.webp",
+      "cutout": "/packages/cutouts/diagnostic-price-list.webp"
+    },
+    {
+      "slug": "hemodialysis",
+      "name": "Hemodialysis",
+      "category": "Treatment",
+      "price": 6700,
+      "priceLabel": "For as low as Php 6,700.00",
+      "includes": [
+        "Dialysis session, inclusive of PhilHealth"
+      ],
+      "note": "Monday–Wednesday–Friday 6:00 AM – 10:00 PM; Tuesday–Thursday–Saturday 6:00 AM – 6:00 PM.",
+      "contactLocal": "local 7000",
+      "featured": false,
+      "image": "/packages/hemodialysis.webp",
+      "cutout": "/packages/cutouts/hemodialysis.webp"
+    }
   ]
 }

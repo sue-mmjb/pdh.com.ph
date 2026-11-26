@@ -1,14 +1,15 @@
 ---
-import { initials, displayName, type Doctor } from '../lib/data';
+import { initials, displayName, doctorScheduleRows, type Doctor } from '../lib/data';
+const rowsOf = (d: Doctor) => doctorScheduleRows(d.schedule).map((r) => (r.days ? `${r.days} · ${r.time}` : r.time)).join(' / ');
 interface Props { doctor: Doctor; }
 const { doctor: d } = Astro.props;
 ---
 <a class="card card-link doctor-card" href={`/doctors/${d.slug}/`}
    data-name={d.name.toLowerCase()} data-dept={d.department} data-spec={d.specialization}>
-  <span class="avatar" aria-hidden="true">{initials(d.name)}</span>
+  {d.photo ? <img class="avatar avatar-photo" src={d.photo} alt="" width="112" height="112" loading="lazy" decoding="async" /> : <span class="avatar" aria-hidden="true">{initials(d.name)}</span>}
   <span>
     <h3>{displayName(d.name)}</h3>
     <p class="meta">{d.specialization}{d.specialization !== d.department ? ` · ${d.department}` : ''}</p>
-    <p class="sched">{d.schedule ? d.schedule : 'Schedule: see profile'}{d.room ? ` · Room ${d.room}` : ''}</p>
+    <p class="sched">{rowsOf(d)}{d.room ? ` · Room ${d.room}` : ''}</p>
   </span>
 </a>

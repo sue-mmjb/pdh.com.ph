@@ -1,39 +1,664 @@
 {
-  "_note": "Clinical services and departments from pdh.com.ph/our-services (crawled 25 Nov 2026). 'offered' lists come from each service's own page. 'preparation' is NOT on the current site: every entry is a labeled sample. 'doctorMatch' maps a service to doctor departments/specializations in doctors.json. A null location or hours means the current site shows TBD.",
+  "_note": "Service photos (public/services/, copies in assets/services/) are PDH's own, cropped from screenshots of pdh.com.ph/our-services supplied by Sue on 26 Nov 2026; PDH to supply originals. Clinical services and departments from pdh.com.ph/our-services (crawled 25 Nov 2026). 'offered' lists come from each service's own page. 'preparation' is NOT on the current site: every entry is a labeled sample. 'doctorMatch' maps a service to doctor departments/specializations in doctors.json. A null location or hours means the current site shows TBD. 'programs', 'priceLine', 'hoursAlt' and 'contactLocal' come from the homepage carousel slides (Nov 2026). 'illustration' is a teal line illustration supplied by Sue (assets/icons/service-illustrations-sheet.webp).",
   "services": [
-    { "slug": "emergency-room", "name": "Emergency Room (ER)", "short": "Emergency", "summary": "Open 24/7, staffed by experienced professionals for all emergency needs.", "location": "Ground Floor", "hours": "Open 24/7", "offered": [], "doctorMatch": { "departments": [], "specializations": [] }, "preparation": null, "featured": true, "icon": "emergency" },
-    { "slug": "radiology", "name": "Radiology", "short": "Radiology", "summary": "Provides essential imaging services such as X-rays, CT scans, and ultrasounds, for accurate diagnoses.", "location": "Ground Floor", "hours": "Open 24/7", "offered": ["X-Ray Services", "Mobile C-Arm Services", "Mammography", "Ultrasound Services", "CT Scan Services", "Specialized Imaging Procedures"], "doctorMatch": { "departments": ["Radiology"], "specializations": [] }, "preparation": "Bring your doctor’s request form and a valid ID. Some scans require fasting; the Radiology desk will tell you when you book.", "featured": true, "icon": "scan" },
-    { "slug": "laboratory", "name": "Laboratory", "short": "Laboratory", "summary": "Offers diagnostic tests, including blood works and specialized tests, to provide accurate diagnosis and support treatment.", "detail": "Our laboratory is fully equipped to conduct a wide range of diagnostic tests, including hematology, clinical microscopy, clinical chemistry, microbiology, immunology, and serology. The laboratory staff ensures quick and accurate results, which are essential for effective treatment planning.", "location": "Ground Floor", "hours": "Open 24/7", "offered": ["Hematology (Blood & Cell Analysis): CBC w/ Platelet, ESR, CT/BT, PT/PTT, Reticulocyte Count, Malarial Smear, Peripheral Blood Smear", "Microbiology (Infection Detection): AFB Stain, Gram Stain & KOH Smear, Culture & Sensitivity (Blood, Urine, Stool, CSF, Sputum, Swab/Discharge)"], "doctorMatch": { "departments": ["Pathology"], "specializations": [] }, "preparation": "Bring your doctor’s request form and a valid ID. Fasting tests (such as blood sugar and lipid profile) need 8–10 hours without food; water is allowed.", "featured": true, "icon": "lab", "extraLink": { "label": "View online lab results", "href": "https://lis.pdh.com.ph/" } },
-    { "slug": "nuclear-medicine", "name": "Nuclear Medicine", "short": "Nuclear Medicine", "summary": "The only Nuclear Medicine Department in Parañaque—bringing advanced diagnostic and therapeutic care closer to the community.", "detail": "Our Nuclear Medicine services specializes in using small amounts of radioactive materials for diagnostic and therapeutic purposes.", "location": "7th Floor", "hours": "By Appointment", "offered": ["Thyroid Uptake (Radioactive Iodine Uptake)", "Radioactive Iodine Therapy"], "doctorMatch": { "departments": [], "specializations": ["Nuclear Medicine"] }, "preparation": "Book ahead; this department is by appointment only. Your doctor may ask you to pause thyroid medication before an uptake study.", "featured": true, "icon": "atom" },
-    { "slug": "multi-diagnostic-center", "name": "Multi-Diagnostic Center", "short": "Diagnostics", "summary": "Advanced testing in cardiology, vascular, and neurology using ECG, Echocardiograms, EEG, and other cutting-edge tools.", "location": "2nd Floor", "hours": "Echo: Mon–Fri 7 AM – 5 PM, Sat–Sun 7 AM – 4 PM. Stress Echo: Saturday, by appointment. Vascular: Mon–Fri, by appointment.", "offered": ["Cardiology: Electrocardiogram (ECG), Treadmill Stress Test, 24-Hour Holter Monitor, 24-Hour BP Monitor, 2D Echocardiogram with Doppler, Stress Echocardiogram", "Vascular: Carotid/Vertebral Duplex Scanning, Peripheral Arterial and Venous Duplex Scanning, Transcranial Doppler Study, Venous Compression Study, Saphenous Vein Mapping", "Neuroscience: Electroencephalogram (EEG), Cranial Ultrasound (Pediatrics), Electromyography (EMG), Nerve Conduction Velocity (NCV)"], "doctorMatch": { "departments": [], "specializations": ["Cardiology", "Neurology"] }, "preparation": "Bring your doctor’s request form. Wear comfortable clothes and shoes for a treadmill stress test, and avoid caffeine on the day.", "featured": true, "icon": "heart" },
-    { "slug": "pulmonary", "name": "Pulmonary", "short": "Pulmonary", "summary": "We provide expert services for respiratory conditions.", "detail": "We offer procedures designed to address respiratory conditions and support patients through accurate diagnoses for healthier lungs.", "location": "2nd Floor", "hours": "6 AM – 10 PM (Monday to Friday), 6 AM – 6 PM (Saturdays & Sundays including Holidays)", "offered": ["Arterial Blood Gas Analysis", "Breathing Exercises", "Bronchodilator Therapy", "Chest Physiotherapy", "Incentive Spirometry (IS)", "Oxygen and Aerosol Administration", "Peak Expiratory Flow Rate (PEFR)", "Pulmonary Function Test (PFT)", "Mechanical Ventilation", "Nebulization/Aerosol Therapy"], "doctorMatch": { "departments": [], "specializations": ["Pulmonology"] }, "preparation": "Bring your doctor’s request form. For a pulmonary function test, avoid heavy meals and smoking beforehand.", "featured": false, "icon": "lungs" },
-    { "slug": "hemodialysis-center", "name": "Hemodialysis Center", "short": "Hemodialysis", "summary": "Essential dialysis treatment for patients with kidney disease, ensuring quality renal care.", "location": "2nd Floor", "hours": "6 AM – 10 PM (Monday, Wednesday, Friday), 6 AM – 6 PM (Tuesday, Thursday, Saturday)", "offered": [], "doctorMatch": { "departments": [], "specializations": ["Nephrology"] }, "preparation": "Bring your nephrologist’s dialysis order, recent lab results, and your PhilHealth or HMO documents for coverage.", "featured": true, "icon": "kidney" },
-    { "slug": "physical-medicine-rehabilitation", "name": "Physical Medicine and Rehabilitation", "short": "Rehabilitation", "summary": "Modern technology and therapy programs designed to support faster recovery and improved functionality.", "detail": "Services include Physical Therapy, Occupational Therapy, and other Rehabilitation Programs to help patients regain functionality and improve their quality of life.", "location": "2nd Floor", "hours": "7 AM – 7 PM (Monday to Saturday)", "offered": ["Physical Therapy: Electrotherapy & Ultrasound Therapy, Transcutaneous/Electrical Nerve Stimulation, Traction Machines, Infrared Radiation & Hydrotherapy, Manual Therapy & Exercise/Gym Equipment", "Occupational Therapy: Adult & Pediatric Management, Dysphagia Management, Activities of Daily Living (ADL)"], "doctorMatch": { "departments": ["Physical Medicine & Rehabilitation"], "specializations": [] }, "preparation": "Bring your doctor’s referral. Wear loose clothing you can move in.", "featured": false, "icon": "rehab" },
-    { "slug": "operating-room", "name": "Operating Room (OR)", "short": "Surgery", "summary": "Our OR is equipped to support a wide array of surgical procedures. Led by our expert medical team, we provide cutting-edge techniques and unmatched surgical precision.", "location": "3rd Floor", "hours": "Open 24/7", "offered": [], "doctorMatch": { "departments": ["Surgery", "Anesthesiology"], "specializations": [] }, "preparation": "Your surgeon and anesthesiologist will give you fasting and medication instructions before any scheduled procedure.", "featured": true, "icon": "surgery" },
-    { "slug": "icu", "name": "ICU (Intensive Care Unit)", "short": "ICU", "summary": "Expert critical care and monitoring for adults with life-threatening conditions.", "location": "3rd Floor", "hours": "Open 24/7", "offered": [], "doctorMatch": { "departments": [], "specializations": ["Intensivist"] }, "preparation": null, "featured": false, "icon": "monitor" },
-    { "slug": "nicu", "name": "NICU (Neonatal Intensive Care Unit)", "short": "NICU", "summary": "Specialized care and intensive monitoring for premature and critically ill newborns, ensuring the best outcomes.", "location": "3rd Floor", "hours": "Open 24/7", "offered": ["Newborn Screening", "Immunizations", "Nutrition Counseling", "Sick and Well-Baby Consultation", "Ear Piercing"], "doctorMatch": { "departments": [], "specializations": ["Neonatology"] }, "preparation": null, "featured": false, "icon": "baby" },
-    { "slug": "picu", "name": "PICU (Pediatric Intensive Care Unit)", "short": "PICU", "summary": "Expert care for children with severe or critical conditions, offering specialized pediatric treatment.", "location": "5th Floor", "hours": "Open 24/7", "offered": ["Immunizations", "Nutrition Counseling", "Sick and Well-Baby Consultation", "Ear Piercing"], "doctorMatch": { "departments": ["Pediatrics"], "specializations": [] }, "preparation": null, "featured": false, "icon": "child" },
-    { "slug": "outpatient-clinics", "name": "Outpatient Department (OPD) Clinics", "short": "Outpatient Clinics", "summary": "Venue for your health consultations with your trusted doctors.", "location": "3rd to 6th Floor", "hours": "By appointment", "offered": [], "doctorMatch": { "departments": ["Internal Medicine"], "specializations": [] }, "preparation": "Check your doctor’s clinic schedule on their profile, then call to book. Bring previous results and a list of your medications.", "featured": true, "icon": "stethoscope" },
-    { "slug": "ob-ultrasound", "name": "OB Ultrasound Services", "short": "OB Ultrasound", "summary": "Advanced imaging to monitor maternal and fetal health, ensuring safe pregnancies and informed care.", "location": "4th Floor", "hours": "8 AM to 5 PM", "offered": ["3D/4D Ultrasound", "Biophysical Scoring (BPS)", "Congenital Anomaly Scan", "Fetal Biometry", "Follicle Monitoring", "Transvaginal Ultrasound", "Transrectal Ultrasound", "Transabdominal Ultrasound", "Doppler Studies"], "doctorMatch": { "departments": ["Obstetrics & Gynecology"], "specializations": [] }, "preparation": "Bring your OB’s request. For a transabdominal scan early in pregnancy you may be asked to come with a full bladder.", "featured": true, "icon": "pregnancy" },
-    { "slug": "breastfeeding-station", "name": "Breastfeeding Station", "short": "Breastfeeding", "summary": "A comfortable and safe space for mothers to breastfeed their infants.", "location": "4th Floor", "hours": "Open 24/7", "offered": [], "doctorMatch": { "departments": [], "specializations": [] }, "preparation": null, "featured": false, "icon": "baby" },
-    { "slug": "animal-bite-center", "name": "Animal Bite Center", "short": "Animal Bite", "summary": "Provides pre and post-exposure prophylaxis (PEP) for animal bites.", "location": null, "hours": null, "offered": [], "doctorMatch": { "departments": [], "specializations": [] }, "preparation": "Wash the wound with soap and running water for 15 minutes, then come in as soon as possible.", "featured": false, "icon": "shield" },
-    { "slug": "eye-center", "name": "Eye Center", "short": "Eye Center", "summary": "Equipped to handle a variety of eye-related health concerns, including common and specialized eye diseases.", "location": "2nd Floor", "hours": "10 AM – 7 PM (Monday to Saturday)", "offered": ["Diagnosis and Treatment of Eye Diseases", "Modern Cataract Surgery", "Microsurgery", "LASIK/Laser Screening", "Blepharoplasty", "Glaucoma Screening", "Retina Screening", "Optical Shop"], "doctorMatch": { "departments": ["Ophthalmology", "ENT, Ophthalmology"], "specializations": [] }, "preparation": "Bring your current glasses or contact lens prescription. If your pupils will be dilated, bring someone to drive you home.", "featured": true, "icon": "eye" },
-    { "slug": "dental-services", "name": "Dental Services", "short": "Dental", "summary": "Comprehensive dental care, offering expert treatments to maintain oral health and confident smiles.", "location": "3rd Floor", "hours": "9 AM – 5 PM (Monday to Friday)", "offered": ["Cosmetic Dentistry and Smile Design", "Extraction", "Removal of Impacted Third Molars", "TMJ Disorder/TMJ Orthopedics", "Orthodontics", "Dental Veneers", "Periodontal/Gum Treatment", "Oral Prophylaxis", "Restorative Treatment/Light Cure Fillings", "Prosthetic Dentistry (Dentures)", "Removable/Flexible Dentures", "Complete Dentures", "Porcelain Crowns and Fixed Bridges", "Teeth Whitening"], "doctorMatch": { "departments": ["Dentistry"], "specializations": [] }, "preparation": "Brush before your visit and bring a list of any medications you take.", "featured": true, "icon": "tooth" },
-    { "slug": "pharmacy", "name": "Pharmacy", "short": "Pharmacy", "summary": "Convenience and easy access to essential medications, ensuring your needs are met promptly.", "location": "Ground Floor", "hours": "Open 24/7", "offered": [], "doctorMatch": { "departments": [], "specializations": [] }, "preparation": "Bring your prescription. Senior citizen and PWD IDs are needed for statutory discounts.", "featured": false, "icon": "pill" },
-    { "slug": "admitting", "name": "Admitting Department", "short": "Admitting", "summary": "A seamless and efficient admission process, ensuring a smooth experience for patients and their families.", "location": "Ground Floor", "hours": "Open 24/7", "offered": [], "doctorMatch": { "departments": [], "specializations": [] }, "preparation": "Bring a valid ID, your admitting order, and PhilHealth or HMO documents.", "featured": false, "icon": "clipboard" },
-    { "slug": "chemo-infusion-center", "name": "Chemo Infusion Center", "short": "Chemo Infusion", "summary": "Serves both inpatients and outpatients, offering safe, personalized chemotherapy treatments in a caring and comfortable setting.", "location": null, "hours": null, "offered": [], "doctorMatch": { "departments": [], "specializations": ["Oncology", "Hematology"] }, "preparation": null, "featured": false, "icon": "drop" },
-    { "slug": "medical-records", "name": "Medical Records", "short": "Medical Records", "summary": "Secure and organized access to medical records, ensuring patients and healthcare providers receive timely and accurate information.", "location": "2nd Floor", "hours": "8 AM – 5 PM (Monday to Saturday)", "offered": [], "doctorMatch": { "departments": [], "specializations": [] }, "preparation": "Bring a valid ID; an authorization letter is needed if you are requesting records for someone else.", "featured": false, "icon": "folder" },
-    { "slug": "patient-experience", "name": "Patient Experience Department", "short": "Patient Experience", "summary": "Dedicated to enhancing patient satisfaction, our team ensures compassionate care, clear communication, and a positive hospital journey.", "location": null, "hours": null, "offered": [], "doctorMatch": { "departments": [], "specializations": [] }, "preparation": null, "featured": false, "icon": "smile" }
+    {
+      "slug": "emergency-room",
+      "name": "Emergency Room (ER)",
+      "short": "Emergency",
+      "summary": "Open 24/7, staffed by experienced professionals for all emergency needs.",
+      "location": "Ground Floor",
+      "hours": "Open 24/7",
+      "offered": [],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": []
+      },
+      "preparation": null,
+      "featured": true,
+      "icon": "emergency",
+      "image": "/services/emergency-room.webp",
+      "illustration": "/icons/services/emergency-room.png"
+    },
+    {
+      "slug": "radiology",
+      "image": "/services/radiology.webp",
+      "name": "Radiology",
+      "short": "Radiology",
+      "summary": "Provides essential imaging services such as X-rays, CT scans, and ultrasounds, for accurate diagnoses.",
+      "location": "Ground Floor",
+      "hours": "Open 24/7",
+      "offered": [
+        "X-Ray Services",
+        "Mobile C-Arm Services",
+        "Mammography",
+        "Ultrasound Services",
+        "CT Scan Services",
+        "Specialized Imaging Procedures"
+      ],
+      "doctorMatch": {
+        "departments": [
+          "Radiology"
+        ],
+        "specializations": []
+      },
+      "preparation": "Bring your doctor’s request form and a valid ID. Some scans require fasting; the Radiology desk will tell you when you book.",
+      "featured": true,
+      "icon": "scan",
+      "illustration": "/icons/services/radiology.png"
+    },
+    {
+      "slug": "laboratory",
+      "name": "Laboratory",
+      "short": "Laboratory",
+      "summary": "Offers diagnostic tests, including blood works and specialized tests, to provide accurate diagnosis and support treatment.",
+      "detail": "Our laboratory is fully equipped to conduct a wide range of diagnostic tests, including hematology, clinical microscopy, clinical chemistry, microbiology, immunology, and serology. The laboratory staff ensures quick and accurate results, which are essential for effective treatment planning.",
+      "location": "Ground Floor",
+      "hours": "Open 24/7",
+      "offered": [
+        "Hematology (Blood & Cell Analysis): CBC w/ Platelet, ESR, CT/BT, PT/PTT, Reticulocyte Count, Malarial Smear, Peripheral Blood Smear",
+        "Microbiology (Infection Detection): AFB Stain, Gram Stain & KOH Smear, Culture & Sensitivity (Blood, Urine, Stool, CSF, Sputum, Swab/Discharge)"
+      ],
+      "doctorMatch": {
+        "departments": [
+          "Pathology"
+        ],
+        "specializations": []
+      },
+      "preparation": "Bring your doctor’s request form and a valid ID. Fasting tests (such as blood sugar and lipid profile) need 8–10 hours without food; water is allowed.",
+      "featured": true,
+      "icon": "lab",
+      "extraLink": {
+        "label": "View online lab results",
+        "href": "https://lis.pdh.com.ph/"
+      },
+      "image": "/services/laboratory.webp",
+      "illustration": "/icons/services/laboratory.png"
+    },
+    {
+      "slug": "nuclear-medicine",
+      "image": "/services/nuclear-medicine.webp",
+      "name": "Nuclear Medicine",
+      "short": "Nuclear Medicine",
+      "summary": "The only Nuclear Medicine Department in Parañaque, bringing advanced diagnostic and therapeutic care closer to the community.",
+      "detail": "Our Nuclear Medicine services specializes in using small amounts of radioactive materials for diagnostic and therapeutic purposes.",
+      "location": "7th Floor",
+      "hours": "By Appointment",
+      "offered": [
+        "Thyroid Uptake (Radioactive Iodine Uptake)",
+        "Radioactive Iodine Therapy"
+      ],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": [
+          "Nuclear Medicine"
+        ]
+      },
+      "preparation": "Book ahead; this department is by appointment only. Your doctor may ask you to pause thyroid medication before an uptake study.",
+      "featured": true,
+      "icon": "atom",
+      "illustration": "/icons/services/nuclear-medicine.png"
+    },
+    {
+      "slug": "multi-diagnostic-center",
+      "name": "Multi-Diagnostic Center",
+      "short": "Diagnostics",
+      "summary": "Advanced testing in cardiology, vascular, and neurology using ECG, Echocardiograms, EEG, and other cutting-edge tools.",
+      "location": "2nd Floor",
+      "hours": "Echo: Mon–Fri 7 AM – 5 PM, Sat–Sun 7 AM – 4 PM. Stress Echo: Saturday, by appointment. Vascular: Mon–Fri, by appointment.",
+      "offered": [
+        "Cardiology: Electrocardiogram (ECG), Treadmill Stress Test, 24-Hour Holter Monitor, 24-Hour BP Monitor, 2D Echocardiogram with Doppler, Stress Echocardiogram",
+        "Vascular: Carotid/Vertebral Duplex Scanning, Peripheral Arterial and Venous Duplex Scanning, Transcranial Doppler Study, Venous Compression Study, Saphenous Vein Mapping",
+        "Neuroscience: Electroencephalogram (EEG), Cranial Ultrasound (Pediatrics), Electromyography (EMG), Nerve Conduction Velocity (NCV)"
+      ],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": [
+          "Cardiology",
+          "Neurology"
+        ]
+      },
+      "preparation": "Bring your doctor’s request form. Wear comfortable clothes and shoes for a treadmill stress test, and avoid caffeine on the day.",
+      "featured": true,
+      "icon": "heart",
+      "hoursAlt": "A homepage slide lists Echocardiogram (pedia & adult) Monday–Sunday 6 AM–7 PM and Vascular procedures Monday–Saturday 8 AM–5 PM, which differs from the Our Services page.",
+      "hoursConfirmed": false,
+      "image": "/services/multi-diagnostic-center.webp",
+      "illustration": "/icons/services/multi-diagnostic-center.png"
+    },
+    {
+      "slug": "pulmonary",
+      "name": "Pulmonary",
+      "image": "/services/pulmonary.webp",
+      "short": "Pulmonary",
+      "summary": "We provide expert services for respiratory conditions.",
+      "detail": "We offer procedures designed to address respiratory conditions and support patients through accurate diagnoses for healthier lungs.",
+      "location": "2nd Floor",
+      "hours": "6 AM – 10 PM (Monday to Friday), 6 AM – 6 PM (Saturdays & Sundays including Holidays)",
+      "offered": [
+        "Arterial Blood Gas Analysis",
+        "Breathing Exercises",
+        "Bronchodilator Therapy",
+        "Chest Physiotherapy",
+        "Incentive Spirometry (IS)",
+        "Oxygen and Aerosol Administration",
+        "Peak Expiratory Flow Rate (PEFR)",
+        "Pulmonary Function Test (PFT)",
+        "Mechanical Ventilation",
+        "Nebulization/Aerosol Therapy"
+      ],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": [
+          "Pulmonology"
+        ]
+      },
+      "preparation": "Bring your doctor’s request form. For a pulmonary function test, avoid heavy meals and smoking beforehand.",
+      "featured": false,
+      "icon": "lungs",
+      "illustration": "/icons/services/pulmonary.png"
+    },
+    {
+      "slug": "hemodialysis-center",
+      "name": "Hemodialysis Center",
+      "short": "Hemodialysis",
+      "summary": "Essential dialysis treatment for patients with kidney disease, ensuring quality renal care.",
+      "location": "2nd Floor",
+      "hours": "6 AM – 10 PM (Monday, Wednesday, Friday), 6 AM – 6 PM (Tuesday, Thursday, Saturday)",
+      "offered": [],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": [
+          "Nephrology"
+        ]
+      },
+      "preparation": "Bring your nephrologist’s dialysis order, recent lab results, and your PhilHealth or HMO documents for coverage.",
+      "featured": true,
+      "icon": "kidney",
+      "priceLine": "For as low as Php 6,700.00, inclusive of PhilHealth (homepage slide, Nov 2026)",
+      "image": "/services/hemodialysis-center.webp",
+      "illustration": "/icons/services/hemodialysis-center.png"
+    },
+    {
+      "slug": "physical-medicine-rehabilitation",
+      "name": "Physical Medicine and Rehabilitation",
+      "short": "Rehabilitation",
+      "summary": "Modern technology and therapy programs designed to support faster recovery and improved functionality.",
+      "detail": "Services include Physical Therapy, Occupational Therapy, and other Rehabilitation Programs to help patients regain functionality and improve their quality of life.",
+      "location": "2nd Floor",
+      "hours": "7 AM – 7 PM (Monday to Saturday)",
+      "offered": [
+        "Physical Therapy: Electrotherapy & Ultrasound Therapy, Transcutaneous/Electrical Nerve Stimulation, Traction Machines, Infrared Radiation & Hydrotherapy, Manual Therapy & Exercise/Gym Equipment",
+        "Occupational Therapy: Adult & Pediatric Management, Dysphagia Management, Activities of Daily Living (ADL)",
+        "Also offered (homepage slides): Laser Therapy, Cryotherapy, Shockwave Therapy, Sports injury treatment, Pain Management Program, Strength and Conditioning, Assistive Device Training"
+      ],
+      "doctorMatch": {
+        "departments": [
+          "Physical Medicine & Rehabilitation"
+        ],
+        "specializations": []
+      },
+      "preparation": "Bring your doctor’s referral. Wear loose clothing you can move in.",
+      "featured": false,
+      "icon": "rehab",
+      "programs": [
+        {
+          "name": "Cryotherapy", "image": "/photos/people-rehab-cryo.webp",
+          "summary": "Cold therapy for pain and inflammation, as offered on PDH's rehabilitation slides.",
+          "conditions": []
+        },
+        {
+          "name": "Laser Therapy", "image": "/photos/people-rehab-laser.webp",
+          "summary": "Reduce acute and chronic pain, inflammation and accelerate tissue repair and healing.",
+          "conditions": [
+            "Osteoarthritis",
+            "Rheumatoid arthritis",
+            "Tendonitis",
+            "Bursitis",
+            "Ligament strains and sprains",
+            "Low back pain",
+            "Sciatica",
+            "Plantar fasciitis",
+            "Sports injuries"
+          ]
+        },
+        {
+          "name": "Shockwave", "image": "/photos/people-rehab-shockwave.webp",
+          "summary": "Non-invasive high energy pulse treatment for chronic musculoskeletal pain, tendinopathies and ligament injuries.",
+          "conditions": [
+            "Plantar fasciitis",
+            "Tennis elbow",
+            "Frozen shoulder (adhesive capsulitis)",
+            "Rotator cuff tendinitis",
+            "MPS",
+            "Trigger finger",
+            "Patellar tendinitis",
+            "Achilles tendinitis"
+          ]
+        },
+        {
+          "name": "Cardiovascular Rehabilitation", "image": "/photos/people-cardio-rehab.webp",
+          "summary": "A medically supervised program that helps patients recover and strengthen their heart through safe exercise, monitoring, and lifestyle guidance.",
+          "conditions": [
+            "Heart attack (myocardial infarction)",
+            "Coronary artery disease",
+            "Post-angioplasty or stent",
+            "Post-heart surgery (CABG, valve surgery)",
+            "Heart failure",
+            "Hypertension",
+            "Peripheral artery disease",
+            "Congenital heart disease",
+            "Weight management"
+          ]
+        }
+      ],
+      "contactLocal": "local 8211",
+      "image": "/services/physical-medicine-rehabilitation.webp",
+      "illustration": "/icons/services/physical-medicine-rehabilitation.png"
+    },
+    {
+      "slug": "operating-room",
+      "image": "/services/operating-room.webp",
+      "name": "Operating Room (OR)",
+      "short": "Surgery",
+      "summary": "Our OR is equipped to support a wide array of surgical procedures. Led by our expert medical team, we provide cutting-edge techniques and unmatched surgical precision.",
+      "location": "3rd Floor",
+      "hours": "Open 24/7",
+      "offered": [],
+      "doctorMatch": {
+        "departments": [
+          "Surgery",
+          "Anesthesiology"
+        ],
+        "specializations": []
+      },
+      "preparation": "Your surgeon and anesthesiologist will give you fasting and medication instructions before any scheduled procedure.",
+      "featured": true,
+      "icon": "surgery",
+      "illustration": "/icons/services/operating-room.png"
+    },
+    {
+      "slug": "icu",
+      "name": "ICU (Intensive Care Unit)",
+      "short": "ICU",
+      "summary": "Expert critical care and monitoring for adults with life-threatening conditions.",
+      "location": "3rd Floor",
+      "hours": "Open 24/7",
+      "offered": [],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": [
+          "Intensivist"
+        ]
+      },
+      "preparation": null,
+      "featured": false,
+      "icon": "monitor",
+      "image": "/services/icu.webp",
+      "illustration": "/icons/services/icu.png"
+    },
+    {
+      "slug": "nicu",
+      "image": "/services/nicu.webp",
+      "name": "NICU (Neonatal Intensive Care Unit)",
+      "short": "NICU",
+      "summary": "Specialized care and intensive monitoring for premature and critically ill newborns, ensuring the best outcomes.",
+      "location": "3rd Floor",
+      "hours": "Open 24/7",
+      "offered": [
+        "Newborn Screening",
+        "Immunizations",
+        "Nutrition Counseling",
+        "Sick and Well-Baby Consultation",
+        "Ear Piercing"
+      ],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": [
+          "Neonatology"
+        ]
+      },
+      "preparation": null,
+      "featured": false,
+      "icon": "baby",
+      "illustration": "/icons/services/nicu.png"
+    },
+    {
+      "slug": "picu",
+      "image": "/services/picu.webp",
+      "name": "PICU (Pediatric Intensive Care Unit)",
+      "short": "PICU",
+      "summary": "Expert care for children with severe or critical conditions, offering specialized pediatric treatment.",
+      "location": "5th Floor",
+      "hours": "Open 24/7",
+      "offered": [
+        "Immunizations",
+        "Nutrition Counseling",
+        "Sick and Well-Baby Consultation",
+        "Ear Piercing"
+      ],
+      "doctorMatch": {
+        "departments": [
+          "Pediatrics"
+        ],
+        "specializations": []
+      },
+      "preparation": null,
+      "featured": false,
+      "icon": "child",
+      "illustration": "/icons/services/picu.png"
+    },
+    {
+      "slug": "outpatient-clinics",
+      "name": "Outpatient Department (OPD) Clinics",
+      "short": "Outpatient Clinics",
+      "summary": "Venue for your health consultations with your trusted doctors.",
+      "location": "3rd to 6th Floor",
+      "hours": "By appointment",
+      "offered": [],
+      "doctorMatch": {
+        "departments": [
+          "Internal Medicine"
+        ],
+        "specializations": []
+      },
+      "preparation": "Check your doctor’s clinic schedule on their profile, then call to book. Bring previous results and a list of your medications.",
+      "featured": true,
+      "icon": "stethoscope",
+      "image": "/services/outpatient-clinics.webp",
+      "illustration": "/icons/services/outpatient-clinics.png"
+    },
+    {
+      "slug": "ob-ultrasound",
+      "name": "OB Ultrasound Services",
+      "image": "/services/ob-ultrasound.webp",
+      "short": "OB Ultrasound",
+      "summary": "Advanced imaging to monitor maternal and fetal health, ensuring safe pregnancies and informed care.",
+      "location": "4th Floor",
+      "hours": "8 AM to 5 PM",
+      "offered": [
+        "3D/4D Ultrasound",
+        "Biophysical Scoring (BPS)",
+        "Congenital Anomaly Scan",
+        "Fetal Biometry",
+        "Follicle Monitoring",
+        "Transvaginal Ultrasound",
+        "Transrectal Ultrasound",
+        "Transabdominal Ultrasound",
+        "Doppler Studies"
+      ],
+      "doctorMatch": {
+        "departments": [
+          "Obstetrics & Gynecology"
+        ],
+        "specializations": []
+      },
+      "preparation": "Bring your OB’s request. For a transabdominal scan early in pregnancy you may be asked to come with a full bladder.",
+      "featured": true,
+      "icon": "pregnancy",
+      "illustration": "/icons/services/ob-ultrasound.png"
+    },
+    {
+      "slug": "breastfeeding-station",
+      "image": "/services/breastfeeding-station.webp",
+      "name": "Breastfeeding Station",
+      "short": "Breastfeeding",
+      "summary": "A comfortable and safe space for mothers to breastfeed their infants.",
+      "location": "4th Floor",
+      "hours": "Open 24/7",
+      "offered": [],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": []
+      },
+      "preparation": null,
+      "featured": false,
+      "icon": "baby",
+      "illustration": "/icons/services/breastfeeding-station.png"
+    },
+    {
+      "slug": "animal-bite-center",
+      "status": "Soon to open",
+      "image": "/services/animal-bite-center.webp",
+      "name": "Animal Bite Center",
+      "short": "Animal Bite",
+      "summary": "Provides pre and post-exposure prophylaxis (PEP) for animal bites.",
+      "location": null,
+      "hours": null,
+      "offered": [],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": []
+      },
+      "preparation": "Wash the wound with soap and running water for 15 minutes, then come in as soon as possible.",
+      "featured": false,
+      "icon": "shield",
+      "illustration": "/icons/services/animal-bite-center.png"
+    },
+    {
+      "slug": "eye-center",
+      "image": "/services/eye-center.webp",
+      "name": "Eye Center",
+      "short": "Eye Center",
+      "summary": "Equipped to handle a variety of eye-related health concerns, including common and specialized eye diseases.",
+      "location": "2nd Floor",
+      "hours": "10 AM – 7 PM (Monday to Saturday)",
+      "offered": [
+        "Diagnosis and Treatment of Eye Diseases",
+        "Modern Cataract Surgery",
+        "Microsurgery",
+        "LASIK/Laser Screening",
+        "Blepharoplasty",
+        "Glaucoma Screening",
+        "Retina Screening",
+        "Optical Shop"
+      ],
+      "doctorMatch": {
+        "departments": [
+          "Ophthalmology",
+          "ENT, Ophthalmology"
+        ],
+        "specializations": []
+      },
+      "preparation": "Bring your current glasses or contact lens prescription. If your pupils will be dilated, bring someone to drive you home.",
+      "featured": true,
+      "icon": "eye",
+      "illustration": "/icons/services/eye-center.png"
+    },
+    {
+      "slug": "dental-services",
+      "image": "/services/dental-services.webp",
+      "name": "Dental Services",
+      "short": "Dental",
+      "summary": "Comprehensive dental care, offering expert treatments to maintain oral health and confident smiles.",
+      "location": "3rd Floor",
+      "hours": "9 AM – 5 PM (Monday to Friday)",
+      "offered": [
+        "Cosmetic Dentistry and Smile Design",
+        "Extraction",
+        "Removal of Impacted Third Molars",
+        "TMJ Disorder/TMJ Orthopedics",
+        "Orthodontics",
+        "Dental Veneers",
+        "Periodontal/Gum Treatment",
+        "Oral Prophylaxis",
+        "Restorative Treatment/Light Cure Fillings",
+        "Prosthetic Dentistry (Dentures)",
+        "Removable/Flexible Dentures",
+        "Complete Dentures",
+        "Porcelain Crowns and Fixed Bridges",
+        "Teeth Whitening"
+      ],
+      "doctorMatch": {
+        "departments": [
+          "Dentistry"
+        ],
+        "specializations": []
+      },
+      "preparation": "Brush before your visit and bring a list of any medications you take.",
+      "featured": true,
+      "icon": "tooth",
+      "illustration": "/icons/services/dental-services.png"
+    },
+    {
+      "slug": "pharmacy",
+      "image": "/services/pharmacy.webp",
+      "name": "Pharmacy",
+      "short": "Pharmacy",
+      "summary": "Convenience and easy access to essential medications, ensuring your needs are met promptly.",
+      "location": "Ground Floor",
+      "hours": "Open 24/7",
+      "offered": [],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": []
+      },
+      "preparation": "Bring your prescription. Senior citizen and PWD IDs are needed for statutory discounts.",
+      "featured": false,
+      "icon": "pill",
+      "illustration": "/icons/services/pharmacy.png"
+    },
+    {
+      "slug": "admitting",
+      "name": "Admitting Department",
+      "short": "Admitting",
+      "summary": "A seamless and efficient admission process, ensuring a smooth experience for patients and their families.",
+      "location": "Ground Floor",
+      "hours": "Open 24/7",
+      "offered": [],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": []
+      },
+      "preparation": "Bring a valid ID, your admitting order, and PhilHealth or HMO documents.",
+      "featured": false,
+      "icon": "clipboard",
+      "image": "/services/admitting.webp"
+    },
+    {
+      "slug": "chemo-infusion-center",
+      "status": "Soon to open",
+      "image": "/services/chemo-infusion-center.webp",
+      "name": "Chemo Infusion Center",
+      "short": "Chemo Infusion",
+      "summary": "Serves both inpatients and outpatients, offering safe, personalized chemotherapy treatments in a caring and comfortable setting.",
+      "location": null,
+      "hours": null,
+      "offered": [],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": [
+          "Oncology",
+          "Hematology"
+        ]
+      },
+      "preparation": null,
+      "featured": false,
+      "icon": "drop",
+      "illustration": "/icons/services/chemo-infusion-center.png"
+    },
+    {
+      "slug": "medical-records",
+      "image": "/services/medical-records.webp",
+      "name": "Medical Records",
+      "short": "Medical Records",
+      "summary": "Secure and organized access to medical records, ensuring patients and healthcare providers receive timely and accurate information.",
+      "location": "2nd Floor",
+      "hours": "8 AM – 5 PM (Monday to Saturday)",
+      "offered": [],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": []
+      },
+      "preparation": "Bring a valid ID; an authorization letter is needed if you are requesting records for someone else.",
+      "featured": false,
+      "icon": "folder",
+      "illustration": "/icons/services/medical-records.png"
+    },
+    {
+      "slug": "patient-experience",
+      "status": "Soon to open",
+      "name": "Patient Experience Department",
+      "short": "Patient Experience",
+      "summary": "Dedicated to enhancing patient satisfaction, our team ensures compassionate care, clear communication, and a positive hospital journey.",
+      "location": null,
+      "hours": null,
+      "offered": [],
+      "doctorMatch": {
+        "departments": [],
+        "specializations": []
+      },
+      "preparation": null,
+      "featured": false,
+      "icon": "smile",
+      "image": "/services/patient-experience.webp",
+      "illustration": "/icons/services/patient-experience.png"
+    }
   ],
-  "namedOnlyOnSite": ["Neurology Center", "Women's Health Center", "Cardiac Rehabilitation Facility"],
+  "namedOnlyOnSite": [
+    "Neurology Center",
+    "Women's Health Center",
+    "Cardiac Rehabilitation Facility"
+  ],
   "specialtyGroups": [
-    { "name": "Internal Medicine", "departments": ["Internal Medicine"], "blurb": "Cardiology, pulmonology, nephrology, neurology, endocrinology, gastroenterology, oncology, infectious diseases and more." },
-    { "name": "Pediatrics", "departments": ["Pediatrics"], "blurb": "Well-baby and sick-child care, immunizations and newborn screening." },
-    { "name": "Obstetrics & Gynecology", "departments": ["Obstetrics & Gynecology"], "blurb": "Prenatal care, delivery, sonology and women’s health." },
-    { "name": "Surgery", "departments": ["Surgery"], "blurb": "General, orthopedic, neuro, thoracic and vascular surgery; urology." },
-    { "name": "Anesthesiology", "departments": ["Anesthesiology"], "blurb": "Anesthesia care for every procedure." },
-    { "name": "ENT, Eye & Dental", "departments": ["ENT", "Ophthalmology", "ENT, Ophthalmology", "Dentistry"], "blurb": "Ear, nose and throat; eye center; dental services." },
-    { "name": "Radiology & Pathology", "departments": ["Radiology", "Pathology"], "blurb": "Imaging, laboratory and diagnostic specialists." },
-    { "name": "Rehabilitation", "departments": ["Physical Medicine & Rehabilitation"], "blurb": "Physical and occupational therapy." }
+    {
+      "name": "Internal Medicine", "image": "/photos/svc-consultation.webp", "imagePos": "center 30%",
+      "departments": [
+        "Internal Medicine"
+      ],
+      "blurb": "Cardiology, pulmonology, nephrology, neurology, endocrinology, gastroenterology, oncology, infectious diseases and more."
+    },
+    {
+      "name": "Pediatrics", "image": "/services/picu.webp", "imagePos": "center 45%",
+      "departments": [
+        "Pediatrics"
+      ],
+      "blurb": "Well-baby and sick-child care, immunizations and newborn screening."
+    },
+    {
+      "name": "Obstetrics & Gynecology", "image": "/services/ob-ultrasound.webp", "imagePos": "center 45%",
+      "departments": [
+        "Obstetrics & Gynecology"
+      ],
+      "blurb": "Prenatal care, delivery, sonology and women’s health."
+    },
+    {
+      "name": "Surgery", "image": "/services/operating-room.webp", "imagePos": "center 45%",
+      "departments": [
+        "Surgery"
+      ],
+      "blurb": "General, orthopedic, neuro, thoracic and vascular surgery; urology."
+    },
+    {
+      "name": "Anesthesiology", "image": "/services/operating-room.webp", "imagePos": "right 40%",
+      "departments": [
+        "Anesthesiology"
+      ],
+      "blurb": "Anesthesia care for every procedure."
+    },
+    {
+      "name": "ENT, Eye & Dental", "image": "/services/eye-center.webp", "imagePos": "center 45%",
+      "departments": [
+        "ENT",
+        "Ophthalmology",
+        "ENT, Ophthalmology",
+        "Dentistry"
+      ],
+      "blurb": "Ear, nose and throat; eye center; dental services."
+    },
+    {
+      "name": "Radiology & Pathology", "image": "/services/radiology.webp", "imagePos": "center 50%",
+      "departments": [
+        "Radiology",
+        "Pathology"
+      ],
+      "blurb": "Imaging, laboratory and diagnostic specialists."
+    },
+    {
+      "name": "Rehabilitation", "image": "/photos/people-rehab-cryo.webp", "imagePos": "center 35%",
+      "departments": [
+        "Physical Medicine & Rehabilitation"
+      ],
+      "blurb": "Physical and occupational therapy."
+    }
   ]
 }

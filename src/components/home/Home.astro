@@ -1,0 +1,482 @@
+---
+// Homepage, "Calm Platform". Design direction from terminal-industries.com (look only, not the
+// template): floating pill nav, light grey bands, one calm sans at a large scale, rounded cards,
+// black primary buttons and a single orange accent. Order follows the brief, task-first.
+// No frame-sequence hero, no scroll hijacking, no trackers: a photo slot with light parallax and
+// gentle reveals, skipped under reduced motion.
+import { site, hmo, news, services, specialtyGroups, doctors, featuredPackages, formatDate, groupByFloor, shortHours, serviceScheduleRows, displayName } from '../../lib/data';
+import ScheduleTable from '../ScheduleTable.astro';
+import ToConfirm from '../ToConfirm.astro';
+import Sample from '../Sample.astro';
+import Icon from '../Icon.astro';
+import Placeholder from '../Placeholder.astro';
+import HmoMarquee from '../HmoMarquee.astro';
+
+const er = site.phones.emergency;
+const info = site.phones.information;
+const always = services.filter((s) => s.hours === 'Open 24/7' && ['emergency-room', 'laboratory', 'radiology', 'pharmacy'].includes(s.slug));
+const clinics = services.filter((s) => ['multi-diagnostic-center', 'hemodialysis-center', 'eye-center', 'dental-services', 'ob-ultrasound', 'nuclear-medicine', 'physical-medicine-rehabilitation', 'outpatient-clinics'].includes(s.slug));
+// Floors with fewer than two featured services are combined into one "Upper floors" row,
+// with each card naming its own floor, so no floor header sits over a single card.
+const rawGroups = groupByFloor([...always, ...clinics]);
+const bigGroups = rawGroups.filter(([, l]) => l.length >= 2);
+const smallOnes = rawGroups.filter(([, l]) => l.length < 2).flatMap(([, l]) => l);
+const floorGroups: [string, typeof services][] = smallOnes.length ? [...bigGroups, ['Upper floors · 3rd to 7th', smallOnes]] : bigGroups;
+// Real PDH people for the hero: doctors with photos PDH publishes, and PDH staff with patients from PDH's own slides
+const faces = doctors.filter((d) => d.photo).slice(0, 6);
+const people = [
+  { src: '/photos/people-rehab-shockwave.webp', alt: 'PDH rehabilitation staff treating a patient' },
+  { src: '/photos/people-rehab-cryo.webp', alt: 'A PDH therapist with a patient in the rehabilitation unit' },
+  { src: '/photos/people-cardio-rehab.webp', alt: 'A PDH therapist guiding a patient through cardiac rehabilitation' },
+  { src: '/photos/people-rehab-laser.webp', alt: 'Laser therapy at PDH rehabilitation' },
+];
+const leadShort = site.hero.text.split('. ')[0] + '.';
+const entry = [
+  { title: 'I need help now', text: 'The Emergency Room is on the Ground Floor and open 24/7. Call first if you can.', cta: 'Call the ER', href: `tel:${er.tel}`, cls: 'btn-emergency', art: '/services/emergency-room.webp', artAlt: 'The Emergency Room entrance at PDH', note: `${er.display} · mobile ${er.mobile}`, confirm: true },
+  { title: 'I want to see a doctor', text: `${doctors.length} doctors in the directory with clinic schedules and room numbers. Outpatient clinics on the 3rd to 6th floors, by appointment.`, cta: 'Find a doctor', href: '/doctors/', cls: 'btn-primary', art: '/services/outpatient-clinics.webp', artAlt: 'The Outpatient Department desk at PDH', note: 'Search by name or specialty' },
+  { title: 'I’m being admitted', text: 'Admitting is on the Ground Floor, open 24/7. Bring a valid ID, your admitting order and PhilHealth or HMO documents.', cta: 'Rooms and admission', href: '/rooms-facilities/', cls: 'btn-outline', art: '/services/admitting.webp', artAlt: 'The Admitting Department desk at PDH', note: '94 beds · ward to suite' },
+];
+// FAQ answers use only facts already published by PDH (see CONFIRM.md for sources).
+const faqs = [
+  { q: 'Is the Emergency Room open 24/7?', a: 'Yes. The ER is on the Ground Floor and open 24/7, with laboratory, radiology and pharmacy also open around the clock.' },
+  { q: 'How do I get HMO approval?', a: `Go to the HMO Hub on the Ground Floor (${serviceScheduleRows(hmo.hub.hours).map((r) => `${r.days} ${r.time}`).join('; ')}) with your HMO card, a valid ID and your doctor’s request, or request approval online before you come.` },
+  { q: 'Which HMOs does PDH accept?', a: 'PDH is accredited by PhilHealth and the HMOs listed on the HMO & PhilHealth page. Each doctor’s profile also lists the HMOs they accept.' },
+  { q: 'How do I get my laboratory results?', a: 'Online lab results are available at lis.pdh.com.ph. The laboratory itself is on the Ground Floor, open 24/7.' },
+  { q: 'How do I pay for a package?', a: 'Packages can be paid in cash, GCash, credit card or debit card, and HMO is accepted. Some promos are cash basis only; each package says so.' },
+  { q: 'Is there parking?', a: 'Yes. Basement parking and allocated parking for patients and visitors, with slots for PWD and senior citizens.' },
+];
+---
+<div class="cp" data-cp>
+  <!-- 1 · Hero: headline, two equal searches (doctor and service), real PDH people -->
+  <section class="cp-hero">
+    <img class="cp-hero_bg" src="/photos/hero-doctor.webp" alt="" width="977" height="1082" fetchpriority="high" decoding="async" />
+    <div class="cp-hero_fade" aria-hidden="true"></div>
+    <div class="cp-hero_glow" aria-hidden="true"></div>
+    <div class="container cp-hero_grid">
+      <div class="cp-hero_copy">
+        <p class="eyebrow cp-reveal">Parañaque City · Member of {site.network.name}</p>
+        <h1 class="cp-h1 cp-reveal">{site.hero.headline}.</h1>
+        <span class="cp-rule cp-hero_rule cp-reveal" aria-hidden="true"></span>
+      </div>
+      <div class="cp-hero_cardwrap cp-reveal">
+        <div class="cp-hero_card">
+          <form class="cp-hero_search" action="/doctors/" method="get" role="search">
+            <label class="cp-hero_lbl" for="hero-q">Find a doctor</label>
+            <div class="cp-hero_row">
+              <div class="cp-hero_field"><Icon name="search" /><input id="hero-q" name="q" type="search" list="hero-doc-suggest" placeholder="Name or specialty" autocomplete="off" /></div>
+              <button class="btn btn-primary cp-hero_btn" type="submit">Search</button>
+            </div>
+            <datalist id="hero-doc-suggest"><option value="Cardiology"></option><option value="Pediatrics"></option><option value="Obstetrics & Gynecology"></option><option value="Internal Medicine"></option><option value="Dermatology"></option><option value="ENT"></option><option value="Ophthalmology"></option><option value="Orthopedic Surgery"></option><option value="Neurology"></option><option value="Nephrology"></option><option value="Pulmonology"></option><option value="Gastroenterology"></option><option value="Endocrinology"></option><option value="Oncology"></option><option value="Urology"></option><option value="Dentistry"></option><option value="General Surgery"></option><option value="Family Medicine"></option><option value="Rehabilitation"></option><option value="Radiology"></option></datalist>
+          </form>
+          <form class="cp-hero_search" action="/services/" method="get" role="search">
+            <label class="cp-hero_lbl" for="hero-s">Find a service</label>
+            <div class="cp-hero_row">
+              <div class="cp-hero_field"><Icon name="search" /><input id="hero-s" name="q" type="search" list="hero-svc-suggest" placeholder="Service or need" autocomplete="off" /></div>
+              <button class="btn btn-accent cp-hero_btn" type="submit">Search</button>
+            </div>
+            <datalist id="hero-svc-suggest"><option value="Emergency Room"></option><option value="Laboratory"></option><option value="Radiology"></option><option value="Pharmacy"></option><option value="Hemodialysis"></option><option value="Physical Medicine and Rehabilitation"></option><option value="Eye Center"></option><option value="Dental Services"></option><option value="OB Ultrasound"></option><option value="Multi-Diagnostic Center"></option><option value="ICU"></option><option value="NICU"></option><option value="Admitting"></option><option value="Medical Records"></option><option value="Animal Bite Center"></option><option value="Nuclear Medicine"></option></datalist>
+          </form>
+          <div class="cp-hero_now">
+            <p class="cp-hero_now_p"><span class="cp-hero_now_txt"><span class="cp-chip_dot"></span>Emergency Room, Ground Floor, open 24/7</span><a class="cp-hero_now_tel" href={`tel:${er.tel}`}>{er.display}</a> <ToConfirm note={er.note} /></p>
+            <a class="btn btn-emergency btn-sm" href={`tel:${er.tel}`}><Icon name="emergency" /> Call the ER</a>
+          </div>
+        </div>
+      </div>
+      <div class="cp-hero_more">
+        <p class="cp-lead cp-reveal">{leadShort}</p>
+        <a class="cp-faces cp-reveal" href="/doctors/" aria-label={`See all ${doctors.length} doctors`}>
+          <span class="cp-faces_row">{faces.map((d) => <img src={d.photo} alt="" width="48" height="48" loading="eager" decoding="async" />)}</span>
+          <span class="cp-faces_txt"><span class="cp-faces_main"><strong>{doctors.length} doctors</strong> <Icon name="arrow" /></span><span class="cp-faces_sub">in the directory, with clinic days and room numbers</span></span>
+        </a>
+        <div class="actions cp-reveal">
+          <a class="btn btn-outline" href="/book/"><Icon name="calendar" /> How to book</a>
+          <a class="btn btn-ghost" href="/services/">Services and hours <Icon name="arrow" /></a>
+        </div>
+      </div>
+    </div>
+    <div class="container cp-people cp-reveal" aria-label="People of PDH">
+      {people.map((p) => <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />)}
+      <p class="cp-people_cap"><strong>The people of PDH.</strong> Photos from PDH's own publications.</p>
+    </div>
+  </section>
+
+  <!-- 3 · Entry points -->
+  <section class="cp-sec">
+    <div class="container">
+      <p class="eyebrow">Start here</p>
+      <h2 class="cp-h2">What do you need today?</h2>
+      <div class="grid grid-3 cp-entry">
+        {entry.map((e) => (
+          <article class="card cp-entry_card cp-reveal">
+            <img class="cp-entry_art" src={e.art} alt={e.artAlt} width="430" height="240" loading="lazy" decoding="async" />
+            <h3>{e.title}</h3>
+            <p class="muted">{e.text}</p>
+            <p class="small muted" style="margin:0 0 14px">{e.note}{e.confirm && <> <ToConfirm note={er.note} /></>}</p>
+            <a class={`btn ${e.cls}`} href={e.href} style="margin-top:auto;align-self:start">{e.cta}</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Alagang PDH ako: PDH's own slogan and video. The Vimeo player loads only after a press on Play
+       (click-to-load, dnt=1), so the page itself loads nothing from Vimeo. Decision: Sue, 25 Nov 2026. -->
+  <section class="cp-sec cp-slogan">
+    <div class="container cp-slogan_grid">
+      <div class="cp-slogan_copy">
+        <p class="eyebrow cp-reveal">Our promise</p>
+        <h2 class="cp-h2 cp-slogan_h cp-reveal">Alagang PDH ako!</h2>
+        <p class="cp-sub cp-reveal">The words PDH lives by: care from your own hospital in Parañaque. Hear it from the people of PDH in the hospital’s own video.</p>
+        <p class="cp-reveal"><a class="btn btn-outline" href="/about/">About PDH <Icon name="arrow" /></a></p>
+      </div>
+      <div class="cp-video cp-reveal" data-cp-video="1071704173">
+        <button class="cp-video_btn" type="button" aria-label="Play the video Alagang PDH Ako. The Vimeo player loads when you press play.">
+          <img class="cp-video_poster" src="/photos/alagang-pdh-ako.webp" alt="" width="1293" height="675" loading="lazy" decoding="async" />
+          <span class="cp-video_play"><span class="cp-video_tri" aria-hidden="true"></span>Play the video</span>
+        </button>
+        <p class="small muted cp-video_note">Alagang PDH Ako, by Parañaque Doctors Hospital, 5 min. Plays from Vimeo only after you press play. <a href="https://vimeo.com/1071704173" target="_blank" rel="noopener">Open on Vimeo</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Services -->
+  <section class="cp-sec section-soft cp-band">
+    <div class="container">
+      <p class="eyebrow">Services</p>
+      <h2 class="cp-h2">One hospital, every department.</h2>
+      <p class="cp-sub">Open 24/7: ER, laboratory, radiology and pharmacy. Clinics and centers by schedule. Floors and hours as published by PDH.</p>
+      {floorGroups.map(([floor, list]) => (
+        <div class="cp-floor">
+          <div class="cp-floor_head"><span class="cp-floor_label">{floor}</span><span class="cp-floor_rule" data-cp-rule></span></div>
+          <div class="cp-svc">
+            {list.map((s) => (
+              <a class="cp-svc_card cp-reveal" href={`/services/${s.slug}/`}>
+                <span class="cp-svc_band">
+                  {s.image
+                    ? <img class="cp-svc_photo" src={s.image} alt="" width="430" height="240" loading="lazy" decoding="async" />
+                    : s.illustration ? <img class="cp-svc_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle cp-svc_ic"><Icon name={s.icon} /></span>}
+                  {s.status && <span class="cp-svc_soon">{s.status}</span>}
+                </span>
+                <strong class="cp-svc_name">{s.name}</strong>
+                <span class="cp-svc_meta">{floor.startsWith('Upper') && s.location ? `${s.location} · ` : ''}{shortHours(s)}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+      <p style="margin-top:20px"><a class="btn btn-outline" href="/services/">All services and departments <Icon name="arrow" /></a></p>
+    </div>
+  </section>
+
+  <!-- 6 · HMO & PhilHealth: text list plus a logo-wall style grid -->
+  <section class="cp-sec">
+    <div class="container">
+      <div class="cp-two">
+        <div>
+          <p class="eyebrow">HMO &amp; PhilHealth</p>
+          <h2 class="cp-h2">Bring your HMO card to the Hub.</h2>
+          <p class="cp-sub" style="margin-bottom:8px">HMO Hub, Ground Floor. PhilHealth-accredited.</p>
+          <ScheduleTable rows={serviceScheduleRows(hmo.hub.hours)} compact />
+          <div class="actions">
+            <a class="btn btn-primary" href="/hmo-philhealth/">How it works</a>
+            <a class="btn btn-outline" href={hmo.hub.onlineApproval.url} target="_blank" rel="noopener">Online approval</a>
+          </div>
+        </div>
+        <p class="small muted" style="align-self:end">Accepted HMO partners, as published by PDH</p>
+      </div>
+      <div class="cp-marquee"><HmoMarquee /></div>
+      <p class="small muted" style="text-align:center;margin:8px 0 0">32 HMO partners · <a href="/hmo-philhealth/">see the full list</a></p>
+    </div>
+  </section>
+
+  <!-- 7 · Packages -->
+  <section class="cp-sec section-soft cp-band">
+    <div class="container">
+      <p class="eyebrow">Packages &amp; promos</p>
+      <h2 class="cp-h2">Bundled tests at one price.</h2>
+      <p class="cp-sub">Prices as published on pdh.com.ph, November 2026. <a href="/packages/">See all packages</a>.</p>
+      <div class="grid grid-4" style="margin-top:8px">
+        {featuredPackages.slice(0, 4).map((p) => (
+          <a class="card card-link cp-pkg cp-reveal" href={`/packages/#${p.slug}`}>
+            <span class="small muted">{p.category}</span>
+            <h3 style="font-size:1.1rem;margin:4px 0 8px">{p.name}</h3>
+            <span class="cp-pkg_price">{p.priceLabel}</span>
+            {p.cutout && <img class="cp-pkg_cut" src={p.cutout} alt="" loading="lazy" decoding="async" />}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Why PDH + figures -->
+  <section class="cp-sec">
+    <div class="container cp-two">
+      <div>
+        <p class="eyebrow">{site.why.heading}</p>
+        <h2 class="cp-h2">Because, we at PDH…</h2>
+        <div class="cp-figs">
+          {site.stats.map((s) => <div><span class="cp-figs_num">{s.value}</span><span class="small muted">{s.label}</span></div>)}
+          <div><span class="cp-figs_num">27</span><span class="small muted">MPH hospitals</span></div>
+        </div>
+        <p class="small muted">{site.network.blurb}</p>
+        <img src={site.network.mapImage} alt="Map of Metro Pacific Health hospitals across the Philippines" loading="lazy" decoding="async" width="847" height="298" style="width:100%;max-width:847px;height:auto;border-radius:12px;margin-top:8px;background:#fff" />
+      </div>
+      <dl class="cp-pillars">
+        {site.pillars.map((p, i) => <div class="cp-reveal"><img src={p.image} alt="" loading="lazy" decoding="async" width="240" height="160" /><div><dt><span>0{i + 1}</span>{p.title}</dt><dd>{p.text}</dd></div></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <!-- 9 · Patient story -->
+  <section class="cp-sec section-strong cp-quote_band">
+    <div class="container">
+      <p class="eyebrow" style="color:var(--pdh-orange)">{site.stories[0].series}</p>
+      <p class="cp-quote">“{site.stories[0].quote}”</p>
+      <p class="small" style="opacity:.85">{site.stories[0].by} · <a href={site.stories[0].url} target="_blank" rel="noopener" style="color:inherit">Read the story</a></p>
+    </div>
+  </section>
+
+  <!-- 10 · FAQ -->
+  <section class="cp-sec">
+    <div class="container cp-two">
+      <div><p class="eyebrow">FAQs</p><h2 class="cp-h2">Before you come.</h2><p class="cp-sub">Answers use only what PDH has published.</p></div>
+      <div>
+        {faqs.map((f, i) => (
+          <details class="acc" open={i === 0}><summary>{f.q}</summary><div class="body">{f.a}</div></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · News -->
+  <section class="cp-sec cp-sec_tight">
+    <div class="container cp-two">
+      <div><p class="eyebrow">PDH News</p><h2 class="cp-h2" style="font-size:1.6rem">From the community.</h2><p><a class="btn btn-outline btn-sm" href="/news/">Go to PDH News</a></p></div>
+      <ul class="cp-news">
+        {news.items.slice(0, 4).map((n) => <li><time datetime={n.date}>{formatDate(n.date)}</time><a href={n.url} target="_blank" rel="noopener">{n.title}</a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 12 · Closing band -->
+  <section class="cp-sec section-strong cp-close">
+    <div class="container">
+      <h2 class="cp-h2" style="color:inherit">Ready for your visit?</h2>
+      <p style="opacity:.85">{site.address.full} · Information <a href={`tel:${info.tel}`} style="color:inherit">{info.display}</a> <ToConfirm note={info.note} /> · <a href={`mailto:${site.emails.info}`} style="color:inherit">{site.emails.info}</a></p>
+      <div class="actions">
+        <a class="btn btn-accent btn-lg" href="/book/">How to book</a>
+        <a class="btn btn-outline btn-lg" href="/contact/#directions">Directions &amp; parking</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { heartbeatAll } from '../../scripts/heartbeat';
+  const root = document.querySelector('[data-cp]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Heading rules: a heartbeat line as wide as the heading's text, under every section heading
+  if (root) {
+    root.querySelectorAll('.cp-h2').forEach((h) => {
+      const r = document.createElement('span'); r.className = 'cp-rule'; r.setAttribute('aria-hidden', 'true');
+      h.insertAdjacentElement('afterend', r);
+    });
+    heartbeatAll('.cp-rule', root);
+  }
+  // Video: the Vimeo player is created only when the visitor presses play (dnt=1: no tracking cookies)
+  root?.querySelectorAll('[data-cp-video]').forEach((box) => {
+    const btn = box.querySelector('.cp-video_btn');
+    btn?.addEventListener('click', () => {
+      const id = (box as HTMLElement).dataset.cpVideo;
+      const f = document.createElement('iframe');
+      f.src = `https://player.vimeo.com/video/${id}?dnt=1&autoplay=1&title=0&byline=0&portrait=0`;
+      f.title = 'Alagang PDH Ako'; f.allow = 'autoplay; fullscreen; picture-in-picture'; f.setAttribute('allowfullscreen', '');
+      f.className = 'cp-video_frame';
+      btn.replaceWith(f);
+    });
+  });
+  if (root && !reduce) {
+    gsap.registerPlugin(ScrollTrigger);
+    // Gentle reveals (no scroll hijacking). On phones, cards float with the scroll instead:
+    // they rise and brighten as they travel up the screen, tied to the scroll position.
+    root.querySelectorAll('.cp-reveal').forEach((el, i) => {
+      // Hero content is above the fold: show it at once, no scroll dependency
+      if (el.closest('.cp-hero')) { gsap.fromTo(el, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: Math.min(i, 6) * 0.06 }); return; }
+      const isCard = el.matches('.card, .cp-svc_card, .cp-pkg, .cp-video');
+      if (isCard) {
+        gsap.fromTo(el, { opacity: 0.35, y: 36, scale: 0.97 }, { opacity: 1, y: -12, scale: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 100%', end: 'top 38%', scrub: 0.35 } });
+        const ph = el.querySelector('.cp-svc_photo, .cp-entry_art, .cp-pkg_cut');
+        if (ph) gsap.fromTo(ph, { yPercent: 8 }, { yPercent: -8, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 0.4 } });
+        return;
+      }
+      gsap.fromTo(el, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: (i % 4) * 0.06, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    });
+    // Floor rules draw from left to right as they scroll into view, shading from light green to orange.
+    root.querySelectorAll('[data-cp-rule]').forEach((r) => {
+      gsap.fromTo(r, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: r, start: 'top 92%', end: 'top 55%', scrub: 0.5 } });
+    });
+    // Hero media: light parallax, the honest stand-in for the frame sequence
+    const media = root.querySelector('[data-cp-parallax]');
+    if (media) gsap.fromTo(media, { yPercent: -4 }, { yPercent: 4, ease: 'none', scrollTrigger: { trigger: media.parentElement, start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
+    // Statement: words brighten as they pass the middle of the screen
+    const st = root.querySelector('[data-cp-words]');
+    if (st && st.textContent) {
+      const words = st.textContent.trim().split(/\s+/);
+      st.innerHTML = words.map((w) => `<span class="cp-word">${w}</span>`).join(' ');
+      gsap.to(st.querySelectorAll('.cp-word'), { opacity: 1, stagger: 0.04, ease: 'none', scrollTrigger: { trigger: st, start: 'top 75%', end: 'bottom 45%', scrub: 0.4 } });
+    }
+  } else if (root) {
+    root.querySelectorAll('.cp-reveal').forEach((el) => (el as HTMLElement).style.opacity = '1');
+  }
+</script>
+
+<style>
+  .cp-reveal { opacity: 0; }
+  :global(html.no-js) .cp-reveal, :global([data-theme]) .cp-reveal.is-visible { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .cp-reveal { opacity: 1; } }
+
+  .cp-hero { position: relative; overflow: hidden; padding: 40px 0 32px; background: #fbfbfa; }
+  /* PDH's own hero photo (doctor with stethoscope) as the backdrop, fading into the page on the text side */
+  .cp-hero_bg { position: absolute; top: 0; right: 0; height: 100%; width: auto; max-width: none; object-fit: cover; object-position: right top; pointer-events: none; }
+  .cp-hero_fade { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(251,251,250,0.7) 0%, rgba(251,251,250,0.93) 30%, #fbfbfa 55%, #fbfbfa 100%); }
+  .cp-hero_copy, .cp-hero_more { text-shadow: 0 0 2px #fbfbfa, 0 0 14px rgba(251,251,250,0.9), 0 0 28px rgba(251,251,250,0.8); }
+  .cp-hero_copy .btn, .cp-hero_more .btn { text-shadow: none; }
+  @media (min-width: 900px) {
+    .cp-hero_bg { height: 100%; }
+    .cp-hero_fade { background: linear-gradient(90deg, #fbfbfa 0%, #fbfbfa 40%, rgba(251,251,250,0.92) 52%, rgba(251,251,250,0.35) 64%, rgba(251,251,250,0) 76%), linear-gradient(180deg, rgba(251,251,250,0) 62%, #fbfbfa 100%); } }
+  .cp-hero_glow { position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(55% 75% at 8% 0%, rgba(0,163,165,0.20), transparent 70%), radial-gradient(35% 50% at 100% 100%, rgba(255,116,2,0.10), transparent 70%); }
+  .cp-hero_grid { position: relative; display: grid; gap: 18px; grid-template-areas: "copy" "card" "more"; }
+  .cp-hero_copy { grid-area: copy; text-align: left; }
+  .cp-hero_cardwrap { grid-area: card; }
+  .cp-hero_more { grid-area: more; }
+  @media (min-width: 900px) { .cp-hero { padding: 64px 0 40px; }
+    .cp-hero_grid { grid-template-columns: minmax(0, 800px) 1fr; grid-template-areas: "copy ." "card ." "more ."; row-gap: 18px; align-items: start; } }
+  .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 3.6vw, 4.4rem); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600; max-width: 12ch; margin: 12px 0 0.3em; }
+  .cp-hero_rule { margin: 4px 0 0; }
+  .cp-lead { max-width: 46ch; margin: 0 0 18px; font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem); color: var(--ink-soft); }
+  /* The card: two equal searches, doctor and service */
+  .cp-hero_card { display: grid; gap: 14px; padding: 20px; background: rgba(255,255,255,0.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(16,48,63,0.06); border-radius: 24px; box-shadow: 0 24px 60px rgba(0,92,94,0.14), 0 2px 0 #fff inset; }
+  @media (min-width: 900px) { .cp-hero_card { padding: 22px 24px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 16px; } .cp-hero_now { grid-column: 1 / -1; } }
+  .cp-hero_search { min-width: 0; }
+  .cp-hero_search { display: grid; gap: 8px; }
+  .cp-hero_lbl { font-family: var(--font-head); font-weight: 600; font-size: 1.05rem; color: var(--heading); letter-spacing: -0.01em; }
+  .cp-hero_row { display: flex; gap: 8px; }
+  .cp-hero_field { flex: 1 1 0; min-width: 0; contain: inline-size; display: flex; align-items: center; gap: 10px; padding: 0 14px; min-height: 48px; background: #fff; border: 1px solid var(--line); border-radius: 14px; color: var(--ink-soft); }
+  .cp-hero_field :global(svg) { flex: none; }
+  .cp-hero_field input { flex: 1 1 0; width: 0; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 1rem; color: var(--ink); padding: 10px 0; outline: none; }
+  .cp-hero_field:focus-within { border-color: var(--pdh-teal); box-shadow: 0 0 0 3px rgba(0,163,165,0.18); }
+  .cp-hero_btn { flex: none; border-radius: 14px; min-height: 48px; padding-inline: 14px; }
+  .cp-hero_more .actions { gap: 8px 4px; }
+  .cp-hero_more .btn-ghost { padding-left: 10px; }
+  .cp-hero_now { margin-top: 2px; padding: 12px 16px; background: #fff; border-radius: 16px; border: 1px solid var(--line); display: grid; gap: 8px; justify-items: start; }
+  .cp-hero_now_p { margin: 0; font-size: 0.9rem; color: var(--ink); display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; }
+  .cp-hero_now_txt { display: inline-flex; align-items: center; gap: 8px; }
+  .cp-hero_now_tel { font-weight: 600; white-space: nowrap; }
+  .cp-chip_dot { width: 10px; height: 10px; border-radius: 50%; background: var(--pdh-orange); box-shadow: 0 0 0 4px rgba(255,116,2,0.2); flex: none; }
+  /* Doctors with photos, straight from PDH's listing */
+  .cp-faces { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 0 0 16px; text-decoration: none; color: var(--ink-soft); font-size: 0.92rem; }
+  .cp-faces_txt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; flex: 1 1 160px; }
+  .cp-faces_main { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .cp-faces_main :global(svg) { flex: none; }
+  .cp-faces_row { display: inline-flex; }
+  .cp-faces_row img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.12); margin-left: -10px; background: #e6f6f6; }
+  .cp-faces_row img:first-child { margin-left: 0; }
+  .cp-faces_txt strong { color: var(--heading); }
+  .cp-faces:hover .cp-faces_txt { color: var(--pdh-teal-text); }
+  /* Real PDH staff and patients, below the hero */
+  .cp-people { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 24px; }
+  @media (min-width: 720px) { .cp-people { grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 36px; } }
+  .cp-people img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px; background: #e6f6f6; box-shadow: 0 10px 30px rgba(0,92,94,0.12); }
+  .cp-people_cap { grid-column: 1 / -1; margin: 4px 0 0; font-size: 0.85rem; color: var(--ink-soft); }
+  .cp-people_cap strong { color: var(--heading); }
+  /* Alagang PDH ako: slogan heading and the click-to-play video */
+  .cp-slogan { padding-bottom: 24px; }
+  .cp-slogan_grid { display: grid; gap: 24px; align-items: center; }
+  @media (min-width: 900px) { .cp-slogan_grid { grid-template-columns: 0.8fr 1.2fr; gap: 48px; } }
+  .cp-slogan_h { font-size: clamp(2.4rem, 1.4rem + 3.4vw, 4rem); color: var(--pdh-orange-text); font-style: italic; }
+  .cp-video_btn { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; margin: 0; border: 0; -webkit-appearance: none; appearance: none; border-radius: 24px; overflow: hidden; cursor: pointer; background: var(--pdh-teal-tint); box-shadow: 0 24px 60px rgba(0,92,94,0.16); }
+  .cp-video_poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(.2,.7,.2,1); }
+  .cp-video_btn:hover .cp-video_poster { transform: scale(1.03); }
+  .cp-video_play { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px 12px 16px; border-radius: 999px; background: var(--pdh-orange); color: #fff; font-weight: 700; font-size: 1rem; box-shadow: 0 10px 24px rgba(0,0,0,0.18); white-space: nowrap; }
+  .cp-video_tri { width: 0; height: 0; border-left: 14px solid #fff; border-top: 9px solid transparent; border-bottom: 9px solid transparent; }
+  .cp-video_btn:focus-visible { outline: 3px solid var(--pdh-orange); outline-offset: 3px; }
+  :global(.cp-video_frame) { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 24px; background: #000; }
+  .cp-video_note { margin: 10px 4px 0; }
+  .cp-sec { padding: 56px 0; }
+  @media (min-width: 900px) { .cp-sec { padding: 80px 0; } }
+  .cp-sec_tight { padding-top: 24px; }
+  .cp-band { border-radius: 24px; margin: 0 var(--gutter); }
+  @media (min-width: 1200px) { .cp-band { margin: 0 auto; max-width: calc(var(--max) - 2 * var(--gutter)); } }
+  .cp-band .container { padding-left: 8px; padding-right: 8px; }
+  @media (min-width: 900px) { .cp-band .container { padding-left: 24px; padding-right: 24px; } }
+  .cp-h2 { font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem); line-height: 1.05; letter-spacing: -0.035em; font-weight: 600; max-width: 20ch; }
+  .cp-sub { color: var(--ink-soft); max-width: 60ch; }
+  .cp-entry { margin-top: 24px; }
+  .cp-entry_card { display: flex; flex-direction: column; gap: 0; padding: 0 24px 24px; min-height: 300px; overflow: hidden; }
+  .cp-entry_card { overflow: hidden; }
+  .cp-entry_art { display: block; width: calc(100% + 48px); max-width: none; height: 190px; margin-top: -10px; object-fit: cover; object-position: center 45%; margin: 0 -24px 18px; }
+  .cp-entry_card h3 { font-size: 1.35rem; letter-spacing: -0.02em; font-weight: 600; color: var(--heading); margin: 0 0 8px; }
+  .cp-entry_card p { margin: 0 0 10px; }
+  .cp-entry_card p.small { margin-bottom: 18px; }
+  .cp-entry_card .btn { margin-top: auto; }
+  .cp-search { display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 18px; border-radius: 999px; max-width: 760px; margin: 0 auto; }
+  .cp-search svg { width: 20px; height: 20px; color: var(--ink-soft); flex: none; }
+  .cp-search input { flex: 1; border: 0; background: transparent; font: inherit; min-height: 44px; outline: none; color: inherit; min-width: 0; }
+  .cp-search .btn { flex: none; }
+  .cp-pills { gap: 8px; max-width: 980px; margin-left: auto; margin-right: auto; }
+  .cp-pills a { font-size: 0.86rem; }
+  .cp-floor { margin-top: 18px; }
+  .cp-floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+  .cp-floor_label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pdh-teal-text); white-space: nowrap; }
+  .cp-floor_rule { flex: 1; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #bfe8e6 0%, #7fd3cf 45%, var(--pdh-orange) 100%); transform-origin: left center; }
+  :global(.cp-rule) { display: block; height: 48px; width: 128px; max-width: 100%; margin: -16px 0 6px; }
+  .cp-svc { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (min-width: 720px) { .cp-svc { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1100px) { .cp-svc { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
+  .cp-svc_card { position: relative; display: flex; flex-direction: column; gap: 3px; padding: 0 14px 14px; background: var(--card); border-radius: var(--radius); text-decoration: none; color: inherit; border: 1px solid transparent; overflow: hidden; transition: border-color 0.2s, transform 0.25s, box-shadow 0.25s; }
+  .cp-svc_band { position: relative; display: block; height: 104px; margin: 0 -14px 10px; overflow: hidden; background: var(--pdh-teal-tint); }
+  .cp-svc_card:hover { border-color: var(--pdh-teal); transform: translateY(-2px); }
+  .cp-svc_name { font-family: var(--font-head); font-weight: 600; font-size: 0.98rem; line-height: 1.25; letter-spacing: -0.01em; color: var(--heading); text-wrap: balance; }
+  .cp-svc_soon { position: absolute; left: 10px; top: 10px; padding: 3px 8px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,0.18); background: var(--pdh-orange); color: #fff; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; }
+  .cp-svc_meta { font-size: 0.85rem; color: var(--ink-soft); }
+  .cp-svc_art { position: absolute; right: 10px; bottom: 6px; width: 72px; height: 72px; object-fit: contain; object-position: right bottom; pointer-events: none; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
+  .cp-svc_card:hover .cp-svc_art { transform: translateY(-4px) scale(1.06); }
+  .cp-svc_photo { display: block; width: 100%; height: 120%; margin-top: -10%; object-fit: cover; object-position: center 45%; transition: transform 0.45s cubic-bezier(.2,.7,.2,1); }
+  .cp-svc_card:hover .cp-svc_photo { transform: scale(1.06); }
+  .cp-svc_card:hover { box-shadow: 0 14px 34px rgba(0,92,94,0.14); }
+  @media (prefers-reduced-motion: reduce) { .cp-svc_photo { transition: none; } .cp-svc_card:hover .cp-svc_photo { transform: none; } }
+  .cp-svc_ic { position: absolute; right: 14px; bottom: 14px; margin: 0; }
+  @media (min-width: 900px) { .cp-svc_band { height: 116px; } }
+  .cp-two { display: grid; gap: 20px; }
+  @media (min-width: 900px) { .cp-two { grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; } }
+  .cp-marquee { margin-top: 24px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+  .cp-pkg { display: grid; align-content: start; padding: 22px 30% 22px 22px; position: relative; overflow: hidden; min-height: 170px; isolation: isolate; }
+  .cp-pkg_cut { position: absolute; right: -6px; bottom: 0; height: 100%; max-height: 220px; width: auto; max-width: 58%; object-fit: contain; object-position: right bottom; pointer-events: none; z-index: -1;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 35%, #000 70%); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 35%, #000 70%); }
+  .cp-pkg_price { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.03em; color: var(--accent-text); }
+  .cp-figs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .cp-figs_num { display: block; font-size: clamp(2.2rem, 1.6rem + 2.6vw, 4rem); line-height: 1; letter-spacing: -0.04em; font-weight: 500; color: var(--pdh-teal-text); }
+  .cp-pillars { margin: 0; display: grid; }
+  .cp-pillars > div { padding: 16px 0; border-top: 1px solid var(--line); display: grid; gap: 12px; grid-template-columns: 96px 1fr; align-items: center; }
+  .cp-pillars img { width: 96px; height: 72px; object-fit: cover; border-radius: 10px; }
+  @media (min-width: 720px) { .cp-pillars > div { grid-template-columns: 120px 1fr; gap: 20px; } .cp-pillars img { width: 120px; height: 84px; } }
+  .cp-pillars dt { font-weight: 500; font-size: 1.15rem; letter-spacing: -0.02em; display: flex; gap: 12px; align-items: baseline; }
+  .cp-pillars dt span { font-size: 0.8rem; color: var(--ink-soft); }
+  .cp-pillars dd { margin: 0; color: var(--ink-soft); }
+  .cp-quote_band { text-align: center; }
+  .cp-quote { font-size: clamp(1.4rem, 1rem + 2vw, 2.6rem); line-height: 1.15; letter-spacing: -0.03em; font-weight: 500; max-width: 26ch; margin: 8px auto 12px; }
+  .cp-news { list-style: none; padding: 0; margin: 0; }
+  .cp-news li { display: grid; gap: 2px; padding: 12px 0; border-top: 1px solid var(--line); }
+  @media (min-width: 640px) { .cp-news li { grid-template-columns: 150px 1fr; gap: 16px; } }
+  .cp-news time { font-size: 0.85rem; color: var(--ink-soft); padding-top: 2px; }
+  .cp-news a { color: inherit; text-decoration: none; font-weight: 500; }
+  .cp-news a:hover { text-decoration: underline; }
+  .cp-close { text-align: center; }
+  .cp-close .cp-h2 { margin-left: auto; margin-right: auto; }
+  .cp-close .actions { justify-content: center; margin-top: 20px; }
+  .cp-close .btn-outline { color: inherit; }
+</style>

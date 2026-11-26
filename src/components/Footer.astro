@@ -9,7 +9,7 @@ const p = site.phones;
       <div>
         <h3>{site.name}</h3>
         <p>{site.address.full}</p>
-        <p class="small">{site.dohLevel} hospital · Member of {site.network.name} since {site.network.memberSince}</p>
+        <p class="small">Member of {site.network.name} since {site.network.memberSince}</p>
       </div>
       <div>
         <h3>Phone lines</h3>
@@ -53,7 +53,15 @@ const p = site.phones;
     </div>
     <div class="legal">
       <span>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
-      <span>Website prototype by Iozera — not the live PDH site. No analytics or tracking.</span>
+      <span>Website prototype by Iozera.</span>
     </div>
   </div>
+  <!-- Closing mark: PDH's own PD+H lettering, cropped from the official logo file -->
+  <div class="footer-mark" aria-hidden="true">
+    <img src="/brand/pdh-mark.png" alt="" width="1890" height="840" loading="lazy" decoding="async" class="footer-mark_img" />
+  </div>
 </footer>
+<style>
+  .footer-mark { max-width: var(--max); margin: 32px auto 0; padding: 0 var(--gutter); }
+  .footer-mark_img { display: block; width: min(100%, 360px); height: auto; }
+</style>

@@ -1,7 +1,9 @@
 ---
+// Self-hosted open-licence fonts (OFL 1.1), bundled at build time: no outside requests.
+import '@fontsource-variable/schibsted-grotesk';
+import '@fontsource-variable/instrument-sans';
 import '../styles/global.css';
 import { site, hospitalJsonLd } from '../lib/data';
-import OptionBar from '../components/OptionBar.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Kriss from '../components/Kriss.astro';
@@ -9,21 +11,18 @@ import Kriss from '../components/Kriss.astro';
 interface Props {
   title: string;
   description: string;
-  /** Force a design option (homepages). Inner pages follow the visitor's stored pick. */
-  theme?: 'a' | 'b' | 'c';
   /** Extra JSON-LD objects for this page (e.g. Physician). */
   jsonLd?: object[];
   noindex?: boolean;
 }
-const { title, description, theme, jsonLd = [], noindex = false } = Astro.props;
+const { title, description, jsonLd = [], noindex = false } = Astro.props;
 const fullTitle = title === site.name ? title : `${title} | ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const siteUrl = Astro.site?.href ?? '/';
 const ld = [hospitalJsonLd(siteUrl), ...jsonLd];
-const forced = theme ?? 'a';
 ---
 <!doctype html>
-<html lang="en" data-theme={forced} data-theme-forced={theme ? 'true' : undefined}>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,36 +41,19 @@ const forced = theme ?? 'a';
     <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <script is:inline>
-      // Inner pages follow the design option picked on the prototype bar. First-party, no tracking.
-      (function () {
-        var h = document.documentElement;
-        if (h.getAttribute('data-theme-forced')) return;
-        try {
-          var t = localStorage.getItem('pdh-theme');
-          if (t === 'a' || t === 'b' || t === 'c') h.setAttribute('data-theme', t);
-        } catch (e) {}
-      })();
-    </script>
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <OptionBar current={forced} />
     <Header />
     <main id="main" tabindex="-1">
       <slot />
     </main>
     <Footer />
     <Kriss />
-    <script is:inline>
-      // Keep the option bar's highlighted letter in sync on inner pages.
-      (function () {
-        var t = document.documentElement.getAttribute('data-theme');
-        document.querySelectorAll('[data-theme-pick]').forEach(function (a) {
-          if (a.getAttribute('data-theme-pick') === t) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
-        });
-      })();
-    </script>
-  </body>
+  <script>
+  import { cardMotion } from '../scripts/cards';
+  cardMotion();
+</script>
+</body>
 </html>

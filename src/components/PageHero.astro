@@ -1,9 +1,13 @@
 ---
-interface Props { title: string; eyebrow?: string; lead?: string; crumbs?: { href: string; label: string }[]; }
-const { title, eyebrow, lead, crumbs = [] } = Astro.props;
+// `photo`: a PDH photo of the place this page is about, shown as the backdrop so each page feels like
+// that part of the hospital. `photoPos` is the object-position for the crop.
+interface Props { title: string; eyebrow?: string; lead?: string; crumbs?: { href: string; label: string }[]; photo?: string; photoAlt?: string; photoPos?: string; }
+const { title, eyebrow, lead, crumbs = [], photo, photoAlt = '', photoPos = 'center 40%' } = Astro.props;
 ---
-<section class="page-hero">
-  <div class="container">
+<section class={`page-hero${photo ? ' page-hero_photo' : ''}`}>
+  {photo && <img class="page-hero_bg" src={photo} alt={photoAlt} width="430" height="240" fetchpriority="high" decoding="async" style={`object-position:${photoPos}`} />}
+  {photo && <div class="page-hero_fade" aria-hidden="true"></div>}
+  <div class="container page-hero_in">
     {crumbs.length > 0 && (
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
@@ -12,7 +16,25 @@ const { title, eyebrow, lead, crumbs = [] } = Astro.props;
     )}
     {eyebrow && <span class="eyebrow">{eyebrow}</span>}
     <h1>{title}</h1>
+    <span class="page-rule" aria-hidden="true"></span>
     {lead && <p class="lead">{lead}</p>}
     <slot />
   </div>
 </section>
+<script>
+  import { heartbeatAll } from '../scripts/heartbeat';
+  heartbeatAll('.page-rule');
+</script>
+<style>
+  .page-rule { display: block; height: 48px; width: 128px; max-width: 100%; margin: -14px 0 4px; }
+  .page-hero_photo { position: relative; overflow: hidden; min-height: 300px; display: flex; align-items: flex-end; padding-bottom: 28px; }
+  .page-hero_bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  .page-hero_fade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(251,251,250,0.35) 0%, rgba(251,251,250,0.93) 42%, #fbfbfa 100%); }
+  /* text over the photo: a soft white halo keeps it readable where the fade thins */
+  .page-hero_photo h1, .page-hero_photo .lead, .page-hero_photo .eyebrow, .page-hero_photo .breadcrumb { text-shadow: 0 0 2px #fbfbfa, 0 0 14px rgba(251,251,250,0.9), 0 0 28px rgba(251,251,250,0.8); }
+  .page-hero_in { position: relative; }
+  @media (min-width: 900px) {
+    .page-hero_photo { min-height: 360px; align-items: center; padding: 48px 0; }
+    .page-hero_fade { background: linear-gradient(90deg, #fbfbfa 0%, #fbfbfa 42%, rgba(251,251,250,0.94) 56%, rgba(251,251,250,0.5) 74%, rgba(251,251,250,0.08) 100%), linear-gradient(180deg, rgba(251,251,250,0) 70%, #fbfbfa 100%); }
+    .page-hero_photo .page-hero_in > * { max-width: min(60ch, 58%); } }
+</style>

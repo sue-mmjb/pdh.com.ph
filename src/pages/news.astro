@@ -5,11 +5,12 @@ import Icon from '../components/Icon.astro';
 import { news, site, formatDate } from '../lib/data';
 ---
 <Base title="PDH News" description={`News, community health talks and Alagang PDH Ako patient stories from ${site.name}.`}>
-  <PageHero eyebrow="PDH News" title="News and stories" lead="Community health talks, barangay partnerships and Alagang PDH Ako patient stories. Full articles open on the current PDH site." />
+  <PageHero photo="/photos/news-health-talk.webp" photoAlt="A PDH health talk" photoPos="center 35%" eyebrow="PDH News" title="News and stories" lead="Community health talks, barangay partnerships and Alagang PDH Ako patient stories. Full articles open on the current PDH site." />
   <section class="section">
     <div class="container grid grid-3">
       {news.items.map((n) => (
         <article class="card">
+          {n.image && <img src={n.image} alt="" loading="lazy" decoding="async" width="1400" height="788" style="width:calc(100% + 40px);margin:-20px -20px 14px;max-width:none;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;display:block" />}
           <p class="meta"><time datetime={n.date}>{formatDate(n.date)}</time> · {n.category}</p>
           <h2 style="font-size:1.1rem">{n.title}</h2>
           <p class="small muted">{n.excerpt}</p>

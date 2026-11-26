@@ -7,7 +7,7 @@ import { site } from '../lib/data';
 const a = site.about;
 ---
 <Base title="About PDH" description={`${a.intro} Founded ${site.founded}; member of ${site.network.name} since ${site.network.memberSince}.`}>
-  <PageHero eyebrow="About us" title={site.name} lead={a.intro} />
+  <PageHero photo="/photos/pdh-lobby.webp" photoAlt="The PDH lobby" photoPos="center 50%" eyebrow="About us" title={site.name} lead={a.intro} />
 
   <section class="section">
     <div class="container about-grid">
@@ -20,7 +20,7 @@ const a = site.about;
           {site.stats.map((s) => <div><span class="num" style="color:var(--primary)">{s.value}</span><span class="lbl muted">{s.label}</span></div>)}
         </div>
       </div>
-      <Placeholder label="PDH building or team photo (supplied by PDH)" ratio="4x3" />
+      <img src={site.photos.lobby.src} alt={site.photos.lobby.alt} width={site.photos.lobby.w} height={site.photos.lobby.h} loading="lazy" decoding="async" style="width:100%;height:auto;border-radius:var(--radius)" />
     </div>
   </section>
 
@@ -69,6 +69,7 @@ const a = site.about;
       <h2>{site.network.name}</h2>
       <p class="lead" style="color:inherit">{site.network.blurb}</p>
       <p>{site.network.detail}</p>
+      <img src={site.network.mapImage} alt="Map of Metro Pacific Health hospitals across the Philippines" loading="lazy" decoding="async" width="847" height="298" style="width:100%;max-width:847px;height:auto;border-radius:12px;background:#fff;padding:12px" />
     </div>
   </section>
 

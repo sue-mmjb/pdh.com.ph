@@ -1,0 +1,41 @@
+---
+// One continuous line of PDH's HMO partner logos, moving right to left at a calm pace.
+// Pure CSS animation (no library), pauses on hover/focus, static under reduced motion.
+// Every logo carries its partner's name as alt text; the full text list lives on /hmo-philhealth/.
+import { hmo } from '../lib/data';
+interface Props { speed?: number; /** pixels per second */ }
+const { speed = 40 } = Astro.props;
+const logos = hmo.logos ?? [];
+// Strip width as rendered on desktop (52px tall logos, 56px gaps) so the speed stays constant
+// whatever the logo count. Logo files are 160px tall at 2x.
+const stripWidth = logos.reduce((w, l) => w + Math.min(220, (l.width * 52) / l.height) + 56, 0) + 56;
+const duration = Math.max(20, Math.round(stripWidth / speed));
+---
+<div class="hmo-marquee" aria-label="HMO partners" role="group" style={`--marquee-duration:${duration}s`}>
+  <div class="hmo-marquee_track">
+    {[0, 1].map((copy) => (
+      <ul class="hmo-marquee_list" aria-hidden={copy === 1 ? 'true' : undefined}>
+        {logos.map((l) => (
+          <li><img src={l.file} alt={copy === 0 ? l.name : ''} width={l.width / 2} height={l.height / 2} loading="lazy" decoding="async" /></li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>
+
+<style>
+  .hmo-marquee { overflow: hidden; position: relative; padding: 12px 0; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .hmo-marquee_track { display: flex; width: max-content; animation: hmo-scroll var(--marquee-duration) linear infinite; will-change: transform; }
+  .hmo-marquee:hover .hmo-marquee_track, .hmo-marquee:focus-within .hmo-marquee_track { animation-play-state: paused; }
+  .hmo-marquee_list { display: flex; align-items: center; gap: 56px; list-style: none; margin: 0; padding: 0 28px; }
+  .hmo-marquee_list li { flex: none; display: grid; place-items: center; height: 56px; }
+  .hmo-marquee_list img { height: 40px; width: auto; max-width: 180px; object-fit: contain; }
+  @media (min-width: 900px) { .hmo-marquee_list li { height: 72px; } .hmo-marquee_list img { height: 52px; max-width: 220px; } }
+  @keyframes hmo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hmo-marquee { mask-image: none; -webkit-mask-image: none; }
+    .hmo-marquee_track { animation: none; flex-wrap: wrap; width: auto; }
+    .hmo-marquee_list { flex-wrap: wrap; gap: 24px 40px; justify-content: center; }
+    .hmo-marquee_list[aria-hidden="true"] { display: none; }
+  }
+</style>

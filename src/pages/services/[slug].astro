@@ -6,7 +6,8 @@ import ToConfirm from '../../components/ToConfirm.astro';
 import Sample from '../../components/Sample.astro';
 import Placeholder from '../../components/Placeholder.astro';
 import Icon from '../../components/Icon.astro';
-import { services, doctorsForService, hmo, site } from '../../lib/data';
+import { services, doctorsForService, hmo, site, serviceScheduleRows } from '../../lib/data';
+import ScheduleTable from '../../components/ScheduleTable.astro';
 
 export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
@@ -17,7 +18,9 @@ const er = site.phones.emergency;
 const isER = s.slug === 'emergency-room';
 ---
 <Base title={s.name} description={`${s.name} at ${site.name}: ${s.summary} ${s.location ? `Location: ${s.location}.` : ''} ${s.hours ? `Hours: ${s.hours}.` : ''}`}>
-  <PageHero eyebrow="Our services" title={s.name} lead={s.summary} crumbs={[{ href: '/services/', label: 'Services' }]} />
+  <PageHero photo={s.image} photoAlt={`${s.name} at PDH`} photoPos="center 45%" eyebrow="Our services" title={s.name} lead={s.summary} crumbs={[{ href: '/services/', label: 'Services' }]}>
+    {s.status && <p class="note-box" style="margin-top:12px"><strong>{s.status}.</strong> PDH lists this service as soon to open; location and hours will follow. Call Information for updates.</p>}
+  </PageHero>
 
   <section class="section">
     <div class="container svc-grid">
@@ -26,10 +29,29 @@ const isER = s.slug === 'emergency-room';
 
         <h2 style="font-size:1.3rem">Location and hours</h2>
         <dl class="dl" style="margin-bottom:24px">
-          <dt>Floor</dt><dd>{s.location ?? <>Not listed <ToConfirm note="The current site shows TBD for this service's location" /></>}</dd>
-          <dt>Hours</dt><dd>{s.hours ?? <>Not listed <ToConfirm note="The current site shows TBD for this service's schedule" /></>}</dd>
-          <dt>Contact</dt><dd><a href={`tel:${site.phones.trunk.tel}`}>{site.phones.trunk.display}</a></dd>
+          <dt>Floor</dt><dd>{s.location ?? <>Call for location <ToConfirm note="The current site shows TBD for this service's location" /></>}</dd>
+          <dt>Hours</dt><dd><ScheduleTable rows={serviceScheduleRows(s.hours)} compact />{s.hoursAlt && <> <ToConfirm note={s.hoursAlt} /></>}</dd>
+          <dt>Contact</dt><dd><a href={`tel:${site.phones.trunk.tel}`}>{site.phones.trunk.display}</a>{s.contactLocal && <> · appointments: {site.phones.information.display.replace('local 7000', s.contactLocal)}</>}</dd>
+          {s.priceLine && <><dt>Price</dt><dd>{s.priceLine}</dd></>}
         </dl>
+        {s.hoursAlt && <p class="note-box small" style="margin:-12px 0 24px">{s.hoursAlt}</p>}
+
+        {s.programs && (
+          <>
+            <h2 style="font-size:1.3rem">Programs</h2>
+            <div class="grid grid-2" style="margin-bottom:24px">
+              {s.programs.map((p) => (
+                <div class="card program">
+                  {p.image && <img class="program_photo" src={p.image} alt={`${p.name} at PDH rehabilitation`} width="374" height="242" loading="lazy" decoding="async" />}
+                  <h3 style="font-size:1.05rem">{p.name}</h3>
+                  <p class="small">{p.summary}</p>
+                  {p.conditions.length > 0 && <><p class="small muted" style="margin:0 0 6px"><strong>{p.name === 'Cardiovascular Rehabilitation' ? 'Recommended for patients with' : 'Commonly treated conditions'}</strong></p>
+                  <ul class="chips">{p.conditions.map((c) => <li>{c}</li>)}</ul></>}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
 
         {s.offered.length > 0 && (
           <>
@@ -57,12 +79,16 @@ const isER = s.slug === 'emergency-room';
       </div>
 
       <aside>
-        <Placeholder label={`${s.name} at PDH`} ratio="4x3" />
+        {s.image
+          ? <img src={s.image} alt={`${s.name} at PDH`} loading="lazy" decoding="async" style="width:100%;height:auto;border-radius:var(--radius)" />
+          : s.illustration
+            ? <div class="svc-art" aria-hidden="true"><img src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /></div>
+            : <Placeholder label={`${s.name} at PDH`} ratio="4x3" />}
         <div class="card" style="margin-top:16px">
           <h3 style="font-size:1.05rem">Next step</h3>
           {isER
             ? <a class="btn btn-emergency" href={`tel:${er.tel}`} style="width:100%"><Icon name="emergency" /> Call the ER</a>
-            : <a class="btn btn-primary" href={`/book/?service=${s.slug}`} style="width:100%"><Icon name="calendar" /> Request an appointment</a>}
+            : <a class="btn btn-primary" href={`/book/?service=${s.slug}`} style="width:100%"><Icon name="calendar" /> Book an appointment</a>}
           <a class="btn btn-outline" href={`tel:${site.phones.information.tel}`} style="width:100%;margin-top:8px"><Icon name="phone" /> Call {site.phones.information.display}</a>
           {s.extraLink && <a class="btn btn-ghost" href={s.extraLink.href} target="_blank" rel="noopener" style="width:100%;margin-top:8px">{s.extraLink.label} <Icon name="external" /></a>}
         </div>
@@ -82,6 +108,12 @@ const isER = s.slug === 'emergency-room';
   )}
 
   <style>
+  /* Departments without a PDH photo yet show their illustration on a tinted panel */
+  .program { padding-top: 0; overflow: hidden; }
+  .program_photo { display: block; width: calc(100% + 40px); max-width: none; height: 160px; margin: 0 -20px 14px; object-fit: cover; object-position: center 35%; }
+  .svc-art { aspect-ratio: 4 / 3; display: grid; place-items: center; border-radius: var(--radius); background: radial-gradient(70% 70% at 50% 60%, #ffffff 0%, var(--pdh-teal-tint) 70%, #d9f0f0 100%); border: 1px solid var(--line); }
+  .svc-art img { width: 58%; height: auto; max-width: 220px; filter: drop-shadow(0 12px 18px rgba(0,92,94,0.18)); }
+
     .svc-grid { display: grid; gap: 32px; }
     @media (min-width: 900px) { .svc-grid { grid-template-columns: 1.6fr 1fr; align-items: start; } aside { position: sticky; top: calc(var(--optionbar-h) + var(--header-h) + 16px); } }
   </style>

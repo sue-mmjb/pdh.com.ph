@@ -3,8 +3,10 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import DoctorCard from '../../components/DoctorCard.astro';
 import ToConfirm from '../../components/ToConfirm.astro';
+import Sample from '../../components/Sample.astro';
 import Icon from '../../components/Icon.astro';
-import { doctors, displayName, initials, services, site } from '../../lib/data';
+import { doctors, displayName, initials, services, site, doctorScheduleRows } from '../../lib/data';
+import ScheduleTable from '../../components/ScheduleTable.astro';
 
 export function getStaticPaths() {
   return doctors.map((d) => ({ params: { slug: d.slug }, props: { doctor: d } }));
@@ -23,17 +25,19 @@ const ld = {
   url: new URL(Astro.url.pathname, Astro.site).href,
 };
 ---
-<Base title={`${name} — ${d.specialization}`} description={`${name}, ${d.specialization} (${d.department}) at ${site.name}. ${d.schedule ? `Clinic schedule: ${d.schedule}.` : ''} ${d.room ? `Room ${d.room}.` : ''} How to book.`} jsonLd={[ld]}>
-  <PageHero eyebrow={d.department} title={name} lead={d.specialization} crumbs={[{ href: '/doctors/', label: 'Doctors' }]} />
+<Base title={`${name}, ${d.specialization}`} description={`${name}, ${d.specialization} (${d.department}) at ${site.name}. ${d.schedule ? `Clinic schedule: ${d.schedule}.` : ''} ${d.room ? `Room ${d.room}.` : ''} How to book.`} jsonLd={[ld]}>
+  <PageHero photo="/services/outpatient-clinics.webp" photoAlt="The Outpatient Department desk at PDH" photoPos="center 50%" eyebrow={d.department} title={name} lead={d.specialization} crumbs={[{ href: '/doctors/', label: 'Doctors' }]} />
 
   <section class="section">
     <div class="container doc-grid">
       <div>
         <div class="card" style="display:flex;gap:16px;align-items:center;margin-bottom:24px">
-          <span class="avatar" aria-hidden="true" style="width:72px;height:72px;border-radius:50%;background:var(--accent-soft);color:var(--accent-text);display:grid;place-items:center;font-weight:800;font-size:1.4rem;font-family:var(--font-head);flex:none">{initials(d.name)}</span>
+          {d.photo
+            ? <img src={d.photo} alt={`${name}`} width="400" height="400" decoding="async" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;flex:none;background:var(--pdh-teal-tint)" />
+            : <span class="avatar" aria-hidden="true" style="width:96px;height:96px;border-radius:50%;background:var(--pdh-teal-tint);color:var(--pdh-teal-text);display:grid;place-items:center;font-weight:800;font-size:1.6rem;font-family:var(--font-head);flex:none">{initials(d.name)}</span>}
           <div>
-            <p style="margin:0" class="muted small">Photo: supplied by PDH only (no AI-generated images)</p>
-            <p style="margin:4px 0 0" class="small">Listed as <strong>{d.name}</strong> on pdh.com.ph</p>
+            <p style="margin:0" class="small">Listed as <strong>{d.name}</strong> on pdh.com.ph</p>
+            {!d.photo && <p style="margin:4px 0 0" class="muted small">No photo published by PDH for this doctor.</p>}
           </div>
         </div>
 
@@ -41,16 +45,16 @@ const ld = {
         <dl class="dl" style="margin-bottom:24px">
           <dt>Specialty</dt><dd>{d.specialization}</dd>
           <dt>Department</dt><dd>{d.department}</dd>
-          <dt>Schedule</dt><dd>{d.schedule ?? <>Not listed <ToConfirm note="No schedule on the current site" /></>}</dd>
+          <dt>Clinic days</dt><dd><ScheduleTable rows={doctorScheduleRows(d.schedule)} compact />{d.schedule && <span class="small muted">As listed: {d.schedule}</span>}</dd>
           <dt>Room</dt><dd>{d.room ? `Room ${d.room}` : <>Not listed <ToConfirm /></>}</dd>
           <dt>Contact</dt><dd><a href={`tel:${site.phones.trunk.tel}`}>{d.contact ?? site.phones.trunk.display}</a></dd>
         </dl>
-        <p class="proto-note">Schedule codes follow PDH’s listing: M Mon · T Tue · W Wed · TH Thu · F Fri · S Sat (e.g. “TTHS” = Tue, Thu, Sat).</p>
+        <p class="proto-note">Clinic days are expanded from the codes on PDH’s listing (M Mon · T Tue · W Wed · TH Thu · F Fri · S Sat).</p>
 
         <h2 style="font-size:1.3rem">Accredited HMOs</h2>
         {d.hmos.length > 0
           ? <ul class="chips" style="margin-bottom:8px">{d.hmos.map((h) => <li>{h}</li>)}</ul>
-          : <p class="muted">{d.hmoNote ?? 'Not listed on the current site'} <ToConfirm note="Accredited HMOs for this doctor are not listed on the current site" /></p>}
+          : <p class="muted">Contact the <a href="/hmo-philhealth/">HMO Hub</a> to confirm this doctor’s accreditation and your coverage. <ToConfirm note="Accredited HMOs for this doctor are not listed on the current site" /></p>}
         <p class="small muted">As listed on the doctor’s page on pdh.com.ph. Confirm coverage with the <a href="/hmo-philhealth/">HMO Hub</a> before your visit.</p>
 
         {relatedServices.length > 0 && (
@@ -63,13 +67,13 @@ const ld = {
 
       <aside>
         <div class="card">
-          <h3 style="font-size:1.05rem">How to book</h3>
+          <h3 style="font-size:1.05rem">How to book <Sample /></h3>
           <ol style="padding-left:1.2em;margin:0 0 12px" class="small">
             <li>Check the clinic schedule above.</li>
-            <li>Call to reserve a slot, or send a request and we call you back.</li>
+            <li>Call or message PDH to reserve a slot.</li>
             <li>Bring a valid ID and your HMO card or PhilHealth MDR.</li>
           </ol>
-          <a class="btn btn-primary" href={`/book/?doctor=${d.slug}`} style="width:100%"><Icon name="calendar" /> Request an appointment</a>
+          <a class="btn btn-primary" href={`/book/?doctor=${d.slug}`} style="width:100%"><Icon name="calendar" /> Book an appointment</a>
           <a class="btn btn-outline" href={`tel:${site.phones.information.mobileTel}`} style="width:100%;margin-top:8px"><Icon name="phone" /> Call {site.phones.information.mobile}</a>
           <p class="small muted" style="margin:12px 0 0">Clinics are on the 3rd to 6th floors, by appointment.</p>
         </div>

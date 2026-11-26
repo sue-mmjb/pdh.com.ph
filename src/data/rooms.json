@@ -6,15 +6,50 @@
     { "slug": "private", "photos": [{ "src": "/rooms/private-4.jpg", "alt": "Private room bed by the window" }, { "src": "/rooms/private-1.jpg", "alt": "Private room entrance with refrigerator" }, { "src": "/rooms/private-2.jpg", "alt": "Private room window side with bench and bedside cabinet" }, { "src": "/rooms/private-3.jpg", "alt": "Private room bed with overbed table" }], "name": "Private Room", "capacity": "One patient", "text": "Our air-conditioned private rooms ensure a comfortable and restful stay with enhanced privacy, essential amenities, and round-the-clock nursing care.", "amenities": ["Bed", "Bedside Table", "Chair", "Cabinet", "Television", "Refrigerator", "Couch", "Private Comfort Room"] },
     { "slug": "suite", "photos": [{ "src": "/rooms/suite-4.jpg", "alt": "Suite with sitting area, bench and bed" }, { "src": "/rooms/suite-1.jpg", "alt": "Suite sitting area with table, chairs and refrigerator" }, { "src": "/rooms/suite-2.jpg", "alt": "Suite bed with overbed table and lounge chair" }, { "src": "/rooms/suite-3.jpg", "alt": "Suite entrance with television and refrigerator" }], "name": "Suite", "capacity": "One patient, premium", "text": "For a premium healing experience, our air-conditioned suite rooms offer spacious accommodations with exclusive amenities, personalized care, and 24/7 nursing support.", "amenities": ["Bed", "Bedside Table", "Chair (Lazy Boy for Presidential Suite)", "Cabinet", "Television", "Refrigerator", "Couch", "Coffee Table", "Private Comfort Room"] },
     { "slug": "isolation", "photos": [{ "src": "/rooms/isolation-1.jpg", "alt": "Isolation room bed by the window" }, { "src": "/rooms/isolation-2.jpg", "alt": "Isolation room entrance with television and refrigerator" }, { "src": "/rooms/isolation-3.jpg", "alt": "Isolation room couch and refrigerator" }, { "src": "/rooms/isolation-4.jpg", "alt": "Isolation room seen from the couch" }], "name": "Isolation Room", "capacity": "One patient", "text": "Our isolation rooms provide a secure environment for patients requiring containment, equipped with filtration and infection control measures for safety.", "amenities": ["Bed", "Bedside Table", "Cabinet", "Television", "Refrigerator", "Couch", "Private Comfort Room", "Anteroom"] },
-    { "slug": "premium-labor-room", "photos": [], "status": "Soon to open", "name": "Premium Labor Room", "capacity": "Mothers in labor", "text": "Our premium labor room provides an advanced, comfortable, and private environment for mothers during childbirth. Equipped with the newest facilities and a dedicated team of healthcare professionals, the room ensures a smooth and safe delivery experience. It is designed to provide a serene atmosphere for both mothers and their families, with necessary amenities to enhance comfort during labor.", "amenities": [] }
+    { "slug": "premium-labor-room", "photos": [{ "src": "/rooms/soon-to-open.webp", "alt": "Soon to open: PDH banner for the Premium Labor Room" }], "status": "Soon to open", "name": "Premium Labor Room", "capacity": "Mothers in labor", "text": "Our premium labor room provides an advanced, comfortable, and private environment for mothers during childbirth. Equipped with the newest facilities and a dedicated team of healthcare professionals, the room ensures a smooth and safe delivery experience. It is designed to provide a serene atmosphere for both mothers and their families, with necessary amenities to enhance comfort during labor.", "amenities": [] }
   ],
   "facilities": [
-    { "name": "HMO Hub", "text": "Facilitates access to healthcare services covered by your health insurance plan.", "location": "Ground Floor", "hours": "6 AM – 7 PM (Monday to Saturday), 6 AM – 2 PM (Sunday and Holidays)" },
-    { "name": "Prayer Room", "text": "A peaceful chapel for prayer and reflection for patients, families, and staff.", "location": "2nd Floor", "hours": "Open 24/7" },
-    { "name": "Parking", "text": "Ample, convenient parking available for patients and visitors, with special slots for Persons with Disabilities (PWD) and Senior Citizens.", "location": "Basement Parking and Allocated Parking Space for Patients and Visitors", "hours": "Open 24/7" },
-    { "name": "Dietary / Canteen", "text": "Our Dietary Services and Canteen offer a wide selection of meals that satisfy both cravings and care needs. From comfort food to medically tailored meal plans, every dish is prepared with your health and well-being in mind.", "location": "Ground Floor", "hours": "6 AM – 8 PM (Monday to Sunday)" },
-    { "name": "Automated Teller Machine (ATM)", "text": "Conveniently located ATM within the hospital ensure easy access to banking services for patients, visitors, and staff.", "location": "Ground Floor", "hours": "Open 24/7" },
-    { "name": "Breastfeeding Station", "text": "A comfortable and safe space for mothers to breastfeed their infants.", "location": "4th Floor", "hours": "Open 24/7" },
-    { "name": "Pharmacy", "text": "Convenience and easy access to essential medications.", "location": "Ground Floor", "hours": "Open 24/7" }
+    {
+      "name": "HMO Hub", "image": "/services/facility-hmo-hub.webp",
+      "text": "Facilitates access to healthcare services covered by your health insurance plan.",
+      "location": "Ground Floor",
+      "hours": "6 AM – 7 PM (Monday to Saturday), 6 AM – 2 PM (Sunday and Holidays)"
+    },
+    {
+      "name": "Prayer Room", "image": "/services/facility-prayer-room.webp",
+      "text": "A peaceful chapel for prayer and reflection for patients, families, and staff.",
+      "location": "2nd Floor",
+      "hours": "Open 24/7"
+    },
+    {
+      "name": "Parking", "image": "/services/facility-parking.webp",
+      "text": "Ample, convenient parking available for patients and visitors, with special slots for Persons with Disabilities (PWD) and Senior Citizens.",
+      "location": "Basement Parking and Allocated Parking Space for Patients and Visitors",
+      "hours": "Open 24/7"
+    },
+    {
+      "name": "Dietary / Canteen", "image": "/services/facility-canteen.webp",
+      "text": "Our Dietary Services and Canteen offer a wide selection of meals that satisfy both cravings and care needs. From comfort food to medically tailored meal plans, every dish is prepared with your health and well-being in mind.",
+      "location": "Ground Floor",
+      "hours": "6 AM – 8 PM (Monday to Sunday)"
+    },
+    {
+      "name": "Automated Teller Machine (ATM)", "image": "/services/facility-atm.webp",
+      "text": "Conveniently located ATM within the hospital ensure easy access to banking services for patients, visitors, and staff.",
+      "location": "Ground Floor",
+      "hours": "Open 24/7"
+    },
+    {
+      "name": "Breastfeeding Station", "image": "/services/breastfeeding-station.webp",
+      "text": "A comfortable and safe space for mothers to breastfeed their infants.",
+      "location": "4th Floor",
+      "hours": "Open 24/7"
+    },
+    {
+      "name": "Pharmacy", "image": "/services/pharmacy.webp",
+      "text": "Convenience and easy access to essential medications.",
+      "location": "Ground Floor",
+      "hours": "Open 24/7"
+    }
   ]
 }

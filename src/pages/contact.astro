@@ -7,10 +7,10 @@ import { site, rooms } from '../lib/data';
 const p = site.phones;
 const parking = rooms.facilities.find((f) => f.name === 'Parking');
 const mapsQuery = encodeURIComponent(`${site.name}, ${site.address.full}`);
-const lines = [p.emergency, p.information, p.admitting, p.hmoHub, p.hr];
+const lines = [p.emergency, p.information, p.marketing, p.admitting, p.hmoHub, p.hr];
 ---
 <Base title="Contact and directions" description={`${site.name} address, phone lines, email, directions, parking and visiting hours. ${site.address.full}.`}>
-  <PageHero eyebrow="Contact us" title="Contact and directions" lead="Thank you for visiting Parañaque Doctors Hospital. Got questions or concerns? We’re here to help—just reach out, and we’ll respond as soon as possible." />
+  <PageHero photo="/photos/pdh-facade.webp" photoAlt="The PDH building" photoPos="center 40%" eyebrow="Contact us" title="Contact and directions" lead="Thank you for visiting Parañaque Doctors Hospital. Got questions or concerns? We’re here to help. Just reach out, and we’ll respond as soon as possible." />
 
   <section class="section">
     <div class="container grid grid-2">
@@ -24,10 +24,10 @@ const lines = [p.emergency, p.information, p.admitting, p.hmoHub, p.hr];
                 <tr>
                   <th scope="row">{l.label}{!l.confirmed && <> <ToConfirm note={l.note} /></>}</th>
                   <td><a href={`tel:${l.tel}`}>{l.display}</a></td>
-                  <td>{l.mobile ? <a href={`tel:${l.mobileTel}`}>{l.mobile}</a> : '—'}{'mobile2' in l && <><br /><a href={`tel:${l.mobile2Tel}`}>{l.mobile2}</a></>}</td>
+                  <td>{l.mobile ? <a href={`tel:${l.mobileTel}`}>{l.mobile}</a> : ''}</td>
                 </tr>
               ))}
-              <tr><th scope="row">Trunk lines</th><td><a href={`tel:${p.trunk.tel}`}>{p.trunk.display}</a></td><td>—</td></tr>
+              <tr><th scope="row">Trunk lines</th><td><a href={`tel:${p.trunk.tel}`}>{p.trunk.display}</a></td><td></td></tr>
             </tbody>
           </table>
         </div>
@@ -49,9 +49,7 @@ const lines = [p.emergency, p.information, p.admitting, p.hmoHub, p.hr];
       <div id="directions">
         <h2>Directions</h2>
         <address style="font-style:normal;margin-bottom:12px"><strong>{site.name}</strong><br />{site.address.full}</address>
-        <div class="ph ph-4x3" role="img" aria-label="Map placeholder: PDH at 175 Doña Soledad Ave., Better Living Subdivision, Parañaque">
-          <span>Map placeholder — no third-party map scripts in the prototype</span>
-        </div>
+        <img src={site.photos.lobby.src} alt={site.photos.lobby.alt} width={site.photos.lobby.w} height={site.photos.lobby.h} loading="lazy" decoding="async" style="width:100%;height:auto;border-radius:var(--radius)" />
         <p style="margin-top:12px"><a class="btn btn-primary" href={`https://www.google.com/maps/search/?api=1&query=${mapsQuery}`} target="_blank" rel="noopener"><Icon name="pin" /> Open in Google Maps</a></p>
 
         <h3 style="margin-top:24px">Parking</h3>
@@ -59,7 +57,7 @@ const lines = [p.emergency, p.information, p.admitting, p.hmoHub, p.hr];
         <p class="small muted">{parking?.location}. {parking?.hours}.</p>
 
         <h3>Visiting hours</h3>
-        <p>Not published on the current site. <ToConfirm note={site.visiting.note} /></p>
+        <p>Please call Information for visiting hours. <ToConfirm note={site.visiting.note} /></p>
 
         <h3>Emergency</h3>
         <p>ER on the Ground Floor, open 24/7. <a href={`tel:${p.emergency.tel}`}>{p.emergency.display}</a> <ToConfirm note={p.emergency.note} /> · Mobile <a href={`tel:${p.emergency.mobileTel}`}>{p.emergency.mobile}</a></p>

@@ -1,16 +1,19 @@
 # PDH Website Prototype — project rules
 
-Website prototype for **Parañaque Doctors Hospital (PDH)**, a Level 2 private hospital in Parañaque City, Philippines, and a member of Metro Pacific Health. Iozera delivers a working site at the first meeting instead of a proposal. The site must look finished, work on a phone first, and be reusable as a template for other hospitals.
+Website prototype for **Parañaque Doctors Hospital (PDH)**, a private hospital in Parañaque City, Philippines, and a member of Metro Pacific Health. Iozera delivers a working site at the first meeting instead of a proposal. The site must look finished, work on a phone first, and be reusable as a template for other hospitals.
 
 Source of truth: `context/PDH_Claude_Code_Brief.md`. Supporting material: `context/PDH_Website_Text_Only.txt` (homepage scrape) and `context/full-site-crawl/` (413-page crawl of pdh.com.ph, 25 Nov 2026, including 288 doctor pages).
 
 ## Hard rules
 
-- **NEVER invent facts.** No made-up doctor names, HMOs, prices, hours, phone numbers or services. Use only what the context files state. Where something is missing or inconsistent, render the `<ToConfirm />` marker on the page and log it in `CONFIRM.md`.
-- **The ER number is not confirmed.** The Emergency button must appear on every page (header, mobile bottom bar, Kriss panel, footer) with a `[TO CONFIRM]` marker next to the number.
+- **NEVER invent facts.** No made-up doctor names, HMOs, prices, hours, phone numbers or services. Use only what the context files state. Where something is missing or inconsistent, keep a `<ToConfirm note="…" />` in the markup (it renders nothing) and log it in `CONFIRM.md`.
+- **The ER number is not confirmed by PDH.** The Emergency button must appear on every page (header, mobile bottom bar, Kriss panel, footer). Visible `[TO CONFIRM]` markers were switched off site-wide on 25 Nov 2026 at Sue's request (`src/components/ToConfirm.astro`, `visible = false`); open items are tracked only in `CONFIRM.md`.
 - Spell the name **"Parañaque Doctors Hospital"** — no apostrophe.
+- Do not state a DOH hospital level anywhere on the site (Sue, 25 Nov 2026) until PDH confirms it; `site.dohLevel` is null on purpose.
 - **No analytics, tracking pixels, cookies or third-party scripts.** The only scripts are small inline first-party ones (menu toggle, Kriss panel toggle, doctor filter, form stub, theme memory) and GSAP, which is installed from npm and bundled into the site at build time — never loaded from a CDN, never phoning home. Google Fonts are not used either; fonts are system stacks. Animations are skipped when the visitor prefers reduced motion. Decision confirmed by Sue on 25 Nov 2026: keep GSAP bundled locally; do not replace it with CSS-only motion unless PDH rules out libraries.
-- **Forms** collect only name, contact details, preferred channel and service needed. No symptoms, medical history or free-text condition field. Forms send nothing; on submit they show "Prototype: request not sent."
+- **Video.** PDH's Alagang PDH Ako video (Vimeo 1071704173) sits on the homepage as a click-to-load poster: the Vimeo player iframe (with `dnt=1`) is created only after the visitor presses Play, so the page itself loads nothing from Vimeo. Decided by Sue on 25 Nov 2026. Self-host the MP4 if PDH supplies it.
+- **No request form for now.** PDH's feedback (25 Nov 2026) asked that booking use approved hospital channels only; `/book/` lists call, Messenger, email and Admitting. If a form returns, it collects only name, contact details, preferred channel and service needed, never symptoms or medical history, and sends nothing.
+- **Mascot.** PDH's mascot is the Kriss launcher avatar only (`public/brand/pdh-mascot-face.webp`); it is not used in the hero (feedback, 25 Nov 2026).
 - **Kriss.ai is a placeholder slot only** (`src/components/Kriss.astro`). Do not build or fake an AI chatbot.
 - **No AI-generated photos of doctors or people.** Use only images PDH supplies in `assets/`; otherwise the labeled `<Placeholder />` component.
 - **Do not hotlink** images or files from pdh.com.ph. Links to article pages on pdh.com.ph are fine.
@@ -22,13 +25,13 @@ Source of truth: `context/PDH_Claude_Code_Brief.md`. Supporting material: `conte
 - Every hospital fact lives in `src/data/*.json`, never in page markup. Swapping the data files produces another hospital's site.
 - Each data file has a `_note` saying where its content came from. Values the current site does not confirm carry `confirmed: false` or `sample: true`.
 - Content the current site lacks (packages, preparation notes, HMO process steps, PhilHealth steps) is a labeled sample: wrap it with `<Sample />` on the page.
-- `src/data/doctors.json` is generated: run `npm run extract` to rebuild it from the crawl. Do not hand-edit it.
+- `src/data/doctors.json` is generated: run `npm run extract` to rebuild it from the crawl. Do not hand-edit it. Doctor photos come from `src/data/doctor-photos.json` (slug → `/doctors/<slug>.webp`), which the extract script merges; the files in `public/doctors/` are the photos PDH publishes on its own doctor pages, nothing else.
 - When PDH confirms an item, update the JSON, remove the marker, and tick it off in `CONFIRM.md`.
 
 ## Stack
 
 - Astro 5, static output (`astro build` → `dist/`), no client-side framework. Sitemap via `@astrojs/sitemap`.
-- Three design directions share the same content: `/` (Option A, Minimal Editorial — scroll-driven layout after the MinimalGoods reference; the old Trust Blue homepage is kept unused in `src/components/home/HomeTrustBlue.astro`), `/option-b/` (Warm Care), `/option-c/` (Bold Modern). Tokens live under `[data-theme]` in `src/styles/global.css`; homepage layouts are `src/components/home/Home{A,B,C}.astro`. Inner pages follow the option picked on the prototype bar (stored in `localStorage`).
+- One design, "Calm Platform" (direction taken from terminal-industries.com: look only — floating pill nav, light grey bands, large calm type, rounded cards, black primary and PDH orange accent; no frame-sequence hero, scroll hijack or trackers). Tokens live in `:root` in `src/styles/global.css`; the homepage is `src/components/home/Home.astro`. The earlier three-option prototype (A Minimal Editorial / PDH brand, B Warm Care, C Bold Modern) was retired on 25 Nov 2026 at Sue's request.
 - Commands: `npm run dev` (http://localhost:4321), `npm run build`, `npm run preview`, `npm run extract`.
 - Site URL in `astro.config.mjs` is a placeholder until PDH chooses a domain.
 

@@ -1,55 +1,88 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import ToConfirm from '../components/ToConfirm.astro';
-import Sample from '../components/Sample.astro';
 import Icon from '../components/Icon.astro';
-import { packages, site } from '../lib/data';
-const published = packages.filter((p) => !p.sample);
-const samples = packages.filter((p) => p.sample);
-const info = site.phones.information;
+import { packages, packagesData, site } from '../lib/data';
+const c = packagesData.contacts;
 ---
-<Base title="Health packages" description={`Health and executive check-up packages at ${site.name}.`}>
-  <PageHero eyebrow="Our packages" title="Health packages" lead="Bundled check-ups at one price, by appointment. PDH publishes its packages as banners on the current site; the ones we could read are listed first, followed by sample layouts for the rest." />
+<Base title="Health packages and promos" description={`Executive check-ups, prenatal, thyroid, heart, hypertension, lipid and kidney packages, diagnostic prices and hemodialysis rates at ${site.name}, as published by PDH.`}>
+  <PageHero photo="/services/multi-diagnostic-center.webp" photoAlt="Echo room at the PDH Multi-Diagnostic Center" photoPos="center 45%" eyebrow="Our packages" title="Health packages and promos" lead="Bundled tests at one price. Every package, inclusion and price below is as published on PDH’s current homepage.">
+    <p class="note-box" style="margin-top:16px">{packagesData.priceNote} Pay with {packagesData.payment.slice(0, 4).join(', ')}; HMO accepted.</p>
+  </PageHero>
 
-  {published.length > 0 && (
-    <section class="section">
-      <div class="container">
-        <h2>Published by PDH</h2>
-        <div class="grid grid-3">
-          {published.map((p) => (
-            <article class="card">
-              <span class="icon-circle"><Icon name="clipboard" /></span>
-              <h3 style="font-size:1.2rem">{p.name}</h3>
-              <p><strong>{p.price}</strong> <ToConfirm note={p.source} /></p>
-              <ul class="small" style="margin:12px 0">{p.includes.map((i) => <li>{i}</li>)}</ul>
-              <p class="small muted">{p.note}</p>
-              <p class="small">Inquiries: <a href={`tel:${info.tel}`}>{info.display}</a> or <a href={`tel:${info.mobileTel}`}>{info.mobile}</a></p>
-              <a class="btn btn-primary btn-sm" href={`/book/?service=package-${p.slug}`}>Request this package</a>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
+  <section class="section">
+    <div class="container grid grid-3">
+      {packages.map((p) => (
+        <article class="card pkg" id={p.slug}>
+          <div class="pkg-head">
+            {p.cutout && <img class="pkg-cutout" src={p.cutout} alt="" loading="lazy" decoding="async" />}
+            <p class="eyebrow" style="margin-bottom:4px">{p.category}</p>
+            <h2 style="font-size:1.2rem">{p.name}</h2>
+            <p class="pkg-price">{p.priceLabel}</p>
+          </div>
+          {p.tiers && (
+            <div class="pkg-tiers">
+              {p.tiers.map((t) => (
+                <div class="pkg-tier">
+                  <p class="pkg-tier_h"><strong>{t.name}</strong> <span>{t.priceLabel}</span></p>
+                  <ul class="small">{t.includes.map((i) => <li>{i}</li>)}</ul>
+                </div>
+              ))}
+            </div>
+          )}
+          {p.items && (
+            <table class="table small" style="margin:8px 0">
+              <tbody>{p.items.map((i) => <tr><td>{i.name}</td><td style="text-align:right;white-space:nowrap"><strong>{i.priceLabel}</strong></td></tr>)}</tbody>
+            </table>
+          )}
+          {p.includes.length > 0 && <ul class="small" style="margin:8px 0">{p.includes.map((i) => <li>{i}</li>)}</ul>}
+          {p.terms && <details class="acc" style="margin:8px 0"><summary>Terms and conditions</summary><div class="body"><ul class="small" style="margin:8px 0 0">{p.terms.map((t) => <li>{t}</li>)}</ul></div></details>}
+          {p.note && <p class="small muted">{p.note}</p>}
+          <div class="actions pkg-actions" style="margin-top:auto">
+            <a class="btn btn-primary btn-sm" href={`/book/?service=package-${p.slug}`}><Icon name="calendar" /> Book</a>
+            <a class="btn btn-outline btn-sm" href={`tel:${c.main.tel}`} title={`${c.main.display.replace('local 7000', p.contactLocal)}`}><Icon name="phone" /> Call {p.contactLocal}</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
 
   <section class="section section-soft">
-    <div class="container">
-      <h2>More packages <Sample /></h2>
-      <p class="note-box" style="margin-bottom:24px">Names, inclusions and prices below are placeholders. <ToConfirm note="PDH to supply the real package list and prices" /></p>
-      <div class="grid grid-3">
-        {samples.map((p) => (
-          <article class="card">
-            <span class="icon-circle"><Icon name="clipboard" /></span>
-            <h3 style="font-size:1.2rem">{p.name} <Sample /></h3>
-            <p class="meta">{p.audience}</p>
-            <ul class="small" style="margin:12px 0">{p.includes.map((i) => <li>{i}</li>)}</ul>
-            <p class="small muted">{p.note}</p>
-            <p><strong>Price:</strong> <ToConfirm note="Prices are never invented; PDH to supply" /></p>
-            <a class="btn btn-primary btn-sm" href={`/book/?service=package-${p.slug}`}>Request this package</a>
-          </article>
-        ))}
+    <div class="container grid grid-2">
+      <div>
+        <h2 style="font-size:1.3rem">For inquiries</h2>
+        <p>{c.main.display}: <a href={`tel:${c.main.tel}`}>call</a><br />
+        {c.mobiles.map((m, i) => <>{i > 0 && ' · '}<a href={`tel:${m.tel}`}>{m.display}</a></>)}<br />
+        <a href={`mailto:${c.email}`}>{c.email}</a></p>
+        <p class="small muted">Each slide names its own local number: 7000 for most packages, 8107 for screening packages, 8211 for rehabilitation.</p>
+      </div>
+      <div>
+        <h2 style="font-size:1.3rem">Using PhilHealth or an HMO?</h2>
+        <p class="small">Hemodialysis pricing is inclusive of PhilHealth. For HMO coverage of a package, check with the <a href="/hmo-philhealth/">HMO Hub</a> before your visit. Promo packages marked “cash basis only” are not covered.</p>
       </div>
     </div>
   </section>
+
+  <style>
+    /* The model from PDH's promo slide lives in a tinted header band beside the name and price;
+       the inclusions below sit on plain white so nothing overlaps the text */
+    .pkg { display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .pkg-head { position: relative; margin: -20px -20px 14px; padding: 22px 44% 14px 20px; min-height: 200px; display: flex; flex-direction: column; justify-content: flex-end;
+      background: linear-gradient(135deg, var(--pdh-teal-tint) 0%, #f3fafa 60%, #fff 100%); border-bottom: 1px solid var(--line); }
+    .pkg-head > :not(.pkg-cutout) { position: relative; z-index: 1; margin-top: 0; }
+    .pkg-head .pkg-price { margin-bottom: 0; }
+    .pkg-cutout { position: absolute; z-index: 0; right: 0; bottom: 0; height: 200px; width: auto; max-width: 60%; object-fit: contain; object-position: right bottom; pointer-events: none;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 18%, #000 40%); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 18%, #000 40%); }
+    .pkg:not(:has(.pkg-cutout)) .pkg-head { padding-right: 20px; min-height: 0; }
+    .pkg-actions { position: relative; z-index: 1; }
+    /* between 900 and 1099px three columns are too tight for a model beside the copy: two columns instead */
+    @media (min-width: 900px) and (max-width: 1099px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 639px) { .pkg-head { padding-right: 44%; min-height: 190px; } .pkg-cutout { height: 190px; } }
+    .pkg-price { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 1.6rem; color: var(--accent-text); margin: 0 0 8px; letter-spacing: -0.02em; }
+    .pkg-tiers { display: grid; gap: 8px; margin: 4px 0 8px; }
+    .pkg-tier { border: 1px solid var(--line); padding: 10px 12px; border-radius: var(--radius-sm); }
+    .pkg-tier_h { display: flex; justify-content: space-between; gap: 12px; margin: 0 0 4px; }
+    .pkg-tier_h span { color: var(--accent-text); font-weight: 700; }
+    .pkg-tier ul { margin: 0; padding-left: 1.2em; }
+  </style>
 </Base>

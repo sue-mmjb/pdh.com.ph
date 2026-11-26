@@ -4,10 +4,13 @@ import PageHero from '../components/PageHero.astro';
 import ToConfirm from '../components/ToConfirm.astro';
 import Sample from '../components/Sample.astro';
 import Icon from '../components/Icon.astro';
+import HmoMarquee from '../components/HmoMarquee.astro';
+import ScheduleTable from '../components/ScheduleTable.astro';
+import { serviceScheduleRows } from '../lib/data';
 import { hmo, site } from '../lib/data';
 ---
 <Base title="HMO & PhilHealth" description={`Accepted HMOs, HMO Hub location and hours, online approval, and PhilHealth at ${site.name}.`}>
-  <PageHero eyebrow="HMO & PhilHealth" title="HMO and PhilHealth help" lead="PDH is accredited by PhilHealth and the HMOs below. The HMO Hub on the Ground Floor handles approvals, or request approval online before you come." />
+  <PageHero photo="/services/facility-hmo-hub.webp" photoAlt="The HMO Hub windows at PDH" photoPos="center 45%" eyebrow="HMO & PhilHealth" title="HMO and PhilHealth help" lead="PDH is accredited by PhilHealth and the HMOs below. The HMO Hub on the Ground Floor handles approvals, or request approval online before you come." />
 
   <section class="section">
     <div class="container grid grid-2">
@@ -17,7 +20,7 @@ import { hmo, site } from '../lib/data';
         <p>{hmo.hub.summary}</p>
         <dl class="dl">
           <dt>Location</dt><dd>{hmo.hub.location}</dd>
-          <dt>Hours</dt><dd>{hmo.hub.hours}</dd>
+          <dt>Hours</dt><dd><ScheduleTable rows={serviceScheduleRows(hmo.hub.hours)} compact /></dd>
           <dt>Phone</dt><dd><a href={`tel:${site.phones.hmoHub.tel}`}>{hmo.hub.phone}</a> · <a href={`tel:${site.phones.hmoHub.mobileTel}`}>{hmo.hub.mobile}</a></dd>
         </dl>
       </div>
@@ -43,8 +46,9 @@ import { hmo, site } from '../lib/data';
 
   <section class="section">
     <div class="container">
-      <h2>Accepted HMOs <ToConfirm note="Names taken from the logos on the current homepage; confirm the official list with PDH" /></h2>
-      <p class="muted">Shown as text so patients, screen readers and search engines can read them. Each doctor’s profile also lists the HMOs they accept.</p>
+      <h2>Accepted HMOs</h2>
+      <HmoMarquee />
+      <p class="muted" style="margin-top:16px">Also listed as text so patients, screen readers and search engines can read them. Each doctor’s profile also lists the HMOs they accept.</p>
       <ul class="cols-3">{hmo.partners.map((p) => <li>{p}</li>)}</ul>
     </div>
   </section>
@@ -54,7 +58,7 @@ import { hmo, site } from '../lib/data';
       <div>
         <h2>PhilHealth</h2>
         <p>{hmo.philhealth.statement}</p>
-        <p class="muted">PhilHealth benefit details, case rates and required forms are not on the current site. <ToConfirm note="PhilHealth process details to be supplied by PDH" /></p>
+        <p class="muted">For PhilHealth benefit details, case rates and required forms, ask at Admitting or the HMO Hub. <ToConfirm note="PhilHealth process details to be supplied by PDH" /></p>
       </div>
       <div class="card">
         <h3 style="font-size:1.05rem">What to bring <Sample /></h3>

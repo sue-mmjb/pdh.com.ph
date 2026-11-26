@@ -4,53 +4,111 @@ import PageHero from '../../components/PageHero.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import ToConfirm from '../../components/ToConfirm.astro';
 import Icon from '../../components/Icon.astro';
-import { services, namedOnlyOnSite, specialtyGroups, rooms, site } from '../../lib/data';
+import { services, namedOnlyOnSite, specialtyGroups, rooms, site, groupByFloor } from '../../lib/data';
 const always = services.filter((s) => s.hours === 'Open 24/7');
 const scheduled = services.filter((s) => s.hours && s.hours !== 'Open 24/7');
 const tbd = services.filter((s) => !s.hours);
+// What patients come for, in their own words, each pointing at the PDH service that provides it
+const needs = [
+  ['Emergency', 'emergency-room'], ['Laboratory test', 'laboratory'], ['X-ray or CT scan', 'radiology'], ['Heart tests (ECG, echo)', 'multi-diagnostic-center'],
+  ['Pregnancy ultrasound', 'ob-ultrasound'], ['Dialysis', 'hemodialysis-center'], ['Physical therapy', 'physical-medicine-rehabilitation'], ['Eye check', 'eye-center'],
+  ['Dental', 'dental-services'], ['Medicines', 'pharmacy'], ['See a doctor', 'outpatient-clinics'], ['Being admitted', 'admitting'], ['Medical records', 'medical-records'],
+].filter(([, slug]) => services.some((s) => s.slug === slug));
+const az = [...services].sort((a, b) => a.name.localeCompare(b.name));
 ---
 <Base title="Services" description={`Emergency, laboratory, radiology, nuclear medicine, dialysis, rehabilitation, eye, dental and more at ${site.name}. Floors, hours and what to bring.`}>
-  <PageHero eyebrow="Our services" title="Services and departments" lead="Every service below is listed on PDH’s current site with its floor and hours. Open a service for what it covers, which doctors to see, and how to prepare." />
+  <PageHero photo="/services/laboratory.webp" photoAlt="The Laboratory at PDH" photoPos="center 55%" eyebrow="Our services" title="Services and departments" lead="Every service below is listed on PDH’s current site with its floor and hours. Open a service for what it covers, which doctors to see, and how to prepare." />
 
   <section class="section">
     <div class="container">
-      <h2>Open 24/7</h2>
-      <div class="grid grid-3">{always.map((s) => <ServiceCard service={s} compact />)}</div>
-    </div>
-  </section>
+      <form class="svc-search" id="svc-search" role="search" action="/services/" method="get">
+        <label for="svc-q">Find a service by name or need</label>
+        <div class="svc-search_row">
+          <input id="svc-q" name="q" type="search" list="svc-suggest" placeholder="e.g. dialysis, x-ray, heart, baby" autocomplete="off" />
+          <datalist id="svc-suggest"><option value="Emergency Room"></option><option value="Laboratory"></option><option value="Radiology"></option><option value="Pharmacy"></option><option value="Hemodialysis"></option><option value="Physical Medicine and Rehabilitation"></option><option value="Eye Center"></option><option value="Dental Services"></option><option value="OB Ultrasound"></option><option value="Multi-Diagnostic Center"></option><option value="ICU"></option><option value="NICU"></option><option value="Admitting"></option><option value="Medical Records"></option><option value="Animal Bite Center"></option><option value="Nuclear Medicine"></option></datalist>
+          <button class="btn btn-primary" type="submit">Search</button>
+          <button class="btn btn-outline" type="reset" id="svc-reset">Clear</button>
+        </div>
+        <p class="results-count" id="svc-count" aria-live="polite">Showing all {services.length} services</p>
+      </form>
+      <p class="small muted" style="margin:4px 0 6px">Common needs</p>
+      <ul class="pill-list needs" id="svc-needs">
+        {needs.map(([label, slug]) => <li><a href={`/services/${slug}/`}>{label}</a></li>)}
+      </ul>
 
-  <section class="section">
-    <div class="container">
-      <div class="card">
-        <h2 style="font-size:1.3rem">Online lab results: {site.labPortal.name}</h2>
-        <p>{site.labPortal.intro}</p>
-        <ul class="small" style="margin:12px 0">{site.labPortal.facts.map((f) => <li><strong>{f.label}:</strong> {f.value}</li>)}</ul>
-        <a class="btn btn-outline" href={site.labPortal.url} target="_blank" rel="noopener"><Icon name="external" /> Open the results portal</a>
+      <h2 style="margin-top:28px">All services</h2>
+      <p class="muted" style="max-width:60ch">Each card shows the floor, hours and contact as published by PDH. Open one for what it covers and how to prepare.</p>
+      <div class="grid grid-3" id="svc-all">{az.map((s) => <ServiceCard service={s} />)}</div>
+
+      <div id="svc-floors">
+        <h2 style="margin-top:40px;font-size:1.3rem">Already in the building? Browse by floor</h2>
+        {groupByFloor(services).map(([floor, list]) => (
+          <div class="floor">
+            <div class="floor_head"><h3 class="floor_label">{floor}</h3><span class="floor_rule"></span><span class="floor_count">{list.length} {list.length === 1 ? 'service' : 'services'}</span></div>
+            <ul class="pill-list">{list.map((s) => <li><a href={`/services/${s.slug}/`}>{s.name}</a></li>)}</ul>
+          </div>
+        ))}
       </div>
+      <p class="note-box" id="svc-empty" hidden>No service matches. Try another word (for example dialysis, x-ray, heart, baby) or clear the search. For anything else, call Information.</p>
+      <p class="muted small" style="margin-top:24px">Also at PDH: {namedOnlyOnSite.join(', ')}. Call Information for details. <ToConfirm note="No description, floor or hours on the current site" /></p>
     </div>
   </section>
-
-  <section class="section section-soft">
-    <div class="container">
-      <h2>Clinics and centers</h2>
-      <div class="grid grid-3">{scheduled.map((s) => <ServiceCard service={s} />)}</div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2>Also listed by PDH <ToConfirm note="These appear on the current site without a floor or schedule" /></h2>
-      <div class="grid grid-3">{tbd.map((s) => <ServiceCard service={s} compact />)}</div>
-      <p class="muted small" style="margin-top:16px">Named on the current site with no details yet: {namedOnlyOnSite.join(', ')}. <ToConfirm note="No description, floor or hours on the current site" /></p>
-    </div>
-  </section>
+  <script is:inline>
+    (function () {
+      var q = document.getElementById('svc-q'), count = document.getElementById('svc-count'), empty = document.getElementById('svc-empty');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.svc-card[data-text]'));
+      var floors = document.getElementById('svc-floors'), needs = document.getElementById('svc-needs');
+      var total = cards.length;
+      // Common patient words map to the service names PDH uses (dialysis -> Hemodialysis Center)
+      var SYN = {"heart":["multi-diagnostic","cardio","ecg","echo"],"cardio":["multi-diagnostic","cardio"],"ecg":["multi-diagnostic"],"echo":["multi-diagnostic","ultrasound"],"dialysis":["hemodialysis"],"kidney":["hemodialysis","nephrology"],"lab":["laboratory"],"labs":["laboratory"],"blood":["laboratory"],"test":["laboratory","multi-diagnostic"],"tests":["laboratory","multi-diagnostic"],"medicine":["pharmacy"],"medicines":["pharmacy"],"drug":["pharmacy"],"drugs":["pharmacy"],"prescription":["pharmacy"],"emergency":["emergency"],"er":["emergency"],"accident":["emergency"],"eye":["eye center","ophthalmology"],"eyes":["eye center"],"glasses":["eye center"],"teeth":["dental"],"tooth":["dental"],"dentist":["dental"],"xray":["radiology"],"x-ray":["radiology"],"ct":["radiology"],"scan":["radiology"],"mri":["radiology"],"imaging":["radiology"],"mammogram":["radiology"],"therapy":["physical medicine","rehabilitation"],"rehab":["rehabilitation"],"physio":["rehabilitation"],"stroke":["rehabilitation","neurology"],"baby":["nicu","ob ultrasound","pediatric"],"newborn":["nicu"],"pregnant":["ob ultrasound","obstetrics"],"pregnancy":["ob ultrasound","obstetrics"],"ultrasound":["ob ultrasound","radiology"],"icu":["intensive","icu"],"intensive":["intensive"],"child":["picu","pediatric"],"children":["picu","pediatric"],"chemo":["chemo"],"cancer":["chemo","oncology"],"bite":["animal bite"],"dog":["animal bite"],"cat":["animal bite"],"rabies":["animal bite"],"vaccine":["animal bite"],"records":["medical records"],"certificate":["medical records"],"results":["laboratory","medical records"],"admission":["admitting"],"admitted":["admitting"],"room":["admitting"],"rooms":["admitting"],"breastfeeding":["breastfeeding"],"nursing":["breastfeeding"],"lung":["pulmonary"],"lungs":["pulmonary"],"breathing":["pulmonary"],"nuclear":["nuclear medicine"],"thyroid":["nuclear medicine","laboratory"],"operation":["operating room"],"surgery":["operating room"],"clinic":["outpatient"],"consultation":["outpatient"],"consult":["outpatient"],"doctor":["outpatient"],"complaint":["patient experience"],"feedback":["patient experience"]};
+      function norm(s) { return (s || '').toLowerCase().replace(/[^a-z0-9 -]/g, ' ').trim(); }
+      function hit(hay, w) { if (hay.indexOf(w) >= 0) return true; var alts = SYN[w] || SYN[w.replace(/s$/, '')] || []; return alts.some(function (t) { return hay.indexOf(t) >= 0; }); }
+      function apply() {
+        var qq = norm(q.value), shown = 0;
+        cards.forEach(function (c) {
+          var hay = c.getAttribute('data-text');
+          var ok = !qq || qq.split(' ').every(function (w) { return hit(hay, w); });
+          c.style.display = ok ? '' : 'none';
+          if (ok) shown++;
+        });
+        floors.style.display = qq ? 'none' : ''; needs.style.display = qq ? 'none' : '';
+        count.textContent = shown === total ? 'Showing all ' + total + ' services' : 'Showing ' + shown + ' of ' + total + ' services';
+        empty.hidden = shown !== 0;
+      }
+      try { var p = new URLSearchParams(location.search); if (p.get('q')) q.value = p.get('q'); } catch (e) {}
+      q.addEventListener('input', apply);
+      document.getElementById('svc-search').addEventListener('submit', function (e) { e.preventDefault(); apply(); });
+      document.getElementById('svc-reset').addEventListener('click', function () { setTimeout(apply, 0); });
+      apply();
+    })();
+  </script>
+  <style>
+    .svc-search { margin-bottom: 8px; }
+    .svc-search label { display: block; font-weight: 600; margin-bottom: 6px; }
+    .svc-search_row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .svc-search_row input { flex: 1 1 240px; min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 12px; font: inherit; }
+    /* Specialty cards: a PDH photo band on top, zooming gently on hover, like the service cards */
+    .spec-card { padding-top: 0; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+    .spec-card:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,92,94,0.14); }
+    .spec-card_band { display: block; height: 120px; margin: 0 -20px 12px; overflow: hidden; background: var(--pdh-teal-tint); }
+    .spec-card_photo { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.45s cubic-bezier(.2,.7,.2,1); }
+    .spec-card:hover .spec-card_photo { transform: scale(1.06); }
+    @media (prefers-reduced-motion: reduce) { .spec-card, .spec-card_photo { transition: none; } .spec-card:hover .spec-card_photo { transform: none; } }
+    .needs { margin-bottom: 4px; }
+    .floor { margin-top: 20px; }
+    .floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+    .floor_label { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pdh-teal-text); margin: 0; white-space: nowrap; }
+    .floor_rule { flex: 1; height: 1px; background: var(--line); }
+    .floor_count { font-size: 0.8rem; color: var(--ink-soft); white-space: nowrap; }
+  </style>
 
   <section class="section section-soft">
     <div class="container">
       <h2>Doctors by specialty</h2>
       <div class="grid grid-4">
         {specialtyGroups.map((g) => (
-          <a class="card card-link" href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}>
+          <a class="card card-link spec-card" href={`/doctors/?dept=${encodeURIComponent(g.departments[0])}`}>
+            {g.image && <span class="spec-card_band"><img class="spec-card_photo" src={g.image} alt="" width="430" height="240" loading="lazy" decoding="async" style={`object-position:${g.imagePos || 'center 45%'}`} /></span>}
             <h3 style="font-size:1.05rem">{g.name}</h3>
             <p class="meta">{g.blurb}</p>
           </a>
