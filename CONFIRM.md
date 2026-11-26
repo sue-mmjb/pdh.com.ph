@@ -119,3 +119,6 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 - Service categories (Emergency and critical care, Tests and imaging, Treatment and therapy, Clinics and consultations, Admission and patient support) are Iozera's grouping of PDH's service list. PDH to confirm the grouping, in particular Nuclear Medicine (tests) and Pulmonary (treatment).
 - Ultrasound: search results label diagnostic scans and ultrasound therapy differently. Wording is ours; PDH to confirm.
 - KRISS: the launcher is still a placeholder that links to the separate demo. Embedding the approved assistant needs the Kriss team's integration details and sign-off.
+- Doctor contact numbers: 107 doctor pages on the current site end with a cut-off "local 2". The prototype shows the trunk line only for those doctors; PDH to supply the full local numbers.
+- ER and Admitting service cards now show their own lines from PDH's Contact page (8776 0645 local 8106; 8776 0646 local 8728). Other departments show the trunk line until PDH supplies verified numbers.
+- Noon times written "12:00nn" / "12:30NN" on the current site are shown as "12:00 PM" / "12:30 PM".

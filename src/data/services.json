@@ -1,5 +1,5 @@
 {
-  "_note": "Service photos (public/services/, copies in assets/services/) are PDH's own, cropped from screenshots of pdh.com.ph/our-services supplied by Sue on 26 Nov 2026; PDH to supply originals. Clinical services and departments from pdh.com.ph/our-services (crawled 25 Nov 2026). 'offered' lists come from each service's own page. 'preparation' is NOT on the current site: every entry is a labeled sample. 'doctorMatch' maps a service to doctor departments/specializations in doctors.json. A null location or hours means the current site shows TBD. 'programs', 'priceLine', 'hoursAlt' and 'contactLocal' come from the homepage carousel slides (Nov 2026). 'illustration' is a teal line illustration supplied by Sue (assets/icons/service-illustrations-sheet.webp). 'category' groups services by what a patient needs (Iozera's grouping of PDH's own service list, not a PDH classification). 'clarify' holds a one-line note shown on a card when a search word could mean different things (ultrasound scan vs ultrasound therapy).",
+  "_note": "Service photos (public/services/, copies in assets/services/) are PDH's own, cropped from screenshots of pdh.com.ph/our-services supplied by Sue on 26 Nov 2026; PDH to supply originals. Clinical services and departments from pdh.com.ph/our-services (crawled 25 Nov 2026). 'offered' lists come from each service's own page. 'preparation' is NOT on the current site: every entry is a labeled sample. 'doctorMatch' maps a service to doctor departments/specializations in doctors.json. A null location or hours means the current site shows TBD. 'programs', 'priceLine', 'hoursAlt' and 'contactLocal' come from the homepage carousel slides (Nov 2026). 'illustration' is a teal line illustration supplied by Sue (assets/icons/service-illustrations-sheet.webp). 'category' groups services by what a patient needs (Iozera's grouping of PDH's own service list, not a PDH classification). 'clarify' holds a one-line note shown on a card when a search word could mean different things (ultrasound scan vs ultrasound therapy). 'phoneKey' points a service at its own line in site.json phones (from PDH's Contact page) so the card shows the department number instead of the trunk line.",
   "services": [
     {
       "slug": "emergency-room",
@@ -18,7 +18,8 @@
       "icon": "emergency",
       "image": "/services/emergency-room.webp",
       "illustration": "/icons/services/emergency-room.png",
-      "category": "emergency"
+      "category": "emergency",
+      "phoneKey": "emergency"
     },
     {
       "slug": "radiology",
@@ -568,7 +569,8 @@
       "featured": false,
       "icon": "clipboard",
       "image": "/services/admitting.webp",
-      "category": "support"
+      "category": "support",
+      "phoneKey": "admitting"
     },
     {
       "slug": "chemo-infusion-center",

@@ -3,6 +3,8 @@ import Icon from './Icon.astro';
 import { shortHours, site, categoryName, type Service } from '../lib/data';
 interface Props { service: Service; compact?: boolean; }
 const { service: s, compact = false } = Astro.props;
+// A department's own line where PDH publishes one (ER, Admitting); otherwise the trunk line
+const dept = s.phoneKey ? (site.phones as Record<string, { display: string; tel: string }>)[s.phoneKey] : null;
 ---
 <a class="card card-link svc-card" href={`/services/${s.slug}/`} data-text={[s.name, s.short, s.summary, s.location, ...(s.offered || [])].filter(Boolean).join(' ').toLowerCase()}>
   <span class="svc-card_band">
@@ -16,7 +18,7 @@ const { service: s, compact = false } = Astro.props;
   {s.clarify && Object.entries(s.clarify).map(([term, text]) => <p class="svc-card_clarify" data-term={term} hidden>{text}</p>)}
   {!compact && <p class="muted small">{s.summary}</p>}
   <p class="meta">{s.location ? `${s.location} · ` : ''}{shortHours(s)}</p>
-  {!compact && <p class="meta svc-card_tel">{site.phones.trunk.display}{s.contactLocal ? ` · ${s.contactLocal}` : ''}</p>}
+  {!compact && <p class="meta svc-card_tel">{dept ? dept.display : `${site.phones.trunk.display}${s.contactLocal ? ` · ${s.contactLocal}` : ''}`}</p>}
 </a>
 
 <style>

@@ -31,7 +31,7 @@ const isER = s.slug === 'emergency-room';
         <dl class="dl" style="margin-bottom:24px">
           <dt>Floor</dt><dd>{s.location ?? <>Call for location <ToConfirm note="The current site shows TBD for this service's location" /></>}</dd>
           <dt>Hours</dt><dd><ScheduleTable rows={serviceScheduleRows(s.hours)} compact />{s.hoursAlt && <> <ToConfirm note={s.hoursAlt} /></>}</dd>
-          <dt>Contact</dt><dd><a href={`tel:${site.phones.trunk.tel}`}>{site.phones.trunk.display}</a>{s.contactLocal && <> · appointments: {site.phones.information.display.replace('local 7000', s.contactLocal)}</>}</dd>
+          <dt>Contact</dt><dd>{s.phoneKey ? <a href={`tel:${(site.phones as any)[s.phoneKey].tel}`}>{(site.phones as any)[s.phoneKey].display}</a> : <a href={`tel:${site.phones.trunk.tel}`}>{site.phones.trunk.display}</a>}{s.contactLocal && <> · appointments: {site.phones.information.display.replace('local 7000', s.contactLocal)}</>}</dd>
           {s.priceLine && <><dt>Price</dt><dd>{s.priceLine}</dd></>}
         </dl>
 

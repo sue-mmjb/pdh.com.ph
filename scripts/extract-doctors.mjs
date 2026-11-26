@@ -65,7 +65,8 @@ for (const file of files) {
     specialization,
     schedule: clean(get('- Schedule:')) || unlabeledSchedule,
     room: clean(get('- Room Number:')),
-    contact: clean(get('- Contact Number:')),
+    // 107 source pages end the number with a cut-off "local 2"; keep the trunk line only (logged in CONFIRM.md)
+    contact: (clean(get('- Contact Number:')) || '').replace(/,\s*local\s*\d{0,2}$/i, '') || null,
     hmos,
     hmoNote,
     photo: PHOTOS[slug] ?? null,

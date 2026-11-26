@@ -98,7 +98,7 @@ const DAY_WORDS: [RegExp, string][] = [
   [/Mon–Fri/g, 'Mon – Fri'], [/Sat–Sun/g, 'Sat – Sun'], [/Saturday/i, 'Sat'], [/Sunday/i, 'Sun'],
 ];
 const shortDays = (d: string) => DAY_WORDS.reduce((acc, [re, to]) => acc.replace(re, to), d.trim());
-const tidyTime = (t: string) => t.replace(/\s*-\s*/g, ' – ').replace(/\s+to\s+/i, ' – ').replace(/(\d)(am|pm)/gi, (_m, n, ap) => `${n} ${ap.toUpperCase()}`).replace(/\b(am|pm)\b/g, (m) => m.toUpperCase()).trim();
+const tidyTime = (t: string) => t.replace(/\s*-\s*/g, ' – ').replace(/\s+to\s+/i, ' – ').replace(/(\d)(am|pm)/gi, (_m, n, ap) => `${n} ${ap.toUpperCase()}`).replace(/\b(am|pm)\b/g, (m) => m.toUpperCase()).replace(/(12:\d\d)\s*nn\b/gi, '$1 PM').trim();
 
 /** Turn a service's published hours string into per-day rows. Falls back to the string itself. */
 export function serviceScheduleRows(hours: string | null | undefined): ScheduleRow[] {
