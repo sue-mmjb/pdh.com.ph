@@ -13,8 +13,8 @@
   --sample-bg: #e8f0fe;
   --sample-ink: #1a3d7c;
   --focus: #1a73e8;
-  --max: 1200px;
-  --gutter: 16px;
+  --max: 1440px;
+  --gutter: 18px;
   --tap: 44px;
   --header-h: 64px;
   --optionbar-h: 0px;
@@ -66,13 +66,15 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.55;
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  line-height: 1.6;
   color: var(--ink);
   background: var(--bg);
   padding-top: calc(var(--optionbar-h));
   padding-bottom: var(--bottombar-h);
 }
+@media (min-width: 640px) { :root { --gutter: 28px; } }
+@media (min-width: 1200px) { :root { --gutter: 40px; } }
 @media (min-width: 900px) { body { padding-bottom: 0; } }
 img, svg { max-width: 100%; display: block; }
 a { color: var(--primary); text-underline-offset: 0.15em; }
@@ -86,7 +88,7 @@ h3 { font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem); }
 h4 { font-size: 1.05rem; }
 p { margin: 0 0 1em; }
 ul, ol { padding-left: 1.25em; }
-.lead { font-size: 1.15rem; color: var(--ink-soft); max-width: 60ch; }
+.lead { font-size: 1.18rem; color: var(--ink-soft); max-width: 60ch; }
 .muted { color: var(--ink-soft); }
 .small { font-size: 0.9rem; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -316,7 +318,7 @@ details.acc .body { padding: 0 16px 16px; color: var(--ink-soft); }
 /* ---------- Calm Platform overrides (after base rules so they win) ---------- */
 /* Floating pill header: PDH teal with the orange rule, white nav, logo lockup */
 .site-header { background: transparent; border-bottom: 0; padding: 10px var(--gutter) 0; pointer-events: none; }
-.site-header .bar { pointer-events: auto; max-width: 1320px; margin: 0 auto; min-height: 60px; padding: 6px 8px 6px 12px; background: var(--pdh-teal); color: #ffffff; border-bottom: 3px solid var(--pdh-orange); border-radius: 999px; box-shadow: 0 8px 30px rgba(0,92,94,0.22); }
+.site-header .bar { pointer-events: auto; max-width: calc(var(--max) - 2 * var(--gutter)); margin: 0 auto; min-height: 60px; padding: 6px 8px 6px 12px; background: var(--pdh-teal); color: #ffffff; border-bottom: 3px solid var(--pdh-orange); border-radius: 999px; box-shadow: 0 8px 30px rgba(0,92,94,0.22); }
 .brand { color: #ffffff; }
 .brand-logo-wide { display: block; height: 42px; width: auto; }
 .brand-logo-square, .brand-text { display: none; }
