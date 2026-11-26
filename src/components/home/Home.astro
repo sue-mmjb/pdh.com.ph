@@ -4,7 +4,7 @@
 // black primary buttons and a single orange accent. Order follows the brief, task-first.
 // No frame-sequence hero, no scroll hijacking, no trackers: a photo slot with light parallax and
 // gentle reveals, skipped under reduced motion.
-import { site, hmo, news, services, specialtyGroups, doctors, featuredPackages, formatDate, groupByFloor, shortHours, serviceScheduleRows, displayName } from '../../lib/data';
+import { site, hmo, news, services, specialtyGroups, doctors, featuredPackages, formatDate, groupByCategory, shortHours, serviceScheduleRows, displayName } from '../../lib/data';
 import ScheduleTable from '../ScheduleTable.astro';
 import ToConfirm from '../ToConfirm.astro';
 import Sample from '../Sample.astro';
@@ -14,14 +14,9 @@ import HmoMarquee from '../HmoMarquee.astro';
 
 const er = site.phones.emergency;
 const info = site.phones.information;
-const always = services.filter((s) => s.hours === 'Open 24/7' && ['emergency-room', 'laboratory', 'radiology', 'pharmacy'].includes(s.slug));
-const clinics = services.filter((s) => ['multi-diagnostic-center', 'hemodialysis-center', 'eye-center', 'dental-services', 'ob-ultrasound', 'nuclear-medicine', 'physical-medicine-rehabilitation', 'outpatient-clinics'].includes(s.slug));
-// Floors with fewer than two featured services are combined into one "Upper floors" row,
-// with each card naming its own floor, so no floor header sits over a single card.
-const rawGroups = groupByFloor([...always, ...clinics]);
-const bigGroups = rawGroups.filter(([, l]) => l.length >= 2);
-const smallOnes = rawGroups.filter(([, l]) => l.length < 2).flatMap(([, l]) => l);
-const floorGroups: [string, typeof services][] = smallOnes.length ? [...bigGroups, ['Upper floors · 3rd to 7th', smallOnes]] : bigGroups;
+// Featured services grouped by what the patient needs; each card names its floor and hours
+const featuredSlugs = ['emergency-room', 'icu', 'nicu', 'operating-room', 'laboratory', 'radiology', 'multi-diagnostic-center', 'ob-ultrasound', 'hemodialysis-center', 'physical-medicine-rehabilitation', 'pulmonary', 'pharmacy', 'outpatient-clinics', 'eye-center', 'dental-services'];
+const careGroups = groupByCategory(featuredSlugs.map((slug) => services.find((x) => x.slug === slug)).filter((x) => !!x));
 // Real PDH people for the hero: doctors with photos PDH publishes, and PDH staff with patients from PDH's own slides
 const faces = doctors.filter((d) => d.photo).slice(0, 6);
 const people = [
@@ -34,7 +29,7 @@ const leadShort = site.hero.text.split('. ')[0] + '.';
 const entry = [
   { title: 'I need help now', text: 'The Emergency Room is on the Ground Floor and open 24/7. Call first if you can.', cta: 'Call the ER', href: `tel:${er.tel}`, cls: 'btn-emergency', art: '/services/emergency-room.webp', artAlt: 'The Emergency Room entrance at PDH', note: `${er.display} · mobile ${er.mobile}`, confirm: true },
   { title: 'I want to see a doctor', text: `${doctors.length} doctors in the directory with clinic schedules and room numbers. Outpatient clinics on the 3rd to 6th floors, by appointment.`, cta: 'Find a doctor', href: '/doctors/', cls: 'btn-primary', art: '/services/outpatient-clinics.webp', artAlt: 'The Outpatient Department desk at PDH', note: 'Search by name or specialty' },
-  { title: 'I’m being admitted', text: 'Admitting is on the Ground Floor, open 24/7. Bring a valid ID, your admitting order and PhilHealth or HMO documents.', cta: 'Rooms and admission', href: '/rooms-facilities/', cls: 'btn-outline', art: '/services/admitting.webp', artAlt: 'The Admitting Department desk at PDH', note: '94 beds · ward to suite' },
+  { title: 'I need a hospital service', text: 'Find laboratory tests, imaging, dialysis, rehabilitation and other services, with hours, locations and contact details.', cta: 'Find a service', href: '/services/', cls: 'btn-primary', art: '/photos/svc-ob-ultrasound.webp', artAlt: 'A patient having an ultrasound scan at PDH', note: 'Search by service or need' },
 ];
 // FAQ answers use only facts already published by PDH (see CONFIRM.md for sources).
 const faqs = [
@@ -49,14 +44,13 @@ const faqs = [
 <div class="cp" data-cp>
   <!-- 1 · Hero: headline, two equal searches (doctor and service), real PDH people -->
   <section class="cp-hero">
-    <img class="cp-hero_bg" src="/photos/hero-doctor.webp" alt="" width="977" height="1082" fetchpriority="high" decoding="async" />
+    <img class="cp-hero_bg" src="/photos/pillar-compassion.webp" alt="A PDH doctor with a patient at her bedside" width="1200" height="675" fetchpriority="high" decoding="async" />
     <div class="cp-hero_fade" aria-hidden="true"></div>
     <div class="cp-hero_glow" aria-hidden="true"></div>
     <div class="container cp-hero_grid">
       <div class="cp-hero_copy">
         <p class="eyebrow cp-reveal">Parañaque City · Member of {site.network.name}</p>
         <h1 class="cp-h1 cp-reveal">{site.hero.headline}.</h1>
-        <span class="cp-rule cp-hero_rule cp-reveal" aria-hidden="true"></span>
       </div>
       <div class="cp-hero_cardwrap cp-reveal">
         <div class="cp-hero_card">
@@ -142,13 +136,13 @@ const faqs = [
   <section class="cp-sec section-soft cp-band">
     <div class="container">
       <p class="eyebrow">Services</p>
-      <h2 class="cp-h2">One hospital, every department.</h2>
-      <p class="cp-sub">Open 24/7: ER, laboratory, radiology and pharmacy. Clinics and centers by schedule.</p>
-      {floorGroups.map(([floor, list]) => (
+      <h2 class="cp-h2">Find the care you need.</h2>
+      <p class="cp-sub">Explore our services, check their hours and find the right contact.</p>
+      {careGroups.map((g) => (
         <div class="cp-floor">
-          <div class="cp-floor_head"><span class="cp-floor_label">{floor}</span><span class="cp-floor_rule" data-cp-rule></span></div>
+          <div class="cp-floor_head"><h3 class="cp-floor_label">{g.name}</h3><span class="cp-floor_blurb">{g.blurb}</span></div>
           <div class="cp-svc">
-            {list.map((s) => (
+            {g.list.map((s) => (
               <a class="cp-svc_card cp-reveal" href={`/services/${s.slug}/`}>
                 <span class="cp-svc_band">
                   {s.image
@@ -157,7 +151,7 @@ const faqs = [
                   {s.status && <span class="cp-svc_soon">{s.status}</span>}
                 </span>
                 <strong class="cp-svc_name">{s.name}</strong>
-                <span class="cp-svc_meta">{floor.startsWith('Upper') && s.location ? `${s.location} · ` : ''}{shortHours(s)}</span>
+                <span class="cp-svc_meta">{s.location ? `${s.location} · ` : ''}{shortHours(s)}</span>
               </a>
             ))}
           </div>
@@ -273,17 +267,8 @@ const faqs = [
 <script>
   import { gsap } from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  import { heartbeatAll } from '../../scripts/heartbeat';
   const root = document.querySelector('[data-cp]');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // Heading rules: a heartbeat line as wide as the heading's text, under every section heading
-  if (root) {
-    root.querySelectorAll('.cp-h2').forEach((h) => {
-      const r = document.createElement('span'); r.className = 'cp-rule'; r.setAttribute('aria-hidden', 'true');
-      h.insertAdjacentElement('afterend', r);
-    });
-    heartbeatAll('.cp-rule', root);
-  }
   // Video: the Vimeo player is created only when the visitor presses play (dnt=1: no tracking cookies)
   root?.querySelectorAll('[data-cp-video]').forEach((box) => {
     const btn = box.querySelector('.cp-video_btn');
@@ -312,10 +297,6 @@ const faqs = [
       }
       gsap.fromTo(el, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: (i % 4) * 0.06, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
     });
-    // Floor rules draw from left to right as they scroll into view, shading from light green to orange.
-    root.querySelectorAll('[data-cp-rule]').forEach((r) => {
-      gsap.fromTo(r, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: r, start: 'top 92%', end: 'top 55%', scrub: 0.5 } });
-    });
     // Hero media: light parallax, the honest stand-in for the frame sequence
     const media = root.querySelector('[data-cp-parallax]');
     if (media) gsap.fromTo(media, { yPercent: -4 }, { yPercent: 4, ease: 'none', scrollTrigger: { trigger: media.parentElement, start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
@@ -336,30 +317,33 @@ const faqs = [
   :global(html.no-js) .cp-reveal, :global([data-theme]) .cp-reveal.is-visible { opacity: 1; }
   @media (prefers-reduced-motion: reduce) { .cp-reveal { opacity: 1; } }
 
-  .cp-hero { position: relative; overflow: hidden; padding: 40px 0 32px; background: #fbfbfa; }
+  .cp-hero { position: relative; overflow: hidden; padding: 0 0 32px; background: #fbfbfa; }
   /* PDH's own hero photo (doctor with stethoscope) as the backdrop, fading into the page on the text side */
-  .cp-hero_bg { position: absolute; top: 0; right: 0; height: 100%; width: auto; max-width: none; object-fit: cover; object-position: right top; pointer-events: none; }
-  .cp-hero_fade { position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, rgba(251,251,250,0.7) 0%, rgba(251,251,250,0.93) 30%, #fbfbfa 55%, #fbfbfa 100%); }
-  .cp-hero_copy, .cp-hero_more { text-shadow: 0 0 2px #fbfbfa, 0 0 14px rgba(251,251,250,0.9), 0 0 28px rgba(251,251,250,0.8); }
-  .cp-hero_copy .btn, .cp-hero_more .btn { text-shadow: none; }
+  /* Hero photo: a PDH doctor with her patient. Phones and tablets: a banner above the words. Desktop: on the
+     right, sized so both faces stay clear of the search card, fading into the page on its left and bottom edges. */
+  .cp-hero_bg { display: block; width: 100%; height: 290px; object-fit: cover; object-position: 62% 0%; pointer-events: none; }
+  .cp-hero_fade { position: absolute; left: 0; right: 0; top: 230px; height: 61px; pointer-events: none; background: linear-gradient(180deg, rgba(251,251,250,0) 0%, #fbfbfa 100%); }
+  .cp-hero_glow { display: none; }
   @media (min-width: 900px) {
-    .cp-hero_bg { height: 100%; }
-    .cp-hero_fade { background: linear-gradient(90deg, #fbfbfa 0%, #fbfbfa 40%, rgba(251,251,250,0.92) 52%, rgba(251,251,250,0.35) 64%, rgba(251,251,250,0) 76%), linear-gradient(180deg, rgba(251,251,250,0) 62%, #fbfbfa 100%); } }
+    .cp-hero_bg { position: absolute; top: 0; left: 44%; width: auto; max-width: none; height: clamp(400px, 42vw, 620px); object-position: left center; }
+    .cp-hero_fade { inset: 0; height: auto; background: linear-gradient(90deg, #fbfbfa 0%, #fbfbfa 45%, rgba(251,251,250,0) 60%), linear-gradient(180deg, rgba(251,251,250,0) calc(clamp(400px, 42vw, 620px) - 150px), #fbfbfa clamp(400px, 42vw, 620px)); }
+    .cp-hero_glow { display: block; }
+  }
+
   .cp-hero_glow { position: absolute; inset: 0; pointer-events: none;
     background: radial-gradient(55% 75% at 8% 0%, rgba(0,163,165,0.20), transparent 70%), radial-gradient(35% 50% at 100% 100%, rgba(255,116,2,0.10), transparent 70%); }
-  .cp-hero_grid { position: relative; display: grid; gap: 18px; grid-template-areas: "copy" "card" "more"; }
+  .cp-hero_grid { position: relative; display: grid; gap: 18px; margin-top: 8px; grid-template-areas: "copy" "card" "more"; }
   .cp-hero_copy { grid-area: copy; text-align: left; }
   .cp-hero_cardwrap { grid-area: card; }
   .cp-hero_more { grid-area: more; }
   @media (min-width: 900px) { .cp-hero { padding: 64px 0 40px; }
-    .cp-hero_grid { grid-template-columns: minmax(0, 800px) 1fr; grid-template-areas: "copy ." "card ." "more ."; row-gap: 18px; align-items: start; } }
+    .cp-hero_grid { grid-template-columns: minmax(0, min(800px, 56%)) 1fr; grid-template-areas: "copy ." "card ." "more ."; row-gap: 18px; align-items: start; } }
   .cp-h1 { font-size: clamp(2.6rem, 1.4rem + 3.6vw, 4.4rem); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600; max-width: 12ch; margin: 12px 0 0.3em; }
-  .cp-hero_rule { margin: 4px 0 0; }
   .cp-lead { max-width: 46ch; margin: 0 0 18px; font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem); color: var(--ink-soft); }
   /* The card: two equal searches, doctor and service */
   .cp-hero_card { display: grid; gap: 14px; padding: 20px; background: rgba(255,255,255,0.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(16,48,63,0.06); border-radius: 24px; box-shadow: 0 24px 60px rgba(0,92,94,0.14), 0 2px 0 #fff inset; }
-  @media (min-width: 900px) { .cp-hero_card { padding: 22px 24px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 16px; } .cp-hero_now { grid-column: 1 / -1; } }
+  @media (min-width: 900px) { .cp-hero_card { padding: 22px 24px; } }
+  @media (min-width: 1200px) { .cp-hero_card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 16px; } .cp-hero_now { grid-column: 1 / -1; } }
   .cp-hero_search { min-width: 0; }
   .cp-hero_search { display: grid; gap: 8px; }
   .cp-hero_lbl { font-family: var(--font-head); font-weight: 600; font-size: 1.05rem; color: var(--heading); letter-spacing: -0.01em; }
@@ -429,10 +413,10 @@ const faqs = [
   .cp-pills { gap: 8px; max-width: 980px; margin-left: auto; margin-right: auto; }
   .cp-pills a { font-size: 0.86rem; }
   .cp-floor { margin-top: 18px; }
-  .cp-floor_head { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
-  .cp-floor_label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pdh-teal-text); white-space: nowrap; }
-  .cp-floor_rule { flex: 1; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #bfe8e6 0%, #7fd3cf 45%, var(--pdh-orange) 100%); transform-origin: left center; }
-  :global(.cp-rule) { display: block; height: 48px; width: 128px; max-width: 100%; margin: -16px 0 6px; }
+  .cp-floor { margin-top: 28px; }
+  .cp-floor_head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-bottom: 12px; }
+  .cp-floor_blurb { font-size: 0.92rem; color: var(--ink-soft); }
+  .cp-floor_label { font-size: 1.2rem; font-weight: 600; letter-spacing: -0.01em; color: var(--heading); margin: 0; }
   .cp-svc { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (min-width: 720px) { .cp-svc { grid-template-columns: repeat(3, 1fr); } }
   @media (min-width: 1100px) { .cp-svc { grid-template-columns: repeat(4, 1fr); gap: 16px; } }

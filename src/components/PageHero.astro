@@ -3,9 +3,13 @@
 // that part of the hospital. `photoPos` is the object-position for the crop.
 interface Props { title: string; eyebrow?: string; lead?: string; crumbs?: { href: string; label: string }[]; photo?: string; photoAlt?: string; photoPos?: string; }
 const { title, eyebrow, lead, crumbs = [], photo, photoAlt = '', photoPos = 'center 40%' } = Astro.props;
+// Phones on slow connections get the 800px copy when one exists next to the photo (name-800.webp)
+import { existsSync } from 'node:fs';
+const small = photo ? photo.replace(/\.(webp|jpg)$/, '-800.webp') : '';
+const srcset = photo && small !== photo && existsSync(`public${small}`) ? `${small} 800w, ${photo} 1600w` : undefined;
 ---
 <section class={`page-hero${photo ? ' page-hero_photo' : ''}`}>
-  {photo && <img class="page-hero_bg" src={photo} alt={photoAlt} width="430" height="240" fetchpriority="high" decoding="async" style={`object-position:${photoPos}`} />}
+  {photo && <img class="page-hero_bg" src={photo} srcset={srcset} sizes={srcset ? "(max-width: 899px) 55vw, 100vw" : undefined} alt={photoAlt} width="430" height="240" fetchpriority="high" decoding="async" style={`object-position:${photoPos}`} />}
   {photo && <div class="page-hero_fade" aria-hidden="true"></div>}
   <div class="container page-hero_in">
     {crumbs.length > 0 && (
@@ -16,17 +20,11 @@ const { title, eyebrow, lead, crumbs = [], photo, photoAlt = '', photoPos = 'cen
     )}
     {eyebrow && <span class="eyebrow">{eyebrow}</span>}
     <h1>{title}</h1>
-    <span class="page-rule" aria-hidden="true"></span>
     {lead && <p class="lead">{lead}</p>}
     <slot />
   </div>
 </section>
-<script>
-  import { heartbeatAll } from '../scripts/heartbeat';
-  heartbeatAll('.page-rule');
-</script>
 <style>
-  .page-rule { display: block; height: 48px; width: 128px; max-width: 100%; margin: -14px 0 4px; }
   /* Phones and tablets: the photo is a banner above the text, never behind it, so signs in the photo cannot cross the words */
   .page-hero_photo { position: relative; overflow: hidden; padding-top: 0; padding-bottom: 28px; }
   .page-hero_bg { display: block; width: 100%; height: 210px; object-fit: cover; pointer-events: none; }

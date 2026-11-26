@@ -56,7 +56,8 @@ for (const file of files) {
   const afterSpec = sIdx >= 0 ? lines[sIdx + 1] || '' : '';
   const unlabeledSchedule = /^- (?!Schedule:|Room Number:|Contact Number:)\S/.test(afterSpec) ? afterSpec.slice(2).trim() : null;
 
-  const clean = (v) => (v && !/^TBD$/i.test(v) ? v : null);
+  // Typos in the source: a semicolon typed for the colon in a time ("12;30NN")
+  const clean = (v) => (v && !/^TBD$/i.test(v) ? v.replace(/(\d);(\d)/g, '$1:$2') : null);
   doctors.push({
     slug,
     name,

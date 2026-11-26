@@ -32,6 +32,7 @@ Source of truth: `context/PDH_Claude_Code_Brief.md`. Supporting material: `conte
 
 - Astro 5, static output (`astro build` → `dist/`), no client-side framework. Sitemap via `@astrojs/sitemap`.
 - One design, "Calm Platform" (direction taken from terminal-industries.com: look only — floating pill nav, light grey bands, large calm type, rounded cards, black primary and PDH orange accent; no frame-sequence hero, scroll hijack or trackers). Tokens live in `:root` in `src/styles/global.css`; the homepage is `src/components/home/Home.astro`. The earlier three-option prototype (A Minimal Editorial / PDH brand, B Warm Care, C Bold Modern) was retired on 25 Nov 2026 at Sue's request.
+- Feedback round 3 (27 Nov 2026): services are grouped by patient need (`categories` and each service's `category` in `src/data/services.json`), with floors shown on the cards and as a secondary "find it by floor" list. The animated heart/ECG heading line is retired site-wide; do not bring it back. The desktop header carries the seven nav links plus Emergency and Book only; Call and Messenger live on the Contact page and the phone bottom bar. The homepage hero photo must show faces and a doctor–patient moment.
 - Commands: `npm run dev` (http://localhost:4321), `npm run build`, `npm run preview`, `npm run extract`.
 - Site URL in `astro.config.mjs` is a placeholder until PDH chooses a domain.
 

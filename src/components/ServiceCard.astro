@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { shortHours, site, type Service } from '../lib/data';
+import { shortHours, site, categoryName, type Service } from '../lib/data';
 interface Props { service: Service; compact?: boolean; }
 const { service: s, compact = false } = Astro.props;
 ---
@@ -11,7 +11,9 @@ const { service: s, compact = false } = Astro.props;
       : s.illustration ? <img class="svc-card_art" src={s.illustration} alt="" width="160" height="160" loading="lazy" decoding="async" /> : <span class="icon-circle"><Icon name={s.icon} /></span>}
     {s.status && <span class="svc-soon">{s.status}</span>}
   </span>
+  <span class="svc-card_cat">{categoryName(s)}</span>
   <h3 class="svc-card_name">{s.name}</h3>
+  {s.clarify && Object.entries(s.clarify).map(([term, text]) => <p class="svc-card_clarify" data-term={term} hidden>{text}</p>)}
   {!compact && <p class="muted small">{s.summary}</p>}
   <p class="meta">{s.location ? `${s.location} · ` : ''}{shortHours(s)}</p>
   {!compact && <p class="meta svc-card_tel">{site.phones.trunk.display}{s.contactLocal ? ` · ${s.contactLocal}` : ''}</p>}
@@ -21,7 +23,9 @@ const { service: s, compact = false } = Astro.props;
   /* Photo band on top (PDH's own department photo), name and hours below; the photo zooms gently on hover */
   .svc-card { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px; padding: 0 18px 18px; transition: transform 0.25s, box-shadow 0.25s, border-color 0.2s; }
   .svc-card:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,92,94,0.14); }
-  .svc-card h3 { margin: 14px 0 0; }
+  .svc-card h3 { margin: 2px 0 0; }
+  .svc-card_cat { margin-top: 14px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pdh-teal-text); }
+  .svc-card_clarify { margin: 2px 0 0; padding: 6px 10px; border-radius: 8px; background: var(--accent-soft, #fff1e6); color: var(--ink); font-size: 0.88rem; font-weight: 600; }
   .svc-card_name { font-size: 1.05rem; line-height: 1.25; text-wrap: balance; }
   .svc-card .meta { margin: 0; }
   .svc-card_tel { font-size: 0.82rem; }

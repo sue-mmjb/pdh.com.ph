@@ -109,3 +109,13 @@ Every item here shows a visible `[TO CONFIRM]` or `Sample` marker on the prototy
 - Explanatory labels removed from the pages at Sue's request (video note, "as published by PDH", "as listed on pdh.com.ph", prototype notes). The sources are still recorded in each data file's `_note`.
 - "How to prepare" text on service pages is still sample content. The on-page note now reads "Please confirm preparation instructions with the department before your visit." PDH to supply real instructions.
 - Data breach reporting form: the live site publishes it only as a QR image; the Privacy page points to the DPO email until PDH supplies the link.
+
+## Feedback round 3 (27 Nov 2026) — to confirm before the client presentation
+
+- Doctor count: the directory holds 288 doctors (from PDH's own listing); PDH's homepage says 320. PDH to confirm which figure to show.
+- Department contacts: service cards show the trunk line plus a local number only where PDH's site prints one. PDH to supply verified direct numbers for the rest.
+- Package prices and promo validity: prices are as shown on PDH's banners in November 2026; no end dates are published. PDH to confirm each price and whether each promo is still running.
+- Schedule typos corrected at extraction: "12;30NN" is read as "12:30NN" (Dr. Jason Mutuc). The source page still has the typo.
+- Service categories (Emergency and critical care, Tests and imaging, Treatment and therapy, Clinics and consultations, Admission and patient support) are Iozera's grouping of PDH's service list. PDH to confirm the grouping, in particular Nuclear Medicine (tests) and Pulmonary (treatment).
+- Ultrasound: search results label diagnostic scans and ultrasound therapy differently. Wording is ours; PDH to confirm.
+- KRISS: the launcher is still a placeholder that links to the separate demo. Embedding the approved assistant needs the Kriss team's integration details and sign-off.

@@ -1,5 +1,5 @@
 {
-  "_note": "Service photos (public/services/, copies in assets/services/) are PDH's own, cropped from screenshots of pdh.com.ph/our-services supplied by Sue on 26 Nov 2026; PDH to supply originals. Clinical services and departments from pdh.com.ph/our-services (crawled 25 Nov 2026). 'offered' lists come from each service's own page. 'preparation' is NOT on the current site: every entry is a labeled sample. 'doctorMatch' maps a service to doctor departments/specializations in doctors.json. A null location or hours means the current site shows TBD. 'programs', 'priceLine', 'hoursAlt' and 'contactLocal' come from the homepage carousel slides (Nov 2026). 'illustration' is a teal line illustration supplied by Sue (assets/icons/service-illustrations-sheet.webp).",
+  "_note": "Service photos (public/services/, copies in assets/services/) are PDH's own, cropped from screenshots of pdh.com.ph/our-services supplied by Sue on 26 Nov 2026; PDH to supply originals. Clinical services and departments from pdh.com.ph/our-services (crawled 25 Nov 2026). 'offered' lists come from each service's own page. 'preparation' is NOT on the current site: every entry is a labeled sample. 'doctorMatch' maps a service to doctor departments/specializations in doctors.json. A null location or hours means the current site shows TBD. 'programs', 'priceLine', 'hoursAlt' and 'contactLocal' come from the homepage carousel slides (Nov 2026). 'illustration' is a teal line illustration supplied by Sue (assets/icons/service-illustrations-sheet.webp). 'category' groups services by what a patient needs (Iozera's grouping of PDH's own service list, not a PDH classification). 'clarify' holds a one-line note shown on a card when a search word could mean different things (ultrasound scan vs ultrasound therapy).",
   "services": [
     {
       "slug": "emergency-room",
@@ -17,7 +17,8 @@
       "featured": true,
       "icon": "emergency",
       "image": "/services/emergency-room.webp",
-      "illustration": "/icons/services/emergency-room.png"
+      "illustration": "/icons/services/emergency-room.png",
+      "category": "emergency"
     },
     {
       "slug": "radiology",
@@ -44,7 +45,11 @@
       "preparation": "Bring your doctor’s request form and a valid ID. Some scans require fasting; the Radiology desk will tell you when you book.",
       "featured": true,
       "icon": "scan",
-      "illustration": "/icons/services/radiology.png"
+      "illustration": "/icons/services/radiology.png",
+      "category": "tests",
+      "clarify": {
+        "ultrasound": "Diagnostic ultrasound: an imaging test (scan)."
+      }
     },
     {
       "slug": "laboratory",
@@ -72,7 +77,8 @@
         "href": "https://lis.pdh.com.ph/"
       },
       "image": "/services/laboratory.webp",
-      "illustration": "/icons/services/laboratory.png"
+      "illustration": "/icons/services/laboratory.png",
+      "category": "tests"
     },
     {
       "slug": "nuclear-medicine",
@@ -96,7 +102,8 @@
       "preparation": "Book ahead; this department is by appointment only. Your doctor may ask you to pause thyroid medication before an uptake study.",
       "featured": true,
       "icon": "atom",
-      "illustration": "/icons/services/nuclear-medicine.png"
+      "illustration": "/icons/services/nuclear-medicine.png",
+      "category": "tests"
     },
     {
       "slug": "multi-diagnostic-center",
@@ -123,7 +130,11 @@
       "hoursAlt": "A homepage slide lists Echocardiogram (pedia & adult) Monday–Sunday 6 AM–7 PM and Vascular procedures Monday–Saturday 8 AM–5 PM, which differs from the Our Services page.",
       "hoursConfirmed": false,
       "image": "/services/multi-diagnostic-center.webp",
-      "illustration": "/icons/services/multi-diagnostic-center.png"
+      "illustration": "/icons/services/multi-diagnostic-center.png",
+      "category": "tests",
+      "clarify": {
+        "ultrasound": "Cranial ultrasound for children: an imaging test (scan)."
+      }
     },
     {
       "slug": "pulmonary",
@@ -155,7 +166,8 @@
       "preparation": "Bring your doctor’s request form. For a pulmonary function test, avoid heavy meals and smoking beforehand.",
       "featured": false,
       "icon": "lungs",
-      "illustration": "/icons/services/pulmonary.png"
+      "illustration": "/icons/services/pulmonary.png",
+      "category": "treatment"
     },
     {
       "slug": "hemodialysis-center",
@@ -176,7 +188,8 @@
       "icon": "kidney",
       "priceLine": "For as low as Php 6,700.00, inclusive of PhilHealth",
       "image": "/services/hemodialysis-center.webp",
-      "illustration": "/icons/services/hemodialysis-center.png"
+      "illustration": "/icons/services/hemodialysis-center.png",
+      "category": "treatment"
     },
     {
       "slug": "physical-medicine-rehabilitation",
@@ -202,12 +215,14 @@
       "icon": "rehab",
       "programs": [
         {
-          "name": "Cryotherapy", "image": "/photos/people-rehab-cryo.webp",
+          "name": "Cryotherapy",
+          "image": "/photos/people-rehab-cryo.webp",
           "summary": "Cold therapy for pain and inflammation.",
           "conditions": []
         },
         {
-          "name": "Laser Therapy", "image": "/photos/people-rehab-laser.webp",
+          "name": "Laser Therapy",
+          "image": "/photos/people-rehab-laser.webp",
           "summary": "Reduce acute and chronic pain, inflammation and accelerate tissue repair and healing.",
           "conditions": [
             "Osteoarthritis",
@@ -222,7 +237,8 @@
           ]
         },
         {
-          "name": "Shockwave", "image": "/photos/people-rehab-shockwave.webp",
+          "name": "Shockwave",
+          "image": "/photos/people-rehab-shockwave.webp",
           "summary": "Non-invasive high energy pulse treatment for chronic musculoskeletal pain, tendinopathies and ligament injuries.",
           "conditions": [
             "Plantar fasciitis",
@@ -236,7 +252,8 @@
           ]
         },
         {
-          "name": "Cardiovascular Rehabilitation", "image": "/photos/people-cardio-rehab.webp",
+          "name": "Cardiovascular Rehabilitation",
+          "image": "/photos/people-cardio-rehab.webp",
           "summary": "A medically supervised program that helps patients recover and strengthen their heart through safe exercise, monitoring, and lifestyle guidance.",
           "conditions": [
             "Heart attack (myocardial infarction)",
@@ -253,7 +270,11 @@
       ],
       "contactLocal": "local 8211",
       "image": "/services/physical-medicine-rehabilitation.webp",
-      "illustration": "/icons/services/physical-medicine-rehabilitation.png"
+      "illustration": "/icons/services/physical-medicine-rehabilitation.png",
+      "category": "treatment",
+      "clarify": {
+        "ultrasound": "Ultrasound therapy: a physical therapy treatment, not a scan."
+      }
     },
     {
       "slug": "operating-room",
@@ -274,7 +295,8 @@
       "preparation": "Your surgeon and anesthesiologist will give you fasting and medication instructions before any scheduled procedure.",
       "featured": true,
       "icon": "surgery",
-      "illustration": "/icons/services/operating-room.png"
+      "illustration": "/icons/services/operating-room.png",
+      "category": "emergency"
     },
     {
       "slug": "icu",
@@ -294,7 +316,8 @@
       "featured": false,
       "icon": "monitor",
       "image": "/services/icu.webp",
-      "illustration": "/icons/services/icu.png"
+      "illustration": "/icons/services/icu.png",
+      "category": "emergency"
     },
     {
       "slug": "nicu",
@@ -320,7 +343,8 @@
       "preparation": null,
       "featured": false,
       "icon": "baby",
-      "illustration": "/icons/services/nicu.png"
+      "illustration": "/icons/services/nicu.png",
+      "category": "emergency"
     },
     {
       "slug": "picu",
@@ -345,7 +369,8 @@
       "preparation": null,
       "featured": false,
       "icon": "child",
-      "illustration": "/icons/services/picu.png"
+      "illustration": "/icons/services/picu.png",
+      "category": "emergency"
     },
     {
       "slug": "outpatient-clinics",
@@ -365,7 +390,8 @@
       "featured": true,
       "icon": "stethoscope",
       "image": "/services/outpatient-clinics.webp",
-      "illustration": "/icons/services/outpatient-clinics.png"
+      "illustration": "/icons/services/outpatient-clinics.png",
+      "category": "clinics"
     },
     {
       "slug": "ob-ultrasound",
@@ -395,7 +421,11 @@
       "preparation": "Bring your OB’s request. For a transabdominal scan early in pregnancy you may be asked to come with a full bladder.",
       "featured": true,
       "icon": "pregnancy",
-      "illustration": "/icons/services/ob-ultrasound.png"
+      "illustration": "/icons/services/ob-ultrasound.png",
+      "category": "tests",
+      "clarify": {
+        "ultrasound": "Pregnancy and pelvic ultrasound: an imaging test (scan)."
+      }
     },
     {
       "slug": "breastfeeding-station",
@@ -413,7 +443,8 @@
       "preparation": null,
       "featured": false,
       "icon": "baby",
-      "illustration": "/icons/services/breastfeeding-station.png"
+      "illustration": "/icons/services/breastfeeding-station.png",
+      "category": "support"
     },
     {
       "slug": "animal-bite-center",
@@ -432,7 +463,8 @@
       "preparation": "Wash the wound with soap and running water for 15 minutes, then come in as soon as possible.",
       "featured": false,
       "icon": "shield",
-      "illustration": "/icons/services/animal-bite-center.png"
+      "illustration": "/icons/services/animal-bite-center.png",
+      "category": "treatment"
     },
     {
       "slug": "eye-center",
@@ -462,7 +494,8 @@
       "preparation": "Bring your current glasses or contact lens prescription. If your pupils will be dilated, bring someone to drive you home.",
       "featured": true,
       "icon": "eye",
-      "illustration": "/icons/services/eye-center.png"
+      "illustration": "/icons/services/eye-center.png",
+      "category": "clinics"
     },
     {
       "slug": "dental-services",
@@ -497,7 +530,8 @@
       "preparation": "Brush before your visit and bring a list of any medications you take.",
       "featured": true,
       "icon": "tooth",
-      "illustration": "/icons/services/dental-services.png"
+      "illustration": "/icons/services/dental-services.png",
+      "category": "clinics"
     },
     {
       "slug": "pharmacy",
@@ -515,7 +549,8 @@
       "preparation": "Bring your prescription. Senior citizen and PWD IDs are needed for statutory discounts.",
       "featured": false,
       "icon": "pill",
-      "illustration": "/icons/services/pharmacy.png"
+      "illustration": "/icons/services/pharmacy.png",
+      "category": "treatment"
     },
     {
       "slug": "admitting",
@@ -532,7 +567,8 @@
       "preparation": "Bring a valid ID, your admitting order, and PhilHealth or HMO documents.",
       "featured": false,
       "icon": "clipboard",
-      "image": "/services/admitting.webp"
+      "image": "/services/admitting.webp",
+      "category": "support"
     },
     {
       "slug": "chemo-infusion-center",
@@ -554,7 +590,8 @@
       "preparation": null,
       "featured": false,
       "icon": "drop",
-      "illustration": "/icons/services/chemo-infusion-center.png"
+      "illustration": "/icons/services/chemo-infusion-center.png",
+      "category": "treatment"
     },
     {
       "slug": "medical-records",
@@ -572,7 +609,8 @@
       "preparation": "Bring a valid ID; an authorization letter is needed if you are requesting records for someone else.",
       "featured": false,
       "icon": "folder",
-      "illustration": "/icons/services/medical-records.png"
+      "illustration": "/icons/services/medical-records.png",
+      "category": "support"
     },
     {
       "slug": "patient-experience",
@@ -591,7 +629,8 @@
       "featured": false,
       "icon": "smile",
       "image": "/services/patient-experience.webp",
-      "illustration": "/icons/services/patient-experience.png"
+      "illustration": "/icons/services/patient-experience.png",
+      "category": "support"
     }
   ],
   "namedOnlyOnSite": [
@@ -601,42 +640,54 @@
   ],
   "specialtyGroups": [
     {
-      "name": "Internal Medicine", "image": "/photos/svc-consultation.webp", "imagePos": "center 30%",
+      "name": "Internal Medicine",
+      "image": "/photos/svc-consultation.webp",
+      "imagePos": "center 30%",
       "departments": [
         "Internal Medicine"
       ],
       "blurb": "Cardiology, pulmonology, nephrology, neurology, endocrinology, gastroenterology, oncology, infectious diseases and more."
     },
     {
-      "name": "Pediatrics", "image": "/services/picu.webp", "imagePos": "center 45%",
+      "name": "Pediatrics",
+      "image": "/services/picu.webp",
+      "imagePos": "center 45%",
       "departments": [
         "Pediatrics"
       ],
       "blurb": "Well-baby and sick-child care, immunizations and newborn screening."
     },
     {
-      "name": "Obstetrics & Gynecology", "image": "/services/ob-ultrasound.webp", "imagePos": "center 45%",
+      "name": "Obstetrics & Gynecology",
+      "image": "/services/ob-ultrasound.webp",
+      "imagePos": "center 45%",
       "departments": [
         "Obstetrics & Gynecology"
       ],
       "blurb": "Prenatal care, delivery, sonology and women’s health."
     },
     {
-      "name": "Surgery", "image": "/services/operating-room.webp", "imagePos": "center 45%",
+      "name": "Surgery",
+      "image": "/services/operating-room.webp",
+      "imagePos": "center 45%",
       "departments": [
         "Surgery"
       ],
       "blurb": "General, orthopedic, neuro, thoracic and vascular surgery; urology."
     },
     {
-      "name": "Anesthesiology", "image": "/services/operating-room.webp", "imagePos": "right 40%",
+      "name": "Anesthesiology",
+      "image": "/services/operating-room.webp",
+      "imagePos": "right 40%",
       "departments": [
         "Anesthesiology"
       ],
       "blurb": "Anesthesia care for every procedure."
     },
     {
-      "name": "ENT, Eye & Dental", "image": "/services/eye-center.webp", "imagePos": "center 45%",
+      "name": "ENT, Eye & Dental",
+      "image": "/services/eye-center.webp",
+      "imagePos": "center 45%",
       "departments": [
         "ENT",
         "Ophthalmology",
@@ -646,7 +697,9 @@
       "blurb": "Ear, nose and throat; eye center; dental services."
     },
     {
-      "name": "Radiology & Pathology", "image": "/services/radiology.webp", "imagePos": "center 50%",
+      "name": "Radiology & Pathology",
+      "image": "/services/radiology.webp",
+      "imagePos": "center 50%",
       "departments": [
         "Radiology",
         "Pathology"
@@ -654,11 +707,40 @@
       "blurb": "Imaging, laboratory and diagnostic specialists."
     },
     {
-      "name": "Rehabilitation", "image": "/photos/people-rehab-cryo.webp", "imagePos": "center 35%",
+      "name": "Rehabilitation",
+      "image": "/photos/people-rehab-cryo.webp",
+      "imagePos": "center 35%",
       "departments": [
         "Physical Medicine & Rehabilitation"
       ],
       "blurb": "Physical and occupational therapy."
+    }
+  ],
+  "categories": [
+    {
+      "id": "emergency",
+      "name": "Emergency and critical care",
+      "blurb": "Urgent help and round-the-clock care."
+    },
+    {
+      "id": "tests",
+      "name": "Tests and imaging",
+      "blurb": "Blood tests, X-ray, CT, ultrasound and heart tests."
+    },
+    {
+      "id": "treatment",
+      "name": "Treatment and therapy",
+      "blurb": "Dialysis, rehabilitation, respiratory care and medicines."
+    },
+    {
+      "id": "clinics",
+      "name": "Clinics and consultations",
+      "blurb": "See a doctor, eye care and dental care."
+    },
+    {
+      "id": "support",
+      "name": "Admission and patient support",
+      "blurb": "Admitting, records and help during your stay."
     }
   ]
 }

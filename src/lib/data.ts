@@ -75,6 +75,12 @@ export function groupByFloor(list: Service[]) {
   const order = (k: string) => { const i = FLOOR_ORDER.indexOf(k); return i === -1 ? 99 : i; };
   return [...groups.entries()].sort((a, b) => order(a[0]) - order(b[0]));
 }
+/** Services grouped by what a patient needs (categories from services.json), in that order. */
+export const serviceCategories = servicesData.categories;
+export function groupByCategory(list: Service[]) {
+  return serviceCategories.map((c) => ({ ...c, list: list.filter((s) => s.category === c.id) })).filter((g) => g.list.length > 0);
+}
+export function categoryName(s: Service) { return serviceCategories.find((c) => c.id === s.category)?.name ?? ''; }
 /** Short hours label for cards. */
 export function shortHours(s: Service) {
   if (!s.hours) return 'Call for schedule';

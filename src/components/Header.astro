@@ -8,7 +8,7 @@ const nav = [
   { href: '/doctors/', label: 'Doctors' },
   { href: '/hmo-philhealth/', label: 'HMO & PhilHealth' },
   { href: '/packages/', label: 'Packages' },
-  { href: '/rooms-facilities/', label: 'Rooms & Facilities' },
+  { href: '/rooms-facilities/', label: 'Rooms' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
@@ -40,12 +40,6 @@ const info = site.phones.information;
       <a class="btn btn-sm btn-emergency" href={`tel:${er.tel}`} title={`Emergency: ${er.display}`}>
         <Icon name="emergency" /> <span>Emergency</span>
       </a>
-      <a class="btn btn-sm btn-ghost" href={`tel:${info.tel}`} title={`Call ${info.display}`} aria-label={`Call ${info.display}`}>
-        <Icon name="phone" /> <span class="lbl-wide">Call</span>
-      </a>
-      <a class="btn btn-sm btn-ghost" href={site.social.messenger.url} target="_blank" rel="noopener" title="Message PDH on Facebook" aria-label="Messenger">
-        <Icon name="message" /> <span class="lbl-wide">Messenger</span>
-      </a>
       <a class="btn btn-sm btn-primary" href="/book/"><Icon name="calendar" /> <span>Book<span class="lbl-wide"> an appointment</span></span></a>
     </div>
   </div>
@@ -67,6 +61,12 @@ const info = site.phones.information;
       var open = nav.classList.toggle('open');
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
+    // Phone keyboard open: step the bottom bar and the assistant launcher aside while someone is typing,
+    // so they do not sit on top of the search field or its results. They return when typing ends.
+    var root = document.documentElement;
+    function typing(el) { return el && el.matches && el.matches('input[type="search"], input[type="text"], input:not([type]), textarea'); }
+    document.addEventListener('focusin', function (e) { if (typing(e.target)) root.classList.add('kb-open'); });
+    document.addEventListener('focusout', function (e) { if (typing(e.target)) root.classList.remove('kb-open'); });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && nav.classList.contains('open')) {
         nav.classList.remove('open');
