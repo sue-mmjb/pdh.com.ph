@@ -341,10 +341,12 @@ const faqs = [
   /* PDH's own hero photo (doctor with stethoscope) as the backdrop, fading into the page on the text side */
   .cp-hero_bg { position: absolute; top: 0; right: 0; height: 100%; width: auto; max-width: none; object-fit: cover; object-position: right top; pointer-events: none; }
   .cp-hero_fade { position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, rgba(251,251,250,0.55) 0%, rgba(251,251,250,0.9) 42%, #fbfbfa 62%, #fbfbfa 100%); }
+    background: linear-gradient(180deg, rgba(251,251,250,0.7) 0%, rgba(251,251,250,0.93) 30%, #fbfbfa 55%, #fbfbfa 100%); }
+  .cp-hero_copy, .cp-hero_more { text-shadow: 0 0 2px #fbfbfa, 0 0 14px rgba(251,251,250,0.9), 0 0 28px rgba(251,251,250,0.8); }
+  .cp-hero_copy .btn, .cp-hero_more .btn { text-shadow: none; }
   @media (min-width: 900px) {
     .cp-hero_bg { height: 100%; }
-    .cp-hero_fade { background: linear-gradient(90deg, #fbfbfa 0%, #fbfbfa 34%, rgba(251,251,250,0.9) 44%, rgba(251,251,250,0.3) 56%, rgba(251,251,250,0) 68%), linear-gradient(180deg, rgba(251,251,250,0) 62%, #fbfbfa 100%); } }
+    .cp-hero_fade { background: linear-gradient(90deg, #fbfbfa 0%, #fbfbfa 40%, rgba(251,251,250,0.92) 52%, rgba(251,251,250,0.35) 64%, rgba(251,251,250,0) 76%), linear-gradient(180deg, rgba(251,251,250,0) 62%, #fbfbfa 100%); } }
   .cp-hero_glow { position: absolute; inset: 0; pointer-events: none;
     background: radial-gradient(55% 75% at 8% 0%, rgba(0,163,165,0.20), transparent 70%), radial-gradient(35% 50% at 100% 100%, rgba(255,116,2,0.10), transparent 70%); }
   .cp-hero_grid { position: relative; display: grid; gap: 18px; grid-template-areas: "copy" "card" "more"; }
